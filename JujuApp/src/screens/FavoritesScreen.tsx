@@ -63,7 +63,7 @@ export default function FavoritesScreen(): JSX.Element {
     try {
       const res = await favoriteApi.getFavorites({ type: activeTab });
       if (res.data) {
-        const items = (res.data.list || []).map(
+        const items = (Array.isArray(res.data) ? res.data : res.data.list || []).map(
           (item: {
             id: string;
             targetTitle: string;

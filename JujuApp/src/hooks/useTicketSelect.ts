@@ -196,7 +196,7 @@ export function useTicketSelect(
         phone: contactPhone.trim(),
         gender: 0,
         quantity,
-      }) as unknown as { code: number; data?: { id: number; order_no: string }; message?: string };
+      }) as unknown as { success: boolean; data?: { id: number; order_no: string }; message?: string };
 
       if (res.success && res.data) {
         Alert.alert(

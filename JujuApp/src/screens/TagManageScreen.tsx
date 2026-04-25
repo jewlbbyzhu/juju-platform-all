@@ -36,9 +36,9 @@ export default function TagManageScreen(): React.JSX.Element {
 
   const fetchTags = useCallback(async () => {
     try {
-      const res = (await tagApi.getTags()) as unknown as { data?: { list: Tag[] } };
-      if (res.data?.list) {
-        setTags(res.data.list);
+      const res = (await tagApi.getTags()) as unknown as { data?: Tag[] };
+      if (res.data) {
+        setTags(res.data);
       }
     } catch {
       // ignore fetch error

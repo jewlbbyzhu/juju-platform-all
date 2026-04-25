@@ -62,16 +62,18 @@ export const useParties = ({
           ...(currentSearch.trim() && { keyword: currentSearch.trim() }),
         };
 
-        const res = (await partyApi.getParties(params)) as unknown as ApiResponse<
-          ListResponse<Party>
-        >;
+        const res = (await partyApi.getParties(params)) as unknown as {
+          success: boolean;
+          data?: Party[] | { list: Party[] };
+          message?: string;
+        };
         if (res.success) {
           const newParties = Array.isArray(res.data) ? res.data : (res.data?.list || []);
           setParties(prev => (reset ? newParties : [...prev, ...newParties]));
           setHasMore(newParties.length >= pageSize);
           if (reset) setPage(1);
         } else {
-          setError(res.message || '获取数据失败');
+          console.error(res.message || '获取数据失败');
         }
       } finally {
         loadingRef.current = false;

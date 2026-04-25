@@ -95,7 +95,7 @@ export default function SocialScreen(): React.JSX.Element {
         const res = (await api(userId, {
           page,
           pageSize,
-        })) as unknown as ApiResponse<SocialUser>;
+        })) as unknown as { success: boolean; data?: { list: SocialUser[]; total: number } };
 
         if (res.success) {
           const newUsers = res.data?.list || [];
