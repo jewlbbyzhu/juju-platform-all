@@ -23,10 +23,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const fetchParties = useCallback(async (params = {}) => {
     setLoading(true);
     try {
-      const res = await partyApi.getParties(params) as unknown as { code?: number; data?: PageData<unknown> };
-      return res.code === 0 ? res.data?.list || [] : [];
+      const res = await partyApi.getParties(params) as unknown as { success?: boolean; total?: number; page?: number; data?: unknown[] };
+      return res.success === true ? res.data || [] : [];
     } catch (error) {
-      console.error("初始化应用失败:", error);
+      console.error("获取聚会列表失败:", error);
       return [];
     } finally {
       setLoading(false);
@@ -36,10 +36,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // 获取聚会详情
   const fetchPartyDetail = useCallback(async (id: string | number) => {
     try {
-      const res = await partyApi.getPartyDetail(id) as { code?: number; data?: unknown };
-      return res.code === 0 ? res.data : null;
+      const res = await partyApi.getPartyDetail(id) as { success?: boolean; data?: unknown };
+      return res.success === true ? res.data : null;
     } catch (error) {
-      console.error("初始化应用失败:", error);
+      console.error("获取聚会详情失败:", error);
       return null;
     }
   }, []);
@@ -47,10 +47,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // 创建订单
   const createOrder = useCallback(async (orderData: unknown) => {
     try {
-      const res = await orderApi.createOrder(orderData as any) as { code?: number; data?: unknown };
-      return res.code === 0 ? res.data : null;
+      const res = await orderApi.createOrder(orderData as any) as { success?: boolean; data?: unknown };
+      return res.success === true ? res.data : null;
     } catch (error) {
-      console.error("初始化应用失败:", error);
+      console.error("创建订单失败:", error);
       return null;
     }
   }, []);
@@ -58,10 +58,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // 支付订单
   const payOrder = useCallback(async (orderId: string | number) => {
     try {
-      const res = await orderApi.createPayment(orderId, { paymentMethod: 'wechat' }) as { code?: number };
-      return res.code === 0;
+      const res = await orderApi.createPayment(orderId, { paymentMethod: 'wechat' }) as { success?: boolean };
+      return res.success === true;
     } catch (error) {
-      console.error("初始化应用失败:", error);
+      console.error("支付订单失败:", error);
       return false;
     }
   }, []);
