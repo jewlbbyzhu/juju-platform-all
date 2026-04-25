@@ -97,7 +97,7 @@ export default function SocialScreen(): React.JSX.Element {
           pageSize,
         })) as unknown as ApiResponse<SocialUser>;
 
-        if (res.code === 0) {
+        if (res.success) {
           const newUsers = res.data?.list || [];
 
           setUserList(prev => (reset ? newUsers : [...prev, ...newUsers]));

@@ -198,7 +198,7 @@ export function useTicketSelect(
         quantity,
       }) as unknown as { code: number; data?: { id: number; order_no: string }; message?: string };
 
-      if (res.code === 0 && res.data) {
+      if (res.success && res.data) {
         Alert.alert(
           '订单提交成功',
           `订单号: ${res.data.order_no}\n${selectedTicketData?.name || ''} × ${quantity}`,

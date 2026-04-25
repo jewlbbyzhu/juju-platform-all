@@ -65,7 +65,7 @@ export default function VIPCenterScreen(): React.JSX.Element {
   const loadVipStatus = useCallback(async () => {
     try {
       const res = (await vipApi.getSubscriptionStatus()) as ApiResponse;
-      if (res.success || res.code === 0) {
+      if (res.success) {
         const data = res.data || {};
         setVipStatus({
           isVip: data.isVip || data.is_vip || false,
@@ -82,7 +82,7 @@ export default function VIPCenterScreen(): React.JSX.Element {
   const loadVipPackages = useCallback(async () => {
     try {
       const res = (await vipApi.getVipPackages()) as ApiResponse;
-      if (res.success || res.code === 0) {
+      if (res.success) {
         const data = res.data || {};
         setPackages(data.list || data.packages || []);
       }
@@ -113,7 +113,7 @@ export default function VIPCenterScreen(): React.JSX.Element {
                 packageId,
                 {},
               )) as ApiResponse;
-              if (res.success || res.code === 0) {
+              if (res.success) {
                 Alert.alert('成功', '订阅成功！');
                 loadVipStatus();
               } else {

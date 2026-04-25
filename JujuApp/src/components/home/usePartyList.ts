@@ -118,8 +118,8 @@ export const usePartyList = (
           ListResponse<PartyType>
         >;
 
-        if (res.code === 0) {
-          const newParties = res.data?.list || [];
+        if (res.success) {
+          const newParties = Array.isArray(res.data) ? res.data : (res.data?.list || []);
           dispatch({ type: 'FETCH_SUCCESS', data: newParties, reset });
           if (reset) setPage(1);
         } else {

@@ -85,7 +85,7 @@ export default function TicketSelectionScreen(): React.JSX.Element {
     if (!party && route.params?.partyId) {
       try {
         const res = await partyApi.getPartyDetail(route.params.partyId) as unknown as { code: number; data?: RouteParams['party'] };
-        if (res.code === 0 && res.data) {
+        if (res.success && res.data) {
           setParty(res.data);
         }
       } catch {

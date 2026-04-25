@@ -65,14 +65,14 @@ export const useParties = ({
         const res = (await partyApi.getParties(params)) as unknown as ApiResponse<
           ListResponse<Party>
         >;
-        if (res.code === 0) {
-          const newParties = res.data?.list || [];
+        if (res.success) {
+          const newParties = Array.isArray(res.data) ? res.data : (res.data?.list || []);
           setParties(prev => (reset ? newParties : [...prev, ...newParties]));
           setHasMore(newParties.length >= pageSize);
           if (reset) setPage(1);
+        } else {
+          setError(res.message || '获取数据失败');
         }
-      } catch (error) {
-        console.error('获取聚会列表失败:', error);
       } finally {
         loadingRef.current = false;
         setLoading(false);

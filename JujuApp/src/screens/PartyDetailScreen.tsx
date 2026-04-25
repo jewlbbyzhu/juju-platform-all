@@ -107,7 +107,7 @@ export default function PartyDetailScreen(): React.JSX.Element {
     setLoading(true);
     try {
       const res = await partyApi.getPartyDetail(partyId) as unknown as { code: number; data: Party };
-      if (res.code === 0) {
+      if (res.success) {
         setParty(res.data);
       }
     } catch {

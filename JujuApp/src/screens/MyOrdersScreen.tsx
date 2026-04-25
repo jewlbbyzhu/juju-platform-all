@@ -87,7 +87,7 @@ export default function MyOrdersScreen(): React.JSX.Element {
           params.status = activeTab;
         }
         const res = await orderApi.getOrders(params);
-        if (res.code === 0) {
+        if (res.success) {
           const newOrders: Order[] = res.data?.list || [];
           if (reset) {
             setOrders(newOrders);
@@ -138,7 +138,7 @@ export default function MyOrdersScreen(): React.JSX.Element {
         onPress: async () => {
           try {
             const res = await orderApi.cancelOrder(order.id);
-            if (res.code === 0) {
+            if (res.success) {
               Alert.alert('成功', '订单已取消');
               fetchOrdersRef.current?.(1, true);
             } else {

@@ -306,7 +306,7 @@ export default function OrderDetailScreen() {
     setLoading(true);
     try {
       const res = await orderApi.getOrderDetail(orderId);
-      if (res.code === 0) {
+      if (res.success) {
         setOrder(res.data);
       } else {
         Alert.alert('错误', res.message || '获取订单详情失败');
@@ -341,7 +341,7 @@ export default function OrderDetailScreen() {
         onPress: async () => {
           try {
             const res = await orderApi.cancelOrder(order.id);
-            if (res.code === 0) {
+            if (res.success) {
               Alert.alert('成功', '订单已取消');
               fetchOrderDetail();
             } else {
