@@ -1,0 +1,271 @@
+name: Comprehensive APK Testing
+
+on:
+  workflow_run:
+    workflows: ["Build Production UniApp APK with Full DCloud SDK"]
+    types:
+      - completed
+  workflow_dispatch:
+    inputs:
+      apk_url:
+        description: 'APK download URL or path'
+        required: true
+        default: 'https://hfparty.asia/download/juju-app-latest.apk'
+
+jobs:
+  test-apk:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    
+    steps:
+    - name: Setup Android SDK for Testing
+      uses: android-actions/setup-android@v3
+      
+    - name: Install Test Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3-pip
+        pip3 install uiautomator2 pytest
+        
+    - name: Download APK
+      run: |
+        APK_URL="${{ github.event.inputs.apk_url || 'https://hfparty.asia/download/juju-app-latest.apk' }}"
+        
+        echo "Downloading APK from: $APK_URL"
+        wget -O test-app.apk "$APK_URL" --timeout=120
+        
+        # 验证下载
+        ls -lh test-app.apk
+        file test-app.apk
+    
+    - name: APK Structure Validation
+      run: |
+        echo "=== APK Structure Test ==="
+        
+        # 创建检查目录
+        mkdir -p apk_check
+        unzip -q test-app.apk -d apk_check
+        
+        # 1. 检查必需文件
+        echo "1. Checking required files..."
+        required_files=(
+          "AndroidManifest.xml"
+          "classes.dex"
+          "resources.arsc"
+        )
+        
+        for file in "${required_files[@]}"; do
+          if [ -f "apk_check/$file" ]; then
+            echo "✓ $file exists"
+          else
+            echo "✗ $file missing!"
+            exit 1
+          fi
+        done
+        
+        # 2. 检查 DCloud SDK 类
+        echo ""
+        echo "2. Checking DCloud SDK classes..."
+        
+        # 使用 dexdump 或 strings 检查类
+        if command -v dexdump &> /dev/null; then
+          dexdump apk_check/classes.dex 2>/dev/null | grep -q "PandoraEntryActivity" && \
+            echo "✓ PandoraEntryActivity found" || \
+            echo "✗ PandoraEntryActivity missing!"
+        fi
+        
+        # 3. 检查应用资源
+        echo ""
+        echo "3. Checking app resources..."
+        if [ -d "apk_check/assets/apps/uni.app.UNIJujuParty/www" ]; then
+          echo "✓ App resources found"
+          ls -la apk_check/assets/apps/uni.app.UNIJujuParty/www/ | head -10
+        else
+          echo "⚠ App resources directory structure may vary"
+          find apk_check/assets -type f 2>/dev/null | head -10
+        fi
+        
+        # 4. 检查签名
+        echo ""
+        echo "4. Checking APK signature..."
+        apksigner verify -v test-app.apk
+    
+    - name: APK Manifest Analysis
+      run: |
+        echo "=== Manifest Analysis ==="
+        
+        # 使用 aapt 解析 manifest
+        if command -v aapt &> /dev/null; then
+          echo "Package info:"
+          aapt dump badging test-app.apk 2>/dev/null | head -20
+          
+          echo ""
+          echo "Permissions:"
+          aapt dump badging test-app.apk 2>/dev/null | grep "uses-permission" | head -10
+        fi
+    
+    - name: APK Size and Performance Check
+      run: |
+        echo "=== Performance Metrics ==="
+        
+        # 文件大小
+        APK_SIZE=$(stat -f%z test-app.apk 2>/dev/null || stat -c%s test-app.apk)
+        echo "APK Size: $((APK_SIZE / 1024 / 1024)) MB ($APK_SIZE bytes)"
+        
+        # 检查大小是否合理 (10MB - 100MB)
+        if [ $APK_SIZE -lt 10485760 ]; then
+          echo "⚠ Warning: APK size is less than 10MB, might be missing resources"
+        elif [ $APK_SIZE -gt 104857600 ]; then
+          echo "⚠ Warning: APK size exceeds 100MB, consider optimizing"
+        else
+          echo "✓ APK size is within normal range"
+        fi
+        
+        # 检查 dex 文件数量
+        echo ""
+        echo "DEX files:"
+        unzip -l test-app.apk | grep "\.dex" | wc -l
+        
+        # 检查资源文件
+        echo ""
+        echo "Resource files:"
+        unzip -l test-app.apk | grep -E "(res/|assets/)" | wc -l
+    
+    - name: Security Scan
+      run: |
+        echo "=== Security Check ==="
+        
+        # 检查硬编码敏感信息
+        echo "1. Checking for hardcoded secrets..."
+        
+        # 解压并搜索
+        mkdir -p apk_scan
+        unzip -q test-app.apk -d apk_scan
+        
+        # 搜索常见的敏感模式
+        patterns=(
+          "api_key"
+          "apikey"
+          "password"
+          "secret"
+          "token"
+          "private_key"
+        )
+        
+        found_secrets=0
+        for pattern in "${patterns[@]}"; do
+          result=$(grep -ri "$pattern" apk_scan/assets/ 2>/dev/null | grep -v ".svn" | head -5)
+          if [ -n "$result" ]; then
+            echo "⚠ Found potential $pattern:"
+            echo "$result"
+            found_secrets=$((found_secrets + 1))
+          fi
+        done
+        
+        if [ $found_secrets -eq 0 ]; then
+          echo "✓ No obvious hardcoded secrets found"
+        fi
+        
+        # 检查混淆
+        echo ""
+        echo "2. Checking code obfuscation..."
+        if unzip -l test-app.apk | grep -q "proguard"; then
+          echo "✓ ProGuard mapping files present"
+        else
+          echo "ℹ ProGuard mapping not found (may not be using obfuscation)"
+        fi
+    
+    - name: Compatibility Check
+      run: |
+        echo "=== Compatibility Check ==="
+        
+        # 使用 aapt 检查 SDK 版本
+        if command -v aapt &> /dev/null; then
+          SDK_INFO=$(aapt dump badging test-app.apk 2>/dev/null | grep -E "sdkVersion|targetSdkVersion")
+          
+          echo "SDK Versions:"
+          echo "$SDK_INFO"
+          
+          # 提取 targetSdk
+          TARGET_SDK=$(echo "$SDK_INFO" | grep targetSdkVersion | grep -oE '[0-9]+' | head -1)
+          
+          if [ -n "$TARGET_SDK" ]; then
+            if [ "$TARGET_SDK" -lt 30 ]; then
+              echo "⚠ Warning: targetSdkVersion $TARGET_SDK is below 30 (Android 11)"
+            elif [ "$TARGET_SDK" -gt 34 ]; then
+              echo "⚠ Warning: targetSdkVersion $TARGET_SDK is very new, may have compatibility issues"
+            else
+              echo "✓ targetSdkVersion $TARGET_SDK is good"
+            fi
+          fi
+        fi
+        
+        # 检查 ABI 支持
+        echo ""
+        echo "ABI Support:"
+        unzip -l test-app.apk | grep "lib/" | awk '{print $4}' | cut -d'/' -f2 | sort -u
+    
+    - name: Generate Test Report
+      run: |
+        echo "=== Test Report ==="
+        
+        REPORT_FILE="apk-test-report.md"
+        
+        cat > $REPORT_FILE << EOF
+        # APK Test Report
+        
+        ## Test Information
+        - Test Date: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+        - APK Source: ${{ github.event.inputs.apk_url || 'https://hfparty.asia/download/juju-app-latest.apk' }}
+        - Workflow Run: ${{ github.run_id }}
+        
+        ## File Information
+        EOF
+        
+        # 添加文件信息
+        ls -lh test-app.apk >> $REPORT_FILE
+        
+        cat >> $REPORT_FILE << EOF
+        
+        ## APK Analysis
+        
+        ### Structure
+        EOF
+        
+        # 添加 APK 结构
+        unzip -l test-app.apk | tail -20 >> $REPORT_FILE
+        
+        cat >> $REPORT_FILE << EOF
+        
+        ### Signature
+        EOF
+        
+        # 添加签名信息
+        apksigner verify -v test-app.apk >> $REPORT_FILE 2>&1 || true
+        
+        echo ""
+        echo "Report generated: $REPORT_FILE"
+        cat $REPORT_FILE
+    
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v4
+      with:
+        name: apk-test-results
+        path: |
+          apk-test-report.md
+          test-app.apk
+        retention-days: 7
+    
+    - name: Test Summary
+      run: |
+        echo "========================================"
+        echo "APK Testing Completed"
+        echo "========================================"
+        echo ""
+        echo "Next steps:"
+        echo "1. Download the APK from artifacts"
+        echo "2. Install on physical device or emulator"
+        echo "3. Perform UI/UX testing"
+        echo "4. Check all app features"
+        echo ""
+        echo "Download URL: https://hfparty.asia/download/juju-app-latest.apk"

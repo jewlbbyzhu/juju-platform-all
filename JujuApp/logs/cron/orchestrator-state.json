@@ -1,0 +1,10 @@
+{
+  "orchestrator_time": "2026-04-09T16:05:47+08:00",
+  "tasks": [{"task": "quick-check", "status": "ok", "last_run": 4},{"task": "deep-check", "status": "ok", "last_run": 2},{"task": "build-task", "status": "unknown", "last_run": -1},{"task": "ui-optimize", "status": "unknown", "last_run": -1}],
+  "build": {
+    "latest_apk": "",
+    "size": "N/A"
+  },
+  "failed_tasks": [],
+  "actions_taken": []
+}

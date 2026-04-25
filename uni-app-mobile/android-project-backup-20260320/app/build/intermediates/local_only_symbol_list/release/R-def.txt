@@ -1,0 +1,9 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color primary
+color white
+drawable icon
+string app_name
+style UniAppTheme
+xml dcloud_file_provider_paths

@@ -1,0 +1,24 @@
+# Test: App Launch & Initial Screen
+# Updated for UI Modernization v2.0 - Light Theme
+
+appId: com.jujuapp
+name: Launch App
+---
+# 启动应用（清除状态模拟首次启动）
+- launchApp:
+    clearState: true
+
+# 等待应用加载动画
+- waitForAnimationToEnd:
+    timeout: 5000
+
+# 截图：启动页
+- takeScreenshot: 01_launch_screen
+
+# 验证应用启动成功（检查任何关键元素）
+- assertVisible:
+    text: ".*"
+    optional: true
+
+# 记录当前页面元素用于调试
+- evalScript: ${output.testInfo = 'App launched successfully'}

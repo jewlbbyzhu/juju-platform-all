@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.juju.platform.app-mergeReleaseResources-40:/values-ldltr-v17/values-ldltr-v17.xml",
+            "map": [
+                {
+                    "source": "/Users/mac/.gradle/caches/transforms-3/c7e2ba65b2478ff4ea72e304913a2fa3/transformed/jetified-uniapp-v8-release/res/values-ldltr-v17/values-ldltr-v17.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "51",
+                        "endOffsets": "102"
+                    }
+                }
+            ]
+        }
+    ]
+}

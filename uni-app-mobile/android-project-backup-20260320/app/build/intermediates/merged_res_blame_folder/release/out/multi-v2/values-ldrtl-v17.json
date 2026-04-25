@@ -1,0 +1,36 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.juju.platform.app-mergeReleaseResources-40:/values-ldrtl-v17/values-ldrtl-v17.xml",
+            "map": [
+                {
+                    "source": "/Users/mac/.gradle/caches/transforms-3/c7e2ba65b2478ff4ea72e304913a2fa3/transformed/jetified-uniapp-v8-release/res/values-ldrtl-v17/values-ldrtl-v17.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "50",
+                        "endOffsets": "101"
+                    }
+                },
+                {
+                    "source": "/Users/mac/.gradle/caches/transforms-3/620ed55ad84f733793bedcdcb1ed882c/transformed/material-1.9.0/res/values-ldrtl-v17/values-ldrtl-v17.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,191",
+                        "endColumns": "135,140",
+                        "endOffsets": "186,327"
+                    },
+                    "to": {
+                        "startLines": "3,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "106,242",
+                        "endColumns": "135,140",
+                        "endOffsets": "237,378"
+                    }
+                }
+            ]
+        }
+    ]
+}

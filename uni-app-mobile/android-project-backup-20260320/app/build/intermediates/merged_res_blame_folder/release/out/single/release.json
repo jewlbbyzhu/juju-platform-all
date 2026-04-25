@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.juju.platform.app-merged_res-42:/drawable_icon.xml.flat",
+        "source": "com.juju.platform.app-main-43:/drawable/icon.xml"
+    },
+    {
+        "merged": "com.juju.platform.app-merged_res-42:/xml_dcloud_file_provider_paths.xml.flat",
+        "source": "com.juju.platform.app-main-43:/xml/dcloud_file_provider_paths.xml"
+    }
+]

@@ -1,0 +1,333 @@
+{
+  "date": "2026-04-12",
+  "total_pages": 54,
+  "refactored": 6,
+  "progress_pct": 11.11111111111111,
+  "ts_errors": 0,
+  "pages": [
+    {
+      "name": "CommunityScreen.tsx",
+      "lines": 652,
+      "status": "\u2705 \u5df2\u91cd\u6784",
+      "has_new": true
+    },
+    {
+      "name": "ReviewScreen.tsx",
+      "lines": 187,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "OrderSuccessScreen.tsx",
+      "lines": 191,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "ThemePreviewScreen.tsx",
+      "lines": 333,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "PartyDetailScreen.tsx",
+      "lines": 640,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "GroupChatScreen.tsx",
+      "lines": 81,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "EvoMapDemoScreen.tsx",
+      "lines": 139,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "CreateGroupScreen.tsx",
+      "lines": 108,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "TicketStatsDetailScreen.tsx",
+      "lines": 67,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "GroupChatListScreen.tsx",
+      "lines": 82,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "TicketSelectScreen.tsx",
+      "lines": 639,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "VIPScreen.tsx",
+      "lines": 584,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "ScanHistoryScreen.tsx",
+      "lines": 74,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "MyTicketsScreen.tsx",
+      "lines": 338,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "VIPCenterScreen.tsx",
+      "lines": 528,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "PushSettingsScreen.tsx",
+      "lines": 319,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "DownloadScreen.tsx",
+      "lines": 246,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "FollowingScreen.tsx",
+      "lines": 186,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "SocialScreen.tsx",
+      "lines": 194,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "NotificationsScreen.tsx",
+      "lines": 508,
+      "status": "\u2705 \u5df2\u91cd\u6784",
+      "has_new": true
+    },
+    {
+      "name": "WalletScreen.tsx",
+      "lines": 162,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "VIPLevelsScreen.tsx",
+      "lines": 416,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "CreatePartyScreen.tsx",
+      "lines": 190,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "TicketStatsScreen.tsx",
+      "lines": 87,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "ProfileScreen.tsx",
+      "lines": 608,
+      "status": "\u2705 \u5df2\u91cd\u6784",
+      "has_new": true
+    },
+    {
+      "name": "TestNewScreen.tsx",
+      "lines": 123,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "TagManageScreen.tsx",
+      "lines": 102,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "ChatListScreen.tsx",
+      "lines": 446,
+      "status": "\u2705 \u5df2\u91cd\u6784",
+      "has_new": true
+    },
+    {
+      "name": "RefundApplyScreen.tsx",
+      "lines": 161,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "CreatePostScreen.tsx",
+      "lines": 283,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "MyPartiesScreen.tsx",
+      "lines": 138,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "TicketSelectionScreen.tsx",
+      "lines": 476,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "FansScreen.tsx",
+      "lines": 189,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "FavoritesScreen.tsx",
+      "lines": 96,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "CustomerServiceScreen.tsx",
+      "lines": 85,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "VIPStatsScreen.tsx",
+      "lines": 462,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "OrderDetailScreen.tsx",
+      "lines": 186,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "VIPEventsScreen.tsx",
+      "lines": 448,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "SharePosterScreen.tsx",
+      "lines": 80,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "PrivateChatScreen.tsx",
+      "lines": 68,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "HomeScreen.tsx",
+      "lines": 519,
+      "status": "\u2705 \u5df2\u91cd\u6784",
+      "has_new": true
+    },
+    {
+      "name": "PaymentScreen.tsx",
+      "lines": 111,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "ScanTicketScreen.tsx",
+      "lines": 78,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "InviteCodeScreen.tsx",
+      "lines": 91,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "MapScreen.tsx",
+      "lines": 218,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "UserProfileScreen.tsx",
+      "lines": 172,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "PushMessagesScreen.tsx",
+      "lines": 330,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "MyOrdersScreen.tsx",
+      "lines": 156,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "TicketInventoryScreen.tsx",
+      "lines": 185,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "LoginScreen.tsx",
+      "lines": 503,
+      "status": "\u2705 \u5df2\u91cd\u6784",
+      "has_new": true
+    },
+    {
+      "name": "VIPHistoryScreen.tsx",
+      "lines": 386,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "VIPPrivilegesScreen.tsx",
+      "lines": 530,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "VIPPointsScreen.tsx",
+      "lines": 497,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    },
+    {
+      "name": "LocationPickerScreen.tsx",
+      "lines": 162,
+      "status": "\u274c \u672a\u91cd\u6784",
+      "has_new": false
+    }
+  ]
+}

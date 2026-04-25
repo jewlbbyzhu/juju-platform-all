@@ -1,0 +1,302 @@
+/**
+ * Element Plus SCSS 变量覆盖
+ * 统一主题色和组件样式
+ */
+
+// ========================================
+// 品牌色彩系统
+// ========================================
+
+// 主色调 - 活力橙
+$--colors: (
+  'primary': (
+    'base': #F04E0C,
+  ),
+  'success': (
+    'base': #4CAF50,
+  ),
+  'warning': (
+    'base': #FFC107,
+  ),
+  'danger': (
+    'base': #F44336,
+  ),
+  'error': (
+    'base': #F44336,
+  ),
+  'info': (
+    'base': #2196F3,
+  ),
+);
+
+// ========================================
+// 文本颜色
+// ========================================
+$--color-text: (
+  'primary': #212121,
+  'regular': #616161,
+  'secondary': #757575,
+  'placeholder': #9E9E9E,
+  'disabled': #BDBDBD,
+);
+
+// 背景颜色
+$--fill-color: (
+  '': #FAFAFA,
+  'light': #F5F5F5,
+  'lighter': #EEEEEE,
+  'extra-light': #FAFAFA,
+  'dark': #E0E0E0,
+  'darker': #BDBDBD,
+  'blank': #FFFFFF,
+);
+
+// ========================================
+// 边框颜色
+// ========================================
+$--border-color: (
+  '': #E0E0E0,
+  'light': #EEEEEE,
+  'lighter': #F5F5F5,
+  'extra-light': #FAFAFA,
+  'dark': #BDBDBD,
+  'darker': #9E9E9E,
+);
+
+// ========================================
+// 阴影系统
+// ========================================
+$--box-shadow: (
+  '': (
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1),
+  ),
+  'light': (
+    0 1px 2px 0 rgba(0, 0, 0, 0.05),
+  ),
+  'lighter': (
+    0 1px 2px 0 rgba(0, 0, 0, 0.05),
+  ),
+  'dark': (
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1),
+  ),
+);
+
+// ========================================
+// 圆角系统
+// ========================================
+$--border-radius: (
+  'base': 6px,
+  'small': 4px,
+  'round': 9999px,
+  'circle': 9999px,
+);
+
+// ========================================
+// 字体系统
+// ========================================
+$--font-size: (
+  'extra-large': 20px,
+  'large': 18px,
+  'medium': 16px,
+  'base': 14px,
+  'small': 13px,
+  'extra-small': 12px,
+);
+
+$--font-weight: (
+  'primary': 400,
+  'secondary': 500,
+);
+
+// ========================================
+// 尺寸系统
+// ========================================
+$--component-size: (
+  'large': 40px,
+  'default': 32px,
+  'small': 24px,
+);
+
+// ========================================
+// 按钮样式
+// ========================================
+$--button: (
+  'font-weight': 500,
+  'border-color': #E0E0E0,
+  'bg-color': #FFFFFF,
+  'text-color': #212121,
+  'disabled-text-color': #BDBDBD,
+  'disabled-bg-color': #F5F5F5,
+  'disabled-border-color': #E0E0E0,
+  'divide-border-color': rgba(0, 0, 0, 0.1),
+  'hover-text-color': #F04E0C,
+  'hover-bg-color': #FFF3ED,
+  'hover-border-color': #F04E0C,
+  'active-text-color': #D63A06,
+  'active-border-color': #D63A06,
+);
+
+// ========================================
+// 输入框样式
+// ========================================
+$--input: (
+  'text-color': #212121,
+  'border': 1px solid #E0E0E0,
+  'hover-border': #BDBDBD,
+  'focus-border': #F04E0C,
+  'transparent-border': 0 0 0 1px transparent inset,
+  'border-radius': 6px,
+  'bg-color': #FFFFFF,
+  'icon-color': #9E9E9E,
+  'placeholder-color': #9E9E9E,
+  'hover-border-color': #BDBDBD,
+  'clear-hover-color': #757575,
+);
+
+// ========================================
+// 表格样式
+// ========================================
+$--table: (
+  'border-color': #EEEEEE,
+  'border': 1px solid #EEEEEE,
+  'text-color': #212121,
+  'header-text-color': #616161,
+  'row-hover-bg-color': #F5F5F5,
+  'current-row-bg-color': #FFF3ED,
+  'header-bg-color': #FAFAFA,
+  'fixed-box-shadow': 0 0 10px rgba(0, 0, 0, 0.12),
+  'bg-color': #FFFFFF,
+  'tr-bg-color': #FFFFFF,
+  'expanded-cell-bg-color': #FAFAFA,
+  'sort-icon-hover-color': #F04E0C,
+);
+
+// ========================================
+// 卡片样式
+// ========================================
+$--card: (
+  'border-color': #EEEEEE,
+  'border-radius': 8px,
+  'padding': 20px,
+  'bg-color': #FFFFFF,
+);
+
+// ========================================
+// 菜单样式
+// ========================================
+$--menu: (
+  'active-color': #F04E0C,
+  'text-color': #616161,
+  'hover-text-color': #212121,
+  'bg-color': #FFFFFF,
+  'hover-bg-color': #F5F5F5,
+);
+
+// ========================================
+// 分页样式
+// ========================================
+$--pagination: (
+  'font-size': 13px,
+  'bg-color': #FFFFFF,
+  'text-color': #616161,
+  'border-radius': 4px,
+  'button-color': #616161,
+  'button-width': 32px,
+  'button-height': 32px,
+  'button-disabled-color': #BDBDBD,
+  'button-disabled-bg-color': #F5F5F5,
+  'hover-color': #F04E0C,
+);
+
+// ========================================
+// 标签样式
+// ========================================
+$--tag: (
+  'font-size': 12px,
+  'border-radius': 9999px,
+  'border-radius-rounded': 4px,
+);
+
+// ========================================
+// 消息提示样式
+// ========================================
+$--messagebox: (
+  'title-color': #212121,
+  'width': 420px,
+  'border-radius': 8px,
+  'font-size': 16px,
+  'content-font-size': 14px,
+  'content-color': #616161,
+  'error-font-size': 12px,
+  'padding-primary': 12px,
+);
+
+// ========================================
+// 消息通知样式
+// ========================================
+$--message: (
+  'min-width': 300px,
+  'bg-color': #FFFFFF,
+  'padding': 12px 16px,
+  'font-size': 14px,
+  'border-radius': 8px,
+  'border-color': #EEEEEE,
+  'icon-size': 16px,
+  'close-size': 14px,
+  'close-icon-color': #9E9E9E,
+  'close-hover-color': #616161,
+);
+
+// ========================================
+// 对话框样式
+// ========================================
+$--dialog: (
+  'width': 50%,
+  'margin-top': 15vh,
+  'bg-color': #FFFFFF,
+  'box-shadow': (
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1),
+  ),
+  'title-font-size': 18px,
+  'content-font-size': 14px,
+  'font-line-height': 1.5,
+  'padding-primary': 20px,
+  'border-radius': 8px,
+);
+
+// ========================================
+// 加载样式
+// ========================================
+$--loading: (
+  'spinner-size': 42px,
+  'fullscreen-spinner-size': 50px,
+);
+
+// ========================================
+// 过渡时间
+// ========================================
+$--transition: (
+  'all': all 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+  'fade': opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+  'md-fade': (
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+  ),
+  'fade-linear': opacity 0.2s linear,
+  'border': border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+  'color': color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+  'box-shadow': box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+);
+
+// 导出配置
+:export {
+  primaryColor: #F04E0C;
+  secondaryColor: #3F51B5;
+  successColor: #4CAF50;
+  warningColor: #FFC107;
+  errorColor: #F44336;
+  infoColor: #2196F3;
+}

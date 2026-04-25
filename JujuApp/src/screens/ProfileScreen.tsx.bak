@@ -1,0 +1,712 @@
+import React, { useState, useEffect, useCallback } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  RefreshControl,
+  Dimensions,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
+import { profileApi } from '../api/profile';
+import type { NavigationProp } from '../types';
+import { useTheme } from '../theme';
+import { vipColors } from '../theme/colors';
+import { GlassCard, GlassButton, SkeletonProfile } from '../components';
+
+// 屏幕宽度常量（如需响应式布局可使用）
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+
+interface UserProfile {
+  id: number;
+  nickname: string;
+  avatar: string;
+  phone?: string;
+  gender?: number;
+  birthday?: string;
+  bio?: string;
+  vipLevel?: number;
+}
+
+interface UserStats {
+  partyCount: number;
+  orderCount: number;
+  followingCount: number;
+  followerCount: number;
+}
+
+export default function ProfileScreen() {
+  const { colors, gradients, typography, spacing, layout } = useTheme();
+  const styles = getStyles(colors, typography, spacing, layout);
+  const navigation = useNavigation<NavigationProp>();
+  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [stats] = useState<UserStats>({
+    partyCount: 12,
+    orderCount: 8,
+    followingCount: 156,
+    followerCount: 89,
+  });
+
+  const MENU_GROUPS = [
+    {
+      title: '我的活动',
+      items: [
+        {
+          icon: '🎉',
+          title: '我的聚会',
+          subtitle: '查看参与的聚会',
+          route: 'MyParties',
+          color: colors.primary.main,
+        },
+        {
+          icon: '🎫',
+          title: '我的票券',
+          subtitle: '管理您的票券',
+          route: 'MyTickets',
+          color: colors.secondary.main,
+        },
+        {
+          icon: '📦',
+          title: '我的订单',
+          subtitle: '查看订单记录',
+          route: 'MyOrders',
+          color: colors.accent.cyan,
+        },
+      ],
+    },
+    {
+      title: '会员服务',
+      items: [
+        {
+          icon: '👑',
+          title: 'VIP中心',
+          subtitle: '会员权益与特权',
+          route: 'VIPCenter',
+          color: colors.accent.gold,
+          badge: 'NEW',
+        },
+        {
+          icon: '💎',
+          title: '我的积分',
+          subtitle: '积分兑换好礼',
+          route: 'Points',
+          color: colors.accent.pink,
+        },
+        {
+          icon: '💰',
+          title: '我的钱包',
+          subtitle: '余额与交易记录',
+          route: 'Wallet',
+          color: colors.status.success,
+        },
+      ],
+    },
+    {
+      title: '社交互动',
+      items: [
+        {
+          icon: '❤️',
+          title: '我的收藏',
+          subtitle: '收藏的活动',
+          route: 'Favorites',
+          color: colors.status.error,
+        },
+        {
+          icon: '👥',
+          title: '我的关注',
+          subtitle: '关注的人',
+          route: 'Following',
+          color: colors.status.info,
+        },
+        {
+          icon: '💬',
+          title: '消息中心',
+          subtitle: '查看消息通知',
+          route: 'Notifications',
+          color: colors.status.warning,
+          badge: '3',
+        },
+      ],
+    },
+    {
+      title: '系统设置',
+      items: [
+        {
+          icon: '⚙️',
+          title: '设置',
+          subtitle: '账号与安全',
+          route: 'Settings',
+          color: colors.gray[500],
+        },
+        {
+          icon: '❓',
+          title: '帮助与反馈',
+          subtitle: '常见问题解答',
+          route: 'Help',
+          color: colors.secondary.light,
+        },
+      ],
+    },
+  ];
+
+  const VIP_LEVELS = [
+    { level: 0, name: '普通用户', color: colors.gray[400] },
+    { level: 1, name: '青铜会员', color: vipColors.bronze },
+    { level: 2, name: '白银会员', color: vipColors.silver },
+    { level: 3, name: '黄金会员', color: vipColors.gold },
+    { level: 4, name: '铂金会员', color: vipColors.platinum },
+    { level: 5, name: '钻石会员', color: vipColors.diamond },
+  ];
+
+  useEffect(() => {
+    loadProfile();
+  }, []);
+
+  const loadProfile = async () => {
+    setLoading(true);
+    try {
+      const res = await profileApi.getUserProfile();
+      if ((res as any).code === 0) {
+        setProfile((res as any).data);
+      }
+    } catch (error) {
+      // 使用默认数据
+      setProfile({
+        id: 1,
+        nickname: '聚聚用户',
+        avatar: 'https://i.pravatar.cc/200?1',
+        bio: '热爱生活，享受聚会 🎉',
+        vipLevel: 3,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await loadProfile();
+    setRefreshing(false);
+  }, []);
+
+  const handleMenuPress = (route: string) => {
+    (navigation as any).navigate(route);
+  };
+
+  const handleSettingsPress = () => {
+    (navigation as any).navigate('Settings');
+  };
+
+  const handleNotificationsPress = () => {
+    (navigation as any).navigate('Notifications');
+  };
+
+  const handleVIPPress = () => {
+    (navigation as any).navigate('VIPCenter');
+  };
+
+  const vipInfo = VIP_LEVELS[profile?.vipLevel || 0];
+
+  // 渲染骨架屏
+  if (loading && !profile) {
+    return (
+      <SafeAreaView style={styles.container} edges={['top']}>
+        <ScrollView style={styles.scrollView}>
+          <LinearGradient
+            colors={[...colors.primary.gradient]}
+            style={styles.headerGradient}
+          >
+            <SkeletonProfile />
+          </LinearGradient>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+
+  return (
+    <SafeAreaView style={styles.container} edges={['top']}>
+      <ScrollView
+        style={styles.scrollView}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={[colors.primary.main]}
+          />
+        }
+      >
+        {/* 用户信息卡片 - 使用GlassCard */}
+        <LinearGradient
+          colors={[...colors.primary.gradient]}
+          style={styles.headerGradient}
+        >
+          <GlassCard
+            intensity="light"
+            style={styles.userCard}
+            glow
+            glowColor={colors.primary.main}
+          >
+            {/* 顶部操作 */}
+            <View style={styles.headerActions}>
+              <GlassButton
+                title=""
+                onPress={handleSettingsPress}
+                variant="ghost"
+                size="small"
+                style={styles.iconButton}
+                textStyle={styles.iconButtonText}
+              />
+              <TouchableOpacity
+                style={styles.iconButtonWithBadge}
+                onPress={handleNotificationsPress}
+              >
+                <Text style={styles.headerIcon}>🔔</Text>
+                <View style={styles.badge}>
+                  <Text style={styles.badgeText}>3</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+            {/* 用户头像和信息 */}
+            <View style={styles.userInfo}>
+              <View style={styles.avatarContainer}>
+                <Image
+                  source={{
+                    uri: profile?.avatar || 'https://i.pravatar.cc/200?1',
+                  }}
+                  style={styles.avatar}
+                />
+                {profile?.vipLevel && profile.vipLevel > 0 && (
+                  <View
+                    style={[
+                      styles.vipBadge,
+                      { backgroundColor: vipInfo.color },
+                    ]}
+                  >
+                    <Text style={styles.vipBadgeText}>VIP</Text>
+                  </View>
+                )}
+              </View>
+              <View style={styles.userMeta}>
+                <Text style={styles.nickname}>
+                  {profile?.nickname || '聚聚用户'}
+                </Text>
+                <View style={styles.userTags}>
+                  {profile?.vipLevel && profile.vipLevel > 0 ? (
+                    <View
+                      style={[
+                        styles.vipTag,
+                        { backgroundColor: vipInfo.color + '30' },
+                      ]}
+                    >
+                      <Text
+                        style={[styles.vipTagText, { color: vipInfo.color }]}
+                      >
+                        {vipInfo.name}
+                      </Text>
+                    </View>
+                  ) : (
+                    <GlassButton
+                      title="升级VIP"
+                      onPress={handleVIPPress}
+                      variant="gradient"
+                      size="small"
+                      style={styles.upgradeButton}
+                    />
+                  )}
+                </View>
+                <Text style={styles.bio} numberOfLines={2}>
+                  {profile?.bio || '还没有个人简介'}
+                </Text>
+              </View>
+            </View>
+
+            {/* 统计数字 - 使用GlassCard */}
+            <View style={styles.statsContainer}>
+              <GlassCard intensity="light" style={styles.statsCard}>
+                <View style={styles.statsRow}>
+                  <TouchableOpacity style={styles.statItem}>
+                    <Text style={styles.statNumber}>{stats.partyCount}</Text>
+                    <Text style={styles.statLabel}>参与活动</Text>
+                  </TouchableOpacity>
+                  <View style={styles.statDivider} />
+                  <TouchableOpacity style={styles.statItem}>
+                    <Text style={styles.statNumber}>{stats.orderCount}</Text>
+                    <Text style={styles.statLabel}>订单</Text>
+                  </TouchableOpacity>
+                  <View style={styles.statDivider} />
+                  <TouchableOpacity style={styles.statItem}>
+                    <Text style={styles.statNumber}>
+                      {stats.followingCount}
+                    </Text>
+                    <Text style={styles.statLabel}>关注</Text>
+                  </TouchableOpacity>
+                  <View style={styles.statDivider} />
+                  <TouchableOpacity style={styles.statItem}>
+                    <Text style={styles.statNumber}>{stats.followerCount}</Text>
+                    <Text style={styles.statLabel}>粉丝</Text>
+                  </TouchableOpacity>
+                </View>
+              </GlassCard>
+            </View>
+          </GlassCard>
+        </LinearGradient>
+
+        {/* 会员权益横幅 - 金色渐变VIP入口 */}
+        {(!profile?.vipLevel || profile.vipLevel === 0) && (
+          <View style={styles.vipBannerContainer}>
+            <LinearGradient
+              colors={[...gradients.vip]}
+              style={styles.vipBannerGradient}
+            >
+              <View style={styles.vipBannerContent}>
+                <View>
+                  <Text style={styles.vipBannerTitle}>开通VIP会员</Text>
+                  <Text style={styles.vipBannerSubtitle}>
+                    享受专属特权与优惠
+                  </Text>
+                </View>
+                <GlassButton
+                  title="立即开通"
+                  onPress={handleVIPPress}
+                  variant="primary"
+                  size="small"
+                  style={styles.vipBannerButton}
+                />
+              </View>
+            </LinearGradient>
+          </View>
+        )}
+
+        {/* 菜单组 - 玻璃拟态风格 */}
+        {MENU_GROUPS.map(group => (
+          <View key={group.title} style={styles.menuGroup}>
+            <Text style={styles.menuGroupTitle}>{group.title}</Text>
+            <GlassCard intensity="medium" style={styles.menuCard}>
+              {group.items.map((item, itemIndex) => (
+                <TouchableOpacity
+                  key={item.title}
+                  style={[
+                    styles.menuItem,
+                    itemIndex === group.items.length - 1 && styles.menuItemLast,
+                  ]}
+                  onPress={() => handleMenuPress(item.route)}
+                >
+                  <View
+                    style={[
+                      styles.menuIcon,
+                      { backgroundColor: item.color + '15' },
+                    ]}
+                  >
+                    <Text style={styles.menuIconText}>{item.icon}</Text>
+                  </View>
+                  <View style={styles.menuContent}>
+                    <Text style={styles.menuTitle}>{item.title}</Text>
+                    <Text style={styles.menuSubtitle}>{item.subtitle}</Text>
+                  </View>
+                  {item.badge && (
+                    <View style={styles.menuBadge}>
+                      <Text style={styles.menuBadgeText}>{item.badge}</Text>
+                    </View>
+                  )}
+                  <Text style={styles.menuArrow}>›</Text>
+                </TouchableOpacity>
+              ))}
+            </GlassCard>
+          </View>
+        ))}
+
+        {/* 底部间距 */}
+        <View style={styles.bottomSpacer} />
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+const getStyles = (colors: any, typography: any, spacing: any, layout: any) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: colors.background.secondary,
+    },
+    scrollView: {
+      flex: 1,
+    },
+
+    // 头部渐变背景
+    headerGradient: {
+      paddingHorizontal: layout.screenPadding,
+      paddingTop: spacing.sm,
+      paddingBottom: spacing.xl,
+    },
+
+    // 用户卡片
+    userCard: {
+      margin: 0,
+      borderRadius: 24,
+      overflow: 'hidden',
+    },
+
+    // 顶部操作
+    headerActions: {
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      gap: spacing.sm,
+      marginBottom: spacing.md,
+      paddingHorizontal: spacing.sm,
+      paddingTop: spacing.sm,
+    },
+    iconButton: {
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+      paddingHorizontal: 0,
+      paddingVertical: 0,
+    },
+    iconButtonText: {
+      fontSize: 18,
+    },
+    iconButtonWithBadge: {
+      position: 'relative',
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+      backgroundColor: colors.glass.highlight,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    headerIcon: {
+      fontSize: 18,
+    },
+    badge: {
+      position: 'absolute',
+      top: -4,
+      right: -4,
+      minWidth: 18,
+      height: 18,
+      borderRadius: 9,
+      backgroundColor: colors.status.error,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    badgeText: {
+      color: colors.text.inverse,
+      fontSize: typography.size.small,
+      fontWeight: typography.weight.bold,
+    },
+
+    // 用户信息
+    userInfo: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: spacing.lg,
+      paddingHorizontal: spacing.md,
+    },
+    avatarContainer: {
+      position: 'relative',
+    },
+    avatar: {
+      width: 80,
+      height: 80,
+      borderRadius: 40,
+      borderWidth: 3,
+      borderColor: colors.glass.border,
+    },
+    vipBadge: {
+      position: 'absolute',
+      bottom: -4,
+      right: -4,
+      paddingHorizontal: 8,
+      paddingVertical: 2,
+      borderRadius: 10,
+      borderWidth: 2,
+      borderColor: colors.background.primary,
+    },
+    vipBadgeText: {
+      color: colors.text.inverse,
+      fontSize: typography.size.small,
+      fontWeight: typography.weight.bold,
+    },
+    userMeta: {
+      flex: 1,
+      marginLeft: spacing.md,
+    },
+    nickname: {
+      fontSize: typography.size.h2,
+      fontWeight: typography.weight.bold,
+      color: colors.text.inverse,
+      marginBottom: spacing.xs,
+    },
+    userTags: {
+      flexDirection: 'row',
+      marginBottom: spacing.xs,
+    },
+    vipTag: {
+      paddingHorizontal: spacing.sm,
+      paddingVertical: 4,
+      borderRadius: 12,
+    },
+    vipTagText: {
+      fontSize: typography.size.caption,
+      fontWeight: typography.weight.semibold,
+    },
+    upgradeButton: {
+      paddingHorizontal: spacing.sm,
+      borderRadius: 12,
+    },
+    bio: {
+      fontSize: typography.size.body2,
+      color: colors.glass.textSecondary,
+      lineHeight: typography.lineHeight.normal * typography.size.body2,
+    },
+
+    // 统计
+    statsContainer: {
+      paddingHorizontal: spacing.md,
+      paddingBottom: spacing.md,
+    },
+    statsCard: {
+      margin: 0,
+      borderRadius: 16,
+    },
+    statsRow: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      paddingVertical: spacing.sm,
+    },
+    statItem: {
+      alignItems: 'center',
+      flex: 1,
+    },
+    statNumber: {
+      fontSize: typography.size.h2,
+      fontWeight: typography.weight.bold,
+      color: colors.text.inverse,
+    },
+    statLabel: {
+      fontSize: typography.size.caption,
+      color: colors.glass.textSecondary,
+      marginTop: spacing.xs,
+    },
+    statDivider: {
+      width: 1,
+      height: 30,
+      backgroundColor: colors.glass.highlight,
+    },
+
+    // VIP横幅
+    vipBannerContainer: {
+      marginHorizontal: layout.screenPadding,
+      marginTop: -spacing.md,
+      marginBottom: spacing.lg,
+      borderRadius: 16,
+      overflow: 'hidden',
+      elevation: 4,
+      shadowColor: colors.accent.gold,
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 8,
+    },
+    vipBannerGradient: {
+      borderRadius: 16,
+      padding: spacing.md,
+    },
+    vipBannerContent: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    vipBannerTitle: {
+      fontSize: typography.size.h4,
+      fontWeight: typography.weight.bold,
+      color: colors.text.primary,
+    },
+    vipBannerSubtitle: {
+      fontSize: typography.size.caption,
+      color: colors.text.secondary,
+      marginTop: 2,
+    },
+    vipBannerButton: {
+      backgroundColor: colors.text.primary,
+    },
+
+    // 菜单组
+    menuGroup: {
+      marginBottom: spacing.lg,
+    },
+    menuGroupTitle: {
+      fontSize: typography.size.body,
+      fontWeight: typography.weight.semibold,
+      color: colors.text.secondary,
+      marginHorizontal: layout.screenPadding,
+      marginBottom: spacing.sm,
+      marginTop: spacing.sm,
+    },
+    menuCard: {
+      marginHorizontal: layout.screenPadding,
+      marginVertical: 0,
+      borderRadius: 16,
+    },
+    menuItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingVertical: spacing.md,
+      paddingHorizontal: spacing.md,
+      borderBottomWidth: 1,
+      borderBottomColor: colors.glass.border,
+    },
+    menuItemLast: {
+      borderBottomWidth: 0,
+    },
+    menuIcon: {
+      width: 40,
+      height: 40,
+      borderRadius: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    menuIconText: {
+      fontSize: 20,
+    },
+    menuContent: {
+      flex: 1,
+      marginLeft: spacing.md,
+    },
+    menuTitle: {
+      fontSize: typography.size.body,
+      fontWeight: typography.weight.medium,
+      color: colors.text.primary,
+    },
+    menuSubtitle: {
+      fontSize: typography.size.caption,
+      color: colors.text.tertiary,
+      marginTop: 2,
+    },
+    menuBadge: {
+      paddingHorizontal: spacing.sm,
+      paddingVertical: 2,
+      backgroundColor: colors.status.error,
+      borderRadius: 10,
+      marginRight: spacing.sm,
+    },
+    menuBadgeText: {
+      fontSize: typography.size.small,
+      fontWeight: typography.weight.bold,
+      color: colors.text.inverse,
+    },
+    menuArrow: {
+      fontSize: 20,
+      color: colors.text.tertiary,
+    },
+
+    // 底部
+    bottomSpacer: {
+      height: spacing['4xl'],
+    },
+  });

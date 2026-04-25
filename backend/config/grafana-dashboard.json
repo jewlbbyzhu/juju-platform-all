@@ -1,0 +1,338 @@
+{
+  "dashboard": {
+    "title": "JuJu Backend - System Overview",
+    "tags": ["juju", "backend", "nodejs"],
+    "timezone": "browser",
+    "schemaVersion": 16,
+    "version": 0,
+    "refresh": "10s",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Request Rate",
+        "type": "graph",
+        "gridPos": {
+          "x": 0,
+          "y": 0,
+          "w": 12,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "rate(http_requests_total[5m])",
+            "legendFormat": "{{method}} {{route}}",
+            "refId": "A"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "reqps",
+            "label": "Requests/sec",
+            "min": 0
+          }
+        ],
+        "xaxis": {
+          "mode": "time",
+          "name": "Time",
+          "show": true,
+          "values": []
+        }
+      },
+      {
+        "id": 2,
+        "title": "Response Time (P95)",
+        "type": "graph",
+        "gridPos": {
+          "x": 12,
+          "y": 0,
+          "w": 12,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "{{route}}",
+            "refId": "B"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "s",
+            "label": "Seconds",
+            "min": 0
+          }
+        ],
+        "xaxis": {
+          "mode": "time",
+          "name": "Time",
+          "show": true,
+          "values": []
+        }
+      },
+      {
+        "id": 3,
+        "title": "Error Rate",
+        "type": "graph",
+        "gridPos": {
+          "x": 0,
+          "y": 8,
+          "w": 12,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{status_code=~\"5..\"}[5m])",
+            "legendFormat": "{{status_code}}",
+            "refId": "C"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "reqps",
+            "label": "Errors/sec",
+            "min": 0
+          }
+        ],
+        "xaxis": {
+          "mode": "time",
+          "name": "Time",
+          "show": true,
+          "values": []
+        }
+      },
+      {
+        "id": 4,
+        "title": "CPU Usage",
+        "type": "graph",
+        "gridPos": {
+          "x": 12,
+          "y": 8,
+          "w": 12,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "rate(process_cpu_seconds_total[5m]) * 100",
+            "legendFormat": "CPU",
+            "refId": "D"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "percent",
+            "label": "CPU %",
+            "min": 0,
+            "max": 100
+          }
+        ],
+        "xaxis": {
+          "mode": "time",
+          "name": "Time",
+          "show": true,
+          "values": []
+        }
+      },
+      {
+        "id": 5,
+        "title": "Memory Usage",
+        "type": "graph",
+        "gridPos": {
+          "x": 0,
+          "y": 16,
+          "w": 12,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "process_resident_memory_bytes / 1024 / 1024 / 1024",
+            "legendFormat": "RSS",
+            "refId": "E"
+          },
+          {
+            "expr": "process_heap_memory_bytes / 1024 / 1024 / 1024",
+            "legendFormat": "Heap",
+            "refId": "F"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "decmbytes",
+            "label": "Memory (MB)",
+            "min": 0
+          }
+        ],
+        "xaxis": {
+          "mode": "time",
+          "name": "Time",
+          "show": true,
+          "values": []
+        }
+      },
+      {
+        "id": 6,
+        "title": "Active Connections",
+        "type": "stat",
+        "gridPos": {
+          "x": 12,
+          "y": 16,
+          "w": 12,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "http_active_connections",
+            "refId": "G"
+          }
+        ],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 0
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 7,
+        "title": "Event Loop Lag",
+        "type": "graph",
+        "gridPos": {
+          "x": 0,
+          "y": 24,
+          "w": 12,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "nodejs_eventloop_lag_seconds",
+            "legendFormat": "Event Loop Lag",
+            "refId": "H"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "s",
+            "label": "Seconds",
+            "min": 0
+          }
+        ],
+        "xaxis": {
+          "mode": "time",
+          "name": "Time",
+          "show": true,
+          "values": []
+        }
+      },
+      {
+        "id": 8,
+        "title": "Database Connections",
+        "type": "graph",
+        "gridPos": {
+          "x": 12,
+          "y": 24,
+          "w": 12,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "mysql_global_status_threads_connected",
+            "legendFormat": "Connections",
+            "refId": "I"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "short",
+            "label": "Connections",
+            "min": 0
+          }
+        ],
+        "xaxis": {
+          "mode": "time",
+          "name": "Time",
+          "show": true,
+          "values": []
+        }
+      },
+      {
+        "id": 9,
+        "title": "Redis Connections",
+        "type": "graph",
+        "gridPos": {
+          "x": 0,
+          "y": 32,
+          "w": 12,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "redis_connected_clients",
+            "legendFormat": "Clients",
+            "refId": "J"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "short",
+            "label": "Clients",
+            "min": 0
+          }
+        ],
+        "xaxis": {
+          "mode": "time",
+          "name": "Time",
+          "show": true,
+          "values": []
+        }
+      },
+      {
+        "id": 10,
+        "title": "Replication Lag",
+        "type": "graph",
+        "gridPos": {
+          "x": 12,
+          "y": 32,
+          "w": 12,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "mysql_slave_lag_seconds",
+            "legendFormat": "Lag",
+            "refId": "K"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "s",
+            "label": "Seconds",
+            "min": 0
+          }
+        ],
+        "xaxis": {
+          "mode": "time",
+          "name": "Time",
+          "show": true,
+          "values": []
+        }
+      }
+    ]
+  }
+}

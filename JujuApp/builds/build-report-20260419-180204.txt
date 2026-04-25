@@ -1,0 +1,46 @@
+=== JUJU APK Build Report ===
+Build Time: 20260419-180204
+Status: SUCCESS
+
+Commit Info:
+  Hash: 0ee3a02
+  Message: refactor: 重构 home 组件目录 - 使用设计系统替代 StyleSheet.create
+
+APK Info:
+  File: juju-release-20260419-180204.apk
+  Size: 67M
+  Path: builds/juju-release-20260419-180204.apk
+  Latest Link: builds/juju-latest-release.apk
+
+Build Environment:
+  JAVA_HOME: /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home
+  ANDROID_HOME: /Users/mac/Library/Android/sdk
+  Gradle: assembleRelease --console=plain
+
+New Commits Since Last Build:
+0ee3a02 refactor: 重构 home 组件目录 - 使用设计系统替代 StyleSheet.create
+f4f9ea0 refactor: 重构 GroupChatScreen.tsx, ScanHistoryScreen.tsx, NotificationsScreen.tsx, ChatListScreen.tsx, WalletScreen.tsx, TagManageScreen.tsx
+0c1f2fd refactor: 重构 TicketSelectScreen.tsx & styles/ticketSelect.ts - 使用设计系统替代 TouchableOpacity 和硬编码样式值
+531621e refactor: 重构 FavoritesScreen.tsx, FollowingScreen.tsx, GroupChatListScreen.tsx, InviteCodeScreen.tsx - 替换硬编码颜色/字体/圆角为设计系统变量
+a524f5b refactor: 重构 EvoMapDemoScreen.tsx & OrderDetailScreen.tsx - 替换硬编码颜色为设计系统变量
+3ed9518 fix: resolve TS type errors in GroupChatScreen
+0a4b66b refactor: 清理所有屏幕文件中的 StyleSheet 遗留引用和注释
+6405c0d fix: 修复 MapView.tsx 缺失 typography 导入导致的 TS2304 错误
+46ea7fc refactor: 清理 CommunityScreen.tsx 重复导入
+b4723aa refactor: 重构 WalletScreen 子组件 - 使用设计系统替代 StyleSheet.create
+fb52d2d refactor: 重构 MyPartiesScreen.tsx & FansScreen.tsx - 替换硬编码 rgba 为 theme colors
+68e2e9d refactor: 重构 VIPScreen.tsx & VIPPrivilegesScreen.tsx - 使用 vipColors 替代硬编码渐变颜色
+8fb4c3b refactor: 重构 WalletScreen.tsx & ScanHistoryScreen.tsx - 清理未使用导入，统一变量命名
+9ce816c refactor: 重构 CustomerServiceScreen 目录下所有组件 - 使用设计系统替代 StyleSheet.create
+7976c98 refactor: 重构 ScanHistoryScreen & ChatListScreen 及其子组件 - 使用设计系统替代 StyleSheet.create
+b3ccae5 fix: 修复 TypeScript 类型错误
+daad765 refactor: 重构 CreateGroupScreen.tsx - 修复header文字颜色为浅色主题适配
+fd9e051 refactor: 重构 CommunityScreen.tsx - 修复深色背景为浅色主题
+9bb7db1 refactor: 重构 MyPartiesScreen.tsx & ScanTicketScreen.tsx - 使用设计系统替代 StyleSheet.create
+b42de24 refactor: 重构 TicketSelectionScreen.tsx & TestNewScreen.tsx - 使用设计系统替代 StyleSheet.create
+9baaac6 refactor: 重构 VIPEventsScreen.tsx & VIPPrivilegesScreen.tsx - 使用设计系统替代 StyleSheet.create
+17afba9 refactor: 重构 PushSettingsScreen.tsx & PushMessagesScreen.tsx - 使用设计系统替代 StyleSheet.create
+5675edd refactor: 重构 MyTicketsScreen.tsx & VIPLevelsScreen.tsx - 使用设计系统替代 StyleSheet.create
+8a9a040 refactor: 重构 VIPHistoryScreen.tsx & VIPStatsScreen.tsx - 使用设计系统替代 StyleSheet.create
+1f5d9ff refactor: 重构 TicketStatsScreen.tsx & TicketStatsDetailScreen.tsx
+9342b85 refactor: 重构 InviteCodeScreen.tsx & SharePosterScreen.tsx - 使用设计系统替代 StyleSheet.create

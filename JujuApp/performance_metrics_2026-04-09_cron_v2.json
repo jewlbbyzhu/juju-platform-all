@@ -1,0 +1,68 @@
+{
+  "test_date": "2026-04-09",
+  "test_time": "14:27:14",
+  "app_version": "1.0.5",
+  "test_type": "automated_cron",
+  "apk_analysis": {
+    "latest_apk": {
+      "file": "JujuApp-v1.0.5-20260407-2305.apk",
+      "compressed_mb": 60.38,
+      "uncompressed_mb": 70.55,
+      "breakdown": {
+        "lib/": 50.08,
+        "res/": 0.72,
+        "assets/": 1.83,
+        "dex": 16.55,
+        "META-INF/": 0.0,
+        "other": 1.37
+      }
+    },
+    "historical_comparison": [
+      {
+        "version": "v1.0.0",
+        "size_mb": 60.28,
+        "date": "2026-03-31"
+      },
+      {
+        "version": "v1.0.1",
+        "size_mb": 60.35,
+        "date": "2026-04-02"
+      },
+      {
+        "version": "v1.0.3",
+        "size_mb": 60.36,
+        "date": "2026-04-05"
+      },
+      {
+        "version": "v1.0.4",
+        "size_mb": 60.36,
+        "date": "2026-04-05"
+      },
+      {
+        "version": "v1.0.5-20260407-2305",
+        "size_mb": 60.38,
+        "date": "2026-04-07"
+      }
+    ]
+  },
+  "dependencies": {
+    "production": 14,
+    "development": 20,
+    "total": 34,
+    "large_packages": []
+  },
+  "code_stats": {
+    "files": 109,
+    "lines": 16265,
+    "typescript": 109,
+    "javascript": 0
+  },
+  "maestro_test": {
+    "status": "passed",
+    "duration_seconds": 21
+  },
+  "warnings": [
+    "APK\u5927\u5c0f\u8d85\u8fc760MB\uff0c\u9700\u8981\u5173\u6ce8"
+  ],
+  "overall_status": "needs_attention"
+}

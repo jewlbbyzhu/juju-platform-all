@@ -1,0 +1,16 @@
+Build Report - 20260416-090257
+===========================
+Status: SUCCESS
+Commit: cd3b6bb
+Message: refactor: 深度重构PartyDetailScreen - 2026设计系统、组件拆分、动画优化、统一colors引用
+APK: juju-v1.0.5-5-release-20260416-090257.apk
+Size:  67M
+Build Time: 11s
+Gradle Tasks: 475 actionable tasks: 51 executed, 424 up-to-date
+New Commits Since Last Build:
+cd3b6bb refactor: 深度重构PartyDetailScreen - 2026设计系统、组件拆分、动画优化、统一colors引用
+a637e3d refactor: 深度重构HomeScreen - 优化头部动画、搜索交互、2026设计系统增强
+b691d4b fix(ts): add missing onRefresh destructuring in ProfileScreen.tsx
+b104770 refactor: 深度重构MyPartiesScreen - 2026设计系统、组件拆分、动画优化、统一colors引用
+1048102 refactor: 优化LoginScreen主题导入 + 微调VIPScreen间距
+1a32fe8 refactor: 深度重构ProfileScreen - 2026设计系统、组件拆分、动画优化、统一colors引用

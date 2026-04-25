@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
+    <title>聚聚</title>
+    <link rel="stylesheet" href="/static/index.css" />
+    <style>
+      /* 初始加载样式 */
+      #app:empty::before {
+        content: '加载中...';
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-size: 16px;
+        color: #666;
+      }
+      /* 错误提示 */
+      .load-error {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 20px;
+        text-align: center;
+      }
+      .load-error h1 {
+        font-size: 20px;
+        color: #ff6b35;
+        margin-bottom: 10px;
+      }
+      .load-error p {
+        font-size: 14px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+    <script>
+      // 加载超时检测
+      setTimeout(function() {
+        const app = document.getElementById('app');
+        if (!app || app.children.length === 0) {
+          app.innerHTML = `
+            <div class="load-error">
+              <h1>⚠️ 页面加载失败</h1>
+              <p>请检查网络连接或刷新页面重试</p>
+              <button onclick="location.reload()" style="margin-top:20px;padding:10px 20px;background:#ff6b35;color:white;border:none;border-radius:5px;cursor:pointer;">刷新页面</button>
+            </div>
+          `;
+        }
+      }, 10000); // 10秒超时
+    </script>
+  </body>
+</html>

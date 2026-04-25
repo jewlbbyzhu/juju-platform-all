@@ -1,0 +1,28 @@
+========================================
+JUJU Build Agent - APK 构建报告
+========================================
+构建时间: 2026-04-11 00:10:04
+构建状态: ✅ 成功
+
+--- Git 状态 ---
+最新提交: d885df5 fix: 替换expo-status-bar为react-native StatusBar
+提交作者: JUJU AutoBot <juju@autobot.local>
+提交时间: Thu Apr 9 21:38:03 2026
+
+--- 构建信息 ---
+版本: v1.0.5-5
+APK大小: 58M
+构建目标: Release
+构建工具: Gradle
+
+--- 最近构建的APK文件 ---
+  juju-v1.0.5-5-release-20260410-120439.apk (58.1 MB)
+  juju-v1.0.5-5-release-20260410-150501.apk (58.1 MB)
+  juju-v1.0.5-5-release.apk (58.1 MB)
+  juju-v1.0.5-6-release.apk (58.1 MB)
+  juju-v1.1.0-release.apk (55.7 MB)
+
+--- 本地修改文件 (前10个) ---
+M agents/code-quality/pending-tasks.json
+
+========================================

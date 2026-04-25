@@ -1,0 +1,49 @@
+# Test: Performance Test - UI Modernization v2.0
+# Tests: 启动时间、滚动性能
+
+appId: com.jujuapp
+name: Performance Test
+---
+# 测试冷启动时间
+- launchApp:
+    clearState: true
+
+- waitForAnimationToEnd:
+    timeout: 10000
+
+# 截图：启动完成
+- takeScreenshot: 09_cold_start_complete
+
+# 记录时间戳
+- evalScript: ${output.coldStartTime = Date.now()}
+
+# 测试滚动性能 - 快速滑动列表
+- swipe:
+    direction: UP
+    duration: 500
+
+- swipe:
+    direction: UP
+    duration: 500
+
+- swipe:
+    direction: UP
+    duration: 500
+
+- waitForAnimationToEnd:
+    timeout: 2000
+
+# 截图：滚动后
+- takeScreenshot: 09_after_scroll
+
+# 测试热启动
+- pressKey: home
+- waitForAnimationToEnd
+- launchApp
+- waitForAnimationToEnd:
+    timeout: 3000
+
+# 截图：热启动完成
+- takeScreenshot: 09_warm_start_complete
+
+- evalScript: ${output.performanceTest = 'Completed'}

@@ -1,0 +1,42 @@
+================================
+JUJU APK Build Report
+================================
+Build Time: 2026-04-11 03:03:13
+Status: ✅ SUCCESS
+
+Git Info:
+- Commit: d885df5 fix: 替换expo-status-bar为react-native StatusBar
+- Author: JUJU AutoBot
+- Date: Thu Apr 9 21:38:03 2026 +0800
+
+Build Info:
+- APK Version: 1.0.5 (5)
+- APK Size: 58M
+- Output: builds/juju-v1.0.5-5-release-20260411-030244.apk
+
+Modified Files:
+ M agents/code-quality/pending-tasks.json
+ M agents/data-validation/pending-tasks.json
+ M android/app/src/main/java/com/jujuapp/MainActivity.kt
+ D android/app/src/main/res/drawable/ic_juju_logo.svg
+ D android/app/src/main/res/drawable/juju_logo_text.svg
+ M builds/juju-v1.0.5-5-release.apk
+ M logs/agents/data-validation-report-latest.json
+ M logs/agents/orchestrator-report-latest.json
+ M logs/agents/test-validation-report-latest.json
+ M package-lock.json
+ M package.json
+ M src/config/index.ts
+ M src/screens/CommunityScreen.tsx
+ M src/screens/HomeScreen.tsx
+ M src/screens/LoginScreen.tsx
+ M src/screens/ProfileScreen.tsx
+?? builds/build-report-20260410-120439.txt
+?? builds/build-report-20260410-150501.txt
+?? builds/build-report-20260410-180359.txt
+?? builds/build-report-20260410-180445.txt
+
+Build Command:
+./gradlew assembleRelease --console=plain
+
+================================

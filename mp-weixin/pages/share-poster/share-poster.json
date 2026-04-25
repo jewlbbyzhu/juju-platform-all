@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "生成分享海报",
+  "navigationBarBackgroundColor": "#0a0a0a",
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "poster-generator": "../../components/poster-generator"
+  }
+}

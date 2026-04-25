@@ -1,0 +1,153 @@
+{
+  "AUTH": {
+    "INVALID_CREDENTIALS": "Invalid username or password, please check and try again",
+    "TOKEN_EXPIRED": "Login expired, please login again",
+    "TOKEN_INVALID": "Invalid login status, please login again",
+    "UNAUTHORIZED": "You do not have permission to perform this operation",
+    "FORBIDDEN": "Access denied",
+    "LOGIN_FAILED": "Login failed, please check username and password",
+    "USER_NOT_FOUND": "User not found",
+    "USER_ALREADY_EXISTS": "User already exists",
+    "PASSWORD_WEAK": "Password is too weak, please use a more complex password",
+    "PASSWORD_INCORRECT": "Incorrect password",
+    "TOO_MANY_ATTEMPTS": "Too many login attempts, please try again later",
+    "ACCOUNT_LOCKED": "Account has been locked, please contact administrator"
+  },
+  "VALIDATION": {
+    "REQUIRED_FIELD": "Required field cannot be empty",
+    "INVALID_EMAIL": "Invalid email format",
+    "INVALID_PHONE": "Invalid phone number format",
+    "INVALID_PASSWORD": "Invalid password format",
+    "INVALID_DATE": "Invalid date format",
+    "INVALID_NUMBER": "Invalid number format",
+    "INVALID_TYPE": "Invalid data type",
+    "INVALID_LENGTH": "Data length does not meet requirements",
+    "INVALID_FORMAT": "Invalid data format",
+    "INVALID_RANGE": "Value exceeds allowed range",
+    "INVALID_ENUM": "Selected value is not within allowed range"
+  },
+  "USER": {
+    "NOT_FOUND": "User not found",
+    "ALREADY_EXISTS": "User already exists",
+    "PROFILE_UPDATE_FAILED": "Failed to update profile",
+    "PASSWORD_UPDATE_FAILED": "Failed to update password",
+    "AVATAR_UPLOAD_FAILED": "Failed to upload avatar",
+    "INVALID_STATUS": "Invalid user status",
+    "INVALID_VIP_STATUS": "Invalid VIP status"
+  },
+  "PARTY": {
+    "NOT_FOUND": "Party not found",
+    "CREATE_FAILED": "Failed to create party",
+    "UPDATE_FAILED": "Failed to update party",
+    "DELETE_FAILED": "Failed to delete party",
+    "INVALID_STATUS": "Invalid party status",
+    "ALREADY_STARTED": "Party has already started, cannot modify",
+    "ALREADY_ENDED": "Party has already ended",
+    "TICKET_SOLD_OUT": "Tickets sold out",
+    "INVALID_TIME": "Invalid party time settings",
+    "INVALID_LOCATION": "Invalid party address"
+  },
+  "TICKET": {
+    "NOT_FOUND": "Ticket not found",
+    "ALREADY_USED": "Ticket has already been used",
+    "EXPIRED": "Ticket has expired",
+    "INVALIDATED": "Ticket has been invalidated",
+    "VERIFY_FAILED": "Ticket verification failed",
+    "USE_FAILED": "Failed to use ticket",
+    "INVALID_CODE": "Invalid ticket code",
+    "INVALID_TYPE": "Invalid ticket type",
+    "INVALID_STATUS": "Invalid ticket status"
+  },
+  "ORDER": {
+    "NOT_FOUND": "Order not found",
+    "CREATE_FAILED": "Failed to create order",
+    "UPDATE_FAILED": "Failed to update order",
+    "CANCEL_FAILED": "Failed to cancel order",
+    "INVALID_STATUS": "Invalid order status",
+    "ALREADY_PAID": "Order has already been paid",
+    "NOT_PAID": "Order has not been paid",
+    "PAYMENT_TIMEOUT": "Payment timeout",
+    "INVALID_AMOUNT": "Invalid order amount",
+    "INVALID_QUANTITY": "Invalid order quantity"
+  },
+  "PAYMENT": {
+    "NOT_FOUND": "Payment record not found",
+    "CREATE_FAILED": "Failed to create payment",
+    "PROCESS_FAILED": "Failed to process payment",
+    "REFUND_FAILED": "Refund failed",
+    "INVALID_STATUS": "Invalid payment status",
+    "INVALID_METHOD": "Invalid payment method",
+    "INSUFFICIENT_BALANCE": "Insufficient balance",
+    "PAYMENT_TIMEOUT": "Payment timeout",
+    "PAYMENT_CANCELLED": "Payment cancelled",
+    "PAYMENT_FAILED": "Payment failed"
+  },
+  "REFUND": {
+    "NOT_FOUND": "Refund record not found",
+    "CREATE_FAILED": "Failed to create refund",
+    "PROCESS_FAILED": "Failed to process refund",
+    "AUDIT_FAILED": "Refund audit failed",
+    "INVALID_STATUS": "Invalid refund status",
+    "ALREADY_PROCESSED": "Refund has already been processed",
+    "AMOUNT_EXCEEDED": "Refund amount exceeds refundable amount",
+    "REASON_REQUIRED": "Refund reason cannot be empty",
+    "AUDIT_REJECTED": "Refund audit rejected"
+  },
+  "WALLET": {
+    "NOT_FOUND": "Wallet not found",
+    "CREATE_FAILED": "Failed to create wallet",
+    "INSUFFICIENT_BALANCE": "Insufficient balance",
+    "WITHDRAW_FAILED": "Withdrawal failed",
+    "RECHARGE_FAILED": "Recharge failed",
+    "INVALID_AMOUNT": "Invalid amount",
+    "INVALID_PASSWORD": "Incorrect payment password",
+    "TRANSACTION_FAILED": "Transaction failed"
+  },
+  "VIP": {
+    "NOT_FOUND": "VIP membership not found",
+    "PURCHASE_FAILED": "Failed to purchase VIP",
+    "INVALID_TYPE": "Invalid VIP type",
+    "INVALID_STATUS": "Invalid VIP status",
+    "ALREADY_VIP": "You are already a VIP member",
+    "EXPIRED": "VIP membership has expired",
+    "RENEWAL_FAILED": "Failed to renew VIP"
+  },
+  "FAVORITE": {
+    "ALREADY_FAVORITED": "Already favorited",
+    "NOT_FAVORITED": "Not favorited",
+    "ADD_FAILED": "Failed to add favorite",
+    "REMOVE_FAILED": "Failed to remove favorite",
+    "NOT_FOUND": "Favorite not found"
+  },
+  "NOTIFICATION": {
+    "NOT_FOUND": "Notification not found",
+    "MARK_READ_FAILED": "Failed to mark as read",
+    "DELETE_FAILED": "Failed to delete notification"
+  },
+  "SETTLEMENT": {
+    "NOT_FOUND": "Settlement record not found",
+    "PROCESS_FAILED": "Failed to process settlement",
+    "INVALID_STATUS": "Invalid settlement status",
+    "ALREADY_PROCESSED": "Already settled",
+    "CANNOT_SETTLE": "Cannot settle"
+  },
+  "SERVER": {
+    "INTERNAL_ERROR": "Internal server error, please try again later",
+    "DATABASE_ERROR": "Database error, please try again later",
+    "NETWORK_ERROR": "Network error, please check your connection",
+    "TIMEOUT": "Request timeout, please try again later",
+    "UNAVAILABLE": "Service temporarily unavailable, please try again later",
+    "MAINTENANCE": "System under maintenance, please visit later"
+  },
+  "FILE": {
+    "UPLOAD_FAILED": "File upload failed",
+    "INVALID_TYPE": "File type not supported",
+    "INVALID_SIZE": "File size exceeds limit",
+    "NOT_FOUND": "File not found",
+    "DELETE_FAILED": "Failed to delete file"
+  },
+  "RATE_LIMIT": {
+    "TOO_MANY_REQUESTS": "Too many requests, please try again later",
+    "IP_BLOCKED": "IP address has been restricted"
+  }
+}

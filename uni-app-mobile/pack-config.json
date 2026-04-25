@@ -1,0 +1,11 @@
+{
+  "platform": "android",
+  "project": "./dist/build/app",
+  "android": {
+    "keystore": "./android-project/app/juju-release-key.jks",
+    "certalias": "juju",
+    "certfile": "zaqzzh.521",
+    "packagetype": 0,
+    "safemode": false
+  }
+}

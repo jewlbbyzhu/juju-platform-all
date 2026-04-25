@@ -1,0 +1,536 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.juju.platform"
+4    android:versionCode="100"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="36" />
+10
+11    <!-- 基础权限 -->
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:6:5-67
+12-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:6:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:7:5-79
+13-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:7:22-76
+14    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+14-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:8:5-76
+14-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:8:22-73
+15
+16    <!-- 存储权限 -->
+17    <uses-permission
+17-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:11:5-12:38
+18        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+18-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:11:22-78
+19        android:maxSdkVersion="32" />
+19-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:12:9-35
+20    <uses-permission
+20-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:13:5-14:38
+21        android:name="android.permission.READ_EXTERNAL_STORAGE"
+21-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:13:22-77
+22        android:maxSdkVersion="32" />
+22-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:14:9-35
+23    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+23-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:15:5-76
+23-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:15:22-73
+24    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+24-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:16:5-75
+24-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:16:22-72
+25    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+25-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:17:5-75
+25-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:17:22-72
+26    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+26-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:18:5-19:40
+26-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:18:22-79
+27
+28    <!-- 相机和定位 -->
+29    <uses-permission android:name="android.permission.CAMERA" />
+29-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:22:5-65
+29-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:22:22-62
+30    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+30-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:23:5-79
+30-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:23:22-76
+31    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+31-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:24:5-81
+31-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:24:22-78
+32    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+32-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:25:5-85
+32-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:25:22-82
+33
+34    <!-- 其他常用权限 -->
+35    <uses-permission android:name="android.permission.VIBRATE" />
+35-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:28:5-66
+35-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:28:22-63
+36    <uses-permission android:name="android.permission.FLASHLIGHT" />
+36-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:29:5-69
+36-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:29:22-66
+37    <uses-permission android:name="android.permission.WAKE_LOCK" />
+37-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:30:5-68
+37-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:30:22-65
+38    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+38-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:31:5-83
+38-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:31:22-80
+39
+40    <!-- 特性声明 -->
+41    <uses-feature
+41-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:34:5-85
+42        android:name="android.hardware.camera"
+42-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:34:19-57
+43        android:required="false" />
+43-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:34:58-82
+44    <uses-feature
+44-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:35:5-95
+45        android:name="android.hardware.camera.autofocus"
+45-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:35:19-67
+46        android:required="false" />
+46-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:35:68-92
+47    <uses-feature
+47-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:36:5-87
+48        android:name="android.hardware.location"
+48-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:36:19-59
+49        android:required="false" />
+49-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:36:60-84
+50    <uses-feature
+50-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:37:5-91
+51        android:name="android.hardware.location.gps"
+51-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:37:19-63
+52        android:required="false" />
+52-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:37:64-88
+53
+54    <supports-screens
+54-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:7:5-12:39
+55        android:anyDensity="true"
+55-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:8:9-34
+56        android:largeScreens="true"
+56-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:9:9-36
+57        android:normalScreens="true"
+57-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:10:9-37
+58        android:resizeable="true"
+58-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:11:9-34
+59        android:smallScreens="true" />
+59-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:12:9-36
+60
+61    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+61-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:19:5-90
+61-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:19:22-87
+62    <!--
+63    <uses-permission
+64        android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
+65    -->
+66    <!-- 华为修改角标需要设置权限 -->
+67    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" /> <!-- vivo 修改角标需要设置权限 -->
+67-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:27:5-91
+67-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:27:22-88
+68    <uses-permission android:name="com.vivo.notification.permission.BADGE_ICON" />
+68-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:29:5-83
+68-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:29:22-80
+69
+70    <queries>
+70-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:31:5-40:15
+71        <intent>
+71-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:32:9-34:18
+72            <action android:name="android.intent.action.MAIN" />
+72-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:70:17-69
+72-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:70:25-66
+73        </intent>
+74        <intent>
+74-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:35:9-39:18
+75            <action android:name="android.intent.action.VIEW" />
+75-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:87:17-69
+75-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:87:25-66
+76
+77            <category android:name="android.intent.category.DEFAULT" />
+77-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:85:17-76
+77-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:85:27-73
+78        </intent>
+79    </queries>
+80
+81    <uses-permission android:name="com.asus.msa.SupplementaryDID.ACCESS" />
+81-->[oaid_sdk_1.0.25.aar] /Users/mac/.gradle/caches/8.11.1/transforms/a290c3505234699a81de1afd7e5cd2e3/transformed/jetified-oaid_sdk_1.0.25/AndroidManifest.xml:13:5-76
+81-->[oaid_sdk_1.0.25.aar] /Users/mac/.gradle/caches/8.11.1/transforms/a290c3505234699a81de1afd7e5cd2e3/transformed/jetified-oaid_sdk_1.0.25/AndroidManifest.xml:13:22-73
+82    <uses-permission android:name="freemme.permission.msa" />
+82-->[oaid_sdk_1.0.25.aar] /Users/mac/.gradle/caches/8.11.1/transforms/a290c3505234699a81de1afd7e5cd2e3/transformed/jetified-oaid_sdk_1.0.25/AndroidManifest.xml:15:5-62
+82-->[oaid_sdk_1.0.25.aar] /Users/mac/.gradle/caches/8.11.1/transforms/a290c3505234699a81de1afd7e5cd2e3/transformed/jetified-oaid_sdk_1.0.25/AndroidManifest.xml:15:22-59
+83
+84    <permission
+84-->[androidx.core:core:1.10.1] /Users/mac/.gradle/caches/8.11.1/transforms/a6fef76d311802dbe1cc28e778917afc/transformed/core-1.10.1/AndroidManifest.xml:22:5-24:47
+85        android:name="com.juju.platform.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+85-->[androidx.core:core:1.10.1] /Users/mac/.gradle/caches/8.11.1/transforms/a6fef76d311802dbe1cc28e778917afc/transformed/core-1.10.1/AndroidManifest.xml:23:9-81
+86        android:protectionLevel="signature" />
+86-->[androidx.core:core:1.10.1] /Users/mac/.gradle/caches/8.11.1/transforms/a6fef76d311802dbe1cc28e778917afc/transformed/core-1.10.1/AndroidManifest.xml:24:9-44
+87
+88    <uses-permission android:name="com.juju.platform.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+88-->[androidx.core:core:1.10.1] /Users/mac/.gradle/caches/8.11.1/transforms/a6fef76d311802dbe1cc28e778917afc/transformed/core-1.10.1/AndroidManifest.xml:26:5-97
+88-->[androidx.core:core:1.10.1] /Users/mac/.gradle/caches/8.11.1/transforms/a6fef76d311802dbe1cc28e778917afc/transformed/core-1.10.1/AndroidManifest.xml:26:22-94
+89
+90    <application
+90-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:39:5-106:19
+91        android:name="io.dcloud.application.DCloudApplication"
+91-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:40:9-63
+92        android:allowBackup="true"
+92-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:41:9-35
+93        android:allowClearUserData="true"
+93-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:42:9-42
+94        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+94-->[androidx.core:core:1.10.1] /Users/mac/.gradle/caches/8.11.1/transforms/a6fef76d311802dbe1cc28e778917afc/transformed/core-1.10.1/AndroidManifest.xml:28:18-86
+95        android:enableOnBackInvokedCallback="false"
+95-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:174:9-52
+96        android:extractNativeLibs="true"
+96-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:43:9-41
+97        android:icon="@drawable/icon"
+97-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:44:9-38
+98        android:label="聚聚"
+98-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:45:9-27
+99        android:largeHeap="true"
+99-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:46:9-33
+100        android:supportsRtl="true"
+100-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:47:9-35
+101        android:theme="@style/TranslucentTheme"
+101-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:48:9-48
+102        android:usesCleartextTraffic="true" >
+102-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:49:9-44
+103
+104        <!-- UniApp 配置 -->
+105        <meta-data
+105-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:52:9-54:66
+106            android:name="DCLOUD_STREAMAPP_CHANNEL"
+106-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:53:13-52
+107            android:value="com.juju.platform|__UNI__030FDBA||" />
+107-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:54:13-63
+108        <meta-data
+108-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:55:9-57:64
+109            android:name="dcloud_appkey"
+109-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:56:13-41
+110            android:value="5d645c0ee06ea2ac05565642984392dd" />
+110-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:57:13-61
+111
+112        <activity
+112-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:59:9-73:20
+113            android:name="io.dcloud.PandoraEntry"
+113-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:60:13-50
+114            android:configChanges="orientation|keyboardHidden|keyboard|navigation|screenSize|locale|uiMode"
+114-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:61:13-108
+115            android:exported="true"
+115-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:62:13-36
+116            android:hardwareAccelerated="true"
+116-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:63:13-47
+117            android:label="聚聚"
+117-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:64:13-31
+118            android:launchMode="singleTask"
+118-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:65:13-44
+119            android:screenOrientation="portrait"
+119-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:66:13-49
+120            android:theme="@style/TranslucentTheme"
+120-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:67:13-52
+121            android:windowSoftInputMode="adjustResize" >
+121-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:68:13-55
+122            <intent-filter>
+122-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:69:13-72:29
+123                <action android:name="android.intent.action.MAIN" />
+123-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:70:17-69
+123-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:70:25-66
+124
+125                <category android:name="android.intent.category.LAUNCHER" />
+125-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:71:17-77
+125-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:71:27-74
+126            </intent-filter>
+127        </activity>
+128        <activity
+128-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:75:9-90:20
+129            android:name="io.dcloud.PandoraEntryActivity"
+129-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:76:13-58
+130            android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale|keyboard|smallestScreenSize|screenLayout|screenSize|uiMode"
+130-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:77:13-151
+131            android:exported="true"
+131-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:78:13-36
+132            android:hardwareAccelerated="true"
+132-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:79:13-47
+133            android:launchMode="singleTask"
+133-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:80:13-44
+134            android:screenOrientation="portrait"
+134-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:81:13-49
+135            android:theme="@style/DCloudTheme"
+135-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:82:13-47
+136            android:windowSoftInputMode="adjustResize" >
+136-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:83:13-55
+137            <intent-filter>
+137-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:84:13-89:29
+138                <category android:name="android.intent.category.DEFAULT" />
+138-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:85:17-76
+138-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:85:27-73
+139                <category android:name="android.intent.category.BROWSABLE" />
+139-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:86:17-78
+139-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:86:27-75
+140
+141                <action android:name="android.intent.action.VIEW" />
+141-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:87:17-69
+141-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:87:25-66
+142
+143                <data android:scheme=" " />
+143-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:88:17-44
+143-->/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/simpleDemo/src/main/AndroidManifest.xml:88:23-41
+144            </intent-filter>
+145        </activity>
+146
+147        <!-- Provider 配置 -->
+148        <!--
+149        <provider
+150            android:name="io.dcloud.common.util.DCloud_FileProvider"
+151            android:authorities="${applicationId}.dc.fileprovider"
+152            android:exported="false"
+153            android:grantUriPermissions="true"
+154            tools:replace="android:authorities">
+155            <meta-data
+156                android:name="android.support.FILE_PROVIDER_PATHS"
+157                android:resource="@xml/dcloud_file_provider_paths"
+158                tools:replace="android:resource" />
+159        </provider>
+160        -->
+161        <!--
+162        <activity
+163            android:name="io.dcloud.imagepick.CustomGalleryActivity"
+164            android:noHistory="true"
+165            android:exported="false"/>
+166        -->
+167        <activity
+167-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:185:9-191:56
+168            android:name="io.dcloud.feature.nativeObj.photoview.PhotoActivity"
+168-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:186:13-79
+169            android:configChanges="orientation|keyboardHidden"
+169-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:187:13-63
+170            android:exported="false"
+170-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:188:13-37
+171            android:noHistory="false"
+171-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:189:13-38
+172            android:screenOrientation="behind"
+172-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:190:13-47
+173            android:theme="@style/DCloudTheme.Light" />
+173-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:191:13-53
+174        <activity
+174-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:192:9-201:58
+175            android:name="io.dcloud.WebAppActivity"
+175-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:193:13-52
+176            android:configChanges="orientation|keyboard|keyboardHidden|smallestScreenSize|screenLayout|screenSize|mcc|mnc|fontScale|navigation"
+176-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:194:13-144
+177            android:hardwareAccelerated="true"
+177-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:195:13-47
+178            android:icon="@drawable/dcloud_recent"
+178-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:196:13-51
+179            android:label="@string/stream_my"
+179-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:197:13-46
+180            android:launchMode="singleTask"
+180-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:198:13-44
+181            android:screenOrientation="portrait"
+181-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:199:13-49
+182            android:theme="@style/DCloudTheme"
+182-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:200:13-47
+183            android:windowSoftInputMode="adjustResize" />
+183-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:201:13-55
+184        <activity
+184-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:202:9-206:75
+185            android:name="io.dcloud.ProcessMediator"
+185-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:203:13-53
+186            android:excludeFromRecents="true"
+186-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:204:13-46
+187            android:exported="false"
+187-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:205:13-37
+188            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+188-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:206:13-72
+189        <activity
+189-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:207:9-213:20
+190            android:name="io.dcloud.WebviewActivity"
+190-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:208:13-53
+191            android:exported="false"
+191-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:209:13-37
+192            android:screenOrientation="portrait"
+192-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:210:13-49
+193            android:theme="@style/AppCompat.ThemeNoTitleBar"
+193-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:211:13-61
+194            android:windowSoftInputMode="adjustPan" >
+194-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:212:13-52
+195        </activity> <!-- gallery******start -->
+196        <activity
+196-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:216:9-221:63
+197            android:name="com.dmcbig.mediapicker.PickerActivity"
+197-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:217:13-65
+198            android:configChanges="orientation|screenSize"
+198-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:218:13-59
+199            android:exported="false"
+199-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:219:13-37
+200            android:theme="@style/DeviceDefault.Light"
+200-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:220:13-55
+201            android:windowSoftInputMode="stateAlwaysHidden" />
+201-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:221:13-60
+202        <activity
+202-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:222:9-227:63
+203            android:name="com.dmcbig.mediapicker.PreviewActivity"
+203-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:223:13-66
+204            android:configChanges="orientation|screenSize"
+204-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:224:13-59
+205            android:exported="false"
+205-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:225:13-37
+206            android:theme="@style/DeviceDefault.Light"
+206-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:226:13-55
+207            android:windowSoftInputMode="stateAlwaysHidden" /> <!-- gallery******end -->
+207-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:227:13-60
+208        <provider
+208-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:230:9-238:20
+209            android:name="io.dcloud.common.util.DCloud_FileProvider"
+209-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:231:13-69
+210            android:authorities="com.juju.platform.dc.fileprovider"
+210-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:232:13-67
+211            android:exported="false"
+211-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:233:13-37
+212            android:grantUriPermissions="true" >
+212-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:234:13-47
+213            <meta-data
+213-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:235:13-237:64
+214                android:name="android.support.FILE_PROVIDER_PATHS"
+214-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:236:17-67
+215                android:resource="@xml/dcloud_file_provider" />
+215-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:237:17-61
+216        </provider>
+217        <!--
+218            <meta-data
+219            android:name="DCLOUD_STREAMAPP_CHANNEL"
+220            android:value="io.dcloud.%APPID%|%APPID%|" />
+221        -->
+222        <meta-data
+222-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:245:9-247:35
+223            android:name="android.max_aspect"
+223-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:246:13-46
+224            android:value="2.4" />
+224-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:247:13-32
+225
+226        <activity
+226-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:249:9-254:63
+227            android:name="io.dcloud.feature.gallery.imageedit.IMGEditActivity"
+227-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:250:13-79
+228            android:configChanges="orientation|keyboardHidden|screenSize"
+228-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:251:13-74
+229            android:exported="false"
+229-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:252:13-37
+230            android:theme="@style/ImageEditTheme"
+230-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:253:13-50
+231            android:windowSoftInputMode="stateAlwaysHidden" /> <!-- 广告相关配置开始 -->
+231-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:254:13-60
+232        <activity
+232-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:257:9-262:55
+233            android:name="io.dcloud.sdk.activity.WebViewActivity"
+233-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:258:13-66
+234            android:exported="false"
+234-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:259:13-37
+235            android:screenOrientation="portrait"
+235-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:260:13-49
+236            android:theme="@style/ThemeNoTitleBar"
+236-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:261:13-51
+237            android:windowSoftInputMode="adjustPan" />
+237-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:262:13-52
+238
+239        <service
+239-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:264:9-267:72
+240            android:name="io.dcloud.sdk.base.service.DownloadService"
+240-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:265:13-70
+241            android:exported="false"
+241-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:266:13-37
+242            android:permission="android.permission.BIND_JOB_SERVICE" />
+242-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:267:13-69
+243
+244        <provider
+244-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:269:9-277:20
+245            android:name="io.dcloud.sdk.base.service.provider.DCloudAdFileProvider"
+245-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:270:13-84
+246            android:authorities="com.juju.platform.dc.fileprovider"
+246-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:271:13-67
+247            android:exported="false"
+247-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:272:13-37
+248            android:grantUriPermissions="true" >
+248-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:273:13-47
+249            <meta-data
+249-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:235:13-237:64
+250                android:name="android.support.FILE_PROVIDER_PATHS"
+250-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:236:17-67
+251                android:resource="@xml/dcloud_gg_file_provider" />
+251-->[lib.5plus.base-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/19f8d9e607626adb1dc5df592527d869/transformed/jetified-lib.5plus.base-release/AndroidManifest.xml:237:17-61
+252        </provider>
+253
+254        <receiver
+254-->[uniapp-v8-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/2f47ef4ee9f7c9e369d4ac97b2462ca6/transformed/jetified-uniapp-v8-release/AndroidManifest.xml:28:9-32:20
+255            android:name="com.taobao.weex.WXGlobalEventReceiver"
+255-->[uniapp-v8-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/2f47ef4ee9f7c9e369d4ac97b2462ca6/transformed/jetified-uniapp-v8-release/AndroidManifest.xml:29:13-65
+256            android:enabled="true"
+256-->[uniapp-v8-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/2f47ef4ee9f7c9e369d4ac97b2462ca6/transformed/jetified-uniapp-v8-release/AndroidManifest.xml:30:13-35
+257            android:exported="false" >
+257-->[uniapp-v8-release.aar] /Users/mac/.gradle/caches/8.11.1/transforms/2f47ef4ee9f7c9e369d4ac97b2462ca6/transformed/jetified-uniapp-v8-release/AndroidManifest.xml:31:13-37
+258        </receiver>
+259
+260        <provider
+260-->[androidx.emoji2:emoji2:1.2.0] /Users/mac/.gradle/caches/8.11.1/transforms/65b90d4ec7322a3be1e6fc0dfb31fc1e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+261            android:name="androidx.startup.InitializationProvider"
+261-->[androidx.emoji2:emoji2:1.2.0] /Users/mac/.gradle/caches/8.11.1/transforms/65b90d4ec7322a3be1e6fc0dfb31fc1e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
+262            android:authorities="com.juju.platform.androidx-startup"
+262-->[androidx.emoji2:emoji2:1.2.0] /Users/mac/.gradle/caches/8.11.1/transforms/65b90d4ec7322a3be1e6fc0dfb31fc1e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
+263            android:exported="false" >
+263-->[androidx.emoji2:emoji2:1.2.0] /Users/mac/.gradle/caches/8.11.1/transforms/65b90d4ec7322a3be1e6fc0dfb31fc1e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
+264            <meta-data
+264-->[androidx.emoji2:emoji2:1.2.0] /Users/mac/.gradle/caches/8.11.1/transforms/65b90d4ec7322a3be1e6fc0dfb31fc1e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+265                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+265-->[androidx.emoji2:emoji2:1.2.0] /Users/mac/.gradle/caches/8.11.1/transforms/65b90d4ec7322a3be1e6fc0dfb31fc1e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
+266                android:value="androidx.startup" />
+266-->[androidx.emoji2:emoji2:1.2.0] /Users/mac/.gradle/caches/8.11.1/transforms/65b90d4ec7322a3be1e6fc0dfb31fc1e/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
+267            <meta-data
+267-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/mac/.gradle/caches/8.11.1/transforms/6d850384046fed55b57a9814b8e627a7/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:29:13-31:52
+268                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+268-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/mac/.gradle/caches/8.11.1/transforms/6d850384046fed55b57a9814b8e627a7/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:30:17-78
+269                android:value="androidx.startup" />
+269-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/mac/.gradle/caches/8.11.1/transforms/6d850384046fed55b57a9814b8e627a7/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:31:17-49
+270            <meta-data
+270-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+271                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+271-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+272                android:value="androidx.startup" />
+272-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+273        </provider>
+274
+275        <receiver
+275-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+276            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+276-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+277            android:directBootAware="false"
+277-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+278            android:enabled="true"
+278-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+279            android:exported="true"
+279-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+280            android:permission="android.permission.DUMP" >
+280-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+281            <intent-filter>
+281-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+282                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+282-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+282-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+283            </intent-filter>
+284            <intent-filter>
+284-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+285                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+285-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+285-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+286            </intent-filter>
+287            <intent-filter>
+287-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+288                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+288-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+288-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+289            </intent-filter>
+290            <intent-filter>
+290-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+291                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+291-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+291-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/mac/.gradle/caches/8.11.1/transforms/a2d895812e95f839a48d304564c77a0b/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+292            </intent-filter>
+293        </receiver>
+294    </application>
+295
+296</manifest>

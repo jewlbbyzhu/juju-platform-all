@@ -1,0 +1,7 @@
+#Fri Mar 20 23:09:30 CST 2026
+base.0=/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/app/build/intermediates/dex/release/mergeDexRelease/classes.dex
+base.1=/Users/mac/.openclaw/workspace/juju-platform-all/uni-app-mobile/android-project/app/build/intermediates/dex/release/mergeDexRelease/classes2.dex
+path.0=classes.dex
+path.1=classes2.dex
+renamed.0=classes.dex
+renamed.1=classes2.dex

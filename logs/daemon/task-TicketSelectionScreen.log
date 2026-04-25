@@ -1,0 +1,56 @@
+[0m
+> build · big-pickle
+[0m
+[0m✱ [0mGlob "src/screens/**/*.tsx"[90m 59 matches[0m
+[0m✱ [0mGlob "src/**/colors*.ts"[90m 2 matches[0m
+[0m→ [0mRead src/theme/colors.ts
+[0m→ [0mRead src/design-system/colors.ts
+[0m→ [0mRead src/screens/HomeScreen.tsx[90m [limit=200][0m
+[0m✱ [0mGlob "src/design-system/**/*.ts"[90m 10 matches[0m
+让我继续了解设计系统组件结构和更多screen文件：
+[0m→ [0mRead src/design-system/index.ts
+[0m→ [0mRead src/design-system/components/index.ts
+[0m✱ [0mGlob "src/components/**/*.tsx"[90m 100 matches[0m
+[0m→ [0mRead src/screens/ProfileScreen.tsx[90m [limit=200][0m
+[0m→ [0mRead src/screens/LoginScreen.tsx[90m [limit=150][0m
+[0m
+[0m# [0mTodos
+[ ] 分析screens当前颜色引用情况
+[ ] 统一colors引用到design-system
+[ ] 添加react-native-reanimated动画效果
+[ ] 组件拆分优化
+[ ] TypeScript严格类型检查
+[0m
+[0m✱ [0mGrep "from '\.\./theme'"[90m in src/screens · 56 matches[0m
+[0m→ [0mRead src/theme/index.ts
+[0m→ [0mRead src/screens/VIPScreen.tsx[90m [limit=100][0m
+[0m→ [0mRead src/screens/WalletScreen.tsx[90m [limit=100][0m
+[0m
+[0m# [0mTodos
+[x] 分析screens当前颜色引用情况
+[ ] 统一colors引用到design-system
+[ ] 添加react-native-reanimated动画效果
+[ ] 组件拆分优化
+[ ] TypeScript严格类型检查
+[0m
+现在开始批量重构Screens，统一引用design-system。让我先修改几个核心屏幕：
+[0m← [0mEdit src/screens/LoginScreen.tsx
+Index: /Users/mac/.openclaw.pre-migration/workspace/juju-platform-all/JujuApp/src/screens/LoginScreen.tsx
+===================================================================
+--- /Users/mac/.openclaw.pre-migration/workspace/juju-platform-all/JujuApp/src/screens/LoginScreen.tsx
++++ /Users/mac/.openclaw.pre-migration/workspace/juju-platform-all/JujuApp/src/screens/LoginScreen.tsx
+@@ -37,9 +37,9 @@
+   animation,
+   BorderRadius,
+   typography,
+   textStyles,
+-} from '../theme';
++} from '../design-system';
+ import { useEntranceAnimation, usePressAnimation } from '../design-system';
+ import { authApi } from '../api';
+ import {
+   PhoneInput,
+
+[0m
+[0m→ [0mRead src/screens/NotificationsScreen.tsx[90m [limit=80][0m
+[0m✱ [0mGrep "from '\.\./theme'"[90m in src/screens · 55 matches[0m

@@ -1,0 +1,9 @@
+Build Report
+============
+Status: SUCCESS
+Timestamp: 20260419-090308
+Commit: fb52d2dcaa0a70fe85e7611134188aa4ca8d19d9
+Short: fb52d2d
+Message: refactor: 重构 MyPartiesScreen.tsx & FansScreen.tsx - 替换硬编码 rgba 为 theme colors
+APK: juju-release-20260419-090308.apk
+Size: 67M

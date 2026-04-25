@@ -1,0 +1,1 @@
+import{a}from"./request.CIu7VnYt.js";const t={scanQRCode:t=>a.post("/api/v1/scan/verify",{qrCode:t}),getScanHistory:(t={})=>a.get("/api/v1/scan/history",t),getScanStats:()=>a.get("/api/v1/scan/stats"),getScanDetail:t=>a.get(`/api/v1/scan/${t}`)};export{t as s};

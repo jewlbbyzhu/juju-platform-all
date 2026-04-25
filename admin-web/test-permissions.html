@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Permissions</title>
+</head>
+<body>
+    <h1>Testing Permissions</h1>
+    <div id="result"></div>
+    <script>
+        // Test hasPermission function
+        function hasPermission(permission, userPermissions) {
+            if (userPermissions.includes('*')) return true;
+            return userPermissions.includes(permission);
+        }
+        
+        function hasAnyPermission(permissions, userPermissions) {
+            if (userPermissions.includes('*')) return true;
+            return permissions.some(p => userPermissions.includes(p));
+        }
+        
+        // Test cases
+        const tests = [
+            { userPerms: ['*'], check: 'dashboard:view', expected: true },
+            { userPerms: ['*'], check: 'user:view', expected: true },
+            { userPerms: ['dashboard:view'], check: 'dashboard:view', expected: true },
+            { userPerms: ['dashboard:view'], check: 'user:view', expected: false },
+        ];
+        
+        let html = '<h2>Test Results:</h2><ul>';
+        tests.forEach((test, i) => {
+            const result = hasPermission(test.check, test.userPerms);
+            const pass = result === test.expected ? '✅' : '❌';
+            html += `<li>${pass} Test ${i+1}: hasPermission('${test.check}', ${JSON.stringify(test.userPerms)}) = ${result} (expected: ${test.expected})</li>`;
+        });
+        html += '</ul>';
+        
+        document.getElementById('result').innerHTML = html;
+    </script>
+</body>
+</html>

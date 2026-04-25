@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.juju.platform.simpleDemo-release-39:/drawable_splash.png.flat",
+        "source": "com.juju.platform.simpleDemo-main-40:/drawable/splash.png"
+    },
+    {
+        "merged": "com.juju.platform.simpleDemo-release-39:/drawable_push.png.flat",
+        "source": "com.juju.platform.simpleDemo-main-40:/drawable/push.png"
+    },
+    {
+        "merged": "com.juju.platform.simpleDemo-release-39:/drawable_icon.png.flat",
+        "source": "com.juju.platform.simpleDemo-main-40:/drawable/icon.png"
+    }
+]

@@ -1,0 +1,1581 @@
+{
+  "config": {
+    "configFile": "D:\\小程序项目\\聚聚项目\\admin-web\\playwright.config.ts",
+    "rootDir": "D:/小程序项目/聚聚项目/admin-web/tests/e2e",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/小程序项目/聚聚项目/admin-web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "D:/小程序项目/聚聚项目/admin-web/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.1",
+    "workers": 8,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "admin-enhanced-test.spec.ts",
+      "file": "admin-enhanced-test.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "📊 仪表盘功能测试",
+          "file": "admin-enhanced-test.spec.ts",
+          "line": 220,
+          "column": 6,
+          "specs": [
+            {
+              "title": "查看统计数据卡片",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30268,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts",
+                            "column": 12,
+                            "line": 196
+                          },
+                          "message": "Error: page.waitForNavigation: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n  navigated to \"http://localhost:3000/login\"\n============================================================\n\n\u001b[0m \u001b[90m 194 |\u001b[39m   \u001b[36mif\u001b[39m (loginButton) {\n \u001b[90m 195 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[33mPromise\u001b[39m\u001b[33m.\u001b[39mall([\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 196 |\u001b[39m       page\u001b[33m.\u001b[39mwaitForNavigation({ url\u001b[33m:\u001b[39m \u001b[35m/\\/dashboard/\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[33mTEST_CONFIG\u001b[39m\u001b[33m.\u001b[39mtimeouts\u001b[33m.\u001b[39mnavigation })\u001b[33m,\u001b[39m\n \u001b[90m     |\u001b[39m            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 197 |\u001b[39m       loginButton\u001b[33m.\u001b[39mclick()\n \u001b[90m 198 |\u001b[39m     ])\n \u001b[90m 199 |\u001b[39m   }\u001b[0m\n\u001b[2m    at performLogin (D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts:196:12)\u001b[22m\n\u001b[2m    at D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts:222:26\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:10:29.627Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\小程序项目\\聚聚项目\\admin-web\\test-results\\admin-enhanced-test-📊-仪表盘功能测试-查看统计数据卡片-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\小程序项目\\聚聚项目\\admin-web\\test-results\\admin-enhanced-test-📊-仪表盘功能测试-查看统计数据卡片-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\小程序项目\\聚聚项目\\admin-web\\test-results\\admin-enhanced-test-📊-仪表盘功能测试-查看统计数据卡片-chromium\\error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-72f3d327604b91fe7211",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 221,
+              "column": 3
+            },
+            {
+              "title": "查看数据图表",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6125,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        },
+                        {
+                          "text": "✅ 找到图表容器\n"
+                        },
+                        {
+                          "text": "⚠️ 未找到API响应: /dashboard/charts\n"
+                        },
+                        {
+                          "text": "  已捕获的URL: [ \u001b[32m'/login'\u001b[39m, \u001b[32m'/stats'\u001b[39m ]\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:11:02.144Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-b8dae886db7510dbfbfa",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 264,
+              "column": 3
+            },
+            {
+              "title": "验证仪表盘数据完整性",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3997,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        },
+                        {
+                          "text": "用户: ✅\n"
+                        },
+                        {
+                          "text": "聚会: ✅\n"
+                        },
+                        {
+                          "text": "订单: ✅\n"
+                        },
+                        {
+                          "text": "收入: ✅\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:11:08.478Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-f82e0b52c788043e4973",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 295,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "👥 用户管理功能测试",
+          "file": "admin-enhanced-test.spec.ts",
+          "line": 310,
+          "column": 6,
+          "specs": [
+            {
+              "title": "查看用户列表并验证数据",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 5967,
+                      "error": {
+                        "message": "Error: 用户列表API应该返回成功\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: 用户列表API应该返回成功\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts:325:40",
+                        "location": {
+                          "file": "D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts",
+                          "column": 40,
+                          "line": 325
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 323 |\u001b[39m       \u001b[36mreturn\u001b[39m data\u001b[33m.\u001b[39msuccess \u001b[33m===\u001b[39m \u001b[36mtrue\u001b[39m \u001b[33m&&\u001b[39m \u001b[33mArray\u001b[39m\u001b[33m.\u001b[39misArray(data\u001b[33m.\u001b[39mdata\u001b[33m?\u001b[39m\u001b[33m.\u001b[39mlist)\n \u001b[90m 324 |\u001b[39m     })\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 325 |\u001b[39m     expect(listValid\u001b[33m,\u001b[39m \u001b[32m'用户列表API应该返回成功'\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\n \u001b[90m     |\u001b[39m                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 326 |\u001b[39m     \n \u001b[90m 327 |\u001b[39m     \u001b[90m// 查找用户表格\u001b[39m\n \u001b[90m 328 |\u001b[39m     \u001b[36mconst\u001b[39m userTable \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m findElement(page\u001b[33m,\u001b[39m [\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts",
+                            "column": 40,
+                            "line": 325
+                          },
+                          "message": "Error: 用户列表API应该返回成功\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 323 |\u001b[39m       \u001b[36mreturn\u001b[39m data\u001b[33m.\u001b[39msuccess \u001b[33m===\u001b[39m \u001b[36mtrue\u001b[39m \u001b[33m&&\u001b[39m \u001b[33mArray\u001b[39m\u001b[33m.\u001b[39misArray(data\u001b[33m.\u001b[39mdata\u001b[33m?\u001b[39m\u001b[33m.\u001b[39mlist)\n \u001b[90m 324 |\u001b[39m     })\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 325 |\u001b[39m     expect(listValid\u001b[33m,\u001b[39m \u001b[32m'用户列表API应该返回成功'\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\n \u001b[90m     |\u001b[39m                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 326 |\u001b[39m     \n \u001b[90m 327 |\u001b[39m     \u001b[90m// 查找用户表格\u001b[39m\n \u001b[90m 328 |\u001b[39m     \u001b[36mconst\u001b[39m userTable \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m findElement(page\u001b[33m,\u001b[39m [\u001b[0m\n\u001b[2m    at D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts:325:40\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        },
+                        {
+                          "text": "⚠️ 未找到API响应: /users\n"
+                        },
+                        {
+                          "text": "  已捕获的URL: []\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:11:12.486Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\小程序项目\\聚聚项目\\admin-web\\test-results\\admin-enhanced-test-👥-用户管理功能测试-查看用户列表并验证数据-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\小程序项目\\聚聚项目\\admin-web\\test-results\\admin-enhanced-test-👥-用户管理功能测试-查看用户列表并验证数据-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\小程序项目\\聚聚项目\\admin-web\\test-results\\admin-enhanced-test-👥-用户管理功能测试-查看用户列表并验证数据-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts",
+                        "column": 40,
+                        "line": 325
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-13b7e45aea86fef01ce5",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 318,
+              "column": 3
+            },
+            {
+              "title": "搜索用户功能",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7222,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/users/?page=1&pageSize=20...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/users/?page=1&pageSize=20...\n"
+                        },
+                        {
+                          "text": "✅ 搜索功能正常\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:11:19.877Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-0296185b1d98211676e3",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 363,
+              "column": 3
+            },
+            {
+              "title": "用户数据格式验证",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5596,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/users/?page=1&pageSize=20...\n"
+                        },
+                        {
+                          "text": "日期格式验证: User - ❌\n"
+                        },
+                        {
+                          "text": "状态格式验证: 33 - ❌\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:11:27.343Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-4084c643d8c3e8b5dc5b",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 391,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "🎉 聚会管理功能测试",
+          "file": "admin-enhanced-test.spec.ts",
+          "line": 413,
+          "column": 6,
+          "specs": [
+            {
+              "title": "查看聚会列表并验证数据",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 6188,
+                      "error": {
+                        "message": "Error: 聚会列表API应该返回成功\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: 聚会列表API应该返回成功\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts:430:40",
+                        "location": {
+                          "file": "D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts",
+                          "column": 40,
+                          "line": 430
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 428 |\u001b[39m       \u001b[36mreturn\u001b[39m data\u001b[33m.\u001b[39msuccess \u001b[33m===\u001b[39m \u001b[36mtrue\u001b[39m \u001b[33m&&\u001b[39m \u001b[33mArray\u001b[39m\u001b[33m.\u001b[39misArray(data\u001b[33m.\u001b[39mdata\u001b[33m?\u001b[39m\u001b[33m.\u001b[39mlist)\n \u001b[90m 429 |\u001b[39m     })\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 430 |\u001b[39m     expect(listValid\u001b[33m,\u001b[39m \u001b[32m'聚会列表API应该返回成功'\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\n \u001b[90m     |\u001b[39m                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 431 |\u001b[39m     \n \u001b[90m 432 |\u001b[39m     \u001b[36mconst\u001b[39m partyTable \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m findElement(page\u001b[33m,\u001b[39m [\u001b[32m'.el-table'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'.data-table'\u001b[39m])\n \u001b[90m 433 |\u001b[39m     expect(partyTable\u001b[33m,\u001b[39m \u001b[32m'聚会表格应该存在'\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBeNull()\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts",
+                            "column": 40,
+                            "line": 430
+                          },
+                          "message": "Error: 聚会列表API应该返回成功\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 428 |\u001b[39m       \u001b[36mreturn\u001b[39m data\u001b[33m.\u001b[39msuccess \u001b[33m===\u001b[39m \u001b[36mtrue\u001b[39m \u001b[33m&&\u001b[39m \u001b[33mArray\u001b[39m\u001b[33m.\u001b[39misArray(data\u001b[33m.\u001b[39mdata\u001b[33m?\u001b[39m\u001b[33m.\u001b[39mlist)\n \u001b[90m 429 |\u001b[39m     })\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 430 |\u001b[39m     expect(listValid\u001b[33m,\u001b[39m \u001b[32m'聚会列表API应该返回成功'\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\n \u001b[90m     |\u001b[39m                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 431 |\u001b[39m     \n \u001b[90m 432 |\u001b[39m     \u001b[36mconst\u001b[39m partyTable \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m findElement(page\u001b[33m,\u001b[39m [\u001b[32m'.el-table'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'.data-table'\u001b[39m])\n \u001b[90m 433 |\u001b[39m     expect(partyTable\u001b[33m,\u001b[39m \u001b[32m'聚会表格应该存在'\u001b[39m)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBeNull()\u001b[0m\n\u001b[2m    at D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts:430:40\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/parties/?page=1&pageSize=20&sortBy=createdAt&sortOr...\n"
+                        },
+                        {
+                          "text": "⚠️ 未找到API响应: /parties\n"
+                        },
+                        {
+                          "text": "  已捕获的URL: []\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:11:32.949Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\小程序项目\\聚聚项目\\admin-web\\test-results\\admin-enhanced-test-🎉-聚会管理功能测试-查看聚会列表并验证数据-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\小程序项目\\聚聚项目\\admin-web\\test-results\\admin-enhanced-test-🎉-聚会管理功能测试-查看聚会列表并验证数据-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\小程序项目\\聚聚项目\\admin-web\\test-results\\admin-enhanced-test-🎉-聚会管理功能测试-查看聚会列表并验证数据-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts",
+                        "column": 40,
+                        "line": 430
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-327968413aa895d15b78",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 423,
+              "column": 3
+            },
+            {
+              "title": "聚会状态筛选",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6026,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/parties/?page=1&pageSize=20&sortBy=createdAt&sortOr...\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:11:40.779Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-3fd3d7fdfee862172547",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 447,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "📋 订单管理功能测试",
+          "file": "admin-enhanced-test.spec.ts",
+          "line": 462,
+          "column": 6,
+          "specs": [
+            {
+              "title": "查看订单列表并验证数据",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5705,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/orders/?page=1&pageSize=20...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/orders/stats...\n"
+                        },
+                        {
+                          "text": "⚠️ 未找到API响应: /orders\n"
+                        },
+                        {
+                          "text": "  已捕获的URL: []\n"
+                        },
+                        {
+                          "text": "✅ 找到 0 个订单\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:11:47.039Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-936522230be3bc41c6ca",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 470,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "💰 财务管理功能测试",
+          "file": "admin-enhanced-test.spec.ts",
+          "line": 497,
+          "column": 6,
+          "specs": [
+            {
+              "title": "查看财务概览并验证数据",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 10841,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/finance/stats?startDate=2026-01-03&endDate=2026-02-...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/finance/stats...\n"
+                        },
+                        {
+                          "text": "⚠️ 未找到API响应: /finance\n"
+                        },
+                        {
+                          "text": "  已捕获的URL: []\n"
+                        },
+                        {
+                          "text": "✅ 找到财务统计卡片\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:11:52.755Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-ecef1e09762771040d89",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 505,
+              "column": 3
+            },
+            {
+              "title": "查看交易明细",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5746,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/finance/stats...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/finance/stats?startDate=2026-01-03&endDate=2026-02-...\n"
+                        },
+                        {
+                          "text": "✅ 找到 0 条交易记录\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:12:03.607Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-60d2078ffbe334e3bb95",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 536,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "📝 内容管理功能测试",
+          "file": "admin-enhanced-test.spec.ts",
+          "line": 548,
+          "column": 6,
+          "specs": [
+            {
+              "title": "查看Banner列表",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5693,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/content/banners?page=1&pageSize=20...\n"
+                        },
+                        {
+                          "text": "⚠️ 未找到API响应: /content/banners\n"
+                        },
+                        {
+                          "text": "  已捕获的URL: []\n"
+                        },
+                        {
+                          "text": "✅ 找到 0 个Banner\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:12:09.363Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-58ec4d5f1aebcdf8d2c3",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 556,
+              "column": 3
+            },
+            {
+              "title": "添加Banner弹窗",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 15891,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/content/banners?page=1&pageSize=20...\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:12:15.069Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-9ba89783ff53d934dfb4",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 573,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "🔌 API响应测试",
+          "file": "admin-enhanced-test.spec.ts",
+          "line": 610,
+          "column": 6,
+          "specs": [
+            {
+              "title": "验证所有关键API响应格式",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 10625,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m500\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m500\u001b[39m\n    at D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts:631:33",
+                        "location": {
+                          "file": "D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts",
+                          "column": 33,
+                          "line": 631
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 629 |\u001b[39m       \u001b[36mif\u001b[39m (response) {\n \u001b[90m 630 |\u001b[39m         console\u001b[33m.\u001b[39mlog(\u001b[32m`${p.name}: ✅ API响应正常`\u001b[39m)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 631 |\u001b[39m         expect(response\u001b[33m.\u001b[39mstatus)\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\n \u001b[90m     |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 632 |\u001b[39m         expect(response\u001b[33m.\u001b[39mdata\u001b[33m.\u001b[39msuccess)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\n \u001b[90m 633 |\u001b[39m       } \u001b[36melse\u001b[39m {\n \u001b[90m 634 |\u001b[39m         console\u001b[33m.\u001b[39mlog(\u001b[32m`${p.name}: ⚠️ 未捕获API响应`\u001b[39m)\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts",
+                            "column": 33,
+                            "line": 631
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m500\u001b[39m\n\n\u001b[0m \u001b[90m 629 |\u001b[39m       \u001b[36mif\u001b[39m (response) {\n \u001b[90m 630 |\u001b[39m         console\u001b[33m.\u001b[39mlog(\u001b[32m`${p.name}: ✅ API响应正常`\u001b[39m)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 631 |\u001b[39m         expect(response\u001b[33m.\u001b[39mstatus)\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\n \u001b[90m     |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 632 |\u001b[39m         expect(response\u001b[33m.\u001b[39mdata\u001b[33m.\u001b[39msuccess)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\n \u001b[90m 633 |\u001b[39m       } \u001b[36melse\u001b[39m {\n \u001b[90m 634 |\u001b[39m         console\u001b[33m.\u001b[39mlog(\u001b[32m`${p.name}: ⚠️ 未捕获API响应`\u001b[39m)\u001b[0m\n\u001b[2m    at D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts:631:33\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "仪表盘: ✅ API响应正常\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/users/?page=1&pageSize=20...\n"
+                        },
+                        {
+                          "text": "用户管理: ✅ API响应正常\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/parties/?page=1&pageSize=20&sortBy=createdAt&sortOr...\n"
+                        },
+                        {
+                          "text": "聚会管理: ✅ API响应正常\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/orders/?page=1&pageSize=20...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/orders/stats...\n"
+                        },
+                        {
+                          "text": "订单管理: ✅ API响应正常\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:12:30.971Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\小程序项目\\聚聚项目\\admin-web\\test-results\\admin-enhanced-test-🔌-API响应测试-验证所有关键API响应格式-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\小程序项目\\聚聚项目\\admin-web\\test-results\\admin-enhanced-test-🔌-API响应测试-验证所有关键API响应格式-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\小程序项目\\聚聚项目\\admin-web\\test-results\\admin-enhanced-test-🔌-API响应测试-验证所有关键API响应格式-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\小程序项目\\聚聚项目\\admin-web\\tests\\e2e\\admin-enhanced-test.spec.ts",
+                        "column": 33,
+                        "line": 631
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-b2b386ed338d07e97602",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 611,
+              "column": 3
+            },
+            {
+              "title": "验证错误处理",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1576,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "404测试: http://localhost:3000/login?redirect=/non-existent-page\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:12:43.129Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-e4af1cf5e6143266aeab",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 639,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "✅ 数据完整性测试",
+          "file": "admin-enhanced-test.spec.ts",
+          "line": 651,
+          "column": 6,
+          "specs": [
+            {
+              "title": "验证页面无无效数据显示",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12287,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "/dashboard: ✅ 数据格式正常\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/users/?page=1&pageSize=20...\n"
+                        },
+                        {
+                          "text": "/users: ✅ 数据格式正常\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/parties/?page=1&pageSize=20&sortBy=createdAt&sortOr...\n"
+                        },
+                        {
+                          "text": "/parties: ✅ 数据格式正常\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/orders/?page=1&pageSize=20...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/orders/stats...\n"
+                        },
+                        {
+                          "text": "/orders: ✅ 数据格式正常\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/finance/withdrawals?page=1&pageSize=20...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/finance/stats?startDate=2026-01-03&endDate=2026-02-...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/finance/stats...\n"
+                        },
+                        {
+                          "text": "/finance: ✅ 数据格式正常\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:12:44.939Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-22cc1773d9233905a025",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 652,
+              "column": 3
+            },
+            {
+              "title": "验证日期格式一致性",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5528,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/users/?page=1&pageSize=20...\n"
+                        },
+                        {
+                          "text": "  行 1: ❌ 无效日期 - 查看封禁\n"
+                        },
+                        {
+                          "text": "  行 2: ❌ 无效日期 - 查看封禁\n"
+                        },
+                        {
+                          "text": "  行 3: ❌ 无效日期 - 查看封禁\n"
+                        },
+                        {
+                          "text": "  行 4: ❌ 无效日期 - 查看封禁\n"
+                        },
+                        {
+                          "text": "  行 5: ❌ 无效日期 - 查看封禁\n"
+                        },
+                        {
+                          "text": "日期验证: ✅ 0, ❌ 5\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:12:57.244Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-e34a8be9fece312cd68b",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 679,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "⚡ 性能测试",
+          "file": "admin-enhanced-test.spec.ts",
+          "line": 708,
+          "column": 6,
+          "specs": [
+            {
+              "title": "页面加载时间测试",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3054,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "仪表盘: 763ms ✅\n"
+                        },
+                        {
+                          "text": "用户管理: 668ms ✅\n"
+                        },
+                        {
+                          "text": "聚会管理: 667ms ✅\n"
+                        },
+                        {
+                          "text": "订单管理: 653ms ✅\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:13:02.781Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-53452df95a9aa93cf0cf",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 709,
+              "column": 3
+            },
+            {
+              "title": "API响应时间测试",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6050,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/users/?page=1&pageSize=20...\n"
+                        },
+                        {
+                          "text": "API响应时间: 2026-02-02T13:13:10.129Z\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:13:05.845Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-36c993c570e6af7ae0d3",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 730,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "🔒 安全性测试",
+          "file": "admin-enhanced-test.spec.ts",
+          "line": 746,
+          "column": 6,
+          "specs": [
+            {
+              "title": "未登录访问受保护页面",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2089,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "未登录访问保护页面: ✅ 正确重定向到登录页\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:13:11.905Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-707f4f4b9049e5bc9112",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 747,
+              "column": 3
+            },
+            {
+              "title": "Token验证",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4114,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "开始登录...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/admin/login...\n"
+                        },
+                        {
+                          "text": "📡 API响应: http://localhost:3000/api/v2/dashboard/stats...\n"
+                        },
+                        {
+                          "text": "❌ API验证: /login\n"
+                        },
+                        {
+                          "text": "⚠️ 登录API验证失败，但页面导航成功，继续测试...\n"
+                        },
+                        {
+                          "text": "✅ 登录成功\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-02T13:13:14.001Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fdff9dcd85f9151f6c1f-390d4fc52e08f0425d8b",
+              "file": "admin-enhanced-test.spec.ts",
+              "line": 764,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-02T13:10:28.307Z",
+    "duration": 170228.816,
+    "expected": 17,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

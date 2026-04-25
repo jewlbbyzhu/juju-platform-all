@@ -1,0 +1,75 @@
+{
+    "name" : "聚聚",
+    "appid" : "__UNI__030FDBA",
+    "description" : "发现精彩聚会，结识志同道合的朋友",
+    "versionName" : "1.0.0",
+    "versionCode" : "100",
+    "transformPx" : false,
+    "vueVersion" : "3",
+    "dcloud" : {
+        "appkey" : "5d645c0ee06ea2ac05565642984392dd"
+    },
+    "app-plus" : {
+        "usingComponents" : true,
+        "nvueStyleCompiler" : "uni-app",
+        "compilerVersion" : 3,
+        "renderer" : "webview",
+        "runmode" : "normal",
+        "optimization" : {
+            "subPackages" : true
+        },
+        "splashscreen" : {
+            "alwaysShowBeforeRender" : true,
+            "waiting" : true,
+            "autoclose" : true,
+            "delay" : 0
+        },
+        "modules" : {},
+        "distribute" : {
+            "android" : {
+                "packagename" : "com.juju.platform",
+                "abiFilters" : [ "armeabi-v7a", "arm64-v8a" ],
+                "minSdkVersion" : 21,
+                "targetSdkVersion" : 36,
+                "permissions" : [
+                    "<uses-permission android:name=\"android.permission.INTERNET\" />",
+                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                    "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
+                    "<uses-permission android:name=\"android.permission.CAMERA\" />",
+                    "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />"
+                ]
+            },
+            "ios" : {
+                "dSYMs" : false
+            },
+            "sdkConfigs" : {
+                "payment" : {
+                    "weixin" : {
+                        "__platform__" : [ "ios", "android" ]
+                    },
+                    "alipay" : {
+                        "__platform__" : [ "ios", "android" ]
+                    }
+                }
+            }
+        }
+    },
+    "mp-weixin" : {
+        "appid" : "",
+        "setting" : {
+            "urlCheck" : false
+        }
+    },
+    "h5" : {
+        "title" : "聚聚",
+        "router" : {
+            "mode" : "hash"
+        },
+        "optimization" : {
+            "treeShaking" : {
+                "enable" : true
+            }
+        }
+    }
+}

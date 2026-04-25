@@ -1,0 +1,84 @@
+/**
+ * 全局样式变量和混合器
+ * 这里定义了应用的全局样式变量，包括颜色、字体、间距等
+ */
+
+/* 颜色变量 - 基于 Cross-Platform UI Spec v1.0.0 (Urban Pop Style) */
+$primary-color: #FF6B35;
+$secondary-color: #1A237E;
+$accent-color: #00FF9D;
+$background-color: #ECEFF1;
+$surface-color: #FFFFFF;
+$text-color: #1A1A1A;
+$text-secondary: #37474F;
+$border-color: #E0E0E0;
+$success-color: #00C853;
+$warning-color: #FFD600;
+$error-color: #FF3D00;
+
+/* 字体大小 */
+$font-size-xs: 24rpx; /* 12px */
+$font-size-sm: 28rpx; /* 14px */
+$font-size-base: 32rpx; /* 16px */
+$font-size-lg: 40rpx; /* 20px - H2 */
+$font-size-xl: 48rpx; /* 24px - H1 */
+$font-size-xxl: 64rpx;
+
+/* 间距 */
+$spacing-xs: 8rpx;  /* 4px */
+$spacing-sm: 16rpx; /* 8px */
+$spacing-base: 32rpx; /* 16px */
+$spacing-lg: 48rpx; /* 24px */
+$spacing-xl: 64rpx; /* 32px */
+$spacing-xxl: 96rpx;
+
+/* 圆角 */
+$border-radius-sm: 8rpx;
+$border-radius-base: 16rpx; /* 8px */
+$border-radius-lg: 32rpx; /* 16px */
+$border-radius-xl: 48rpx;
+$border-radius-full: 9999rpx;
+
+/* 阴影 - Hard Shadows */
+$box-shadow-sm: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
+$box-shadow-md: 4rpx 8rpx 0rpx 0rpx rgba(0, 0, 0, 0.08);
+$box-shadow-base: 4rpx 8rpx 0rpx 0rpx rgba(0, 0, 0, 0.1);
+$box-shadow-lg: 8rpx 16rpx 0rpx 0rpx rgba(0, 0, 0, 0.1);
+
+/* 混合器 */
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-ellipsis-multi($lines: 2) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 动画 */
+@mixin transition($property: all, $duration: 0.3s, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+/* 响应式断点 */
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;

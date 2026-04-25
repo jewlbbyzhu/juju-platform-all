@@ -1,0 +1,26 @@
+JUJU Build Report
+=================
+Build Time: 2026-04-14 06:03:31
+Commit: f8f0458 fix(ui): OpenCode/本地修复页面导入问题
+Commit Time: 2026-04-14 05:08:50 +0800
+Status: SUCCESS
+
+Build Info:
+- Task: JUJU Build Agent - APK构建
+- Build Type: Release
+- Gradle Tasks: assembleRelease
+- Duration: ~13s
+
+Output:
+- File: builds/juju-v1.0.5-5-release-20260414-060331.apk
+- Size: 58M (60970821 bytes)
+- Source: android/app/build/outputs/apk/release/juju-v1.0.5-5-release.apk
+
+Changes Since Last Build:
+- fix(ui): OpenCode/本地修复页面导入问题
+- Theme重构批次4: 17个页面WIP - 当前37/54完成(68.5%)
+- Theme重构批次3: 5个页面Theme系统支持
+
+Environment:
+- JAVA_HOME: /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home
+- ANDROID_HOME: /Users/mac/Library/Android/sdk

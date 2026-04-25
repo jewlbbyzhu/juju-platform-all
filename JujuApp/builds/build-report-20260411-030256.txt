@@ -1,0 +1,23 @@
+================================
+JUJU APK Build Report
+================================
+Build Time: $(date '+%Y-%m-%d %H:%M:%S')
+Status: SUCCESS
+
+Git Info:
+- Commit: $(git log -1 --oneline)
+- Author: $(git log -1 --format='%an')
+- Date: $(git log -1 --format='%ad')
+
+Build Info:
+- APK Version: 1.0.5 (5)
+- APK Size: $(ls -lh builds/juju-v1.0.5-5-release-${TIMESTAMP}.apk | awk '{print $5}')
+- Output: builds/juju-v1.0.5-5-release-${TIMESTAMP}.apk
+
+Modified Files:
+$(git status --short | head -20)
+
+Build Command:
+./gradlew assembleRelease --console=plain
+
+================================

@@ -1,0 +1,263 @@
+/**
+ * 响应式设计样式
+ */
+
+/* 断点变量 */
+:root {
+  --breakpoint-xs: 0px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/* 容器 */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
+/* 响应式显示/隐藏 */
+.hidden-xs {
+  display: none !important;
+}
+
+@media (min-width: 640px) {
+  .hidden-xs {
+    display: block !important;
+  }
+  .hidden-sm {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .hidden-sm {
+    display: block !important;
+  }
+  .hidden-md {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hidden-md {
+    display: block !important;
+  }
+  .hidden-lg {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hidden-lg {
+    display: block !important;
+  }
+  .hidden-xl {
+    display: none !important;
+  }
+}
+
+/* 仅在移动端显示 */
+.mobile-only {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+/* 仅在桌面端显示 */
+.desktop-only {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .desktop-only {
+    display: block !important;
+  }
+}
+
+/* 响应式网格 */
+.grid-responsive {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 640px) {
+  .grid-responsive {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-responsive {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .grid-responsive {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 响应式间距 */
+.spacing-responsive {
+  padding: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .spacing-responsive {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .spacing-responsive {
+    padding: 1.5rem;
+  }
+}
+
+/* 响应式字体 */
+.text-responsive {
+  font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+  .text-responsive {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-responsive {
+    font-size: 1.125rem;
+  }
+}
+
+/* 触摸优化 */
+@media (hover: none) and (pointer: coarse) {
+  /* 增大触摸目标 */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* 移除hover效果 */
+  .hover-effect:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* 移动端优化 */
+@media (max-width: 767px) {
+  /* 全宽按钮 */
+  .mobile-full-width {
+    width: 100% !important;
+  }
+
+  /* 移动端表格 */
+  .mobile-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 移动端卡片 */
+  .mobile-card {
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* 平板优化 */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tablet-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .print-full-width {
+    width: 100% !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* 暗黑模式过渡 */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* 减少动画（用户偏好） */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  :root {
+    --border-width: 2px;
+  }
+
+  .border {
+    border-width: var(--border-width);
+  }
+}

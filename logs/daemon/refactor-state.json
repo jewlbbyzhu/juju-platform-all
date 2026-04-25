@@ -1,0 +1,19 @@
+{
+  "current_index": 2,
+  "completed": 0,
+  "failed": 2,
+  "history": [
+    {
+      "page": "PartyDetailScreen.tsx",
+      "status": "fail",
+      "error": "\u001b[0m\n> build \u00b7 big-pickle\n\u001b[0m\n\u001b[0m\u2192 \u001b[0mRead src/screens/PartyDetailScreen.tsx\n\u001b[0m\u2731 \u001b[0mGlob \"src/components/**/index.ts\"\u001b[90m 10 matches\u001b[0m\n\u001b[0m\u2731 \u001b[0mGlob \"src/theme/**/*.ts\"\u001b[90m 7 matches\u001b[0m\n\u001b[0m\u2192 \u001b[0mRead src/theme/index.ts\n\u001b[0m\u2192 \u001b[0mRead src/theme/animation.ts\n\u001b[0m\u2192 \u001b[0mRead src/theme/spacing.ts\n\u001b[0m\u2192 \u001b[0mRead src/theme/colors.ts\n\u001b[0m\u2192 \u001b[0mRead src/components/partyDetail/index.ts\n",
+      "time": "2026-04-16T22:05:25.441627"
+    },
+    {
+      "page": "HomeScreen.tsx",
+      "status": "fail",
+      "error": "\u001b[0m\n> build \u00b7 big-pickle\n\u001b[0m\n\u001b[0m\u2192 \u001b[0mRead src/screens/HomeScreen.tsx\n\u001b[0m\u2731 \u001b[0mGlob \"src/**/*design*\"\u001b[90m 0 matches\u001b[0m\n\u001b[0m\u2731 \u001b[0mGlob \"src/components/**/*.tsx\"\u001b[90m 59 matches\u001b[0m\n\u001b[0m\u2731 \u001b[0mGlob \"src/theme/**/*.ts\"\u001b[90m 7 matches\u001b[0m\n",
+      "time": "2026-04-16T22:06:25.765555"
+    }
+  ]
+}

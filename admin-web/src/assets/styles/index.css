@@ -1,0 +1,596 @@
+/* Global styles */
+@import './design-tokens.css';
+@import './components.css';
+@import './animations.css';
+@import './responsive.css';
+@import './element-plus-overrides.css';
+
+/* ========================================
+   基础重置 - Base Reset
+   ======================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================
+   Element Plus 主题覆盖
+   ======================================== */
+
+/* 主色调覆盖 - 使用活力橙 */
+:root {
+  --el-color-primary: var(--color-primary-500);
+  --el-color-primary-light-3: var(--color-primary-400);
+  --el-color-primary-light-5: var(--color-primary-300);
+  --el-color-primary-light-7: var(--color-primary-200);
+  --el-color-primary-light-8: var(--color-primary-100);
+  --el-color-primary-light-9: var(--color-primary-50);
+  --el-color-primary-dark-2: var(--color-primary-600);
+  
+  --el-color-success: var(--color-success-500);
+  --el-color-warning: var(--color-warning-500);
+  --el-color-danger: var(--color-error-500);
+  --el-color-info: var(--color-info-500);
+  
+  --el-bg-color: var(--color-bg-surface);
+  --el-bg-color-page: var(--color-bg-base);
+  --el-bg-color-overlay: var(--color-bg-overlay);
+  
+  --el-text-color-primary: var(--color-text-primary);
+  --el-text-color-regular: var(--color-text-secondary);
+  --el-text-color-secondary: var(--color-text-tertiary);
+  --el-text-color-placeholder: var(--color-text-tertiary);
+  --el-text-color-disabled: var(--color-text-disabled);
+  
+  --el-border-color: var(--color-border-default);
+  --el-border-color-light: var(--color-border-light);
+  --el-border-color-lighter: var(--color-gray-100);
+  --el-border-color-extra-light: var(--color-gray-50);
+  --el-border-color-dark: var(--color-border-strong);
+  --el-border-color-darker: var(--color-gray-500);
+  
+  --el-fill-color: var(--color-gray-100);
+  --el-fill-color-light: var(--color-gray-50);
+  --el-fill-color-lighter: var(--color-gray-50);
+  --el-fill-color-extra-light: var(--color-gray-50);
+  --el-fill-color-dark: var(--color-gray-200);
+  --el-fill-color-darker: var(--color-gray-300);
+  --el-fill-color-blank: var(--color-bg-surface);
+  
+  --el-box-shadow: var(--shadow-md);
+  --el-box-shadow-light: var(--shadow-sm);
+  --el-box-shadow-lighter: var(--shadow-sm);
+  --el-box-shadow-dark: var(--shadow-lg);
+  
+  --el-border-radius-base: var(--radius-md);
+  --el-border-radius-small: var(--radius-sm);
+  --el-border-radius-round: var(--radius-full);
+  --el-border-radius-circle: var(--radius-full);
+}
+
+/* ========================================
+   通用工具类 - Utility Classes
+   ======================================== */
+
+/* Flexbox */
+.flex {
+  display: flex;
+}
+
+.flex-inline {
+  display: inline-flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-none {
+  flex: none;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-around {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-1 {
+  gap: var(--spacing-1);
+}
+
+.gap-2 {
+  gap: var(--spacing-2);
+}
+
+.gap-3 {
+  gap: var(--spacing-3);
+}
+
+.gap-4 {
+  gap: var(--spacing-4);
+}
+
+.gap-5 {
+  gap: var(--spacing-5);
+}
+
+.gap-6 {
+  gap: var(--spacing-6);
+}
+
+/* 文本对齐 */
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* 文本颜色 */
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-tertiary {
+  color: var(--color-text-tertiary);
+}
+
+.text-disabled {
+  color: var(--color-text-disabled);
+}
+
+.text-brand {
+  color: var(--color-brand);
+}
+
+.text-success {
+  color: var(--color-success-500);
+}
+
+.text-warning {
+  color: var(--color-warning-600);
+}
+
+.text-error {
+  color: var(--color-error-500);
+}
+
+/* 字体大小 */
+.text-xs {
+  font-size: var(--font-size-xs);
+}
+
+.text-sm {
+  font-size: var(--font-size-sm);
+}
+
+.text-base {
+  font-size: var(--font-size-base);
+}
+
+.text-md {
+  font-size: var(--font-size-md);
+}
+
+.text-lg {
+  font-size: var(--font-size-lg);
+}
+
+.text-xl {
+  font-size: var(--font-size-xl);
+}
+
+/* 字体粗细 */
+.font-normal {
+  font-weight: var(--font-weight-normal);
+}
+
+.font-medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.font-semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.font-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+/* 尺寸 */
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.min-h-full {
+  min-height: 100%;
+}
+
+.min-w-full {
+  min-width: 100%;
+}
+
+/* 间距 */
+.m-0 {
+  margin: 0;
+}
+
+.m-1 {
+  margin: var(--spacing-1);
+}
+
+.m-2 {
+  margin: var(--spacing-2);
+}
+
+.m-3 {
+  margin: var(--spacing-3);
+}
+
+.m-4 {
+  margin: var(--spacing-4);
+}
+
+.m-5 {
+  margin: var(--spacing-5);
+}
+
+.m-6 {
+  margin: var(--spacing-6);
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.p-1 {
+  padding: var(--spacing-1);
+}
+
+.p-2 {
+  padding: var(--spacing-2);
+}
+
+.p-3 {
+  padding: var(--spacing-3);
+}
+
+.p-4 {
+  padding: var(--spacing-4);
+}
+
+.p-5 {
+  padding: var(--spacing-5);
+}
+
+.p-6 {
+  padding: var(--spacing-6);
+}
+
+/* 溢出 */
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+/* 定位 */
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.sticky {
+  position: sticky;
+}
+
+/* 滚动条样式 - 自定义 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-gray-100);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-400);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-500);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: var(--color-gray-800);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-gray-600);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-500);
+}
+
+/* Firefox 滚动条 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-400) var(--color-gray-100);
+}
+
+.dark * {
+  scrollbar-color: var(--color-gray-600) var(--color-gray-800);
+}
+
+/* 选择文本颜色 */
+::selection {
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-900);
+}
+
+.dark ::selection {
+  background-color: var(--color-primary-700);
+  color: var(--color-text-inverse);
+}
+
+/* 焦点样式 */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* 禁用文本选择 */
+.select-none {
+  user-select: none;
+}
+
+/* 单行文本溢出 */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 多行文本溢出 */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 圆角 */
+.rounded-none {
+  border-radius: var(--radius-none);
+}
+
+.rounded-sm {
+  border-radius: var(--radius-sm);
+}
+
+.rounded-md {
+  border-radius: var(--radius-md);
+}
+
+.rounded-lg {
+  border-radius: var(--radius-lg);
+}
+
+.rounded-xl {
+  border-radius: var(--radius-xl);
+}
+
+.rounded-full {
+  border-radius: var(--radius-full);
+}
+
+/* 阴影 */
+.shadow-none {
+  box-shadow: var(--shadow-none);
+}
+
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.shadow-xl {
+  box-shadow: var(--shadow-xl);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+/* 背景 */
+.bg-base {
+  background-color: var(--color-bg-base);
+}
+
+.bg-surface {
+  background-color: var(--color-bg-surface);
+}
+
+.bg-elevated {
+  background-color: var(--color-bg-elevated);
+}
+
+/* 边框 */
+.border {
+  border: 1px solid var(--color-border-default);
+}
+
+.border-light {
+  border: 1px solid var(--color-border-light);
+}
+
+.border-strong {
+  border: 1px solid var(--color-border-strong);
+}
+
+.border-none {
+  border: none;
+}
+
+/* 光标 */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
+/* 显示/隐藏 */
+.hidden {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+/* 透明度过渡 */
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.opacity-100 {
+  opacity: 1;
+}
+
+/* 可见性 */
+.invisible {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}

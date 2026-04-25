@@ -1,0 +1,95 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.juju.platform'
+    compileSdk 36
+
+    signingConfigs {
+        release {
+            storeFile file("juju-release-key.jks")
+            storePassword "zaqzzh.521"
+            keyAlias "juju"
+            keyPassword "zaqzzh.521"
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.juju.platform"
+        minSdk 24
+        targetSdk 36
+        versionCode 100
+        versionName "1.0.0"
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main {
+            assets.srcDirs = ['src/main/assets']
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
+    
+    packagingOptions {
+        pickFirst 'lib/arm64-v8a/libweexcore.so'
+        pickFirst 'lib/armeabi-v7a/libweexcore.so'
+        // 注意: libdcblur.so 需要与 UniApp SDK 版本匹配
+        // 当前版本存在 JNI 方法签名不匹配问题
+        // 建议: 更新 UniApp 离线 SDK 到最新版本
+    }
+    
+    aaptOptions {
+        additionalParameters '--auto-add-overlay'
+        ignoreAssetsPattern "!.svn:!.git:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~"
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
+    
+    // UniApp SDK
+    implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'])
+    
+    // FastJSON (UniApp 依赖)
+    implementation 'com.alibaba:fastjson:1.2.83'
+    
+    // Fresco 图片库 (UniApp 依赖)
+    implementation 'com.facebook.fresco:fresco:2.6.0'
+    implementation 'com.facebook.fresco:animated-gif:2.6.0'
+    implementation 'com.facebook.fresco:animated-webp:2.6.0'
+    implementation 'com.facebook.fresco:webpsupport:2.6.0'
+    
+    // 额外依赖 (UniApp 可能需要)
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.9.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.activity:activity-ktx:1.7.2'
+    implementation 'androidx.fragment:fragment-ktx:1.6.1'
+}

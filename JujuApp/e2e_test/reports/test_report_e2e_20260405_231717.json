@@ -1,0 +1,79 @@
+{
+  "test_run_id": "e2e_20260405_231717",
+  "timestamp": "2026-04-05T23:17:17.475442",
+  "app_version": "v1.0.4",
+  "test_device": "Medium_Phone_API_36.1 (Emulator)",
+  "android_version": "API 36",
+  "total_tests": 11,
+  "passed": 11,
+  "failed": 0,
+  "duration_seconds": 19.15,
+  "screenshots": [
+    {
+      "id": 1,
+      "filename": "01_launch_screen.png",
+      "size_kb": 1345.37,
+      "test_step": "01 Launch Screen"
+    },
+    {
+      "id": 2,
+      "filename": "01_startup.png",
+      "size_kb": 78.89,
+      "test_step": "01 Startup"
+    },
+    {
+      "id": 3,
+      "filename": "02_after_tap.png",
+      "size_kb": 78.89,
+      "test_step": "02 After Tap"
+    },
+    {
+      "id": 4,
+      "filename": "02_main_screen.png",
+      "size_kb": 1345.37,
+      "test_step": "02 Main Screen"
+    },
+    {
+      "id": 5,
+      "filename": "03_tab_home.png",
+      "size_kb": 92.87,
+      "test_step": "03 Tab Home"
+    },
+    {
+      "id": 6,
+      "filename": "04_tab_orders.png",
+      "size_kb": 85.64,
+      "test_step": "04 Tab Orders"
+    },
+    {
+      "id": 7,
+      "filename": "05_tab_tickets.png",
+      "size_kb": 97.33,
+      "test_step": "05 Tab Tickets"
+    },
+    {
+      "id": 8,
+      "filename": "06_tab_profile.png",
+      "size_kb": 82.96,
+      "test_step": "06 Tab Profile"
+    },
+    {
+      "id": 9,
+      "filename": "07_vip_screen.png",
+      "size_kb": 82.96,
+      "test_step": "07 Vip Screen"
+    },
+    {
+      "id": 10,
+      "filename": "08_back_to_profile.png",
+      "size_kb": 82.96,
+      "test_step": "08 Back To Profile"
+    },
+    {
+      "id": 11,
+      "filename": "09_scroll_profile.png",
+      "size_kb": 82.94,
+      "test_step": "09 Scroll Profile"
+    }
+  ]
+}

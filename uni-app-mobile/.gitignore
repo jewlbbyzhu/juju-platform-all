@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+unpackage/
+*.apk
+*.ipa
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local env
+.env
+.env.local
+
+# Gradle
+android-project/.gradle/
+android-project/build/
+android-project/app/build/
+android-project/*.iml
+android-project/local.properties
+
+# Misc
+*.tmp
+*.temp
+node_modules_backup_*/

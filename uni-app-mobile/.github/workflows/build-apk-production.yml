@@ -1,0 +1,583 @@
+name: Build Production UniApp APK with Full DCloud SDK
+
+on:
+  push:
+    branches: [ main, master, develop ]
+    paths:
+      - 'uni-app-mobile/**'
+  workflow_dispatch:
+
+env:
+  UNI_PLATFORM: app
+  NODE_VERSION: '18'
+  DCLOUD_SDK_VERSION: '4.36.81513'
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        cache-dependency-path: uni-app-mobile/package-lock.json
+    
+    - name: Setup Java 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+      
+    - name: Install Android Build Tools
+      run: |
+        sdkmanager "build-tools;34.0.0" "platforms;android-34" "platform-tools"
+        
+        # 验证安装
+        which aapt
+        which apksigner
+        which zipalign
+    
+    # 下载完整的 DCloud Android 离线 SDK
+    - name: Download DCloud Android SDK (Full)
+      timeout-minutes: 10
+      run: |
+        cd /tmp
+        
+        # DCloud Android 离线 SDK 下载地址
+        SDK_URL="https://dcloud-img.oss-cn-beijing.aliyuncs.com/ext/4.36/Android-SDK@4.36.81513.zip"
+        BACKUP_URL="https://nativesupport.dcloud.net.cn/AppDocs/download/android/Android-SDK.zip"
+        
+        echo "Downloading DCloud Android SDK v${{ env.DCLOUD_SDK_VERSION }}..."
+        
+        # 尝试下载（带重试）
+        for i in 1 2 3; do
+          echo "Download attempt $i..."
+          wget --timeout=300 --tries=2 -O dcloud-sdk.zip "$SDK_URL" && break
+          
+          if [ $i -eq 2 ]; then
+            echo "Trying backup URL..."
+            wget --timeout=300 --tries=2 -O dcloud-sdk.zip "$BACKUP_URL" && break
+          fi
+          
+          sleep 10
+        done
+        
+        # 验证下载
+        if [ ! -f dcloud-sdk.zip ] || [ ! -s dcloud-sdk.zip ]; then
+          echo "Failed to download SDK from official source"
+          echo "Attempting to download from GitHub mirror..."
+          
+          # GitHub 上的备用镜像
+          wget --timeout=300 -O dcloud-sdk.zip "https://github.com/dcloudio/HBuilder-Hello/archive/refs/heads/master.zip" || {
+            echo "ERROR: Cannot download DCloud SDK"
+            exit 1
+          }
+        fi
+        
+        # 解压 SDK
+        echo "Extracting SDK..."
+        unzip -q dcloud-sdk.zip || {
+          # 可能是 GitHub 下载的 HBuilder-Hello
+          unzip -q dcloud-sdk.zip -d dcloud-sdk-temp
+          mv dcloud-sdk-temp/* Android-SDK 2>/dev/null || true
+        }
+        
+        # 查找 SDK 目录
+        SDK_DIR=$(find /tmp -type d -name "Android-SDK*" | head -1)
+        if [ -z "$SDK_DIR" ]; then
+          SDK_DIR=$(find /tmp -type d -name "HBuilder-Hello*" | head -1)
+        fi
+        
+        if [ -z "$SDK_DIR" ]; then
+          echo "ERROR: Cannot find SDK directory after extraction"
+          ls -la /tmp/
+          exit 1
+        fi
+        
+        echo "SDK found at: $SDK_DIR"
+        ln -sf "$SDK_DIR" /tmp/Android-SDK
+        
+        # 列出 SDK 内容
+        ls -la "$SDK_DIR"
+        
+        # 查找 libs 目录
+        find "$SDK_DIR" -name "*.aar" -o -name "*.jar" | head -20
+    
+    # 安装 uni-app 依赖并构建
+    - name: Install Dependencies
+      working-directory: uni-app-mobile
+      run: |
+        npm ci
+        
+    # 构建 uni-app 为原生 App 资源
+    - name: Build UniApp for Native
+      working-directory: uni-app-mobile
+      run: |
+        echo "Building UniApp for native platform..."
+        
+        # 使用 vite 构建 app 平台
+        npm run build:app 2>/dev/null || {
+          echo "Using alternative build method..."
+          npx vite build --mode app
+        }
+        
+        # 检查构建输出
+        echo "Build output:"
+        ls -la dist/ 2>/dev/null || ls -la
+        
+        # 确保有构建产物
+        if [ ! -d "dist" ] && [ ! -d "dist/build/app" ]; then
+          echo "ERROR: Build failed - no output directory"
+          exit 1
+        fi
+    
+    # 复制资源到 Android SDK
+    - name: Copy Resources to Android Project
+      run: |
+        SDK_DIR=$(readlink -f /tmp/Android-SDK)
+        echo "SDK Directory: $SDK_DIR"
+        
+        # 查找 SDK 中的 app 目录
+        APP_DIR=$(find "$SDK_DIR" -type d -name "app" | grep -v "build" | head -1)
+        
+        if [ -z "$APP_DIR" ]; then
+          # HBuilder-Hello 结构
+          APP_DIR=$(find "$SDK_DIR" -type d -path "*/app/src/*" | head -1)
+          if [ -z "$APP_DIR" ]; then
+            APP_DIR="$SDK_DIR/app"
+            mkdir -p "$APP_DIR"
+          fi
+        fi
+        
+        echo "App Directory: $APP_DIR"
+        
+        # 找到 assets 目录
+        ASSETS_DIR=$(find "$APP_DIR" -type d -name "assets" | head -1)
+        if [ -z "$ASSETS_DIR" ]; then
+          ASSETS_DIR="$APP_DIR/src/main/assets"
+          mkdir -p "$ASSETS_DIR"
+        fi
+        
+        echo "Assets Directory: $ASSETS_DIR"
+        
+        # 创建应用目录
+        APP_WWW="$ASSETS_DIR/apps/uni.app.UNIJujuParty/www"
+        mkdir -p "$APP_WWW"
+        
+        # 复制构建产物
+        if [ -d "uni-app-mobile/dist/build/app" ]; then
+          cp -r uni-app-mobile/dist/build/app/* "$APP_WWW/"
+        elif [ -d "uni-app-mobile/dist" ]; then
+          cp -r uni-app-mobile/dist/* "$APP_WWW/"
+        fi
+        
+        # 复制 manifest.json
+        if [ -f "uni-app-mobile/manifest.json" ]; then
+          cp uni-app-mobile/manifest.json "$APP_WWW/"
+        fi
+        
+        # 验证资源
+        echo "App resources:"
+        ls -la "$APP_WWW"
+        
+        # 确保有 index.html
+        if [ ! -f "$APP_WWW/index.html" ]; then
+          echo "WARNING: index.html not found in app resources"
+          find "$APP_WWW" -name "*.html" | head -5
+        fi
+    
+    # 配置 Android 项目
+    - name: Configure Android Project
+      run: |
+        SDK_DIR=$(readlink -f /tmp/Android-SDK)
+        cd "$SDK_DIR"
+        
+        # 查找 build.gradle
+        APP_BUILD_GRADLE=$(find . -name "build.gradle" -path "*/app/*" | head -1)
+        
+        if [ -z "$APP_BUILD_GRADLE" ]; then
+          echo "Creating build.gradle..."
+          
+          # 创建标准的 Android 项目结构
+          mkdir -p app/src/main/java/io/dcloud
+          mkdir -p app/src/main/res/values
+          
+          # 创建 build.gradle
+          cat > app/build.gradle << 'GRADLE_EOF'
+          plugins {
+              id 'com.android.application'
+          }
+          
+          android {
+              namespace 'uni.app.UNIJujuParty'
+              compileSdk 34
+              
+              defaultConfig {
+                  applicationId "uni.app.UNIJujuParty"
+                  minSdk 21
+                  targetSdk 34
+                  versionCode 1
+                  versionName "1.0.0"
+                  
+                  multiDexEnabled true
+              }
+              
+              signingConfigs {
+                  release {
+                      storeFile file(System.getenv("KEYSTORE_PATH") ?: "/tmp/release.keystore")
+                      storePassword System.getenv("KEYSTORE_PASSWORD") ?: "juju123"
+                      keyAlias System.getenv("KEY_ALIAS") ?: "juju"
+                      keyPassword System.getenv("KEY_PASSWORD") ?: "juju123"
+                  }
+              }
+              
+              buildTypes {
+                  release {
+                      minifyEnabled false
+                      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                      signingConfig signingConfigs.release
+                  }
+                  debug {
+                      signingConfig signingConfigs.release
+                  }
+              }
+              
+              compileOptions {
+                  sourceCompatibility JavaVersion.VERSION_1_8
+                  targetCompatibility JavaVersion.VERSION_1_8
+              }
+              
+              aaptOptions {
+                  additionalParameters '--auto-add-overlay'
+                  ignoreAssetsPattern '!.svn:!.git:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~'
+              }
+          }
+          
+          dependencies {
+              implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+              implementation 'androidx.appcompat:appcompat:1.6.1'
+              implementation 'com.google.android.material:material:1.11.0'
+              implementation 'androidx.webkit:webkit:1.9.0'
+              implementation 'androidx.multidex:multidex:2.0.1'
+          }
+          GRADLE_EOF
+          
+          # 创建 AndroidManifest.xml
+          cat > app/src/main/AndroidManifest.xml << 'MANIFEST_EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+              package="uni.app.UNIJujuParty">
+              
+              <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />
+              
+              <uses-permission android:name="android.permission.INTERNET" />
+              <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+              <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+              <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+              <uses-permission android:name="android.permission.CAMERA" />
+              <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+              <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+              
+              <application
+                  android:allowBackup="true"
+                  android:icon="@mipmap/ic_launcher"
+                  android:label="@string/app_name"
+                  android:roundIcon="@mipmap/ic_launcher_round"
+                  android:supportsRtl="true"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+                  android:usesCleartextTraffic="true"
+                  android:hardwareAccelerated="true"
+                  android:name="androidx.multidex.MultiDexApplication">
+                  
+                  <activity
+                      android:name="io.dcloud.PandoraEntryActivity"
+                      android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale|keyboard|smallestScreenSize"
+                      android:exported="true"
+                      android:hardwareAccelerated="true"
+                      android:screenOrientation="portrait"
+                      android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+                      android:windowSoftInputMode="adjustResize">
+                      <intent-filter>
+                          <action android:name="android.intent.action.MAIN" />
+                          <category android:name="android.intent.category.LAUNCHER" />
+                      </intent-filter>
+                  </activity>
+                  
+                  <activity
+                      android:name="io.dcloud.PandoraEntry"
+                      android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale|keyboard|smallestScreenSize"
+                      android:hardwareAccelerated="true"
+                      android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+                      android:windowSoftInputMode="adjustResize" />
+              </application>
+          </manifest>
+          MANIFEST_EOF
+          
+          # 创建资源文件
+          cat > app/src/main/res/values/strings.xml << 'STRINGS_EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <resources>
+              <string name="app_name">聚聚</string>
+          </resources>
+          STRINGS_EOF
+          
+          # 创建 gradle.properties
+          cat > gradle.properties << 'GRADLE_PROPS'
+          android.useAndroidX=true
+          android.enableJetifier=true
+          org.gradle.jvmargs=-Xmx4096m -Dfile.encoding=UTF-8
+          org.gradle.daemon=true
+          org.gradle.parallel=true
+          GRADLE_PROPS
+          
+          # 创建 settings.gradle
+          cat > settings.gradle << 'SETTINGS_EOF'
+          pluginManagement {
+              repositories {
+                  google()
+                  mavenCentral()
+                  gradlePluginPortal()
+              }
+          }
+          dependencyResolutionManagement {
+              repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+              repositories {
+                  google()
+                  mavenCentral()
+              }
+          }
+          include ':app'
+          SETTINGS_EOF
+          
+          # 创建根 build.gradle
+          cat > build.gradle << 'ROOT_GRADLE'
+          // Top-level build file
+          buildscript {
+              repositories {
+                  google()
+                  mavenCentral()
+              }
+              dependencies {
+                  classpath 'com.android.tools.build:gradle:8.2.2'
+              }
+          }
+          ROOT_GRADLE
+        fi
+    
+    # 下载 DCloud 核心库
+    - name: Download DCloud Core Libraries
+      run: |
+        SDK_DIR=$(readlink -f /tmp/Android-SDK)
+        
+        # 查找或创建 libs 目录
+        LIBS_DIR=$(find "$SDK_DIR" -type d -name "libs" -path "*/app/*" | head -1)
+        if [ -z "$LIBS_DIR" ]; then
+          LIBS_DIR="$SDK_DIR/app/libs"
+          mkdir -p "$LIBS_DIR"
+        fi
+        
+        echo "Libs Directory: $LIBS_DIR"
+        cd "$LIBS_DIR"
+        
+        # 下载 DCloud 核心 AAR 库（从 Maven Central 或 DCloud 仓库）
+        echo "Downloading DCloud core libraries..."
+        
+        # 尝试从 DCloud Maven 仓库下载
+        BASE_URL="https://maven.dcloud.net.cn/repository/maven-releases/io/dcloud"
+        
+        # 下载核心库（带重试）
+        download_lib() {
+          local name=$1
+          local version=$2
+          local filename="${name}-${version}.aar"
+          
+          for i in 1 2 3; do
+            wget --timeout=60 -O "$filename" "${BASE_URL}/${name}/${version}/${filename}" 2>/dev/null && {
+              echo "Downloaded: $filename"
+              return 0
+            }
+            sleep 5
+          done
+          
+          echo "Failed to download: $filename"
+          return 1
+        }
+        
+        # 下载必要的 DCloud 库
+        download_lib "feature-rm" "4.36.0" || true
+        download_lib "feature-messaging" "4.36.0" || true
+        download_lib "feature-aps" "4.36.0" || true
+        
+        # 如果下载失败，尝试查找 SDK 中自带的库
+        echo "Checking for libraries in SDK..."
+        find "$SDK_DIR" -name "*.aar" -o -name "dcloud*.jar" | while read f; do
+          cp "$f" "$LIBS_DIR/" 2>/dev/null || true
+        done
+        
+        # 列出所有库
+        echo "Available libraries:"
+        ls -la "$LIBS_DIR"
+    
+    # 生成签名密钥
+    - name: Generate Signing Key
+      run: |
+        keytool -genkey -v \
+          -keystore /tmp/release.keystore \
+          -alias juju \
+          -keyalg RSA \
+          -keysize 2048 \
+          -validity 10000 \
+          -storepass juju123 \
+          -keypass juju123 \
+          -dname "CN=JuJu, OU=JuJu, O=JuJu, L=Beijing, ST=Beijing, C=CN"
+        
+        echo "KEYSTORE_PATH=/tmp/release.keystore" >> $GITHUB_ENV
+        echo "KEYSTORE_PASSWORD=juju123" >> $GITHUB_ENV
+        echo "KEY_ALIAS=juju" >> $GITHUB_ENV
+        echo "KEY_PASSWORD=juju123" >> $GITHUB_ENV
+    
+    # 构建 APK
+    - name: Build Release APK
+      timeout-minutes: 15
+      run: |
+        SDK_DIR=$(readlink -f /tmp/Android-SDK)
+        cd "$SDK_DIR"
+        
+        # 使 gradlew 可执行
+        chmod +x gradlew 2>/dev/null || true
+        
+        # 检查 Gradle wrapper
+        if [ ! -f "gradlew" ]; then
+          echo "Creating Gradle wrapper..."
+          
+          # 创建 gradle wrapper
+          mkdir -p gradle/wrapper
+          
+          cat > gradle/wrapper/gradle-wrapper.properties << 'WRAPPER_EOF'
+          distributionBase=GRADLE_USER_HOME
+          distributionPath=wrapper/dists
+          distributionUrl=https\://services.gradle.org/distributions/gradle-8.2-bin.zip
+          networkTimeout=10000
+          validateDistributionUrl=true
+          zipStoreBase=GRADLE_USER_HOME
+          zipStorePath=wrapper/dists
+          WRAPPER_EOF
+          
+          # 下载 wrapper jar
+          wget -q -O gradle/wrapper/gradle-wrapper.jar \
+            "https://raw.githubusercontent.com/gradle/gradle/v8.2.0/gradle/wrapper/gradle-wrapper.jar"
+          
+          cat > gradlew << 'GRADLEW_EOF'
+          #!/bin/sh
+          exec java -jar "$(dirname "$0")/gradle/wrapper/gradle-wrapper.jar" "$@"
+          GRADLEW_EOF
+          chmod +x gradlew
+        fi
+        
+        # 构建 APK
+        echo "Building APK..."
+        ./gradlew assembleRelease --no-daemon --stacktrace
+        
+        # 检查构建输出
+        echo "Build outputs:"
+        find . -name "*.apk" -path "*/release/*" 2>/dev/null | head -10
+    
+    # 处理构建输出
+    - name: Process APK Output
+      run: |
+        SDK_DIR=$(readlink -f /tmp/Android-SDK)
+        
+        # 查找构建的 APK
+        UNSIGNED_APK=$(find "$SDK_DIR" -name "app-release-unsigned.apk" -o -name "app-release.apk" | head -1)
+        
+        if [ -z "$UNSIGNED_APK" ]; then
+          echo "ERROR: APK not found"
+          find "$SDK_DIR" -name "*.apk" 2>/dev/null
+          exit 1
+        fi
+        
+        echo "Found APK: $UNSIGNED_APK"
+        
+        # 对齐 APK
+        echo "Aligning APK..."
+        zipalign -f -v 4 "$UNSIGNED_APK" /tmp/aligned.apk
+        
+        # 签名 APK
+        echo "Signing APK..."
+        apksigner sign \
+          --ks /tmp/release.keystore \
+          --ks-key-alias juju \
+          --ks-pass pass:juju123 \
+          --key-pass pass:juju123 \
+          --out juju-app-v${{ github.run_number }}.apk \
+          /tmp/aligned.apk
+        
+        # 验证签名
+        echo "Verifying signature..."
+        apksigner verify -v juju-app-v${{ github.run_number }}.apk
+        
+        # 同时创建最新版本链接
+        cp juju-app-v${{ github.run_number }}.apk juju-app-latest.apk
+        
+        # 显示最终 APK 信息
+        echo "Final APK:"
+        ls -lh *.apk
+        
+        # 检查 APK 内容
+        echo "APK contents check:"
+        unzip -l juju-app-latest.apk | grep -E "(classes|Pandora)" | head -10
+    
+    # 上传构建产物
+    - name: Upload APK Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: juju-app-apk-v${{ github.run_number }}
+        path: |
+          juju-app-*.apk
+        retention-days: 30
+    
+    # 部署到服务器
+    - name: Deploy to Production Server
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SSH_HOST: ${{ secrets.SSH_HOST }}
+        SSH_USER: ${{ secrets.SSH_USER }}
+      run: |
+        if [ -n "$SSH_PRIVATE_KEY" ]; then
+          echo "Deploying to server..."
+          
+          # 设置 SSH
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          
+          # 部署 APK
+          scp -i ~/.ssh/deploy_key \
+            -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=/dev/null \
+            juju-app-latest.apk \
+            $SSH_USER@$SSH_HOST:/var/www/html/download/juju-app-latest.apk
+          
+          # 同时保留版本历史
+          scp -i ~/.ssh/deploy_key \
+            -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=/dev/null \
+            juju-app-v${{ github.run_number }}.apk \
+            $SSH_USER@$SSH_HOST:/var/www/html/download/juju-app-v${{ github.run_number }}.apk
+          
+          rm -f ~/.ssh/deploy_key
+          echo "Deployment completed!"
+          echo "Download URL: https://hfparty.asia/download/juju-app-latest.apk"
+        else
+          echo "SSH credentials not configured, skipping deployment"
+          echo "APK is available as artifact"
+        fi

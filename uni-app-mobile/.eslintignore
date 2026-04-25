@@ -1,0 +1,7 @@
+# ESLint忽略目录
+
+dist/
+node_modules/
+*.min.js
+*.bundle.js
+coverage/

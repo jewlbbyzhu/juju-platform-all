@@ -1,0 +1,178 @@
+{
+  "agent": "data-validation",
+  "timestamp": "2026-04-12T16:32:49.126246",
+  "party_flow": {
+    "steps": [
+      {
+        "step": "list_parties",
+        "status": "failed",
+        "error": "<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>"
+      }
+    ],
+    "success": false
+  },
+  "api_endpoints": {
+    "total": 6,
+    "success": 1,
+    "failed": 5,
+    "details": [
+      {
+        "name": "\u805a\u4f1a\u5217\u8868",
+        "endpoint": "/parties?page=1&pageSize=1",
+        "method": "GET",
+        "status": "success",
+        "error": null
+      },
+      {
+        "name": "\u805a\u4f1a\u5206\u7c7b",
+        "endpoint": "/parties/categories",
+        "method": "GET",
+        "status": "failed",
+        "error": "HTTP Error 404: Not Found"
+      },
+      {
+        "name": "VIP\u4fe1\u606f",
+        "endpoint": "/vip/info",
+        "method": "GET",
+        "status": "failed",
+        "error": "HTTP Error 404: Not Found"
+      },
+      {
+        "name": "\u7528\u6237\u8d44\u6599",
+        "endpoint": "/user/profile",
+        "method": "GET",
+        "status": "failed",
+        "error": "HTTP Error 401: Unauthorized"
+      },
+      {
+        "name": "\u8ba2\u5355\u5217\u8868",
+        "endpoint": "/orders?page=1&pageSize=1",
+        "method": "GET",
+        "status": "failed",
+        "error": "HTTP Error 401: Unauthorized"
+      },
+      {
+        "name": "\u6211\u7684\u7968\u5238",
+        "endpoint": "/tickets/my?page=1&pageSize=1",
+        "method": "GET",
+        "status": "failed",
+        "error": "HTTP Error 401: Unauthorized"
+      }
+    ]
+  },
+  "screen_data_mapping": {
+    "total_screens": 10,
+    "fully_mapped": 1,
+    "details": [
+      {
+        "screen": "HomeScreen",
+        "endpoints": [
+          {
+            "endpoint": "/parties",
+            "available": true
+          },
+          {
+            "endpoint": "/parties/categories",
+            "available": false
+          }
+        ],
+        "all_available": false
+      },
+      {
+        "screen": "PartyDetailScreen",
+        "endpoints": [
+          {
+            "endpoint": "/parties/{id}",
+            "available": true
+          },
+          {
+            "endpoint": "/parties/{id}/tickets",
+            "available": false
+          }
+        ],
+        "all_available": false
+      },
+      {
+        "screen": "TicketSelectionScreen",
+        "endpoints": [
+          {
+            "endpoint": "/parties/{id}/tickets",
+            "available": true
+          }
+        ],
+        "all_available": true
+      },
+      {
+        "screen": "MyTicketsScreen",
+        "endpoints": [
+          {
+            "endpoint": "/tickets/my",
+            "available": false
+          }
+        ],
+        "all_available": false
+      },
+      {
+        "screen": "OrderListScreen",
+        "endpoints": [
+          {
+            "endpoint": "/orders",
+            "available": false
+          }
+        ],
+        "all_available": false
+      },
+      {
+        "screen": "VIPCenterScreen",
+        "endpoints": [
+          {
+            "endpoint": "/vip/info",
+            "available": false
+          }
+        ],
+        "all_available": false
+      },
+      {
+        "screen": "ProfileScreen",
+        "endpoints": [
+          {
+            "endpoint": "/user/profile",
+            "available": false
+          }
+        ],
+        "all_available": false
+      },
+      {
+        "screen": "CommunityScreen",
+        "endpoints": [
+          {
+            "endpoint": "/posts",
+            "available": false
+          }
+        ],
+        "all_available": false
+      },
+      {
+        "screen": "FansScreen",
+        "endpoints": [
+          {
+            "endpoint": "/users/fans",
+            "available": false
+          }
+        ],
+        "all_available": false
+      },
+      {
+        "screen": "FollowingScreen",
+        "endpoints": [
+          {
+            "endpoint": "/users/following",
+            "available": false
+          }
+        ],
+        "all_available": false
+      }
+    ]
+  },
+  "log_file": "/Users/mac/.openclaw.pre-migration/workspace/juju-platform-all/JujuApp/logs/agents/data-validation-20260412-163138.log"
+}

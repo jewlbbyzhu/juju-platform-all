@@ -1,0 +1,64 @@
+ValidationError: The 'X-Forwarded-For' header is set but the Express 'trust proxy' setting is false (default). This could indicate a misconfiguration which would prevent express-rate-limit from accurately identifying users. See https://express-rate-limit.github.io/ERR_ERL_UNEXPECTED_X_FORWARDED_FOR/ for more information.
+    at Object.xForwardedForHeader (/opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:185:13)
+    at wrappedValidations.<computed> [as xForwardedForHeader] (/opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:397:22)
+    at Object.keyGenerator (/opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:658:20)
+    at /opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:710:32
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:691:5 {
+  code: 'ERR_ERL_UNEXPECTED_X_FORWARDED_FOR',
+  help: 'https://express-rate-limit.github.io/ERR_ERL_UNEXPECTED_X_FORWARDED_FOR/'
+}
+HIGH RISK SECURITY EVENT: {
+  action: 'REQUEST_COMPLETE',
+  resource: '/api/v1/parties',
+  userId: 'anonymous',
+  ip: '::ffff:127***',
+  timestamp: '2026-02-08T08:19:38.587Z'
+}
+HIGH RISK SECURITY EVENT: {
+  action: 'REQUEST_COMPLETE',
+  resource: '/api/v1/parties',
+  userId: 'anonymous',
+  ip: '::ffff:127***',
+  timestamp: '2026-02-08T08:20:19.165Z'
+}
+ValidationError: The 'X-Forwarded-For' header is set but the Express 'trust proxy' setting is false (default). This could indicate a misconfiguration which would prevent express-rate-limit from accurately identifying users. See https://express-rate-limit.github.io/ERR_ERL_UNEXPECTED_X_FORWARDED_FOR/ for more information.
+    at Object.xForwardedForHeader (/opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:185:13)
+    at wrappedValidations.<computed> [as xForwardedForHeader] (/opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:397:22)
+    at Object.keyGenerator (/opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:658:20)
+    at /opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:710:32
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:691:5 {
+  code: 'ERR_ERL_UNEXPECTED_X_FORWARDED_FOR',
+  help: 'https://express-rate-limit.github.io/ERR_ERL_UNEXPECTED_X_FORWARDED_FOR/'
+}
+ValidationError: The 'X-Forwarded-For' header is set but the Express 'trust proxy' setting is false (default). This could indicate a misconfiguration which would prevent express-rate-limit from accurately identifying users. See https://express-rate-limit.github.io/ERR_ERL_UNEXPECTED_X_FORWARDED_FOR/ for more information.
+    at Object.xForwardedForHeader (/opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:185:13)
+    at wrappedValidations.<computed> [as xForwardedForHeader] (/opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:397:22)
+    at Object.keyGenerator (/opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:658:20)
+    at /opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:710:32
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:691:5 {
+  code: 'ERR_ERL_UNEXPECTED_X_FORWARDED_FOR',
+  help: 'https://express-rate-limit.github.io/ERR_ERL_UNEXPECTED_X_FORWARDED_FOR/'
+}
+ValidationError: The 'X-Forwarded-For' header is set but the Express 'trust proxy' setting is false (default). This could indicate a misconfiguration which would prevent express-rate-limit from accurately identifying users. See https://express-rate-limit.github.io/ERR_ERL_UNEXPECTED_X_FORWARDED_FOR/ for more information.
+    at Object.xForwardedForHeader (/opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:185:13)
+    at wrappedValidations.<computed> [as xForwardedForHeader] (/opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:397:22)
+    at Object.keyGenerator (/opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:658:20)
+    at /opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:710:32
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:691:5 {
+  code: 'ERR_ERL_UNEXPECTED_X_FORWARDED_FOR',
+  help: 'https://express-rate-limit.github.io/ERR_ERL_UNEXPECTED_X_FORWARDED_FOR/'
+}
+ValidationError: The 'X-Forwarded-For' header is set but the Express 'trust proxy' setting is false (default). This could indicate a misconfiguration which would prevent express-rate-limit from accurately identifying users. See https://express-rate-limit.github.io/ERR_ERL_UNEXPECTED_X_FORWARDED_FOR/ for more information.
+    at Object.xForwardedForHeader (/opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:185:13)
+    at wrappedValidations.<computed> [as xForwardedForHeader] (/opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:397:22)
+    at Object.keyGenerator (/opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:658:20)
+    at /opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:710:32
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /opt/juju-platform/backend/node_modules/express-rate-limit/dist/index.cjs:691:5 {
+  code: 'ERR_ERL_UNEXPECTED_X_FORWARDED_FOR',
+  help: 'https://express-rate-limit.github.io/ERR_ERL_UNEXPECTED_X_FORWARDED_FOR/'
+}

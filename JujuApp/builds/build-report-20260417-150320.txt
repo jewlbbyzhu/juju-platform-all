@@ -1,0 +1,12 @@
+Build Report
+============
+Date: 2026-04-17 15:03:20
+Commit: cdb955d
+Message: refactor: 深度重构MyOrdersScreen - 685行降至257行，拆分至6个独立组件文件，统一2026设计系统，动画优化
+APK: juju-v1.0.5-5-release-20260417-150320.apk
+Size: 67M
+Status: SUCCESS
+Changes since last build:
+cdb955d refactor: 深度重构MyOrdersScreen - 685行降至257行，拆分至6个独立组件文件，统一2026设计系统，动画优化
+79cd835 refactor: 深度重构HomeScreen - 移除3处硬编码颜色，统一2026设计系统
+c998da5 fix(ts): 修复 SocialLoginButton.tsx 的类型错误 - shadows -> Shadows

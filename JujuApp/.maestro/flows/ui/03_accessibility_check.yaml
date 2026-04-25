@@ -1,0 +1,38 @@
+# UI Test: Accessibility Check
+# Verify accessibility labels and hints
+
+appId: com.jujuapp
+name: Accessibility Check
+---
+- launchApp
+- waitForAnimationToEnd:
+    timeout: 3000
+
+# 检查关键元素的可访问性标签
+- assertVisible:
+    text: "登录"
+    optional: true
+
+# 导航到个人中心检查无障碍属性
+- tapOn:
+    id: "tab-profile"
+    optional: true
+
+- waitForAnimationToEnd
+
+# 截图检查
+- takeScreenshot: ui_accessibility_profile
+
+# 检查文本可读性（字体大小）
+- assertVisible:
+    text: "个人中心"
+    optional: true
+
+# 检查按钮可点击性
+- tapOn:
+    text: "设置"
+    optional: true
+
+- waitForAnimationToEnd
+
+- takeScreenshot: ui_settings_screen

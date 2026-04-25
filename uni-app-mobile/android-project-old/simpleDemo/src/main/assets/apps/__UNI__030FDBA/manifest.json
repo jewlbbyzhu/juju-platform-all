@@ -1,0 +1,181 @@
+{
+  "@platforms": [
+    "android",
+    "iPhone",
+    "iPad"
+  ],
+  "id": "__UNI__030FDBA",
+  "name": "聚聚",
+  "version": {
+    "name": "1.0.0",
+    "code": "100"
+  },
+  "description": "发现精彩聚会，结识志同道合的朋友",
+  "developer": {
+    "name": "",
+    "email": "",
+    "url": ""
+  },
+  "permissions": {
+    "UniNView": {
+      "description": "UniNView原生渲染"
+    }
+  },
+  "plus": {
+    "useragent": {
+      "value": "uni-app",
+      "concatenate": true
+    },
+    "splashscreen": {
+      "target": "id:1",
+      "autoclose": true,
+      "waiting": true,
+      "delay": 0
+    },
+    "popGesture": "close",
+    "launchwebview": {
+      "id": "1",
+      "kernel": "WKWebview"
+    },
+    "usingComponents": true,
+    "nvueStyleCompiler": "uni-app",
+    "compilerVersion": 3,
+    "renderer": "webview",
+    "runmode": "normal",
+    "optimization": {
+      "subPackages": true
+    },
+    "distribute": {
+      "google": {
+        "packagename": "com.juju.platform",
+        "abiFilters": [
+          "armeabi-v7a",
+          "arm64-v8a",
+          "x86_64"
+        ],
+        "minSdkVersion": 21,
+        "targetSdkVersion": 36,
+        "webview": "x5",
+        "keystore": "android-project/app/juju-release-key.jks",
+        "password": "zaqzzh.521",
+        "aliasname": "juju",
+        "aliaspassword": "zaqzzh.521",
+        "permissions": [
+          "<uses-permission android:name=\"android.permission.INTERNET\" />",
+          "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+          "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+          "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
+          "<uses-permission android:name=\"android.permission.CAMERA\" />",
+          "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />"
+        ]
+      },
+      "apple": {
+        "dSYMs": false
+      },
+      "plugins": {
+        "audio": {
+          "mp3": {
+            "description": "Android平台录音支持MP3格式文件"
+          }
+        }
+      }
+    },
+    "statusbar": {
+      "immersed": "supportedDevice",
+      "style": "light",
+      "background": "#0a0a0a"
+    },
+    "allowsInlineMediaPlayback": true,
+    "safearea": {
+      "background": "#0a0a0a",
+      "bottom": {
+        "offset": "auto"
+      }
+    },
+    "uni-app": {
+      "control": "uni-v3",
+      "vueVersion": "3",
+      "compilerVersion": "5.01",
+      "nvueCompiler": "uni-app",
+      "renderer": "webview",
+      "nvue": {
+        "flex-direction": "column"
+      },
+      "nvueLaunchMode": "normal",
+      "webView": {
+        "minUserAgentVersion": "49.0"
+      }
+    },
+    "tabBar": {
+      "position": "bottom",
+      "color": "#666666",
+      "selectedColor": "#FF6B35",
+      "borderStyle": "rgba(0,0,0,0.4)",
+      "blurEffect": "dark",
+      "fontSize": "24rpx",
+      "iconWidth": "48rpx",
+      "spacing": "6rpx",
+      "height": "100px",
+      "list": [
+        {
+          "pagePath": "pages/index/index",
+          "text": "发现",
+          "iconPath": "/static/tabbar/home.png",
+          "selectedIconPath": "/static/tabbar/home-active.png"
+        },
+        {
+          "pagePath": "pages/community/community",
+          "text": "社区",
+          "iconPath": "/static/tabbar/community.png",
+          "selectedIconPath": "/static/tabbar/community-active.png"
+        },
+        {
+          "pagePath": "pages/create-party/create-party",
+          "text": "发布",
+          "iconPath": "/static/tabbar/publish.png",
+          "selectedIconPath": "/static/tabbar/publish-active.png"
+        },
+        {
+          "pagePath": "pages/chat-list/chat-list",
+          "text": "消息",
+          "iconPath": "/static/tabbar/message.png",
+          "selectedIconPath": "/static/tabbar/message-active.png"
+        },
+        {
+          "pagePath": "pages/profile/profile",
+          "text": "我的",
+          "iconPath": "/static/tabbar/profile.png",
+          "selectedIconPath": "/static/tabbar/profile-active.png"
+        }
+      ],
+      "backgroundColor": "#0a0a0a",
+      "midButton": {
+        "width": "120rpx",
+        "height": "120rpx",
+        "text": "发布",
+        "iconPath": "static/tabbar/publish-center.png",
+        "iconWidth": "60rpx",
+        "backgroundImage": "/static/tabbar/publish-bg.png"
+      },
+      "selectedIndex": 0,
+      "shown": true,
+      "child": [
+        "lauchwebview"
+      ],
+      "selected": 0
+    }
+  },
+  "app-harmony": {
+    "useragent": {
+      "value": "uni-app",
+      "concatenate": true
+    },
+    "safearea": {
+      "background": "#0a0a0a",
+      "bottom": {
+        "offset": "auto"
+      }
+    }
+  },
+  "launch_path": "__uniappview.html"
+}

@@ -1,0 +1,1 @@
+import{a5 as s,r as a}from"./index-86e56e1f.js";const u=s("user",()=>{const e=a("light"),t=a(!1);return{theme:e,sidebarCollapsed:t,toggleTheme:()=>{e.value=e.value==="light"?"dark":"light",document.documentElement.classList.toggle("dark",e.value==="dark")},toggleSidebar:()=>{t.value=!t.value},setSidebarCollapsed:l=>{t.value=l}}});export{u};

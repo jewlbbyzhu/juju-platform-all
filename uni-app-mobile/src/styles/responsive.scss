@@ -1,0 +1,486 @@
+// ============================================
+// 聚聚平台 Uni-APP 响应式布局系统 v2.0
+// 上市级别 UI/UX 标准
+// ============================================
+
+@import './variables.scss';
+
+// --------------------------------------------
+// 1. 响应式断点 (Responsive Breakpoints)
+// --------------------------------------------
+
+// 小屏手机 (iPhone SE 等)
+@media screen and (max-width: 320px) {
+  .hide-xs { display: none !important; }
+  .show-xs { display: block !important; }
+  
+  // 调整字体大小
+  .text-responsive {
+    font-size: $text-sm;
+  }
+  
+  // 调整间距
+  .p-responsive {
+    padding: $space-3;
+  }
+  
+  // 调整卡片
+  .card-responsive {
+    border-radius: $radius-md;
+    margin-bottom: $space-3;
+  }
+  
+  // 调整按钮
+  .btn-responsive {
+    height: $btn-height-sm;
+    padding: $btn-padding-sm;
+    font-size: $text-sm;
+  }
+}
+
+// 标准手机 (iPhone 6/7/8/X/11/12/13/14)
+@media screen and (min-width: 321px) and (max-width: 375px) {
+  .hide-sm { display: none !important; }
+  .show-sm { display: block !important; }
+  
+  .text-responsive {
+    font-size: $text-base;
+  }
+  
+  .p-responsive {
+    padding: $space-4;
+  }
+  
+  .card-responsive {
+    border-radius: $radius-lg;
+    margin-bottom: $space-4;
+  }
+}
+
+// 大屏手机 (iPhone Plus/Max)
+@media screen and (min-width: 376px) and (max-width: 414px) {
+  .hide-md { display: none !important; }
+  .show-md { display: block !important; }
+  
+  .text-responsive {
+    font-size: $text-base;
+  }
+  
+  .p-responsive {
+    padding: $space-4;
+  }
+  
+  .card-responsive {
+    border-radius: $radius-xl;
+    margin-bottom: $space-4;
+  }
+}
+
+// 平板 (iPad Mini)
+@media screen and (min-width: 415px) and (max-width: 768px) {
+  .hide-lg { display: none !important; }
+  .show-lg { display: block !important; }
+  
+  // 平板适配 - 两列布局
+  .grid-tablet {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-4;
+  }
+  
+  .text-responsive {
+    font-size: $text-lg;
+  }
+  
+  .p-responsive {
+    padding: $space-6;
+  }
+  
+  .card-responsive {
+    border-radius: $radius-xl;
+    margin-bottom: $space-4;
+  }
+}
+
+// 大平板 (iPad)
+@media screen and (min-width: 769px) {
+  .hide-xl { display: none !important; }
+  .show-xl { display: block !important; }
+  
+  // 大平板适配 - 三列布局
+  .grid-tablet {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-6;
+  }
+  
+  .text-responsive {
+    font-size: $text-lg;
+  }
+  
+  .p-responsive {
+    padding: $space-8;
+  }
+  
+  // 限制最大宽度
+  .container-limit {
+    max-width: 750rpx;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// --------------------------------------------
+// 2. 横屏适配 (Landscape Mode)
+// --------------------------------------------
+
+@media screen and (orientation: landscape) and (max-width: 768px) {
+  .landscape-hide { display: none !important; }
+  .landscape-show { display: block !important; }
+  
+  // 横屏时调整布局
+  .landscape-flex {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  // 横屏时限制高度
+  .landscape-limit-height {
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+}
+
+// --------------------------------------------
+// 3. 安全区域适配 (Safe Area)
+// --------------------------------------------
+
+// iPhone X+ 刘海屏适配
+.safe-area-inset-top {
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-inset-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area-inset-left {
+  padding-left: constant(safe-area-inset-left);
+  padding-left: env(safe-area-inset-left);
+}
+
+.safe-area-inset-right {
+  padding-right: constant(safe-area-inset-right);
+  padding-right: env(safe-area-inset-right);
+}
+
+// 同时适配顶部和底部
+.safe-area-vertical {
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+// 同时适配左右
+.safe-area-horizontal {
+  padding-left: constant(safe-area-inset-left);
+  padding-left: env(safe-area-inset-left);
+  padding-right: constant(safe-area-inset-right);
+  padding-right: env(safe-area-inset-right);
+}
+
+// 完整安全区域
+.safe-area-all {
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: constant(safe-area-inset-left);
+  padding-left: env(safe-area-inset-left);
+  padding-right: constant(safe-area-inset-right);
+  padding-right: env(safe-area-inset-right);
+}
+
+// TabBar 安全区域（底部导航栏高度 + 安全区域）
+.safe-area-tabbar {
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 100rpx);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 100rpx);
+}
+
+// 导航栏安全区域（状态栏高度 + 导航栏高度）
+.safe-area-navbar {
+  padding-top: calc(constant(safe-area-inset-top) + 88rpx);
+  padding-top: calc(env(safe-area-inset-top) + 88rpx);
+}
+
+// --------------------------------------------
+// 4. 响应式布局工具类 (Responsive Layout Utilities)
+// --------------------------------------------
+
+// 流体容器
+.container-fluid {
+  width: 100%;
+  padding-left: $page-padding;
+  padding-right: $page-padding;
+}
+
+// 固定宽度容器
+.container {
+  width: 100%;
+  max-width: 750rpx;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $page-padding;
+  padding-right: $page-padding;
+}
+
+// 响应式网格系统
+.grid {
+  display: grid;
+  gap: $space-4;
+}
+
+.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+// 响应式网格
+@media screen and (max-width: 375px) {
+  .grid-responsive {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (min-width: 376px) and (max-width: 768px) {
+  .grid-responsive {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .grid-responsive {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// --------------------------------------------
+// 5. 响应式间距 (Responsive Spacing)
+// --------------------------------------------
+
+@media screen and (max-width: 375px) {
+  .gap-responsive { gap: $space-2; }
+  .gap-responsive-lg { gap: $space-3; }
+  .p-responsive { padding: $space-3; }
+  .m-responsive { margin: $space-3; }
+}
+
+@media screen and (min-width: 376px) {
+  .gap-responsive { gap: $space-4; }
+  .gap-responsive-lg { gap: $space-6; }
+  .p-responsive { padding: $space-4; }
+  .m-responsive { margin: $space-4; }
+}
+
+// --------------------------------------------
+// 6. 响应式字体 (Responsive Typography)
+// --------------------------------------------
+
+@media screen and (max-width: 375px) {
+  .text-responsive-xs { font-size: $text-xs; }
+  .text-responsive-sm { font-size: $text-sm; }
+  .text-responsive-base { font-size: $text-base; }
+  .text-responsive-lg { font-size: $text-lg; }
+}
+
+@media screen and (min-width: 376px) {
+  .text-responsive-xs { font-size: $text-sm; }
+  .text-responsive-sm { font-size: $text-base; }
+  .text-responsive-base { font-size: $text-lg; }
+  .text-responsive-lg { font-size: $text-xl; }
+}
+
+// --------------------------------------------
+// 7. 响应式图片 (Responsive Images)
+// --------------------------------------------
+
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+}
+
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.img-contain {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+// 响应式图片比例
+.aspect-square { aspect-ratio: 1 / 1; }
+.aspect-video { aspect-ratio: 16 / 9; }
+.aspect-portrait { aspect-ratio: 3 / 4; }
+.aspect-landscape { aspect-ratio: 4 / 3; }
+
+// --------------------------------------------
+// 8. 隐藏/显示工具类 (Visibility Utilities)
+// --------------------------------------------
+
+.hidden { display: none !important; }
+.block { display: block !important; }
+.inline { display: inline !important; }
+.inline-block { display: inline-block !important; }
+.flex { display: flex !important; }
+.inline-flex { display: inline-flex !important; }
+.grid { display: grid !important; }
+
+// 可见性
+.visible { visibility: visible !important; }
+.invisible { visibility: hidden !important; }
+
+// 透明度
+.opacity-0 { opacity: 0; }
+.opacity-25 { opacity: 0.25; }
+.opacity-50 { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+.opacity-100 { opacity: 1; }
+
+// --------------------------------------------
+// 9. 响应式组件调整 (Responsive Component Adjustments)
+// --------------------------------------------
+
+// 卡片响应式
+@media screen and (max-width: 375px) {
+  .card-responsive {
+    border-radius: $radius-md;
+    
+    .card-header,
+    .card-body,
+    .card-footer {
+      padding: $space-3;
+    }
+  }
+}
+
+@media screen and (min-width: 376px) {
+  .card-responsive {
+    border-radius: $radius-lg;
+    
+    .card-header,
+    .card-body,
+    .card-footer {
+      padding: $space-4;
+    }
+  }
+}
+
+// 按钮响应式
+@media screen and (max-width: 375px) {
+  .btn-responsive {
+    height: $btn-height-sm;
+    padding: $btn-padding-sm;
+    font-size: $text-sm;
+  }
+}
+
+@media screen and (min-width: 376px) {
+  .btn-responsive {
+    height: $btn-height-md;
+    padding: $btn-padding-md;
+    font-size: $text-base;
+  }
+}
+
+// 输入框响应式
+@media screen and (max-width: 375px) {
+  .input-responsive {
+    height: $input-height-sm;
+    font-size: $text-sm;
+  }
+}
+
+@media screen and (min-width: 376px) {
+  .input-responsive {
+    height: $input-height-md;
+    font-size: $text-base;
+  }
+}
+
+// 列表响应式
+@media screen and (max-width: 375px) {
+  .list-responsive {
+    .list-item {
+      padding: $space-3;
+      
+      .item-icon {
+        width: 64rpx;
+        height: 64rpx;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 376px) {
+  .list-responsive {
+    .list-item {
+      padding: $space-4;
+      
+      .item-icon {
+        width: 80rpx;
+        height: 80rpx;
+      }
+    }
+  }
+}
+
+// --------------------------------------------
+// 10. 设备特定适配 (Device Specific)
+// --------------------------------------------
+
+// iPhone X / XS / 11 Pro / 12 Mini / 13 Mini (375px width)
+@media screen and (width: 375px) {
+  .iphone-x-specific {
+    // 特定样式
+  }
+}
+
+// iPhone 12 / 12 Pro / 13 / 13 Pro / 14 (390px width)
+@media screen and (width: 390px) {
+  .iphone-12-specific {
+    // 特定样式
+  }
+}
+
+// iPhone 12 Pro Max / 13 Pro Max / 14 Plus (428px width)
+@media screen and (width: 428px) {
+  .iphone-max-specific {
+    // 特定样式
+  }
+}
+
+// --------------------------------------------
+// 11. 打印样式 (Print Styles)
+// --------------------------------------------
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}

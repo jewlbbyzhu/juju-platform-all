@@ -1,0 +1,1 @@
+"use strict";const t="production",p={baseURL:{development:"https://api.hfparty.asia/api/v1",test:"https://api.hfparty.asia/api/v1",production:"https://api.hfparty.asia/api/v1"}[t],timeout:{development:3e4,test:2e4,production:15e3}[t],headers:{"Content-Type":"application/json"}};exports.config=p;

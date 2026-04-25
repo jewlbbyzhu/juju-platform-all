@@ -1,0 +1,15 @@
+=== JUJU Build Report ===
+Build Time: $(date '+%Y-%m-%d %H:%M:%S')
+Commit: $(git log -1 --format="%H %s")
+Commit Author: $(git log -1 --format="%an <%ae>")
+Commit Date: $(git log -1 --format="%ci")
+
+Build Status: SUCCESS ✓
+APK File: $(ls -t builds/*.apk | head -1 | xargs basename)
+APK Size: $(ls -lh builds/*.apk | head -1 | awk '{print $5}')
+
+Build Environment:
+- JAVA_HOME: /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home
+- ANDROID_HOME: /Users/mac/Library/Android/sdk
+- Gradle Version: $(cd android && ./gradlew --version 2>/dev/null | grep "Gradle" | head -1)
+

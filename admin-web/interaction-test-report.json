@@ -1,0 +1,472 @@
+{
+  "summary": {
+    "total": 22,
+    "passed": 22,
+    "failed": 0,
+    "passRate": "100.00%",
+    "timestamp": "2026-02-01T06:36:59.116Z"
+  },
+  "byType": {
+    "button": {
+      "passed": 5,
+      "failed": 0
+    },
+    "input": {
+      "passed": 5,
+      "failed": 0
+    },
+    "select": {
+      "passed": 3,
+      "failed": 0
+    },
+    "checkbox": {
+      "passed": 5,
+      "failed": 0
+    },
+    "form": {
+      "passed": 2,
+      "failed": 0
+    },
+    "modal": {
+      "passed": 2,
+      "failed": 0
+    }
+  },
+  "results": [
+    {
+      "elementType": "button",
+      "action": "click",
+      "passed": true,
+      "duration": 113
+    },
+    {
+      "elementType": "button",
+      "action": "click",
+      "passed": true,
+      "duration": 110
+    },
+    {
+      "elementType": "button",
+      "action": "click",
+      "passed": true,
+      "duration": 104
+    },
+    {
+      "elementType": "button",
+      "action": "click",
+      "passed": true,
+      "duration": 103
+    },
+    {
+      "elementType": "button",
+      "action": "click",
+      "passed": true,
+      "duration": 112
+    },
+    {
+      "elementType": "input",
+      "action": "input",
+      "passed": true,
+      "duration": 144
+    },
+    {
+      "elementType": "input",
+      "action": "input",
+      "passed": true,
+      "duration": 172
+    },
+    {
+      "elementType": "input",
+      "action": "input",
+      "passed": true,
+      "duration": 133
+    },
+    {
+      "elementType": "input",
+      "action": "input",
+      "passed": true,
+      "duration": 147
+    },
+    {
+      "elementType": "input",
+      "action": "input",
+      "passed": true,
+      "duration": 132
+    },
+    {
+      "elementType": "select",
+      "action": "select",
+      "passed": true,
+      "duration": 104
+    },
+    {
+      "elementType": "select",
+      "action": "select",
+      "passed": true,
+      "duration": 126
+    },
+    {
+      "elementType": "select",
+      "action": "select",
+      "passed": true,
+      "duration": 108
+    },
+    {
+      "elementType": "checkbox",
+      "action": "toggle",
+      "passed": true,
+      "duration": 212
+    },
+    {
+      "elementType": "checkbox",
+      "action": "toggle",
+      "passed": true,
+      "duration": 217
+    },
+    {
+      "elementType": "checkbox",
+      "action": "toggle",
+      "passed": true,
+      "duration": 217
+    },
+    {
+      "elementType": "checkbox",
+      "action": "toggle",
+      "passed": true,
+      "duration": 217
+    },
+    {
+      "elementType": "checkbox",
+      "action": "toggle",
+      "passed": true,
+      "duration": 235
+    },
+    {
+      "elementType": "form",
+      "action": "submit",
+      "passed": true,
+      "duration": 213
+    },
+    {
+      "elementType": "form",
+      "action": "submit",
+      "passed": true,
+      "duration": 216
+    },
+    {
+      "elementType": "modal",
+      "action": "open/close",
+      "passed": true,
+      "duration": 152
+    },
+    {
+      "elementType": "modal",
+      "action": "open/close",
+      "passed": true,
+      "duration": 153
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2026-02-01T06:36:55.664Z",
+      "level": "info",
+      "action": "Testing button click",
+      "target": "button-1"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:55.777Z",
+      "level": "success",
+      "action": "Button click successful",
+      "target": "button-1",
+      "duration": 113
+    },
+    {
+      "timestamp": "2026-02-01T06:36:55.777Z",
+      "level": "info",
+      "action": "Testing button click",
+      "target": "button-2"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:55.887Z",
+      "level": "success",
+      "action": "Button click successful",
+      "target": "button-2",
+      "duration": 110
+    },
+    {
+      "timestamp": "2026-02-01T06:36:55.890Z",
+      "level": "info",
+      "action": "Testing button click",
+      "target": "button-3"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:55.995Z",
+      "level": "success",
+      "action": "Button click successful",
+      "target": "button-3",
+      "duration": 104
+    },
+    {
+      "timestamp": "2026-02-01T06:36:55.995Z",
+      "level": "info",
+      "action": "Testing button click",
+      "target": "button-4"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:56.098Z",
+      "level": "success",
+      "action": "Button click successful",
+      "target": "button-4",
+      "duration": 103
+    },
+    {
+      "timestamp": "2026-02-01T06:36:56.098Z",
+      "level": "info",
+      "action": "Testing button click",
+      "target": "button-5"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:56.210Z",
+      "level": "success",
+      "action": "Button click successful",
+      "target": "button-5",
+      "duration": 112
+    },
+    {
+      "timestamp": "2026-02-01T06:36:56.210Z",
+      "level": "info",
+      "action": "Testing text input",
+      "target": "input-text"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:56.354Z",
+      "level": "success",
+      "action": "Text input successful",
+      "target": "input-text",
+      "details": {
+        "value": "Test Value 1769927816210"
+      },
+      "duration": 144
+    },
+    {
+      "timestamp": "2026-02-01T06:36:56.355Z",
+      "level": "info",
+      "action": "Testing text input",
+      "target": "input-email"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:56.527Z",
+      "level": "success",
+      "action": "Text input successful",
+      "target": "input-email",
+      "details": {
+        "value": "test1769927816355@example.com"
+      },
+      "duration": 172
+    },
+    {
+      "timestamp": "2026-02-01T06:36:56.527Z",
+      "level": "info",
+      "action": "Testing text input",
+      "target": "input-password"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:56.660Z",
+      "level": "success",
+      "action": "Text input successful",
+      "target": "input-password",
+      "details": {
+        "value": "TestPass123!"
+      },
+      "duration": 133
+    },
+    {
+      "timestamp": "2026-02-01T06:36:56.661Z",
+      "level": "info",
+      "action": "Testing text input",
+      "target": "input-number"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:56.809Z",
+      "level": "success",
+      "action": "Text input successful",
+      "target": "input-number",
+      "details": {
+        "value": "100"
+      },
+      "duration": 147
+    },
+    {
+      "timestamp": "2026-02-01T06:36:56.809Z",
+      "level": "info",
+      "action": "Testing text input",
+      "target": "input-tel"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:56.941Z",
+      "level": "success",
+      "action": "Text input successful",
+      "target": "input-tel",
+      "details": {
+        "value": "13800138000"
+      },
+      "duration": 132
+    },
+    {
+      "timestamp": "2026-02-01T06:36:56.941Z",
+      "level": "info",
+      "action": "Testing select dropdown",
+      "target": "select-1"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:57.045Z",
+      "level": "success",
+      "action": "Select test completed",
+      "target": "select-1",
+      "duration": 104
+    },
+    {
+      "timestamp": "2026-02-01T06:36:57.045Z",
+      "level": "info",
+      "action": "Testing select dropdown",
+      "target": "select-2"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:57.171Z",
+      "level": "success",
+      "action": "Select test completed",
+      "target": "select-2",
+      "duration": 126
+    },
+    {
+      "timestamp": "2026-02-01T06:36:57.172Z",
+      "level": "info",
+      "action": "Testing select dropdown",
+      "target": "select-3"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:57.280Z",
+      "level": "success",
+      "action": "Select test completed",
+      "target": "select-3",
+      "duration": 108
+    },
+    {
+      "timestamp": "2026-02-01T06:36:57.280Z",
+      "level": "info",
+      "action": "Testing checkbox",
+      "target": "checkbox-1"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:57.492Z",
+      "level": "success",
+      "action": "Checkbox test completed",
+      "target": "checkbox-1",
+      "duration": 212
+    },
+    {
+      "timestamp": "2026-02-01T06:36:57.493Z",
+      "level": "info",
+      "action": "Testing checkbox",
+      "target": "checkbox-2"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:57.710Z",
+      "level": "success",
+      "action": "Checkbox test completed",
+      "target": "checkbox-2",
+      "duration": 217
+    },
+    {
+      "timestamp": "2026-02-01T06:36:57.710Z",
+      "level": "info",
+      "action": "Testing checkbox",
+      "target": "checkbox-3"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:57.927Z",
+      "level": "success",
+      "action": "Checkbox test completed",
+      "target": "checkbox-3",
+      "duration": 217
+    },
+    {
+      "timestamp": "2026-02-01T06:36:57.927Z",
+      "level": "info",
+      "action": "Testing checkbox",
+      "target": "checkbox-4"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:58.144Z",
+      "level": "success",
+      "action": "Checkbox test completed",
+      "target": "checkbox-4",
+      "duration": 217
+    },
+    {
+      "timestamp": "2026-02-01T06:36:58.144Z",
+      "level": "info",
+      "action": "Testing checkbox",
+      "target": "checkbox-5"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:58.379Z",
+      "level": "success",
+      "action": "Checkbox test completed",
+      "target": "checkbox-5",
+      "duration": 235
+    },
+    {
+      "timestamp": "2026-02-01T06:36:58.380Z",
+      "level": "info",
+      "action": "Testing form submission",
+      "target": "form-1"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:58.593Z",
+      "level": "success",
+      "action": "Form submission successful",
+      "target": "form-1",
+      "duration": 213
+    },
+    {
+      "timestamp": "2026-02-01T06:36:58.593Z",
+      "level": "info",
+      "action": "Testing form submission",
+      "target": "form-2"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:58.809Z",
+      "level": "success",
+      "action": "Form submission successful",
+      "target": "form-2",
+      "duration": 216
+    },
+    {
+      "timestamp": "2026-02-01T06:36:58.809Z",
+      "level": "info",
+      "action": "Testing modal operations",
+      "target": "modal-1"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:58.961Z",
+      "level": "success",
+      "action": "Modal operations completed",
+      "target": "modal-1",
+      "duration": 152
+    },
+    {
+      "timestamp": "2026-02-01T06:36:58.961Z",
+      "level": "info",
+      "action": "Testing modal operations",
+      "target": "modal-2"
+    },
+    {
+      "timestamp": "2026-02-01T06:36:59.114Z",
+      "level": "success",
+      "action": "Modal operations completed",
+      "target": "modal-2",
+      "duration": 153
+    }
+  ]
+}

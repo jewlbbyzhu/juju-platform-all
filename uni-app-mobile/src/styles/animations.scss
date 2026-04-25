@@ -1,0 +1,896 @@
+// ============================================
+// 聚聚平台 Uni-APP 动画系统 v2.0
+// 上市级别 UI/UX 标准
+// ============================================
+
+@import './variables.scss';
+
+// --------------------------------------------
+// 1. 关键帧动画定义 (Keyframe Animations)
+// --------------------------------------------
+
+// 淡入
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// 淡入上移动画
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// 淡入下移动画
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// 淡入左移动画
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// 淡入右移动画
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// 淡出
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+// 淡出上移动画
+@keyframes fadeOutUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-30rpx);
+  }
+}
+
+// 缩放入场动画
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// 缩放出场上移动画
+@keyframes zoomInUp {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(30rpx);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+// 缩放出库动画
+@keyframes zoomOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+// 滑入动画（从底部）
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+// 滑入动画（从顶部）
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+// 滑入动画（从左侧）
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+// 滑入动画（从右侧）
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+// 旋转动画
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// 脉冲动画
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+// 弹跳动画
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+// 抖动动画
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5rpx);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5rpx);
+  }
+}
+
+// 闪烁动画（骨架屏）
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+// 呼吸动画
+@keyframes breathe {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+// 光晕动画
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5rpx rgba(255, 107, 53, 0.5), 0 0 10rpx rgba(255, 107, 53, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20rpx rgba(255, 107, 53, 0.8), 0 0 40rpx rgba(255, 107, 53, 0.5);
+  }
+}
+
+// 浮动动画
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20rpx);
+  }
+}
+
+// 橡皮筋动画
+@keyframes rubberBand {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+// 心跳动画
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.1);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+// 翻转动画
+@keyframes flip {
+  0% {
+    transform: perspective(400rpx) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, -360deg);
+    animation-timing-function: ease-out;
+  }
+  40% {
+    transform: perspective(400rpx) scale3d(1, 1, 1) translate3d(0, 0, 150rpx) rotate3d(0, 1, 0, -190deg);
+    animation-timing-function: ease-out;
+  }
+  50% {
+    transform: perspective(400rpx) scale3d(1, 1, 1) translate3d(0, 0, 150rpx) rotate3d(0, 1, 0, -170deg);
+    animation-timing-function: ease-in;
+  }
+  80% {
+    transform: perspective(400rpx) scale3d(0.95, 0.95, 0.95) translate3d(0, 0, 0) rotate3d(0, 1, 0, 0deg);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: perspective(400rpx) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, 0deg);
+    animation-timing-function: ease-in;
+  }
+}
+
+// 页面转场动画
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateX(50rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pageLeave {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50rpx);
+  }
+}
+
+// 模态框动画
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes modalLeave {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(20rpx);
+  }
+}
+
+// Toast 动画
+@keyframes toastEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20rpx) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@keyframes toastLeave {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20rpx) scale(0.95);
+  }
+}
+
+// --------------------------------------------
+// 2. 动画工具类 (Animation Utilities)
+// --------------------------------------------
+
+// 淡入
+.animate-fadeIn {
+  animation: fadeIn $duration-normal $ease-out forwards;
+}
+
+// 淡入上移动画
+.animate-fadeInUp {
+  animation: fadeInUp $duration-normal $ease-out forwards;
+}
+
+// 淡入下移动画
+.animate-fadeInDown {
+  animation: fadeInDown $duration-normal $ease-out forwards;
+}
+
+// 淡入左移动画
+.animate-fadeInLeft {
+  animation: fadeInLeft $duration-normal $ease-out forwards;
+}
+
+// 淡入右移动画
+.animate-fadeInRight {
+  animation: fadeInRight $duration-normal $ease-out forwards;
+}
+
+// 淡出
+.animate-fadeOut {
+  animation: fadeOut $duration-normal $ease-in forwards;
+}
+
+// 缩放入场动画
+.animate-zoomIn {
+  animation: zoomIn $duration-normal $ease-spring forwards;
+}
+
+// 缩放出场上移动画
+.animate-zoomInUp {
+  animation: zoomInUp $duration-slow $ease-spring forwards;
+}
+
+// 缩放出库动画
+.animate-zoomOut {
+  animation: zoomOut $duration-normal $ease-in forwards;
+}
+
+// 滑入（从底部）
+.animate-slideUp {
+  animation: slideUp $duration-slow $ease-out forwards;
+}
+
+// 滑入（从顶部）
+.animate-slideDown {
+  animation: slideDown $duration-slow $ease-out forwards;
+}
+
+// 滑入（从左侧）
+.animate-slideInLeft {
+  animation: slideInLeft $duration-slow $ease-out forwards;
+}
+
+// 滑入（从右侧）
+.animate-slideInRight {
+  animation: slideInRight $duration-slow $ease-out forwards;
+}
+
+// 旋转动画
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 2s linear infinite;
+}
+
+// 脉冲动画
+.animate-pulse {
+  animation: pulse 2s $ease-in-out infinite;
+}
+
+// 弹跳动画
+.animate-bounce {
+  animation: bounce 1s $ease-in-out infinite;
+}
+
+// 抖动动画
+.animate-shake {
+  animation: shake 0.5s $ease-in-out;
+}
+
+// 呼吸动画
+.animate-breathe {
+  animation: breathe 2s $ease-in-out infinite;
+}
+
+// 光晕动画
+.animate-glow {
+  animation: glow 2s $ease-in-out infinite;
+}
+
+// 浮动动画
+.animate-float {
+  animation: float 3s $ease-in-out infinite;
+}
+
+// 橡皮筋动画
+.animate-rubberBand {
+  animation: rubberBand 1s $ease-in-out;
+}
+
+// 心跳动画
+.animate-heartBeat {
+  animation: heartBeat 1.3s $ease-in-out;
+}
+
+// 翻转动画
+.animate-flip {
+  animation: flip 1s $ease-in-out;
+}
+
+// 页面转场
+.animate-pageEnter {
+  animation: pageEnter 0.4s $ease-out forwards;
+}
+
+.animate-pageLeave {
+  animation: pageLeave 0.3s $ease-in forwards;
+}
+
+// 模态框转场
+.animate-modalEnter {
+  animation: modalEnter 0.3s $ease-spring forwards;
+}
+
+.animate-modalLeave {
+  animation: modalLeave 0.2s $ease-in forwards;
+}
+
+// --------------------------------------------
+// 3. 动画延迟 (Animation Delays)
+// --------------------------------------------
+
+.delay-0 { animation-delay: 0ms; }
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-800 { animation-delay: 800ms; }
+.delay-900 { animation-delay: 900ms; }
+.delay-1000 { animation-delay: 1000ms; }
+
+// --------------------------------------------
+// 4. 动画时长 (Animation Durations)
+// --------------------------------------------
+
+.duration-150 { animation-duration: 150ms; }
+.duration-200 { animation-duration: 200ms; }
+.duration-300 { animation-duration: 300ms; }
+.duration-400 { animation-duration: 400ms; }
+.duration-500 { animation-duration: 500ms; }
+.duration-700 { animation-duration: 700ms; }
+.duration-1000 { animation-duration: 1000ms; }
+
+// --------------------------------------------
+// 5. 动画填充模式 (Animation Fill Modes)
+// --------------------------------------------
+
+.fill-forwards { animation-fill-mode: forwards; }
+.fill-backwards { animation-fill-mode: backwards; }
+.fill-both { animation-fill-mode: both; }
+
+// --------------------------------------------
+// 6. 交错动画 (Staggered Animations)
+// --------------------------------------------
+
+// 列表项交错动画
+.stagger-children {
+  > * {
+    opacity: 0;
+    animation: fadeInUp $duration-normal $ease-out forwards;
+  }
+  
+  @for $i from 1 through 20 {
+    > *:nth-child(#{$i}) {
+      animation-delay: #{$i * 50}ms;
+    }
+  }
+}
+
+// 列表项交错动画（从左侧）
+.stagger-children-left {
+  > * {
+    opacity: 0;
+    animation: fadeInLeft $duration-normal $ease-out forwards;
+  }
+  
+  @for $i from 1 through 20 {
+    > *:nth-child(#{$i}) {
+      animation-delay: #{$i * 50}ms;
+    }
+  }
+}
+
+// 列表项交错动画（缩放）
+.stagger-children-zoom {
+  > * {
+    opacity: 0;
+    animation: zoomIn $duration-normal $ease-spring forwards;
+  }
+  
+  @for $i from 1 through 20 {
+    > *:nth-child(#{$i}) {
+      animation-delay: #{$i * 50}ms;
+    }
+  }
+}
+
+// --------------------------------------------
+// 7. 过渡效果 (Transitions)
+// --------------------------------------------
+
+// 基础过渡
+.transition {
+  transition-property: all;
+  transition-timing-function: $ease-out;
+  transition-duration: $duration-normal;
+}
+
+// 颜色过渡
+.transition-colors {
+  transition-property: color, background-color, border-color;
+  transition-timing-function: $ease-out;
+  transition-duration: $duration-fast;
+}
+
+// 透明度过渡
+.transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: $ease-out;
+  transition-duration: $duration-fast;
+}
+
+// 变换过渡
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: $ease-out;
+  transition-duration: $duration-normal;
+}
+
+// 阴影过渡
+.transition-shadow {
+  transition-property: box-shadow;
+  transition-timing-function: $ease-out;
+  transition-duration: $duration-normal;
+}
+
+// 时长
+.transition-fast {
+  transition-duration: $duration-fast;
+}
+
+.transition-normal {
+  transition-duration: $duration-normal;
+}
+
+.transition-slow {
+  transition-duration: $duration-slow;
+}
+
+// --------------------------------------------
+// 8. 滚动动画 (Scroll Animations)
+// --------------------------------------------
+
+// 滚动进入视图动画
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(30rpx);
+  transition: opacity $duration-slow $ease-out, transform $duration-slow $ease-out;
+  
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-animate-left {
+  opacity: 0;
+  transform: translateX(-30rpx);
+  transition: opacity $duration-slow $ease-out, transform $duration-slow $ease-out;
+  
+  &.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.scroll-animate-right {
+  opacity: 0;
+  transform: translateX(30rpx);
+  transition: opacity $duration-slow $ease-out, transform $duration-slow $ease-out;
+  
+  &.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.scroll-animate-zoom {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity $duration-slow $ease-out, transform $duration-slow $ease-spring;
+  
+  &.is-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// --------------------------------------------
+// 9. 悬停效果 (Hover Effects)
+// --------------------------------------------
+
+// 悬浮效果
+.hover-lift {
+  transition: transform $duration-normal $ease-out, box-shadow $duration-normal $ease-out;
+  
+  &:hover {
+    transform: translateY(-4rpx);
+    box-shadow: $shadow-lg;
+  }
+}
+
+// 缩放效果
+.hover-scale {
+  transition: transform $duration-fast $ease-out;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// 透明效果
+.hover-fade {
+  transition: opacity $duration-fast $ease-out;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+// 颜色效果
+.hover-color {
+  transition: color $duration-fast $ease-out;
+  
+  &:hover {
+    color: $primary;
+  }
+}
+
+// 背景效果
+.hover-bg {
+  transition: background-color $duration-fast $ease-out;
+  
+  &:hover {
+    background-color: $gray-100;
+  }
+}
+
+// --------------------------------------------
+// 10. 点击反馈 (Tap Feedback)
+// --------------------------------------------
+
+// 缩放点击
+.tap-scale {
+  transition: transform $duration-fast $ease-out;
+  
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+// 透明度点击
+.tap-fade {
+  transition: opacity $duration-fast $ease-out;
+  
+  &:active {
+    opacity: 0.7;
+  }
+}
+
+// 组合点击反馈
+.tap-feedback {
+  transition: transform $duration-fast $ease-out, opacity $duration-fast $ease-out;
+  
+  &:active {
+    transform: scale(0.98);
+    opacity: 0.8;
+  }
+}
+
+// 波纹效果（模拟）
+.tap-ripple {
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s $ease-out, height 0.6s $ease-out, opacity 0.6s $ease-out;
+    opacity: 0;
+  }
+  
+  &:active::after {
+    width: 200%;
+    height: 200%;
+    opacity: 1;
+    transition: width 0.3s $ease-out, height 0.3s $ease-out, opacity 0.3s $ease-out;
+  }
+}
+
+// --------------------------------------------
+// 11. 特殊效果 (Special Effects)
+// --------------------------------------------
+
+// 霓虹发光效果
+.neon-glow {
+  box-shadow: 
+    0 0 5rpx $primary,
+    0 0 10rpx $primary,
+    0 0 20rpx $primary,
+    0 0 40rpx $primary;
+}
+
+.neon-text {
+  text-shadow: 
+    0 0 5rpx $primary,
+    0 0 10rpx $primary,
+    0 0 20rpx $primary;
+}
+
+// 渐变边框
+.gradient-border {
+  position: relative;
+  background: $light-bg-primary;
+  border-radius: $radius-lg;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2rpx;
+    left: -2rpx;
+    right: -2rpx;
+    bottom: -2rpx;
+    background: $primary-gradient;
+    border-radius: $radius-lg;
+    z-index: -1;
+  }
+}
+
+// 玻璃态效果
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20rpx);
+  -webkit-backdrop-filter: blur(20rpx);
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20rpx);
+  -webkit-backdrop-filter: blur(20rpx);
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+// 渐变文字
+.gradient-text {
+  background: $primary-gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// VIP 金色文字
+.vip-text {
+  background: $vip-gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: $font-bold;
+}

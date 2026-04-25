@@ -1,0 +1,59 @@
+{
+  "name": "admin-web",
+  "version": "1.0.0",
+  "description": "聚聚管理后台 - Vue 3 + TypeScript + Element Plus",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:prod": "vite --config vite.config.prod.ts",
+    "build": "vite build",
+    "build:check": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
+    "format": "prettier --write src/"
+  },
+  "keywords": [
+    "vue3",
+    "typescript",
+    "element-plus",
+    "admin",
+    "dashboard"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "@types/dompurify": "^3.0.5",
+    "axios": "^1.13.2",
+    "dayjs": "^1.11.19",
+    "dompurify": "^3.3.1",
+    "echarts": "^5.6.0",
+    "element-plus": "^2.13.1",
+    "pinia": "^2.3.1",
+    "vue": "^3.5.26",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.1",
+    "@typescript-eslint/eslint-plugin": "^8.53.0",
+    "@typescript-eslint/parser": "^8.53.0",
+    "@vitejs/plugin-vue": "^6.0.3",
+    "@vitest/coverage-v8": "^4.0.17",
+    "@vue/test-utils": "^2.4.6",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-vue": "^10.6.2",
+    "fast-check": "^4.5.3",
+    "jsdom": "^23.2.0",
+    "prettier": "^3.7.4",
+    "sass": "^1.98.0",
+    "sass-embedded": "^1.97.2",
+    "typescript": "^5.9.3",
+    "vite": "^4.4.21",
+    "vitest": "^4.0.17",
+    "vue-tsc": "^3.2.2"
+  }
+}

@@ -1,0 +1,2 @@
+--------- beginning of main
+04-07 17:16:03.439  4173 27922 I ReactNativeJS: Running "JujuApp"

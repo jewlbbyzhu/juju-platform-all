@@ -1,0 +1,11 @@
+=== JUJU APK Build Report ===
+Build Time: 2026-04-16 12:14:20
+Commit: da0843b
+Message: refactor: 深度重构LoginScreen - 2026设计系统、组件拆分、动画优化、统一colors引用
+APK: juju-v1.0.5-5-release-20260416-121405.apk
+Size:  67M
+Status: SUCCESS
+Gradle Tasks: assembleRelease
+Environment:
+  JAVA_HOME=/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home
+  ANDROID_HOME=/Users/mac/Library/Android/sdk

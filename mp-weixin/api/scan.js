@@ -1,0 +1,1 @@
+"use strict";const e=require("../utils/request.js"),t={scanQRCode:t=>e.apiRequest.post("/api/v1/scan/verify",{qrCode:t}),getScanHistory:(t={})=>e.apiRequest.get("/api/v1/scan/history",t),getScanStats:()=>e.apiRequest.get("/api/v1/scan/stats"),getScanDetail:t=>e.apiRequest.get(`/api/v1/scan/${t}`)};exports.scanApi=t;

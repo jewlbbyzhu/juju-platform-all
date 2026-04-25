@@ -1,0 +1,20 @@
+=== JUJU APK Build Report ===
+Build Time: 20260418-090212
+Status: SUCCESS
+
+Commit Info:
+  Hash: dc87c4bdc74a7c5e0d4fb35b5829175058082b6e
+  Short: dc87c4b
+  Message: refactor: 批量提交历史未提交的重构改动 - 33个屏幕+组件+theme统一2026设计系统
+  Author: JUJU AutoBot
+  Date: Fri Apr 17 22:14:15 2026 +0800
+
+APK Output:
+  File: juju-release-20260418-090212.apk
+  Size:  67M
+  Path: builds/juju-release-20260418-090212.apk
+  Latest: builds/juju-latest-release.apk
+
+Build Environment:
+  JAVA_HOME: /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home
+  ANDROID_HOME: /Users/mac/Library/Android/sdk

@@ -1,0 +1,34 @@
+const express = require('express');
+const router = express.Router();
+
+router.use('/users', require('./users'));
+router.use('/parties', require('./parties'));
+router.use('/tickets', require('./tickets'));
+router.use('/orders', require('./orders'));
+router.use('/payments', require('./payments'));
+router.use('/wallet', require('./wallet'));
+router.use('/finance', require('./finance'));
+router.use('/bankcards', require('./bankcards'));
+router.use('/refunds', require('./refunds'));
+router.use('/favorites', require('./favorites'));
+router.use('/notifications', require('./notifications'));
+router.use('/vip', require('./vip'));
+router.use('/admin', require('./admin'));
+router.use('/auth', require('./auth'));
+router.use('/wechat', require('./wechat'));
+router.use('/appversion', require('./appversion'));
+router.use('/app', require('./app'));
+router.use('/system', require('./system'));
+router.use('/monitoring', require('./monitoring'));
+router.use('/dashboard', require('./dashboard'));
+router.use('/content', require('./content'));
+router.use('/social', require('./social'));
+router.use('/analytics', require('./analytics'));
+router.use('/automation', require('./automation'));
+router.use('/chat', require('./chat'));
+router.use('/group-chat', require('./groupChat'));
+router.use('/push', require('./push'));
+router.use('/push-settings', require('./pushSettings'));
+router.use('/schedule', require('./schedule'));
+
+module.exports = router;

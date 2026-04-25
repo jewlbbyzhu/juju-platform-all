@@ -1,0 +1,14 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="url(#gradient)" />
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9333ea" />
+      <stop offset="1" stop-color="#db2777" />
+    </linearGradient>
+  </defs>
+  <text x="800" y="450" text-anchor="middle" font-size="48" font-weight="bold" fill="white" opacity="0.8">
+    聚聚应用预览
+  </text>
+  <rect x="600" y="350" width="400" height="200" rx="16" fill="white" opacity="0.2" />
+  <rect x="620" y="370" width="360" height="140" rx="8" fill="white" opacity="0.3" />
+</svg>

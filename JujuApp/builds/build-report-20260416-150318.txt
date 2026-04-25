@@ -1,0 +1,7 @@
+Build Report - 20260416-150318
+========================
+Commit: 457e82c refactor: 深度重构MyTicketsScreen - 2026设计系统、动画优化、统一colors引用、组件结构优化
+APK: juju-v1.0.5-5-release-20260416-150318.apk
+Size: 67M
+Status: SUCCESS
+Path: builds/juju-v1.0.5-5-release-20260416-150318.apk

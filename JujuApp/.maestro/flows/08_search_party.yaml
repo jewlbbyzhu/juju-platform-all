@@ -1,0 +1,38 @@
+# Test: Search Party - UI Modernization v2.0
+# Tests: 搜索功能
+
+appId: com.jujuapp
+name: Search Party
+---
+- launchApp
+- waitForAnimationToEnd:
+    timeout: 3000
+
+# 截图：首页
+- takeScreenshot: 08_home_before_search
+
+# 点击搜索栏
+- tapOn:
+    text: "搜索"
+    optional: true
+
+- tapOn:
+    point: 50%,15%
+    optional: true
+
+- waitForAnimationToEnd:
+    timeout: 2000
+
+# 截图：搜索页
+- takeScreenshot: 08_search_screen
+
+# 输入搜索关键词
+- inputText:
+    text: "音乐"
+    optional: true
+
+- waitForAnimationToEnd:
+    timeout: 2000
+
+# 截图：搜索结果
+- takeScreenshot: 08_search_results

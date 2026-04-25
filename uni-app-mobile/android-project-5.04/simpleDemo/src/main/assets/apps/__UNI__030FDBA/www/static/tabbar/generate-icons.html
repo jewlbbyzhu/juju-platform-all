@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Generate TabBar Icons</title>
+    <style>
+        body {
+            background: #000;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+        .icon-container {
+            text-align: center;
+        }
+        canvas {
+            border: 1px solid #333;
+            margin: 10px;
+        }
+        .label {
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="icon-container">
+        <canvas id="message" width="48" height="48"></canvas>
+        <div class="label">message.png</div>
+    </div>
+    <div class="icon-container">
+        <canvas id="message-active" width="48" height="48"></canvas>
+        <div class="label">message-active.png</div>
+    </div>
+
+    <script>
+        // 绘制消息图标（未选中状态 - 灰色）
+        function drawMessageIcon(ctx, color) {
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color;
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            // 绘制气泡轮廓
+            ctx.beginPath();
+            ctx.moveTo(8, 12);
+            ctx.lineTo(40, 12);
+            ctx.quadraticCurveTo(44, 12, 44, 16);
+            ctx.lineTo(44, 32);
+            ctx.quadraticCurveTo(44, 36, 40, 36);
+            ctx.lineTo(20, 36);
+            ctx.lineTo(12, 42);
+            ctx.lineTo(14, 36);
+            ctx.lineTo(8, 36);
+            ctx.quadraticCurveTo(4, 36, 4, 32);
+            ctx.lineTo(4, 16);
+            ctx.quadraticCurveTo(4, 12, 8, 12);
+            ctx.closePath();
+            ctx.stroke();
+
+            // 绘制省略号
+            ctx.fillStyle = color;
+            for (let i = 0; i < 3; i++) {
+                ctx.beginPath();
+                ctx.arc(16 + i * 8, 24, 2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // 绘制消息图标（选中状态 - 橙色）
+        function drawMessageIconActive(ctx, color) {
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color;
+            ctx.lineWidth = 2.5;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            // 绘制填充气泡
+            ctx.beginPath();
+            ctx.moveTo(8, 12);
+            ctx.lineTo(40, 12);
+            ctx.quadraticCurveTo(44, 12, 44, 16);
+            ctx.lineTo(44, 32);
+            ctx.quadraticCurveTo(44, 36, 40, 36);
+            ctx.lineTo(20, 36);
+            ctx.lineTo(12, 42);
+            ctx.lineTo(14, 36);
+            ctx.lineTo(8, 36);
+            ctx.quadraticCurveTo(4, 36, 4, 32);
+            ctx.lineTo(4, 16);
+            ctx.quadraticCurveTo(4, 12, 8, 12);
+            ctx.closePath();
+            ctx.fill();
+
+            // 绘制白色省略号
+            ctx.fillStyle = '#fff';
+            for (let i = 0; i < 3; i++) {
+                ctx.beginPath();
+                ctx.arc(16 + i * 8, 24, 2.5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // 生成图标
+        const messageCanvas = document.getElementById('message');
+        const messageCtx = messageCanvas.getContext('2d');
+        drawMessageIcon(messageCtx, '#999999');
+
+        const messageActiveCanvas = document.getElementById('message-active');
+        const messageActiveCtx = messageActiveCanvas.getContext('2d');
+        drawMessageIconActive(messageActiveCtx, '#FF6B35');
+
+        // 下载功能
+        function downloadCanvas(canvas, filename) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // 自动下载
+        setTimeout(() => {
+            downloadCanvas(messageCanvas, 'message.png');
+            downloadCanvas(messageActiveCanvas, 'message-active.png');
+        }, 1000);
+    </script>
+</body>
+</html>

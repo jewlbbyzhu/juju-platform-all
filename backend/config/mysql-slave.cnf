@@ -1,0 +1,56 @@
+[mysqld]
+server-id=2
+relay-log=relay-bin
+read-only=1
+relay-log-index=relay-bin.index
+relay_log_recovery=1
+
+# 主库连接信息
+master-host=localhost
+master-port=3306
+master-user=repl
+master-password=repl_password
+master-connect-retry=60
+
+# 复制过滤
+replicate-do-db=juju_platform
+replicate-do-db=juju_test
+
+# 并行复制
+slave_parallel_workers=4
+slave_parallel_type=LOGICAL_CLOCK
+
+# 中继日志
+max_relay_log_size=100M
+relay_log_purge=1
+
+# InnoDB配置
+innodb_flush_log_at_trx_commit=2
+innodb_flush_method=O_DIRECT
+innodb_buffer_pool_size=1G
+innodb_log_file_size=256M
+innodb_log_buffer_size=16M
+
+# 连接配置
+max_connections=500
+max_connect_errors=100000
+connect_timeout=10
+wait_timeout=28800
+interactive_timeout=28800
+
+# 慢查询日志
+slow_query_log=1
+slow_query_log_file=/var/log/mysql/slow-query.log
+long_query_time=2
+
+# 字符集
+character-set-server=utf8mb4
+collation-server=utf8mb4_unicode_ci
+
+# 时区
+default-time-zone='+08:00'
+
+# 网络配置
+bind-address=0.0.0.0
+port=3307
+skip-name-resolve

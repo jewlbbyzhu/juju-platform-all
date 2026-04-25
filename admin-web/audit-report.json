@@ -1,0 +1,14 @@
+{
+  "summary": {
+    "totalPages": 0,
+    "totalInteractions": 0,
+    "passed": 0,
+    "failed": 0,
+    "consoleErrors": 0,
+    "networkErrors": 0,
+    "passRate": "0%",
+    "timestamp": "2026-02-01T04:55:20.280Z"
+  },
+  "results": [],
+  "allConsoleLogs": []
+}
