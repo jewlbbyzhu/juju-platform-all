@@ -608,6 +608,13 @@ export default function TicketSelectionScreen(): React.JSX.Element {
 
         <View style={sectionStyle}>
           <Text style={sectionTitleStyle}>选择票型</Text>
+          {party.ticket_types?.length === 0 && (
+            <View style={{ padding: spacing.md, alignItems: 'center' }}>
+              <Text style={{ fontSize: typography.size.body, color: colors.text.secondary }}>
+                暂无可用票型
+              </Text>
+            </View>
+          )}
           {party.ticket_types?.map(ticket => {
             const stock = ticket.current_stock ?? ticket.available_count ?? 0;
             const isSoldOut = stock <= 0;
@@ -669,6 +676,13 @@ export default function TicketSelectionScreen(): React.JSX.Element {
             <Text style={{ fontSize: 12, color: colors.status.warning, marginTop: 8, textAlign: 'center' }}>
               请选择一种票型继续
             </Text>
+          )}
+          {selectedTicket && (
+            <View style={{ marginTop: spacing.sm, padding: spacing.sm, backgroundColor: colors.primary.light + '15', borderRadius: BorderRadius.md }}>
+              <Text style={{ fontSize: typography.size.body2, color: colors.primary.main, fontWeight: typography.weight.medium }}>
+                ✓ 已选择: {selectedTicket.name} ¥{selectedTicket.price} × {quantity}张
+              </Text>
+            </View>
           )}
         </View>
 

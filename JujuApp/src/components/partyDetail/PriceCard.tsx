@@ -197,56 +197,8 @@ export const PriceCard: React.FC<PriceCardProps> = React.memo(
             </View>
           </View>
 
-          {/* 单票型也展示详细信息 */}
-          {hasSingleTicket && ticketTypes?.[0] && (
-            <View style={styles.ticketList}>
-              {ticketTypes.map((ticket) => {
-                const isSelected = selectedTicketId === ticket.id;
-                const stock = ticket.current_stock ?? ticket.available_count ?? 0;
-                const isSoldOut = stock <= 0;
-                return (
-                  <TouchableOpacity
-                    key={ticket.id}
-                    style={[
-                      styles.ticketItem,
-                      isSelected && styles.ticketItemSelected,
-                      isSoldOut && { opacity: 0.6 },
-                    ]}
-                    onPress={() => !isSoldOut && onTicketSelect?.(ticket)}
-                    activeOpacity={0.8}
-                    disabled={isSoldOut}
-                  >
-                    <View style={styles.ticketItemLeft}>
-                      <Text style={styles.ticketItemName}>{ticket.name}</Text>
-                      {ticket.description ? (
-                        <Text style={styles.ticketItemDesc}>{ticket.description}</Text>
-                      ) : null}
-                      {isSoldOut ? (
-                        <View style={styles.soldOutBadge}>
-                          <Text style={styles.soldOutText}>已售罄</Text>
-                        </View>
-                      ) : (
-                        <Text style={styles.ticketItemStock}>剩余 {stock} 张</Text>
-                      )}
-                    </View>
-                    <View style={styles.ticketItemRight}>
-                      <Text style={styles.ticketItemPrice}>
-                        {ticket.price === 0 ? '免费' : `¥${ticket.price}`}
-                      </Text>
-                      {isSelected && !isSoldOut && (
-                        <View style={styles.checkIcon}>
-                          <Text style={styles.checkIconText}>✓</Text>
-                        </View>
-                      )}
-                    </View>
-                  </TouchableOpacity>
-                );
-              })}
-            </View>
-          )}
-
-          {/* 多票型选择列表 */}
-          {hasMultipleTickets && onTicketSelect && (
+          {/* 票型选择列表 - 统一单票型和多票型 */}
+          {(hasSingleTicket || hasMultipleTickets) && onTicketSelect && (
             <View style={styles.ticketList}>
               {ticketTypes?.map((ticket) => {
                 const isSelected = selectedTicketId === ticket.id;

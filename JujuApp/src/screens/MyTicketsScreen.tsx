@@ -93,10 +93,11 @@ interface TicketCardProps {
   item: Ticket;
   statusConfig: TicketStatusConfig;
   onNavigate: (partyId: number) => void;
+  onViewDetail?: (ticketId: number) => void;
   index: number;
 }
 
-const TicketCard = memo(({ item, statusConfig, onNavigate, index }: TicketCardProps) => {
+const TicketCard = memo(({ item, statusConfig, onNavigate, onViewDetail, index }: TicketCardProps) => {
   const { colors } = useTheme();
   const scale = useSharedValue(1);
 
@@ -122,8 +123,12 @@ const TicketCard = memo(({ item, statusConfig, onNavigate, index }: TicketCardPr
   }, [scale]);
 
   const handlePress = useCallback(() => {
-    onNavigate(item.party_id);
-  }, [onNavigate, item.party_id]);
+    if (onViewDetail) {
+      onViewDetail(item.id);
+    } else {
+      onNavigate(item.party_id);
+    }
+  }, [onNavigate, onViewDetail, item.party_id, item.id]);
   const cardContainerStyle = useMemo(
     (): ViewStyle => ({
       marginBottom: spacing.md,
@@ -631,6 +636,13 @@ export default function MyTicketsScreen(): React.JSX.Element {
     [navigation],
   );
 
+  const handleViewTicketDetail = useCallback(
+    (ticketId: number) => {
+      navigation.navigate('TicketDetail', { ticketId });
+    },
+    [navigation],
+  );
+
   const handleScanTicket = useCallback(() => {
     navigation.navigate('ScanTicket');
   }, [navigation]);
@@ -647,11 +659,12 @@ export default function MyTicketsScreen(): React.JSX.Element {
           item={item}
           statusConfig={status}
           onNavigate={handleNavigateToDetail}
+          onViewDetail={handleViewTicketDetail}
           index={index}
         />
       );
     },
-    [handleNavigateToDetail, statusMap],
+    [handleNavigateToDetail, handleViewTicketDetail, statusMap],
   );
 
   const keyExtractor = useCallback((item: Ticket) => `ticket-${item.id}`, []);

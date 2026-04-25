@@ -131,7 +131,7 @@ export default function PaymentScreen() {
     marginBottom: spacing.md,
   };
 
-  const countdownStyle: ViewStyle = {
+  const countdownWrapperStyle: ViewStyle = {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -139,6 +139,11 @@ export default function PaymentScreen() {
     backgroundColor: colors.status.warning + '15',
     borderRadius: BorderRadius.md,
     marginTop: spacing.sm,
+  };
+
+  const countdownIconStyle: TextStyle = {
+    fontSize: 14,
+    marginRight: spacing.xs,
   };
 
   const countdownTextStyle: TextStyle = {
@@ -276,9 +281,10 @@ export default function PaymentScreen() {
             </Text>
             <Text style={orderNameStyle}>报名人: {order?.name}</Text>
             {countdown > 0 && (
-              <View style={countdownStyle}>
+              <View style={countdownWrapperStyle}>
+                <Text style={countdownIconStyle}>⏱️</Text>
                 <Text style={countdownTextStyle}>
-                  ⏱️ 支付截止: {formatCountdown(countdown)}
+                  支付截止: {formatCountdown(countdown)}
                 </Text>
               </View>
             )}

@@ -66,6 +66,7 @@ export type RootStackParamList = {
   TicketInventory: undefined;
   TicketStats: undefined;
   TicketStatsDetail: undefined;
+  TicketDetail: { ticketId: string | number };
   EvoMapDemo: undefined;
   SearchChat: undefined;
   Recharge: undefined;
