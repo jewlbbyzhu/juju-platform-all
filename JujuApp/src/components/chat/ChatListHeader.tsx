@@ -235,5 +235,6 @@ export const ChatListHeader: React.FC<ChatListHeaderProps> = memo(
     );
   },
 );
+ChatListHeader.displayName = 'ChatListHeader';
 
 export default ChatListHeader;

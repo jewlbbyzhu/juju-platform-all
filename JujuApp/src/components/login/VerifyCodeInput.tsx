@@ -84,6 +84,7 @@ export const VerifyCodeInput: React.FC<VerifyCodeInputProps> = React.memo(
     );
   },
 );
+VerifyCodeInput.displayName = 'VerifyCodeInput';
 
 const styles = StyleSheet.create({
   inputWrapper: {

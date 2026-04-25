@@ -61,6 +61,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = React.memo(
     );
   },
 );
+PhoneInput.displayName = 'PhoneInput';
 
 const styles = StyleSheet.create({
   inputWrapper: {

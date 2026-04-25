@@ -102,3 +102,4 @@ export const SearchBar: React.FC<SearchBarProps> = React.memo(
     );
   },
 );
+SearchBar.displayName = 'SearchBar';

@@ -82,3 +82,4 @@ export const EmptyState: React.FC = React.memo(() => {
     </Animated.View>
   );
 });
+EmptyState.displayName = 'EmptyState';

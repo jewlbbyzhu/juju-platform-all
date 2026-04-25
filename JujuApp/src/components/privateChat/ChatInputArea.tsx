@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+
 import {
   View,
   Text,
@@ -37,7 +37,7 @@ export function ChatInputArea({
   ).current;
   const opacityAnim = useRef(new Animated.Value(1)).current;
 
-  const [isFocused, setIsFocused] = useState(false);
+
 
   const handleFocus = () => {
     setIsFocused(true);

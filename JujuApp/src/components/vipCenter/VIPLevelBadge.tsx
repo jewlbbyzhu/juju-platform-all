@@ -81,6 +81,7 @@ export const VIPLevelBadge: React.FC<VIPLevelBadgeProps> = React.memo(
     );
   },
 );
+VIPLevelBadge.displayName = 'VIPLevelBadge';
 
 const getSizeStyles = (size: 'small' | 'medium' | 'large') => {
   switch (size) {

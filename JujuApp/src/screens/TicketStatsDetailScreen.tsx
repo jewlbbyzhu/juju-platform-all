@@ -42,7 +42,7 @@ export default function TicketStatsDetailScreen() {
     avgOrderValue: 40,
   });
 
-  const [loading, setLoading] = useState(false);
+
 
   const handleBack = useCallback(() => navigation.goBack(), [navigation]);
   const handleViewOrders = useCallback(

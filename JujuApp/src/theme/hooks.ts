@@ -11,7 +11,7 @@ import {
 import { animation } from './animation';
 
 // 兼容 OpenCode 重构时引入的 hook
-export function useEntranceAnimation(delay?: number) {
+export function useEntranceAnimation(_delay?: number) {
 
   const opacity = useSharedValue(0);
   const translateY = useSharedValue(20);
@@ -46,7 +46,7 @@ export function usePressAnimation({ scale = 0.97 }: { scale?: number }) {
   return { animatedStyle, handlePressIn, handlePressOut };
 }
 
-export function useListItemAnimation(index?: number, delay?: number) {
+export function useListItemAnimation(_index?: number, _delay?: number) {
   const opacity = useSharedValue(0);
   const translateY = useSharedValue(20);
 
@@ -58,7 +58,7 @@ export function useListItemAnimation(index?: number, delay?: number) {
   return { animatedStyle };
 }
 
-export function useNumberAnimation(value: number = 0, duration?: number) {
+export function useNumberAnimation(value: number = 0, _duration?: number) {
   const animatedValue = useSharedValue(value);
 
   const animatedStyle = useAnimatedStyle(() => ({

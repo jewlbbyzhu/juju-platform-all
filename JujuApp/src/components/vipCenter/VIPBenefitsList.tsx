@@ -44,6 +44,7 @@ export const VIPBenefitsList: React.FC = React.memo(() => {
     </View>
   );
 });
+VIPBenefitsList.displayName = 'VIPBenefitsList';
 
 const styles = StyleSheet.create({
   container: {

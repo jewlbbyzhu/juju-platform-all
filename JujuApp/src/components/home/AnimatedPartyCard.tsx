@@ -76,6 +76,7 @@ export const AnimatedPressable: React.FC<AnimatedPressableProps> = memo(
     );
   },
 );
+AnimatedPressable.displayName = 'AnimatedPressable';
 
 interface AnimatedPartyCardProps {
   item: PartyType;
@@ -204,3 +205,4 @@ export const AnimatedPartyCard: React.FC<AnimatedPartyCardProps> = memo(
     );
   },
 );
+AnimatedPartyCard.displayName = 'AnimatedPartyCard';

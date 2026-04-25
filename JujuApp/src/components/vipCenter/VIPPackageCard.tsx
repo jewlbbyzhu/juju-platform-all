@@ -135,6 +135,7 @@ export const VIPPackageCard: React.FC<VIPPackageCardProps> = React.memo(
     );
   },
 );
+VIPPackageCard.displayName = 'VIPPackageCard';
 
 const styles = StyleSheet.create({
   card: {

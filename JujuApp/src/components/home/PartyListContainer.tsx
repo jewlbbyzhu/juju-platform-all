@@ -81,6 +81,7 @@ export const LoadingFooter: React.FC<LoadingFooterProps> = memo(
     );
   },
 );
+LoadingFooter.displayName = 'LoadingFooter';
 
 interface ErrorBannerProps {
   error: string | null;
@@ -184,6 +185,7 @@ export const ErrorBanner: React.FC<ErrorBannerProps> = memo(
     );
   },
 );
+ErrorBanner.displayName = 'ErrorBanner';
 
 interface PartyListContainerProps {
   parties: PartyType[];
@@ -309,6 +311,7 @@ export const PartyListContainer: React.FC<PartyListContainerProps> = memo(
     );
   },
 );
+PartyListContainer.displayName = 'PartyListContainer';
 
 // 保留简单的静态样式（无需重构为设计系统）
 const styles = {

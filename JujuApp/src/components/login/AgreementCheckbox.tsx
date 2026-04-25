@@ -84,6 +84,7 @@ export const AgreementCheckbox: React.FC<AgreementCheckboxProps> = React.memo(
     );
   },
 );
+AgreementCheckbox.displayName = 'AgreementCheckbox';
 
 const styles = StyleSheet.create({
   agreementSection: {

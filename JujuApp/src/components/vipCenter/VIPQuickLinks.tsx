@@ -75,6 +75,7 @@ export const VIPQuickLinks: React.FC = React.memo(() => {
     </Animated.View>
   );
 });
+VIPQuickLinks.displayName = 'VIPQuickLinks';
 
 const styles = StyleSheet.create({
   card: {

@@ -24,11 +24,11 @@ export const VIPBanner: React.FC<VIPBannerProps> = ({ onPress }) => {
     });
   }, [scale]);
 
-  const handlePressIn = useCallback(() => {
+
     scale.value = withSpring(0.98, animation.spring.gentle);
   }, [scale]);
 
-  const handlePressOut = useCallback(() => {
+
     scale.value = withSpring(1, animation.spring.gentle);
   }, [scale]);
 

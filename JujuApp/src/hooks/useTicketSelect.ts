@@ -216,7 +216,7 @@ export function useTicketSelect(
       } else {
         Alert.alert('订单提交失败', res.message || '请稍后重试');
       }
-    } catch (err) {
+
       Alert.alert('错误', '网络错误，请检查网络连接');
     } finally {
       setSubmitting(false);

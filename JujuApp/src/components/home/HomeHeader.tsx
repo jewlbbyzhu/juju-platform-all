@@ -161,3 +161,5 @@ const HomeHeader: React.FC<HomeHeaderProps> = React.memo(
 );
 
 export default HomeHeader;
+
+HomeHeader.displayName = 'HomeHeader';

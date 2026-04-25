@@ -134,5 +134,6 @@ export const VIPHeader: React.FC<VIPHeaderProps> = React.memo(
     );
   },
 );
+VIPHeader.displayName = 'VIPHeader';
 
 export default VIPHeader;

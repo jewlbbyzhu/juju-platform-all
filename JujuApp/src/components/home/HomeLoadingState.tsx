@@ -82,3 +82,5 @@ const HomeLoadingState: React.FC<HomeLoadingStateProps> = React.memo(
 );
 
 export default HomeLoadingState;
+
+HomeLoadingState.displayName = 'HomeLoadingState';

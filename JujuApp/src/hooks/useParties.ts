@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { partyApi } from '../api/party';
-import { Party, ApiResponse, ListResponse } from '../types';
+import { Party } from '../types';
 
 interface UsePartiesOptions {
   pageSize?: number;

@@ -256,6 +256,7 @@ export const FeedCard: React.FC<FeedCardProps> = React.memo(
     );
   },
 );
+FeedCard.displayName = 'FeedCard';
 
 const styles = StyleSheet.create({
   cardWrapper: {

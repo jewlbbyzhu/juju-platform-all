@@ -140,3 +140,5 @@ const BalanceCard = React.memo(({ walletInfo, colors }: BalanceCardProps) => {
 });
 
 export default BalanceCard;
+
+BalanceCard.displayName = 'BalanceCard';

@@ -21,7 +21,7 @@ import {
   glassmorphism,
   gradients,
   BorderRadius,
-  Shadows,
+
 } from '../theme';
 import { AnimatedPressable } from '../components/feed/AnimatedPressable';
 
@@ -51,14 +51,12 @@ export default function TicketStatsScreen(): JSX.Element {
   const [timeFilter, setTimeFilter] = useState<TimeFilter>('today');
   const [chartType, setChartType] = useState<ChartType>('sales');
   const [refreshing, setRefreshing] = useState(false);
-  const [stats, setStats] = useState<Stats>({
+
     totalSales: 1256,
     totalRevenue: 56800,
     conversionRate: 24.5,
     avgOrderValue: 45.2,
   });
-
-  const [loading, setLoading] = useState(false);
 
   // 使用设计系统替代 useMemo 样式 - 提取为命名样式对象
   const containerStyle: ViewStyle = {

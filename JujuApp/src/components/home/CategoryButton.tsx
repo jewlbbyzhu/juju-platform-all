@@ -121,3 +121,4 @@ export const CategoryButton: React.FC<CategoryButtonProps> = React.memo(
     );
   },
 );
+CategoryButton.displayName = 'CategoryButton';

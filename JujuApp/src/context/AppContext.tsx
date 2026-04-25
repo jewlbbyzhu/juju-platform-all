@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
 import { partyApi } from '../api/party';
 import { orderApi } from '../api/order';
-import { PageData } from '../types/api';
+// import { ApiResponse, ListResponse } from '../types/api';
 
 interface AppContextType {
   user: unknown;

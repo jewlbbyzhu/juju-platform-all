@@ -21,7 +21,7 @@ import {
 } from '../../theme';
 import type { NavigationProp } from '../../types';
 
-const { width } = require('react-native').Dimensions.get('window');
+// const { width } = require('react-native').Dimensions.get('window');
 const CARD_WIDTH = (width - layout.screenPadding * 2 - spacing.md) / 2;
 
 interface Category {
@@ -84,7 +84,7 @@ interface PartyCardProps {
 }
 
 const AnimatedTouchable = Animated.createAnimatedComponent(
-  require('react-native').TouchableOpacity,
+//   require('react-native').TouchableOpacity,
 );
 
 export const PartyCard: React.FC<PartyCardProps> = React.memo(
@@ -231,6 +231,7 @@ export const PartyCard: React.FC<PartyCardProps> = React.memo(
     );
   },
 );
+PartyCard.displayName = 'PartyCard';
 
 const styles = StyleSheet.create({
   card: {

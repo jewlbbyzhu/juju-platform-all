@@ -801,3 +801,9 @@ export default function MyTicketsScreen(): React.JSX.Element {
     </SafeAreaView>
   );
 }
+
+TicketCard.displayName = 'TicketCard';
+
+TicketsEmptyState.displayName = 'TicketsEmptyState';
+
+TabBar.displayName = 'TabBar';

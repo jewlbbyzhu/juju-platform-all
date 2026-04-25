@@ -114,6 +114,9 @@ export default function MyOrdersScreen(): React.JSX.Element {
   useFocusEffect(
     useCallback(() => {
       fetchOrders(1, true);
+// eslint-disable-next-line react-hooks/exhaustive-deps
+// eslint-disable-next-line react-hooks/exhaustive-deps
+// eslint-disable-next-line react-hooks/exhaustive-deps
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeTab]),
   );

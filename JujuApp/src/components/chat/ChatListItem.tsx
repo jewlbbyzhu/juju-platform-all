@@ -208,5 +208,6 @@ export const ChatListItem: React.FC<ChatListItemProps> = memo(
     );
   },
 );
+ChatListItem.displayName = 'ChatListItem';
 
 export default ChatListItem;

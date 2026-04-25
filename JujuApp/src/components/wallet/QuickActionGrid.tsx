@@ -138,3 +138,5 @@ const QuickActionGrid = React.memo(
 );
 
 export default QuickActionGrid;
+
+QuickActionGrid.displayName = 'QuickActionGrid';

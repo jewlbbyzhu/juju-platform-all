@@ -21,8 +21,8 @@ import {
   BorderRadius,
   gradients,
   typography,
-  textStyles,
-  Shadows,
+
+
 } from '../theme';
 import { GlassCard } from '../components/GlassCard';
 import { GlassButton } from '../components/GlassButton';
@@ -249,7 +249,7 @@ export default function CreatePostScreen() {
     fontWeight: typography.weight.regular,
   };
 
-  const addImageLabelStyle: TextStyle = {
+
     fontSize: typography.size.caption,
     color: colors.text.secondary,
     marginTop: spacing.xs,

@@ -11,7 +11,7 @@ import {
   ImageStyle,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation, useRoute } from '@react-navigation/native';
+
 import Animated, { FadeInUp } from 'react-native-reanimated';
 import { partyApi } from '../api/party';
 import { GlassCard } from '../components/GlassCard';
@@ -35,9 +35,9 @@ interface Party {
 
 export default function ReviewScreen(): React.JSX.Element {
   const navigation = useNavigation();
-  const route = useRoute();
+
   const { colors } = useTheme();
-  const { orderId, partyId } = (route.params as any) || {};
+
   const [party, setParty] = useState<Party>({
     id: '',
     title: '',
@@ -105,7 +105,7 @@ export default function ReviewScreen(): React.JSX.Element {
           { text: '确定', onPress: () => navigation.goBack() },
         ]);
       }
-    } catch (_error) {
+
       Alert.alert('错误', '提交失败，请重试');
     } finally {
       setSubmitting(false);

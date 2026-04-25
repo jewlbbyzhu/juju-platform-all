@@ -161,3 +161,5 @@ const TransactionItem = React.memo(
 );
 
 export default TransactionItem;
+
+TransactionItem.displayName = 'TransactionItem';

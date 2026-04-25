@@ -154,3 +154,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = memo(
 );
 
 export default CategoryFilter;
+
+CategoryItem.displayName = 'CategoryItem';
+
+CategoryFilter.displayName = 'CategoryFilter';

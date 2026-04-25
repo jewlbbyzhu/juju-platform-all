@@ -9,7 +9,7 @@ import Animated, {
   withSpring,
   withDelay,
   Easing,
-  SharedValue,
+
 } from 'react-native-reanimated';
 import { useTheme, spacing, typography, animation } from '../../theme';
 

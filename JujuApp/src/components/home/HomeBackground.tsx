@@ -253,3 +253,5 @@ const HomeBackground: React.FC<HomeBackgroundProps> = React.memo(
 );
 
 export default HomeBackground;
+
+HomeBackground.displayName = 'HomeBackground';

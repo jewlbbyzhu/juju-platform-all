@@ -21,7 +21,7 @@ interface TagSelectorProps {
 }
 
 const AnimatedTouchable = Animated.createAnimatedComponent(
-  require('react-native').TouchableOpacity,
+//   require('react-native').TouchableOpacity,
 );
 
 export const TagSelector: React.FC<TagSelectorProps> = ({

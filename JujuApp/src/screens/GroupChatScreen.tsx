@@ -28,7 +28,7 @@ import {
 export default function GroupChatScreen() {
   const { colors } = useTheme();
   const navigation = useNavigation();
-  const [loading, setLoading] = useState(false);
+
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
   const [groupInfo] = useState({ name: '群聊', memberCount: 0 });

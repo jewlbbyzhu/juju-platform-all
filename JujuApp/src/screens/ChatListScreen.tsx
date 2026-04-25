@@ -49,7 +49,7 @@ export default function ChatListScreen({
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
-  const [chatError, setChatError] = useState<string | null>(null);
+
   const pageSize = 20;
 
   const unreadCount =

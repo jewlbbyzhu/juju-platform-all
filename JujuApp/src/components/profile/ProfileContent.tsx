@@ -11,7 +11,7 @@ import {
 } from './index';
 import { VIPBanner } from './VIPBanner';
 import { RefreshIndicator } from './RefreshIndicator';
-import type { RefreshAnimationOverlay } from './RefreshIndicator';
+
 import { MENU_GROUPS } from './constants';
 
 export interface ProfileContentProps {

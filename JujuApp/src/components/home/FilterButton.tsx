@@ -56,3 +56,4 @@ export const FilterButton: React.FC = React.memo(() => {
     </Animated.View>
   );
 });
+FilterButton.displayName = 'FilterButton';

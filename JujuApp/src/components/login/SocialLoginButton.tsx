@@ -64,6 +64,7 @@ export const SocialLoginButton: React.FC<SocialLoginButtonProps> = React.memo(
     );
   },
 );
+SocialLoginButton.displayName = 'SocialLoginButton';
 
 const styles = StyleSheet.create({
   socialIcons: {

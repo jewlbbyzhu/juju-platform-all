@@ -50,7 +50,9 @@ export const cache = {
   async clear(): Promise<void> {
     const keys = await AsyncStorage.getAllKeys();
     const cacheKeys = keys.filter((key) => key.startsWith(CACHE_PREFIX));
-    await Promise.all(cacheKeys.map(key => AsyncStorage.removeItem(key)));
+    if (cacheKeys.length > 0) {
+      await AsyncStorage.multiRemove(cacheKeys);
+    }
   },
 
   // 获取所有缓存键

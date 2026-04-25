@@ -61,7 +61,7 @@ const AnimatedSection: React.FC<{
   <Animated.View
     entering={FadeInUp.duration(animation.duration.normal).delay(delay)}
     layout={
-      require('react-native-reanimated').LinearTransition.springify()
+      FadeInUp.duration(animation.duration.normal)
         .damping(animation.spring.gentle.damping)
         .stiffness(animation.spring.gentle.stiffness)
     }

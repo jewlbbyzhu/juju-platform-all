@@ -530,3 +530,7 @@ const MyPartiesScreen: React.FC = () => {
 };
 
 export default MyPartiesScreen;
+
+PartyListItem.displayName = 'PartyListItem';
+
+RoleTab.displayName = 'RoleTab';

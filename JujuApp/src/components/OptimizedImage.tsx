@@ -53,12 +53,14 @@ export const OptimizedImage = memo<OptimizedImageProps>(({
   );
 });
 
+OptimizedImage.displayName = 'OptimizedImage';
+
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
   },
   image: {
-    backgroundColor: colors.divider,
+    backgroundColor: '#eee',
   },
   overlay: {
     position: 'absolute',
@@ -66,14 +68,13 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: colors.background.tertiary,
+    backgroundColor: '#f5f5f5',
     justifyContent: 'center',
     alignItems: 'center',
   },
   errorOverlay: {
-    backgroundColor: colors.divider,
+    backgroundColor: '#eee',
   },
 });
 
 export default OptimizedImage;
-import { colors } from "../theme/colors";
