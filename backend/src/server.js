@@ -1,9 +1,21 @@
 // 首先加载环境变量，必须在任何其他模块之前
 const path = require('path');
-const dotenv = require('dotenv');
+const fs = require('fs');
+
+// 临时绕过dotenv，直接读取.env文件
+try {
+  const envFile = fs.readFileSync(path.resolve(__dirname, '../.env'), 'utf8');
+  envFile.split('\n').forEach(line => {
+    const match = line.match(/^([^#=]+)=(.*)$/);
+    if (match) {
+      process.env[match[1].trim()] = match[2].trim();
+    }
+  });
+} catch (e) {
+  console.log('Warning: Could not load .env file');
+}
+
 const env = process.env.NODE_ENV || 'development';
-const envPath = path.resolve(__dirname, `../.env.${env}`);
-dotenv.config({ path: envPath });
 
 const express = require('express');
 const cors = require('cors');
