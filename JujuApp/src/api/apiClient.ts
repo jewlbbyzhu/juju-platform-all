@@ -188,7 +188,11 @@ axiosClient.interceptors.response.use(
     // 统一错误处理
     const errorData = error.response?.data as { message?: string; code?: number };
     const errorMessage = errorData?.message || error.message || '请求失败';
-    console.error('API Error:', errorMessage);
+    if (__DEV__) {
+      console.error('API Error:', errorMessage);
+    } else {
+      console.error('API Error:', errorData?.code || error.response?.status || 'UNKNOWN');
+    }
     
     return Promise.reject({
       success: false,

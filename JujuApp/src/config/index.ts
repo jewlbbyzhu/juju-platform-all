@@ -6,8 +6,8 @@ const isDev = __DEV__;
 const REMOTE_API = "https://api.hfparty.asia/api/v1";
 const REMOTE_WS = "wss://api.hfparty.asia";
 
-// 本地开发配置
-const LOCAL_API = "http://localhost:3000/api/v1";
+// 本地开发配置（仅用于本地开发环境）
+const LOCAL_API = "http://localhost:3000/api/v1";  // 本地开发使用HTTP，生产环境使用HTTPS
 const LOCAL_WS = "ws://localhost:3000";
 
 // 当前使用的API地址
