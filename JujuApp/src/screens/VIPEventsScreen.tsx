@@ -48,6 +48,7 @@ const FILTER_OPTIONS = [
 
 export default function VIPEventsScreen() {
   const { glassmorphism: gm, glow: gl } = useTheme();
+  const navigation = useNavigation();
 
   const STATUS_CONFIG = {
     upcoming: {

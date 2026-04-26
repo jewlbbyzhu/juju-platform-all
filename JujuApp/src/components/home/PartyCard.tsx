@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -21,7 +21,8 @@ import {
 } from '../../theme';
 import type { NavigationProp } from '../../types';
 
-// const { width } = require('react-native').Dimensions.get('window');
+import { Dimensions } from 'react-native';
+const { width } = Dimensions.get('window');
 const CARD_WIDTH = (width - layout.screenPadding * 2 - spacing.md) / 2;
 
 interface Category {
@@ -83,9 +84,7 @@ interface PartyCardProps {
   navigation: NavigationProp;
 }
 
-const AnimatedTouchable = Animated.createAnimatedComponent(
-//   require('react-native').TouchableOpacity,
-);
+const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 
 export const PartyCard: React.FC<PartyCardProps> = React.memo(
   ({ item, index, navigation }) => {

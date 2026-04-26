@@ -3,6 +3,7 @@ import { View, Text, Alert, ViewStyle, TextStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import { scanApi } from '../api/scan';
+import { useNavigation } from '@react-navigation/native';
 import {
   useTheme,
   spacing,
@@ -28,6 +29,7 @@ interface TicketResult {
 
 export default function ScanTicketScreen(): React.JSX.Element {
   const { colors } = useTheme();
+  const navigation = useNavigation();
   const [scanning, setScanning] = useState(false);
   const [result, setResult] = useState<TicketResult | null>(null);
 

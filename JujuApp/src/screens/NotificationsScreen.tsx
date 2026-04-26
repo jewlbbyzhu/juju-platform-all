@@ -15,15 +15,11 @@ import {
   NotificationEmptyState,
   Notification,
 } from '../components/notificationsScreen';
+import { useNavigation } from '@react-navigation/native';
 import {
   useTheme,
   spacing,
   animation,
-
-
-
-
-
 } from '../theme';
 
 type TabType = 'all' | 'unread';
@@ -74,6 +70,7 @@ const MOCK_NOTIFICATIONS: Notification[] = [
 
 export default function NotificationsScreen(): React.JSX.Element {
   const { colors } = useTheme();
+  const navigation = useNavigation();
   const [currentTab, setCurrentTab] = useState<TabType>('all');
   const [notifications, setNotifications] =
     useState<Notification[]>(MOCK_NOTIFICATIONS);

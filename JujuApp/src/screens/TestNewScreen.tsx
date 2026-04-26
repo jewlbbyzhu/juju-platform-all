@@ -19,6 +19,7 @@ import LinearGradient from 'react-native-linear-gradient';
 // 2026高颜值设计 - 开发测试工具页 (设计系统重构版)
 export default function TestNewScreen(): React.JSX.Element {
   const { colors } = useTheme();
+  const navigation = useNavigation();
   const [testResults, setTestResults] = useState<string[]>([]);
 
   const addResult = (result: string) => {

@@ -51,7 +51,9 @@ export const cache = {
     const keys = await AsyncStorage.getAllKeys();
     const cacheKeys = keys.filter((key) => key.startsWith(CACHE_PREFIX));
     if (cacheKeys.length > 0) {
-      await AsyncStorage.multiRemove(cacheKeys);
+      for (const key of cacheKeys) {
+        await AsyncStorage.removeItem(key);
+      }
     }
   },
 

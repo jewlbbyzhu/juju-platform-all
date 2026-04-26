@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, { FadeInUp } from 'react-native-reanimated';
+import { useNavigation } from '@react-navigation/native';
 import { useTheme, spacing, typography, animation } from '../theme';
 import { EmptyState } from '../components';
 import { vipApi } from '../api/vip';
@@ -52,6 +53,7 @@ interface ApiResponse {
 
 export default function VIPCenterScreen(): React.JSX.Element {
   const { colors } = useTheme();
+  const navigation = useNavigation();
   const [vipStatus, setVipStatus] = useState<VipStatus>({
     isVip: false,
     level: 0,

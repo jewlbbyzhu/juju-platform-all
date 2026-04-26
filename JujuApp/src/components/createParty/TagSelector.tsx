@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -20,9 +20,7 @@ interface TagSelectorProps {
   onSelect: (key: string) => void;
 }
 
-const AnimatedTouchable = Animated.createAnimatedComponent(
-//   require('react-native').TouchableOpacity,
-);
+const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 
 export const TagSelector: React.FC<TagSelectorProps> = ({
   options,

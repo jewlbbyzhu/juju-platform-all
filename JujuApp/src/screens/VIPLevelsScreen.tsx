@@ -85,6 +85,7 @@ const VIP_LEVELS: VipLevel[] = [
 
 export default function VIPLevelsScreen(): React.JSX.Element {
   const { colors } = useTheme();
+  const navigation = useNavigation();
   const [currentLevel, setCurrentLevel] = useState(1);
   const [currentPoints, setCurrentPoints] = useState(2500);
   const [refreshing, setRefreshing] = useState(false);

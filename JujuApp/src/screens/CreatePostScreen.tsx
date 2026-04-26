@@ -249,7 +249,7 @@ export default function CreatePostScreen() {
     fontWeight: typography.weight.regular,
   };
 
-
+  const addImageTextStyle: TextStyle = {
     fontSize: typography.size.caption,
     color: colors.text.secondary,
     marginTop: spacing.xs,

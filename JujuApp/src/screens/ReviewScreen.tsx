@@ -11,6 +11,7 @@ import {
   ImageStyle,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import Animated, { FadeInUp } from 'react-native-reanimated';
 import { partyApi } from '../api/party';
@@ -35,6 +36,8 @@ interface Party {
 
 export default function ReviewScreen(): React.JSX.Element {
   const navigation = useNavigation();
+  const route = useRoute<any>();
+  const partyId = route.params?.partyId as string | undefined;
 
   const { colors } = useTheme();
 
@@ -95,7 +98,7 @@ export default function ReviewScreen(): React.JSX.Element {
     setSubmitting(true);
     try {
       const res = await partyApi.submitReview({
-        partyId: partyId,
+        partyId: Number(partyId) || 0,
         rating,
         content,
         tags: selectedTags,

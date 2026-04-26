@@ -36,7 +36,7 @@ type RootStackParamList = {
 
 type SocialScreenRouteProp = RouteProp<RootStackParamList, 'Social'>;
 
-
+interface ApiResponse<T> {
   code: number;
   data?: {
     list: T[];

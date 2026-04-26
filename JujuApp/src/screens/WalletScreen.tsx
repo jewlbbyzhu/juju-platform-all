@@ -38,7 +38,7 @@ export default function WalletScreen(): React.JSX.Element {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [refreshing, setRefreshing] = useState(false);
   const [loading, setLoading] = useState(true);
-
+  const [walletError, setWalletError] = useState<string | null>(null);
 
   const loadWalletInfo = useCallback(async () => {
     try {

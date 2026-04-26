@@ -1,4 +1,4 @@
-
+import React, { useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -32,12 +32,11 @@ export function ChatInputArea({
 }: ChatInputAreaProps) {
   const theme = useTheme();
   const colors = theme.colors;
+  const [isFocused, setIsFocused] = useState(false);
   const heightAnim = useRef(
     new Animated.Value(Platform.OS === 'ios' ? 40 : 36),
   ).current;
   const opacityAnim = useRef(new Animated.Value(1)).current;
-
-
 
   const handleFocus = () => {
     setIsFocused(true);

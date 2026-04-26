@@ -40,7 +40,7 @@ export default function GroupChatListScreen(): JSX.Element {
     setRefreshing(false);
   }, []);
 
-
+  const loadGroups = useCallback(async () => {
     setLoading(true);
     await new Promise<void>(resolve => setTimeout(resolve, 800));
     setGroups([

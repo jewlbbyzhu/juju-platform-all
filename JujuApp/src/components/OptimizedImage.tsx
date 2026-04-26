@@ -1,5 +1,6 @@
 import React, { useState, useCallback, memo } from 'react';
 import { Image, View, ActivityIndicator, StyleSheet } from 'react-native';
+import { useTheme } from '../theme';
 
 interface OptimizedImageProps {
   source: { uri: string };
@@ -15,6 +16,7 @@ export const OptimizedImage = memo<OptimizedImageProps>(({
   resizeMode = 'cover',
   placeholder = true,
 }) => {
+  const { colors } = useTheme();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 

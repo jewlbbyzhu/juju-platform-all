@@ -41,7 +41,7 @@ export default function TicketStatsDetailScreen() {
     conversionRate: 28.5,
     avgOrderValue: 40,
   });
-
+  const [loading, setLoading] = useState(false);
 
 
   const handleBack = useCallback(() => navigation.goBack(), [navigation]);

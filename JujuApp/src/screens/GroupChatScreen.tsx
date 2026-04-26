@@ -32,6 +32,7 @@ export default function GroupChatScreen() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
   const [groupInfo] = useState({ name: '群聊', memberCount: 0 });
+  const [loading, setLoading] = useState(false);
   const flatListRef = useRef<Animated.FlatList<Message>>(null);
 
   const sendMessage = useCallback(async () => {

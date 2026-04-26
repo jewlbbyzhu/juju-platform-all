@@ -11,6 +11,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, { FadeInUp } from 'react-native-reanimated';
 import { tagApi } from '../api/tag';
+import { useNavigation } from '@react-navigation/native';
 import {
   useTheme,
   Border,
@@ -31,6 +32,7 @@ interface Tag {
 // 2026高颜值设计 - 标签管理页 (设计系统重构版)
 export default function TagManageScreen(): React.JSX.Element {
   const { colors } = useTheme();
+  const navigation = useNavigation();
   const [tags, setTags] = useState<Tag[]>([]);
   const [newTagName, setNewTagName] = useState('');
 
