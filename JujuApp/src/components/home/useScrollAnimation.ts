@@ -33,14 +33,18 @@ export const useScrollAnimation = (): UseScrollAnimationReturn => {
       if (!isScrolling.value) {
         isScrolling.value = true;
       }
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-      scrollTimeoutRef.current = setTimeout(() => {
-        isScrolling.value = false;
-      }, 150);
     },
   });
+
+  // Handle scroll end outside worklet
+  const handleScrollEnd = () => {
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
+    }
+    scrollTimeoutRef.current = setTimeout(() => {
+      isScrolling.value = false;
+    }, 150);
+  };
 
   const headerStyle = useAnimatedStyle(() => {
     const scale = interpolate(

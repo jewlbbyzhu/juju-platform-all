@@ -84,7 +84,6 @@ export function useEntranceAnimation(
   });
 
   const start = useCallback(() => {
-    'worklet';
     opacity.value = withDelay(
       delay,
       withTiming(1, {
@@ -243,8 +242,7 @@ export function useScrollAnimation() {
     };
   });
 
-  const onScroll = useCallback((y: number) => {
-    'worklet';
+  const onScroll = (y: number) => {
     scrollY.value = y;
     const threshold = 50;
     if (y > threshold) {
@@ -254,7 +252,7 @@ export function useScrollAnimation() {
       headerOpacity.value = withTiming(1, { duration: 150 });
       headerScale.value = withTiming(1, { duration: 150 });
     }
-  }, []);
+  };
 
   return {
     scrollY,

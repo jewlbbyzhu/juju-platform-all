@@ -22,7 +22,6 @@ export const partyListReducer = (
   state: PartyListState,
   action: PartyListAction,
 ): PartyListState => {
-  'worklet';
   switch (action.type) {
     case 'FETCH_START':
       return {
