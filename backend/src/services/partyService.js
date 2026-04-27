@@ -171,7 +171,30 @@ class PartyService {
 
       await party.increment('view_count');
       const result = toJSONSafe(party);
-      logger.info(`DEBUG getPartyById: cover_image=${result.cover_image}, type=${typeof result.cover_image}`);
+      
+      // Add priceRange field (formatted price range for frontend)
+      const minPrice = parseFloat(result.min_price || 0);
+      const maxPrice = parseFloat(result.max_price || 0);
+      if (minPrice === 0 && maxPrice === 0) {
+        result.priceRange = { min: '0.00', max: '0.00', text: '免费' };
+      } else if (minPrice === maxPrice) {
+        result.priceRange = { min: minPrice.toFixed(2), max: maxPrice.toFixed(2), text: `¥${minPrice.toFixed(2)}` };
+      } else {
+        result.priceRange = { min: minPrice.toFixed(2), max: maxPrice.toFixed(2), text: `¥${minPrice.toFixed(2)} - ¥${maxPrice.toFixed(2)}` };
+      }
+      
+      // Add organizer as alias for user
+      if (result.user) {
+        result.organizer = result.user;
+      }
+      
+      // Use first image from images array as coverImage if cover_image is null
+      if (!result.cover_image && result.images && result.images.length > 0) {
+        result.coverImage = result.images[0];
+      } else {
+        result.coverImage = result.cover_image;
+      }
+      
       return result;
     } catch (error) {
       logger.error('Get party by ID failed:', error);

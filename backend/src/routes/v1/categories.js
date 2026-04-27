@@ -8,7 +8,8 @@ router.get('/', async (req, res) => {
     const categories = await PartyCategory.findAll({
       where: { status: 1 },
       order: [['sort_order', 'ASC']],
-      attributes: ['id', 'slug', 'name', 'name_en', 'icon', 'color', 'description']
+      attributes: ['id', 'slug', 'name', 'name_en', 'icon', 'color', 'description'],
+      raw: true
     });
 
     res.json({
