@@ -1,0 +1,263 @@
+{
+  "test_info": {
+    "test_date": "2026-04-09 06:46:26",
+    "app_version": "1.0.5",
+    "build_number": 5,
+    "test_type": "性能基准测试"
+  },
+  "apk_analysis": {
+    "file_name": "juju-v1.0.5-5-release.apk",
+    "compressed_mb": 18.82,
+    "uncompressed_mb": 42.06,
+    "compression_ratio": "55.2%",
+    "breakdown": {
+      "lib": {
+        "size_mb": 13.58,
+        "percentage": 32.3
+      },
+      "dex": {
+        "size_mb": 3.93,
+        "percentage": 9.3
+      },
+      "res": {
+        "size_mb": 0.55,
+        "percentage": 1.3
+      },
+      "assets": {
+        "size_mb": 1.85,
+        "percentage": 4.4
+      },
+      "arsc": {
+        "size_mb": 1.04,
+        "percentage": 2.5
+      },
+      "other": {
+        "size_mb": 21.12,
+        "percentage": 50.2
+      }
+    },
+    "size_trend": [
+      {
+        "version": "1.0.4",
+        "size_mb": 60.4,
+        "date": "2026-04-05"
+      },
+      {
+        "version": "1.0.5",
+        "size_mb": 18.82,
+        "date": "2026-04-09"
+      }
+    ]
+  },
+  "startup_performance": {
+    "cold_start": {
+      "avg_ms": 836,
+      "min_ms": 790,
+      "max_ms": 914,
+      "samples": [
+        914,
+        790,
+        803
+      ],
+      "status": "good",
+      "evaluation": "冷启动时间 < 1s，符合标准"
+    },
+    "warm_start": {
+      "avg_ms": 87,
+      "min_ms": 63,
+      "max_ms": 131,
+      "samples": [
+        63,
+        131,
+        68
+      ],
+      "status": "excellent",
+      "evaluation": "热启动时间 < 100ms，表现优秀"
+    }
+  },
+  "memory_usage": {
+    "total_pss_kb": 71555,
+    "total_pss_mb": 71.6,
+    "breakdown": {
+      "native_heap": {
+        "size_kb": 14370,
+        "percentage": 20.1
+      },
+      "code": {
+        "size_kb": 32136,
+        "percentage": 44.9
+      },
+      "java_heap": {
+        "size_kb": 5940,
+        "percentage": 8.3
+      },
+      "private_other": {
+        "size_kb": 9456,
+        "percentage": 13.3
+      },
+      "system": {
+        "size_kb": 8987,
+        "percentage": 12.6
+      },
+      "stack": {
+        "size_kb": 688,
+        "percentage": 1.0
+      }
+    },
+    "heap": {
+      "native": {
+        "size_kb": 28184,
+        "alloc_kb": 22185,
+        "free_kb": 2453
+      },
+      "dalvik": {
+        "size_kb": 6398,
+        "alloc_kb": 3199,
+        "free_kb": 3199
+      }
+    }
+  },
+  "frame_performance": {
+    "total_frames": 20,
+    "janky_frames": 16,
+    "janky_percentage": 80.0,
+    "percentiles": {
+      "p50_ms": 34,
+      "p90_ms": 65,
+      "p95_ms": 150
+    },
+    "issues": {
+      "missed_vsync": 1,
+      "high_input_latency": 11,
+      "slow_ui_thread": 6,
+      "slow_bitmap_uploads": 1,
+      "slow_draw_commands": 15
+    },
+    "status": "critical"
+  },
+  "dependency_analysis": {
+    "total_dependencies": {
+      "production": 15,
+      "development": 17,
+      "total": 32
+    },
+    "node_modules_size": "1.0GB",
+    "largest_packages": [
+      {
+        "name": "react-native-gesture-handler",
+        "size_mb": 474,
+        "percentage": 47.4
+      },
+      {
+        "name": "aws-sdk",
+        "size_mb": 100,
+        "percentage": 10.0
+      },
+      {
+        "name": "react-native-screens",
+        "size_mb": 64,
+        "percentage": 6.4
+      },
+      {
+        "name": "hermes-compiler",
+        "size_mb": 46,
+        "percentage": 4.6
+      },
+      {
+        "name": "react-native",
+        "size_mb": 32,
+        "percentage": 3.2
+      }
+    ],
+    "unused_dependencies": [
+      "@react-native-masked-view/masked-view",
+      "@react-native/new-app-screen",
+      "@react-navigation/stack",
+      "react-native-maps"
+    ],
+    "security_audit": "无法执行（npm registry不支持）"
+  },
+  "code_stats": {
+    "source_files": 109,
+    "total_lines": 16190,
+    "estimated_methods": 86769,
+    "screens": 56,
+    "components": 11
+  },
+  "historical_comparison": {
+    "apk_size": {
+      "previous": 60.4,
+      "current": 18.82,
+      "change_mb": -41.58,
+      "change_percent": -68.8,
+      "status": "✅ 大幅优化"
+    },
+    "cold_start": {
+      "previous_avg_ms": 890,
+      "current_avg_ms": 836,
+      "change_ms": -54,
+      "change_percent": -6.1,
+      "status": "✅ 略有提升"
+    }
+  },
+  "issues": [
+    {
+      "severity": "critical",
+      "category": "帧率性能",
+      "description": "掉帧率高达80%，严重影响用户体验",
+      "impact": "用户滑动列表时会感到卡顿",
+      "recommendation": "实现FlatList虚拟化，优化图片加载策略，使用shouldComponentUpdate减少重渲染"
+    },
+    {
+      "severity": "high",
+      "category": "APK结构",
+      "description": "'other'类别占比50.2%（21.12MB），需要进一步分析",
+      "impact": "可能存在未优化资源或重复文件",
+      "recommendation": "使用APK Analyzer详细检查'other'类别内容，清理无用资源"
+    },
+    {
+      "severity": "medium",
+      "category": "未使用依赖",
+      "description": "检测到4个未使用的依赖包",
+      "impact": "增加构建时间和包体积",
+      "recommendation": "移除未使用的依赖：@react-native-masked-view/masked-view, @react-native/new-app-screen, @react-navigation/stack, react-native-maps"
+    },
+    {
+      "severity": "low",
+      "category": "node_modules",
+      "description": "react-native-gesture-handler占用474MB（47.4%）",
+      "impact": "开发环境磁盘占用大",
+      "recommendation": "检查是否可以精简或替换该依赖"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "P0-紧急",
+      "action": "帧率优化",
+      "details": "实现列表虚拟化(FlatList getItemLayout)，图片懒加载，减少重渲染"
+    },
+    {
+      "priority": "P1-高",
+      "action": "APK结构优化",
+      "details": "分析并清理'other'类别的21MB内容，启用ProGuard/R8代码压缩"
+    },
+    {
+      "priority": "P2-中",
+      "action": "依赖清理",
+      "details": "移除4个未使用的依赖包，预计可减少5-10MB"
+    },
+    {
+      "priority": "P3-低",
+      "action": "native库优化",
+      "details": "分离x86架构so文件，使用App Bundle分发"
+    }
+  ],
+  "overall_score": {
+    "startup": 8.5,
+    "memory": 7.0,
+    "frame_rate": 2.0,
+    "apk_size": 6.5,
+    "overall": 6.0,
+    "grade": "C+"
+  }
+}

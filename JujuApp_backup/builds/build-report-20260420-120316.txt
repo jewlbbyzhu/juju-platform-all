@@ -1,0 +1,24 @@
+=== JUJU APK Build Report ===
+Build Time: 20260420-120316
+Status: SUCCESS
+
+Commit Info:
+  Hash: f3e72e866571851f16d33da8115bd0b5c13f0a5b
+  Short: f3e72e8
+  Message: refactor: 重构 ScanTicketScreen.tsx & GroupChatListScreen.tsx - 移除 useMemo 样式，提取内联样式为命名样式对象，统一使用设计系统变量
+  Author: JUJU AutoBot
+  Date: Mon Apr 20 11:14:37 2026 +0800
+
+APK Info:
+  Source: android/app/build/outputs/apk/release/juju-v1.0.5-5-release.apk
+  Archived: builds/juju-release-20260420-120316.apk
+  Latest: builds/juju-latest-release.apk
+  Size:  67M
+
+Build Environment:
+  JAVA_HOME: /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home
+  ANDROID_HOME: /Users/mac/Library/Android/sdk
+  Gradle: assembleRelease --console=plain
+
+Next Build Check:
+  Last build commit recorded in builds/.last_build_commit

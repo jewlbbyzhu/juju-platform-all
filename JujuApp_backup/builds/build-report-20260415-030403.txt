@@ -1,0 +1,6 @@
+Build Report 20260415-030403
+Commit: 0fcf5bb3e5b43f9b7bbc13aed7af004b277e4d8f
+Message: chore: improve gradients type safety in colors.ts
+APK: juju-v1.0.5-5-release-20260415-030403.apk
+Size: 67.0M
+Status: SUCCESS

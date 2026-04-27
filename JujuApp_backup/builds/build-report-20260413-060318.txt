@@ -1,0 +1,24 @@
+JUJU Build Agent - 构建报告
+=====================================
+构建时间: 2026-04-13 06:03:18
+构建状态: ✅ 成功
+
+Git 信息:
+- Commit: 350c4df9b2bb26b0360726d0489672cd99c54eb8
+- 提交信息: UI/UX优化: 统一浅色主题，修复API配置，提升用户体验
+- 提交时间: 2026-04-13 05:36:17 +0800
+
+构建配置:
+- Java 版本: /opt/homebrew/opt/openjdk@17
+- Android SDK: /Users/mac/Library/Android/sdk
+- 构建任务: assembleRelease
+
+输出文件:
+- juju-v1.0.5-5-release.apk (58.1 MB)
+- 位置: builds/
+
+构建统计:
+- 执行时间: ~16秒
+- 执行任务: 29个
+- 缓存命中: 333个任务
+- 构建结果: BUILD SUCCESSFUL

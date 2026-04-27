@@ -1,0 +1,6 @@
+Build Date: Thu Apr 16 06:17:42 CST 2026
+Commit: b104770
+Commit Message: refactor: 深度重构MyPartiesScreen - 2026设计系统、组件拆分、动画优化、统一colors引用
+Status: SUCCESS
+APK: juju-v1.0.5-5-release.apk
+Size: 67M

@@ -1,0 +1,6 @@
+Build Report 20260415-010955
+Commit: 6cc212638492a0a85df8285463d26e780262642b
+Message: chore: 提交pending的screen微调修改
+APK: juju-v1.0.5-5-release-20260415-010955.apk
+Size: 67M
+Status: SUCCESS

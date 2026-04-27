@@ -1,0 +1,9 @@
+JUJU APK Build Report
+=====================
+Build Time: 20260417-090228
+Commit: 849d466
+Commit Message: refactor(home): 深度重构HomeScreen - 1584行降至240行，拆分为8个独立组件
+APK File: juju-v1.0.5-5-release-20260417-090228.apk
+APK Size:  67M
+Build Status: SUCCESS
+Gradle Output: android/app/build/outputs/apk/release/juju-v1.0.5-5-release.apk

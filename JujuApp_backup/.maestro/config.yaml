@@ -1,0 +1,22 @@
+# Maestro E2E Test Configuration
+appId: com.jujuapp
+name: JUJU App E2E Tests
+
+# 基础配置
+baseUrl: http://localhost:8081
+
+# 超时设置
+timeouts:
+  default: 10000
+  tap: 5000
+  assert: 10000
+  waitFor: 15000
+
+# 设备配置
+device:
+  locale: zh_CN
+  timezone: Asia/Shanghai
+
+# 动画配置
+animation:
+  enabled: false

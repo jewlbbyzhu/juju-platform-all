@@ -1,0 +1,23 @@
+========================================
+JUJU Build Agent - APK构建报告
+========================================
+构建时间: $(date '+%Y-%m-%d %H:%M:%S')
+构建状态: ✅ 成功
+
+提交信息:
+$(git log -1 --format="%h %s %cd" --date=iso)
+
+修复内容:
+- 修复 RefundApplyScreen.tsx 第109行语法错误 (多余的']')
+
+APK信息:
+文件名: juju-v1.0.5-5-release-$(date +%Y%m%d-%H%M%S).apk
+大小: $(du -h builds/juju-v1.0.5-5-release-$(date +%Y%m%d-%H%M%S).apk | cut -f1)
+路径: builds/juju-v1.0.5-5-release-$(date +%Y%m%d-%H%M%S).apk
+
+构建环境:
+- JAVA_HOME: /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home
+- ANDROID_HOME: /Users/mac/Library/Android/sdk
+- Gradle: $(./android/gradlew --version 2>/dev/null | grep Gradle | head -1)
+
+========================================

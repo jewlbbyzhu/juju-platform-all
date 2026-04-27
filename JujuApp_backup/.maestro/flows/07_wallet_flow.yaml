@@ -1,0 +1,32 @@
+# Test: Wallet Flow - UI Modernization v2.0
+# Tests: 钱包页面、余额显示
+
+appId: com.jujuapp
+name: Wallet Flow
+---
+- launchApp
+- waitForAnimationToEnd:
+    timeout: 3000
+
+# 导航到个人中心
+- tapOn:
+    point: 85%,95%
+    optional: true
+
+- waitForAnimationToEnd:
+    timeout: 2000
+
+# 尝试点击钱包
+- tapOn:
+    text: "钱包"
+    optional: true
+
+- tapOn:
+    text: "余额"
+    optional: true
+
+- waitForAnimationToEnd:
+    timeout: 3000
+
+# 截图：钱包页面
+- takeScreenshot: 07_wallet_screen

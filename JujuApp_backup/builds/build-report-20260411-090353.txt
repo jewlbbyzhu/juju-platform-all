@@ -1,0 +1,31 @@
+================================================================================
+JUJU BUILD AGENT - APK构建报告
+================================================================================
+构建时间: $(date '+%Y-%m-%d %H:%M:%S')
+构建状态: ✅ 成功
+
+--- Git状态 ---
+分支: $(git branch --show-current)
+最新提交: $(git log -1 --oneline)
+提交时间: $(git log -1 --format=%cd --date=iso)
+
+--- 代码变更摘要 ---
+$(git status --short | head -20)
+$(git status --short | wc -l | xargs echo "总变更文件数:")
+
+--- 构建信息 ---
+APK版本: juju-v1.0.5-5-release
+APK大小: $(ls -lh builds/juju-v1.0.5-5-release-${TIMESTAMP}.apk | awk '{print $5}')
+输出路径: builds/juju-v1.0.5-5-release-${TIMESTAMP}.apk
+Gradle任务: assembleRelease
+Java版本: $(/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home/bin/java -version 2>&1 | head -1)
+
+--- 构建环境 ---
+JAVA_HOME: /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home
+ANDROID_HOME: /Users/mac/Library/Android/sdk
+Node版本: $(node --version 2>/dev/null || echo "N/A")
+
+--- 历史构建 ---
+$(ls -1t builds/juju-*.apk 2>/dev/null | head -5 | nl)
+
+================================================================================

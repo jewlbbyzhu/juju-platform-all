@@ -1,0 +1,8 @@
+=== JUJU APK Build Report ===
+Status: SUCCESS
+Timestamp: 20260421-000300
+Commit: c5b479f2d737341cb48eef3d6e0ff7a8bb543e6e
+Commit Message: refactor: 重构 WalletScreen.tsx & ScanHistoryScreen.tsx - 统一使用 gradients.primary 替代 gradients.secondary/warm，增强设计系统导入
+APK File: juju-release-20260421-000300.apk
+APK Size:  67M
+Latest Link: juju-latest-release.apk

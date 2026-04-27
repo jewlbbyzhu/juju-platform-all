@@ -1,0 +1,18 @@
+=== JUJU APK Build Report ===
+Build Time: 20260421-210312
+Status: SUCCESS
+
+Commit Info:
+  Hash:    53895c437572e02e2190aa5bfd0cc2381f57c8ce
+  Short:   53895c4
+  Message: fix: 关闭Mock模式，启用真实后端API连接
+
+APK Info:
+  Source:  android/app/build/outputs/apk/release/juju-v1.0.5-5-release.apk
+  Archived: builds/juju-v1.0.5-5-release-20260421-210312.apk
+  Latest:  builds/juju-latest-release.apk
+  Size:     67M
+
+Build Environment:
+  JAVA_HOME:    /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home
+  ANDROID_HOME: /Users/mac/Library/Android/sdk

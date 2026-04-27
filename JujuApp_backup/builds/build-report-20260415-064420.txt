@@ -1,0 +1,10 @@
+JUJU APK Build Report
+======================
+Build Time: 2026-04-15 06:44:20 CST
+Git Commit: 74ed915af360ed25346c034f767a0e70dc32581b
+Short Commit: 74ed915
+APK File: juju-v1.0.5-5-release-20260415-064420.apk
+APK Size:  67M
+Build Status: SUCCESS
+New Commits Since Last Build:
+

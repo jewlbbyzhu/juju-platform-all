@@ -1,0 +1,63 @@
+# Test: Bottom Tab Navigation - UI Modernization v2.0
+# Tests: 底部导航栏切换
+
+appId: com.jujuapp
+name: Bottom Tab Navigation
+---
+- launchApp
+- waitForAnimationToEnd:
+    timeout: 3000
+
+# 截图：首页Tab
+- takeScreenshot: 04_tab_home
+
+# 尝试切换到不同Tab（使用坐标点击底部区域）
+# Tab 2 - 使用底部右侧位置
+- tapOn:
+    point: 35%,95%
+    optional: true
+
+- waitForAnimationToEnd:
+    timeout: 2000
+
+- takeScreenshot: 04_tab_2
+
+# Tab 3
+- tapOn:
+    point: 50%,95%
+    optional: true
+
+- waitForAnimationToEnd:
+    timeout: 2000
+
+- takeScreenshot: 04_tab_3
+
+# Tab 4
+- tapOn:
+    point: 65%,95%
+    optional: true
+
+- waitForAnimationToEnd:
+    timeout: 2000
+
+- takeScreenshot: 04_tab_4
+
+# Tab 5 - 个人中心
+- tapOn:
+    point: 85%,95%
+    optional: true
+
+- waitForAnimationToEnd:
+    timeout: 2000
+
+- takeScreenshot: 04_tab_profile
+
+# 返回首页Tab
+- tapOn:
+    point: 15%,95%
+    optional: true
+
+- waitForAnimationToEnd:
+    timeout: 2000
+
+- takeScreenshot: 04_back_to_home

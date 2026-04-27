@@ -1,0 +1,10 @@
+JUJU Build Report
+==================
+Build Time: 20260414-182431
+Status: SUCCESS
+Commit: 69fa7b390c578b70b0a658c5f5da6b2ee00b657a
+Commit Message: refactor: 深度重构10个核心页面 - 统一2026设计系统、colors规范、组件优化
+APK: juju-v1.0.5-5-release-20260414-182431.apk
+APK Size:  67M
+Build Duration: ~4m 29s
+Notes: Auto-installed missing react-native-worklets dependency

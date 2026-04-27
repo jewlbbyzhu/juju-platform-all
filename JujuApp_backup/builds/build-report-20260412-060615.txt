@@ -1,0 +1,19 @@
+=== JUJU Build Report ===
+Build Time: 2026-04-12 06:06:15
+Status: SUCCESS
+
+APK Version: v1.0.5 (build 5)
+APK Size: 58M
+APK File: juju-v1.0.5-5-release-20260412-060615.apk
+
+Git Commit: 1568dc4
+Commit Message: feat: 重写3个核心页面 - 2026高颜值设计
+
+Build Details:
+- Build Type: Release
+- Gradle Tasks: assembleRelease
+- Build Duration: ~17s
+- Configuration Cache: Reused
+
+Changed Files Since Last Build:
+- src/screens/ (UI updates for 2026 design)

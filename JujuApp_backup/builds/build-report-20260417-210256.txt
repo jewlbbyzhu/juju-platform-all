@@ -1,0 +1,13 @@
+JUJU APK 构建报告
+==================
+构建时间: 2026-04-17 21:02:56
+构建编号: v1.0.5-6
+提交哈希: cc5a2418f383bb22a721f1a8bb73538a783d195b
+提交信息: refactor: 深度重构TicketSelectScreen - 958行降至140行
+作者: JUJU AutoBot
+构建状态: ✅ 成功
+APK大小: 
+APK路径: builds/juju-v1.0.5-6-release-20260417-210256.apk
+最新链接: builds/juju-latest-release.apk
+
+变更文件数: 46

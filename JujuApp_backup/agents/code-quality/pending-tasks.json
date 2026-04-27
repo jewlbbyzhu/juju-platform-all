@@ -1,0 +1,1454 @@
+[
+  {
+    "id": "ts_compile_error-20260409210101",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-09T21:01:01.891149",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260409210137",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-09T21:01:37.860850",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260409213109",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-09T21:31:09.134562",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260409220133",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 11 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-09T22:01:33.552372",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260409223114",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 11 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-09T22:31:14.060253",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260409230047",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 11 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-09T23:00:47.350503",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260409233140",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 11 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-09T23:31:40.679658",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410000132",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 11 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T00:01:32.331219",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410003141",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 11 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T00:31:41.741452",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410010054",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 11 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T01:00:54.436222",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410013052",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 11 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T01:30:52.010095",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410020112",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 11 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T02:01:12.709006",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410023112",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 15 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T02:31:12.499280",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410030047",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 15 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T03:00:47.703741",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410033025",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T03:30:25.881464",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410040047",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T04:00:47.504069",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410043115",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T04:31:15.756713",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410050732",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T05:07:32.831286",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410053025",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T05:30:25.442858",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410060058",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T06:00:58.353094",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410063110",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T06:31:10.852788",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410070113",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T07:01:13.134447",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410073102",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T07:31:02.732473",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410080039",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T08:00:39.275291",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410083127",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T08:31:27.577703",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410090044",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T09:00:44.128648",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410093106",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T09:31:06.303362",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410100108",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T10:01:08.055194",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410103044",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T10:30:44.247532",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410110136",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T11:01:36.020419",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410113908",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T11:39:08.313290",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410120117",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T12:01:17.671814",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410123109",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T12:31:09.760149",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410130032",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T13:00:32.452764",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410133045",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T13:30:45.238762",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410140047",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T14:00:47.842307",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410143102",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 14 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T14:31:02.654461",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410150135",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 19 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T15:01:35.580579",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410153120",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 19 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T15:31:20.231895",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410160058",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 19 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T16:00:58.539037",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410163033",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 19 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T16:30:33.604157",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410170058",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T17:00:58.117583",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410174016",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T17:40:16.929248",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410180115",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T18:01:15.870347",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410183051",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T18:30:51.151060",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410190059",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T19:00:59.882297",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410193113",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T19:31:13.340327",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410200033",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T20:00:33.816534",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410203058",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T20:30:58.919048",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410210047",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T21:00:47.516876",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410213039",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T21:30:39.627854",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410220107",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T22:01:07.310001",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410223107",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T22:31:07.308681",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410230138",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T23:01:38.890571",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260410233117",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-10T23:31:17.831918",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411000649",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T00:06:49.377605",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411003050",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T00:30:50.693700",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411010112",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T01:01:12.937109",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411013105",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T01:31:05.678570",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411020031",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T02:00:31.609480",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411023024",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T02:30:24.810635",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411030041",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T03:00:41.852418",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411033126",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T03:31:26.246655",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411040107",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T04:01:07.365640",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411043109",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T04:31:09.322750",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411050109",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T05:01:09.385816",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411053109",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T05:31:09.115482",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411060019",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T06:00:19.566159",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411064106",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T06:41:06.963198",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411070114",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T07:01:14.305842",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411073053",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T07:30:53.614512",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411080110",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T08:01:10.410207",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411083030",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T08:30:30.848924",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411090051",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T09:00:51.399536",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411093106",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T09:31:06.266245",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411100115",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T10:01:15.704250",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411103135",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T10:31:35.278192",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411110242",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T11:02:42.922747",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260411113058",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 18 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-11T11:30:58.930223",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412143108",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 16 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T14:31:08.736710",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412150130",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 22 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T15:01:30.666704",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412153120",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 36 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T15:31:20.819684",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412160104",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 38 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T16:01:04.093346",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412163129",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 38 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T16:31:29.750670",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412170031",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 38 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T17:00:31.578190",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412173047",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 13 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T17:30:47.179295",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412180139",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 13 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T18:01:39.686540",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412183103",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 45 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T18:31:03.755181",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412190103",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 45 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T19:01:03.097054",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412193613",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 45 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T19:36:13.052570",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412200158",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 45 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T20:01:58.933398",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412203025",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 45 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T20:30:25.863391",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412210102",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 45 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T21:01:02.346103",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412213032",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 45 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T21:30:32.905740",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412220107",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 47 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T22:01:07.621247",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412223102",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 47 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T22:31:02.910265",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412230059",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 47 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T23:00:59.765933",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260412233053",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 47 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-12T23:30:53.502331",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413000044",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 49 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T00:00:44.332039",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413003053",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 49 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T00:30:53.808909",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413010050",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 49 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T01:00:50.433021",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413013021",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 49 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T01:30:21.687078",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413020558",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 52 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T02:05:58.118067",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413023121",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 52 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T02:31:21.056994",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413030029",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T03:00:29.200607",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413033108",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T03:31:08.652231",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413040113",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T04:01:13.596879",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413043041",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T04:30:41.299400",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413050023",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T05:00:23.650037",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413053049",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T05:30:49.196980",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413060119",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T06:01:19.903068",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413063019",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T06:30:19.036786",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413070116",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T07:01:16.284971",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413073045",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T07:30:45.468177",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413080125",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T08:01:25.363270",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413083057",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T08:30:57.345867",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413090057",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T09:00:57.568639",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413093120",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T09:31:20.911623",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413100037",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T10:00:37.952402",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413103031",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T10:30:31.506418",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413110046",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T11:00:46.720403",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413113113",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T11:31:13.687270",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413120027",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T12:00:27.964772",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413123024",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T12:30:24.820795",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413130122",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T13:01:22.683615",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413133037",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T13:30:37.188305",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413140131",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T14:01:31.803682",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413143047",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 46 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T14:30:47.228701",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413150300",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 61 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T15:03:00.473973",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413153326",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 113 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T15:33:26.191874",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413160244",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 6 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T16:02:44.318896",
+    "dispatched_by": "orchestrator"
+  },
+  {
+    "id": "ts_compile_error-20260413160924",
+    "type": "ts_compile_error",
+    "priority": "high",
+    "status": "pending",
+    "context": {
+      "message": "TypeScript\u6709 109 \u4e2a\u9519\u8bef"
+    },
+    "created": "2026-04-13T16:09:24.241863",
+    "dispatched_by": "orchestrator"
+  }
+]

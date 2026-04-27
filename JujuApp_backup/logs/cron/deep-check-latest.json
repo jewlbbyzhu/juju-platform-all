@@ -1,0 +1,30 @@
+{
+  "task": "deep-check",
+  "time": "2026-04-09T16:03:20+08:00",
+  "status": "ok",
+  "results": {
+    "tests": {
+      "passed": "0",
+      "total": "0"
+    },
+    "eslint": {
+      "errors": 32,
+      "warnings": 30
+    },
+    "performance": {
+      "apk_size": "N/A",
+      "code_lines": 16265
+    },
+    "data_flow": {
+      "parties_count": 10,
+      "detail_api": "✅ 详情API正常",
+      "sample_party_id": "4"
+    },
+    "screens": {
+      "total":       52,
+      "ts_errors": 0
+0
+    }
+  },
+  "issues": []
+}
