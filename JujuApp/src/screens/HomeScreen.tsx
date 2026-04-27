@@ -1,6 +1,6 @@
 /**
  * 聚聚 (JUJU) App - 首页
- * 2026 设计系统重构版 - 动画增强 + 代码优化
+ * 禁用动画版本 - 解决 Worklets 崩溃问题
  */
 
 import React, {
@@ -10,16 +10,9 @@ import React, {
   useEffect,
   memo,
 } from 'react';
-import { View, StatusBar, ViewStyle } from 'react-native';
+import { View, StatusBar, ViewStyle, ScrollView, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Animated, {
-  useAnimatedStyle,
-
-
-  LinearTransition,
-  useAnimatedScrollHandler,
-} from 'react-native-reanimated';
-import { useTheme, animation, colors } from '../theme';
+import { useTheme, colors } from '../theme';
 import {
   HomeBackground,
   HomeHeader,
@@ -29,10 +22,6 @@ import {
   usePartyList,
   useScrollAnimation,
 } from '../components/home';
-import {
-  useScreenEnterAnimation,
-  EnteringAnimation,
-} from '../theme';
 import type { NavigationProp } from '../types';
 import type { Party as PartyType } from '../types/api';
 
@@ -52,12 +41,12 @@ interface ScreenContentProps {
   onRefresh: () => void;
   loadMore: () => void;
   isPending: boolean;
-  scrollHandler: ReturnType<typeof useAnimatedScrollHandler>;
+  scrollHandler: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
   loading: boolean;
   error: string | null;
   onRetry: () => void;
-  titleStyle: ReturnType<typeof useAnimatedStyle>;
-  searchBarStyle: ReturnType<typeof useAnimatedStyle>;
+  titleStyle: object;
+  searchBarStyle: object;
 }
 
 // 命名样式对象替代 useMemo
@@ -144,11 +133,8 @@ export default function HomeScreen({
   const [isPending, startTransition] = useTransition();
   const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const { scrollY, scrollHandler, titleStyle, searchBarStyle, isScrolling } =
+  const { scrollHandler, titleStyle, searchBarStyle, isScrolling } =
     useScrollAnimation();
-
-  const { animatedStyle: screenAnimatedStyle, play: playScreenAnimation } =
-    useScreenEnterAnimation();
 
   const {
     parties,
@@ -194,10 +180,6 @@ export default function HomeScreen({
   }, [reset]);
 
   useEffect(() => {
-    playScreenAnimation();
-  }, [playScreenAnimation]);
-
-  useEffect(() => {
     return () => {
       if (searchDebounceRef.current) {
         clearTimeout(searchDebounceRef.current);
@@ -213,7 +195,7 @@ export default function HomeScreen({
           backgroundColor={themeColors.gray[900]}
           translucent={true}
         />
-        <HomeBackground scrollY={scrollY} isScrolling={isScrolling} />
+        <HomeBackground scrollY={{ value: 0 }} isScrolling={{ value: false }} />
         <HomeLoadingState
           searchQuery={searchQuery}
           onSearchChange={handleSearchChange}
@@ -232,14 +214,8 @@ export default function HomeScreen({
         backgroundColor={themeColors.gray[900]}
         translucent={true}
       />
-      <HomeBackground scrollY={scrollY} isScrolling={isScrolling} />
-      <Animated.View
-        style={[screenWrapperStyle, screenAnimatedStyle]}
-        entering={EnteringAnimation.FadeIn()}
-        layout={LinearTransition.springify()
-          .damping(animation.spring.gentle.damping)
-          .stiffness(animation.spring.gentle.stiffness)}
-      >
+      <HomeBackground scrollY={{ value: 0 }} isScrolling={isScrolling} />
+      <View style={screenWrapperStyle}>
         <ScreenContent
           activeCategory={activeCategory}
           onCategoryChange={handleCategoryChange}
@@ -259,7 +235,7 @@ export default function HomeScreen({
           titleStyle={titleStyle}
           searchBarStyle={searchBarStyle}
         />
-      </Animated.View>
+      </View>
     </SafeAreaView>
   );
 }

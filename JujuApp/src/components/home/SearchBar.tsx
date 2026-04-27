@@ -1,10 +1,9 @@
+/**
+ * 禁用动画版本 - SearchBar
+ * 解决 Worklets 循环引用崩溃问题
+ */
 import React, { useState } from 'react';
 import { View, TextInput, ViewStyle, TextStyle } from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-} from 'react-native-reanimated';
 import { useTheme, spacing, typography, BorderRadius } from '../../theme';
 
 interface SearchBarProps {
@@ -17,30 +16,7 @@ export const SearchBar: React.FC<SearchBarProps> = React.memo(
   ({ value, onChangeText, onSubmit }) => {
     const { colors } = useTheme();
     const [isFocused, setIsFocused] = useState(false);
-    const borderOpacity = useSharedValue(0.1);
-    const scale = useSharedValue(1);
 
-    const animatedBorderStyle = useAnimatedStyle(() => ({
-      borderColor: `rgba(123, 97, 255, ${borderOpacity.value})`,
-    }));
-
-    const animatedContainerStyle = useAnimatedStyle(() => ({
-      transform: [{ scale: scale.value }],
-    }));
-
-    const handleFocus = () => {
-      setIsFocused(true);
-      borderOpacity.value = withTiming(0.6, { duration: 200 });
-      scale.value = withTiming(1.02, { duration: 200 });
-    };
-
-    const handleBlur = () => {
-      setIsFocused(false);
-      borderOpacity.value = withTiming(0.1, { duration: 200 });
-      scale.value = withTiming(1, { duration: 200 });
-    };
-
-    // 使用设计系统替代 StyleSheet.create
     const searchContainerStyle: ViewStyle = {
       flex: 1,
       flexDirection: 'row',
@@ -50,6 +26,8 @@ export const SearchBar: React.FC<SearchBarProps> = React.memo(
       paddingHorizontal: spacing.md,
       paddingVertical: spacing.sm + 2,
       borderWidth: 1,
+      borderColor: isFocused ? 'rgba(123, 97, 255, 0.6)' : 'rgba(123, 97, 255, 0.1)',
+      transform: [{ scale: isFocused ? 1.02 : 1 }],
     };
 
     const iconContainerStyle: ViewStyle = {
@@ -58,11 +36,7 @@ export const SearchBar: React.FC<SearchBarProps> = React.memo(
 
     const searchIconBaseStyle: TextStyle = {
       fontSize: 16,
-      opacity: 0.6,
-    };
-
-    const searchIconActiveStyle: TextStyle = {
-      opacity: 1,
+      opacity: isFocused ? 1 : 0.6,
     };
 
     const searchInputStyle: TextStyle = {
@@ -73,19 +47,11 @@ export const SearchBar: React.FC<SearchBarProps> = React.memo(
     };
 
     return (
-      <Animated.View
-        style={[
-          searchContainerStyle,
-          animatedBorderStyle,
-          animatedContainerStyle,
-        ]}
-      >
+      <View style={searchContainerStyle}>
         <View style={iconContainerStyle}>
-          <Animated.Text
-            style={[searchIconBaseStyle, isFocused && searchIconActiveStyle]}
-          >
-            🔍
-          </Animated.Text>
+          <View style={searchIconBaseStyle}>
+            <TextStyle>🔍</TextStyle>
+          </View>
         </View>
         <TextInput
           style={searchInputStyle}
@@ -94,11 +60,11 @@ export const SearchBar: React.FC<SearchBarProps> = React.memo(
           value={value}
           onChangeText={onChangeText}
           onSubmitEditing={onSubmit}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
           returnKeyType="search"
         />
-      </Animated.View>
+      </View>
     );
   },
 );

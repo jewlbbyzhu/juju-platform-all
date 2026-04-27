@@ -1,17 +1,13 @@
-import React, { useEffect, useMemo, useCallback, memo } from 'react';
-import { View, RefreshControl, ListRenderItem, ViewStyle, TextStyle } from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-  withSpring,
-  FadeIn,
-
-} from 'react-native-reanimated';
+/**
+ * 禁用动画版本 - PartyListContainer
+ * 解决 Worklets 循环引用崩溃问题
+ */
+import React, { useMemo, useCallback, memo } from 'react';
+import { View, FlatList, RefreshControl, ListRenderItem, ViewStyle, ActivityIndicator } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { EmptyState } from './EmptyState';
 import { AnimatedPartyCard } from './AnimatedPartyCard';
-import {gradients, animation, spacing, layout, colors, typography, BorderRadius} from '../../theme';
+import {gradients, spacing, layout, colors, typography, BorderRadius} from '../../theme';
 import type { NavigationProp } from '../../types';
 import type { Party as PartyType } from '../../types/api';
 
@@ -23,61 +19,18 @@ interface LoadingFooterProps {
 
 export const LoadingFooter: React.FC<LoadingFooterProps> = memo(
   ({ isLoading }) => {
-    const rotation = useSharedValue(0);
-    const scale = useSharedValue(1);
-    const opacity = useSharedValue(0);
-
-    useEffect(() => {
-      opacity.value = withTiming(isLoading ? 1 : 0, {
-        duration: animation.duration.fast,
-      });
-    }, [isLoading, opacity]);
-
-    useEffect(() => {
-      if (isLoading) {
-        rotation.value = withTiming(360, { duration: 1000 });
-        scale.value = withSpring(1.1, animation.spring.bouncy);
-      }
-    }, [isLoading, rotation, scale]);
-
-    const spinnerStyle = useAnimatedStyle(() => ({
-      transform: [{ rotate: `${rotation.value}deg` }, { scale: scale.value }] as any,
-      opacity: opacity.value,
-    }));
-
     if (!isLoading) return null;
 
-    // 使用设计系统替代 StyleSheet.create
     const loadingFooterStyle: ViewStyle = {
       paddingVertical: spacing.xl,
       alignItems: 'center',
       justifyContent: 'center',
     };
 
-    const loadingSpinnerStyle: ViewStyle = {
-      width: 28,
-      height: 28,
-      borderRadius: BorderRadius.full,
-      overflow: 'hidden',
-    };
-
-    const spinnerGradientStyle: ViewStyle = {
-      width: '100%',
-      height: '100%',
-      borderRadius: BorderRadius.full,
-    };
-
     return (
-      <Animated.View style={[loadingFooterStyle, spinnerStyle]}>
-        <View style={loadingSpinnerStyle}>
-          <LinearGradient
-            colors={gradients.primary}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={spinnerGradientStyle}
-          />
-        </View>
-      </Animated.View>
+      <View style={[loadingFooterStyle]}>
+        <ActivityIndicator size="small" color={colors.primary.main} />
+      </View>
     );
   },
 );
@@ -90,28 +43,8 @@ interface ErrorBannerProps {
 
 export const ErrorBanner: React.FC<ErrorBannerProps> = memo(
   ({ error, onRetry }) => {
-    const translateY = useSharedValue(-100);
-    const opacity = useSharedValue(0);
-    const scale = useSharedValue(0.8);
+    if (!error) return null;
 
-    useEffect(() => {
-      if (error) {
-        translateY.value = withSpring(0, animation.spring.bouncy);
-        opacity.value = withTiming(1, { duration: animation.duration.fast });
-        scale.value = withSpring(1, animation.spring.bouncy);
-      } else {
-        translateY.value = withSpring(-100, animation.spring.stiff);
-        opacity.value = withTiming(0, { duration: animation.duration.fast });
-        scale.value = withTiming(0.8, { duration: animation.duration.fast });
-      }
-    }, [error, translateY, opacity, scale]);
-
-    const bannerStyle = useAnimatedStyle(() => ({
-      transform: [{ translateY: translateY.value }, { scale: scale.value }] as any,
-      opacity: opacity.value,
-    }));
-
-    // 使用设计系统替代 StyleSheet.create
     const errorBannerStyle: ViewStyle = {
       position: 'absolute',
       top: 0,
@@ -132,24 +65,8 @@ export const ErrorBanner: React.FC<ErrorBannerProps> = memo(
       gap: spacing.sm,
     };
 
-    const errorIconStyle: ViewStyle = {
-      width: 20,
-      height: 20,
-      borderRadius: BorderRadius.full,
-      overflow: 'hidden',
-    };
-
-    const errorIconGradientStyle: ViewStyle = {
-      width: '100%',
-      height: '100%',
-      borderRadius: BorderRadius.full,
-    };
-
-    const errorTextStyle: TextStyle = {
+    const errorTextStyle: ViewStyle = {
       flex: 1,
-      color: colors.text.inverse,
-      fontSize: typography.size.body2,
-      fontWeight: typography.weight.medium,
     };
 
     const retryButtonStyle: ViewStyle = {
@@ -159,29 +76,19 @@ export const ErrorBanner: React.FC<ErrorBannerProps> = memo(
       borderRadius: BorderRadius.xs,
     };
 
-    const retryTextStyle: TextStyle = {
-      color: colors.text.inverse,
-      fontSize: typography.size.caption,
-      fontWeight: typography.weight.semibold,
-    };
-
     return (
-      <Animated.View style={[errorBannerStyle, bannerStyle]}>
+      <View style={[errorBannerStyle]}>
         <View style={errorContentStyle}>
-          <View style={errorIconStyle}>
-            <LinearGradient
-              colors={gradients.warm}
-              style={errorIconGradientStyle}
-            />
+          <View style={errorTextStyle}>
+            <View style={{ color: colors.text.inverse, fontSize: typography.size.body2 }} />
           </View>
-          <Animated.Text style={errorTextStyle}>{error}</Animated.Text>
           <View style={retryButtonStyle}>
-            <Animated.Text style={retryTextStyle} onPress={onRetry}>
-              重试
-            </Animated.Text>
+            <View style={{ color: colors.text.inverse, fontSize: typography.size.caption }} onTouchEnd={onRetry}>
+              <View><View style={{ color: colors.text.inverse }}>重试</View></View>
+            </View>
           </View>
         </View>
-      </Animated.View>
+      </View>
     );
   },
 );
@@ -213,32 +120,6 @@ export const PartyListContainer: React.FC<PartyListContainerProps> = memo(
     error,
     onRetry,
   }) => {
-    const listOpacity = useSharedValue(1);
-    const listScale = useSharedValue(1);
-    const listTranslateY = useSharedValue(0);
-
-    useEffect(() => {
-      listOpacity.value = withTiming(isPending ? 0.7 : 1, {
-        duration: animation.duration.fast,
-      });
-      listScale.value = withSpring(
-        isPending ? 0.98 : 1,
-        animation.spring.gentle,
-      );
-      listTranslateY.value = withSpring(
-        isPending ? 10 : 0,
-        animation.spring.gentle,
-      );
-    }, [isPending, listOpacity, listScale, listTranslateY]);
-
-    const listContainerStyle = useAnimatedStyle(() => ({
-      opacity: listOpacity.value,
-      transform: [
-        { scale: listScale.value },
-        { translateY: listTranslateY.value },
-      ] as any,
-    }));
-
     const refreshControl = useMemo(
       () => (
         <RefreshControl
@@ -266,15 +147,9 @@ export const PartyListContainer: React.FC<PartyListContainerProps> = memo(
 
     const ListEmptyComponent = useMemo(
       () => (
-        <Animated.View
-          entering={FadeIn.duration(animation.duration.dramatic)
-            .springify()
-            .damping(12)}
-          exiting={FadeIn.duration(animation.duration.fast)}
-          style={styles.emptyContainer}
-        >
+        <View style={styles.emptyContainer}>
           <EmptyState />
-        </Animated.View>
+        </View>
       ),
       [],
     );
@@ -287,12 +162,12 @@ export const PartyListContainer: React.FC<PartyListContainerProps> = memo(
     return (
       <View style={styles.listWrapper}>
         <ErrorBanner error={error} onRetry={onRetry} />
-        <Animated.FlatList
+        <FlatList
           data={parties}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           numColumns={2}
-          contentContainerStyle={[styles.listContainer, listContainerStyle]}
+          contentContainerStyle={styles.listContainer}
           refreshControl={refreshControl}
           onEndReached={loadMore}
           onEndReachedThreshold={0.3}
@@ -313,7 +188,7 @@ export const PartyListContainer: React.FC<PartyListContainerProps> = memo(
 );
 PartyListContainer.displayName = 'PartyListContainer';
 
-// 保留简单的静态样式（无需重构为设计系统）
+// 保留简单的静态样式
 const styles = {
   separator: {
     height: spacing.xs,

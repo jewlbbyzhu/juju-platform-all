@@ -1,26 +1,11 @@
-import React, { useEffect, useMemo } from 'react';
-import { ViewStyle } from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withDelay,
-  withRepeat,
-  withSequence,
-  withTiming,
-  useAnimatedReaction,
-  interpolate,
-  Extrapolation,
-  Easing,
-} from 'react-native-reanimated';
+/**
+ * 禁用动画版本 - HomeBackground
+ * 解决 Worklets 循环引用崩溃问题
+ */
+import React from 'react';
+import { View, ViewStyle } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {gradients, BorderRadius} from '../../theme';
-
-interface ParticleAnimation {
-  initialY: number;
-  amplitude: number;
-  duration: number;
-  delay: number;
-}
 
 interface HomeBackgroundProps {
   scrollY: any;
@@ -29,132 +14,6 @@ interface HomeBackgroundProps {
 
 const HomeBackground: React.FC<HomeBackgroundProps> = React.memo(
   ({ scrollY, isScrolling }) => {
-    const particle1Y = useSharedValue(0);
-    const particle1Rotate = useSharedValue(0);
-    const particle2Y = useSharedValue(0);
-    const particle2Rotate = useSharedValue(0);
-    const particle3Y = useSharedValue(0);
-    const particle3Rotate = useSharedValue(0);
-    const backgroundScale = useSharedValue(1);
-    const blurIntensity = useSharedValue(0);
-
-    const particleAnimations: ParticleAnimation[] = useMemo(
-      () => [
-        { initialY: 0, amplitude: 30, duration: 3000, delay: 0 },
-        { initialY: 0, amplitude: 25, duration: 4000, delay: 500 },
-        { initialY: 0, amplitude: 20, duration: 3500, delay: 1000 },
-      ],
-      [],
-    );
-
-    useEffect(() => {
-      const startParticleAnimation = (
-        particle: any,
-        rotateParticle: any,
-        config: ParticleAnimation,
-      ) => {
-        particle.value = withDelay(
-          config.delay,
-          withRepeat(
-            withSequence(
-              withTiming(config.amplitude, {
-                duration: config.duration,
-                easing: Easing.inOut(Easing.sin),
-              }),
-              withTiming(-config.amplitude, {
-                duration: config.duration,
-                easing: Easing.inOut(Easing.sin),
-              }),
-            ),
-            -1,
-            true,
-          ),
-        );
-        rotateParticle.value = withDelay(
-          config.delay,
-          withRepeat(
-            withTiming(360, { duration: 8000, easing: Easing.linear }),
-            -1,
-          ),
-        );
-      };
-
-      startParticleAnimation(
-        particle1Y,
-        particle1Rotate,
-        particleAnimations[0],
-      );
-      startParticleAnimation(
-        particle2Y,
-        particle2Rotate,
-        particleAnimations[1],
-      );
-      startParticleAnimation(
-        particle3Y,
-        particle3Rotate,
-        particleAnimations[2],
-      );
-    }, [particleAnimations]);
-
-    useEffect(() => {
-      const interval = setInterval(() => {
-        backgroundScale.value = withSequence(
-          withTiming(1.05, {
-            duration: 4000,
-            easing: Easing.inOut(Easing.sin),
-          }),
-          withTiming(1, {
-            duration: 4000,
-            easing: Easing.inOut(Easing.sin),
-          }),
-        );
-      }, 8000);
-      return () => clearInterval(interval);
-    }, [backgroundScale]);
-
-    useAnimatedReaction(
-      () => isScrolling.value,
-      scrolling => {
-        blurIntensity.value = withTiming(scrolling ? 2 : 0, {
-          duration: 200,
-        });
-      },
-    );
-
-    const particle1Style = useAnimatedStyle(() => ({
-      transform: [
-        { translateY: particle1Y.value },
-        { rotate: `${particle1Rotate.value}deg` },
-      ] as any,
-    }));
-
-    const particle2Style = useAnimatedStyle(() => ({
-      transform: [
-        { translateY: particle2Y.value },
-        { rotate: `${particle2Rotate.value}deg` },
-      ] as any,
-    }));
-
-    const particle3Style = useAnimatedStyle(() => ({
-      transform: [
-        { translateY: particle3Y.value },
-        { rotate: `${particle3Rotate.value}deg` },
-      ] as any,
-    }));
-
-    const backgroundStyle = useAnimatedStyle(() => {
-      const scale = interpolate(
-        scrollY.value,
-        [0, 200],
-        [1, 1.1],
-        Extrapolation.CLAMP,
-      );
-
-      return {
-        transform: [{ scale: scale * backgroundScale.value }],
-      };
-    });
-
     // 使用设计系统替代 StyleSheet.create
     const backgroundContainerStyle: ViewStyle = {
       position: 'absolute',
@@ -207,8 +66,8 @@ const HomeBackground: React.FC<HomeBackgroundProps> = React.memo(
     };
 
     return (
-      <Animated.View
-        style={[backgroundContainerStyle, backgroundStyle]}
+      <View
+        style={[backgroundContainerStyle]}
         pointerEvents="none"
       >
         <LinearGradient
@@ -223,31 +82,31 @@ const HomeBackground: React.FC<HomeBackgroundProps> = React.memo(
           end={{ x: 0.5, y: 1 }}
           style={gradientOverlayStyle}
         />
-        <Animated.View
-          style={[floatingParticleBaseStyle, particle1StyleStatic, particle1Style]}
+        <View
+          style={[floatingParticleBaseStyle, particle1StyleStatic]}
         >
           <LinearGradient
             colors={['rgba(255,77,109,0.3)', 'transparent']}
             style={particleGradientStyle}
           />
-        </Animated.View>
-        <Animated.View
-          style={[floatingParticleBaseStyle, particle2StyleStatic, particle2Style]}
+        </View>
+        <View
+          style={[floatingParticleBaseStyle, particle2StyleStatic]}
         >
           <LinearGradient
             colors={['rgba(123,97,255,0.3)', 'transparent']}
             style={particleGradientStyle}
           />
-        </Animated.View>
-        <Animated.View
-          style={[floatingParticleBaseStyle, particle3StyleStatic, particle3Style]}
+        </View>
+        <View
+          style={[floatingParticleBaseStyle, particle3StyleStatic]}
         >
           <LinearGradient
             colors={['rgba(255,215,0,0.2)', 'transparent']}
             style={particleGradientStyle}
           />
-        </Animated.View>
-      </Animated.View>
+        </View>
+      </View>
     );
   },
 );

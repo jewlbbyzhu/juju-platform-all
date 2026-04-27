@@ -50,8 +50,7 @@ react {
     //   The list of flags to pass to the Hermes compiler. By default is "-O", "-output-source-map"
     // hermesFlags = ["-O", "-output-source-map"]
 
-    /* Autolinking */
-    autolinkLibrariesWithApp()
+
 }
 
 /**
@@ -90,6 +89,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 5
         versionName "1.0.5"
+        manifestPlaceholders = [usesCleartextTraffic: "true"]
     }
     signingConfigs {
         debug {
