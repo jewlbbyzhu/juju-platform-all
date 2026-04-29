@@ -2,8 +2,27 @@ const express = require('express');
 const router = express.Router();
 const contentController = require('../../controllers/contentController');
 
-router.use('/users', require('./users'));
+// 前端兼容性路由 - /party/* 是 /parties/* 的别名
+router.use('/party', require('./parties'));
 router.use('/parties', require('./parties'));
+
+// 前端兼容性路由 - /api/v1/health
+router.get('/health', async (req, res) => {
+  try {
+    res.json({
+      success: true,
+      data: {
+        status: 'healthy',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
+        environment: process.env.NODE_ENV
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Health check failed' });
+  }
+});
+router.use('/users', require('./users'));
 router.use('/tickets', require('./tickets'));
 router.use('/orders', require('./orders'));
 router.use('/payments', require('./payments'));

@@ -22,6 +22,16 @@ router.post('/verify-code', async (req, res) => {
   } catch (error) { res.status(500).json({ success: false, message: 'Failed' }); }
 });
 
+// 前端兼容性路由 - /auth/send-code (别名)
+router.post('/send-code', async (req, res) => {
+  try {
+    const { phone } = req.body || {};
+    if (!phone) return res.status(400).json({ success: false, message: 'Phone required' });
+    mockVerifyCodes[phone] = '123456';
+    res.json({ success: true, message: 'Code sent', data: { sent: true } });
+  } catch (error) { res.status(500).json({ success: false, message: 'Failed' }); }
+});
+
 // 前端兼容性路由 - /auth/verification-code
 router.post('/verification-code', async (req, res) => {
   try {
