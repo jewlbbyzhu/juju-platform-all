@@ -4,6 +4,8 @@ const partyController = require('../../controllers/partyController');
 const { auth } = require('../../middleware/auth');
 
 router.get('/', partyController.getPartyList);
+// 前端兼容性路由 - /parties/list 和 /party/list 是 /parties 的别名
+router.get('/list', partyController.getPartyList);
 router.post('/', auth, partyController.createParty);  // 前端调用 POST /parties 创建聚会
 router.get('/published', partyController.getPublishedParties);
 router.get('/public', partyController.getPublishedParties);
