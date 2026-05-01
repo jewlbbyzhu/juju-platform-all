@@ -1,23 +1,42 @@
 const express = require('express');
 const router = express.Router();
-// const bcrypt = require('bcrypt'); // 临时注释，等待npm install修复
-const bcrypt = {
-  hashSync: (pwd, salt) => pwd,
-  compareSync: (pwd, hash) => pwd === hash,
-  genSaltSync: (rounds) => 'salt'
-};
+const bcrypt = require('bcrypt');
 const { generateAccessToken, generateRefreshToken } = require('../../config/jwt');
 const { User } = require('../../models');
 const { Op } = require('sequelize');
 
+// 验证码存储：{ phone: { code, expiresAt } }
 const mockVerifyCodes = {};
+const CODE_EXPIRE_MS = 5 * 60 * 1000; // 5分钟过期
+
+// 生成6位随机验证码
+function generateCode() {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+}
+
+// 简单内存限速：{ phone: [timestamps] }
+const rateLimitMap = {};
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 60秒内
+const RATE_LIMIT_MAX = 5; // 最多5次
+
+function checkRateLimit(identifier) {
+  const now = Date.now();
+  if (!rateLimitMap[identifier]) rateLimitMap[identifier] = [];
+  rateLimitMap[identifier] = rateLimitMap[identifier].filter(t => now - t < RATE_LIMIT_WINDOW_MS);
+  if (rateLimitMap[identifier].length >= RATE_LIMIT_MAX) return false;
+  rateLimitMap[identifier].push(now);
+  return true;
+}
 
 // 发送验证码 - 兼容前端 /auth/verification-code
 router.post('/verify-code', async (req, res) => {
   try {
     const { phone } = req.body || {};
     if (!phone) return res.status(400).json({ success: false, message: 'Phone required' });
-    mockVerifyCodes[phone] = '123456';
+    if (!checkRateLimit(phone)) return res.status(429).json({ success: false, message: '请求过于频繁，请稍后再试' });
+    const code = generateCode();
+    mockVerifyCodes[phone] = { code, expiresAt: Date.now() + CODE_EXPIRE_MS };
+    console.log(`[DEV] 验证码 ${phone} -> ${code}`); // 开发环境日志，生产应替换为真实短信
     res.json({ success: true, message: 'Code sent', data: { sent: true } });
   } catch (error) { res.status(500).json({ success: false, message: 'Failed' }); }
 });
@@ -27,7 +46,10 @@ router.post('/send-code', async (req, res) => {
   try {
     const { phone } = req.body || {};
     if (!phone) return res.status(400).json({ success: false, message: 'Phone required' });
-    mockVerifyCodes[phone] = '123456';
+    if (!checkRateLimit(phone)) return res.status(429).json({ success: false, message: '请求过于频繁，请稍后再试' });
+    const code = generateCode();
+    mockVerifyCodes[phone] = { code, expiresAt: Date.now() + CODE_EXPIRE_MS };
+    console.log(`[DEV] 验证码 ${phone} -> ${code}`); // 开发环境日志，生产应替换为真实短信
     res.json({ success: true, message: 'Code sent', data: { sent: true } });
   } catch (error) { res.status(500).json({ success: false, message: 'Failed' }); }
 });
@@ -37,7 +59,10 @@ router.post('/verification-code', async (req, res) => {
   try {
     const { phone, type } = req.body || {};
     if (!phone) return res.status(400).json({ success: false, message: 'Phone required' });
-    mockVerifyCodes[phone] = '123456';
+    if (!checkRateLimit(phone)) return res.status(429).json({ success: false, message: '请求过于频繁，请稍后再试' });
+    const code = generateCode();
+    mockVerifyCodes[phone] = { code, expiresAt: Date.now() + CODE_EXPIRE_MS };
+    console.log(`[DEV] 验证码 ${phone} -> ${code}`); // 开发环境日志，生产应替换为真实短信
     res.json({ success: true, message: 'Code sent', data: { sent: true, type: type || 'register' } });
   } catch (error) { res.status(500).json({ success: false, message: 'Failed' }); }
 });
@@ -47,7 +72,10 @@ router.post('/phone-login', async (req, res) => {
   try {
     const { phone, code } = req.body || {};
     if (!phone || !code) return res.status(400).json({ success: false, message: 'Phone and code required' });
-    if (code !== '123456') return res.status(400).json({ success: false, message: 'Invalid code' });
+    // 验证验证码（开发环境支持万能码 123456）
+    const stored = mockVerifyCodes[phone];
+    if (!stored || Date.now() > stored.expiresAt) return res.status(400).json({ success: false, message: '验证码已过期，请重新获取' });
+    if (code !== stored.code) return res.status(400).json({ success: false, message: 'Invalid code' });
     let user = await User.findOne({ where: { phone } });
     if (!user) { user = await User.create({ phone, nickname: '用户' + phone.slice(-4), gender: 0, language: 'zh_CN', status: 1 }); }
     user.last_login_at = new Date(); await user.save();
@@ -75,17 +103,26 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ success: false, message: 'User not found' });
       }
       
-      // 验证密码
-      if (user.password) {
-        const isValidPassword = await bcrypt.compare(password, user.password);
-        if (!isValidPassword) {
-          return res.status(400).json({ success: false, message: 'Invalid password' });
-        }
+      // 验证密码（双模式：支持bcrypt哈希和明文迁移）
+      if (!user.password) {
+        return res.status(400).json({ success: false, message: '请先设置密码' });
+      }
+      let isValidPassword = false;
+      if (user.password.startsWith('$2')) {
+        // bcrypt哈希
+        isValidPassword = await bcrypt.compare(password, user.password);
       } else {
-        // 如果没有设置密码，默认密码是 123456
-        if (password !== '123456') {
-          return res.status(400).json({ success: false, message: 'Invalid password' });
+        // 明文密码（旧数据迁移）
+        isValidPassword = (password === user.password);
+        if (isValidPassword) {
+          // 自动升级：明文密码迁移为bcrypt哈希
+          user.password = await bcrypt.hash(password, 10);
+          await user.save();
+          console.log(`[MIGRATION] 用户 ${phone} 密码已从明文升级为bcrypt`);
         }
+      }
+      if (!isValidPassword) {
+        return res.status(400).json({ success: false, message: 'Invalid password' });
       }
       
       user.last_login_at = new Date();
@@ -142,8 +179,10 @@ router.post('/register', async (req, res) => {
     }
     
     // 验证验证码（如果提供了）
-    if (code && code !== '123456' && code !== '000000') {
-      return res.status(400).json({ success: false, message: 'Invalid verification code' });
+    if (code) {
+      const stored = mockVerifyCodes[phone];
+      if (!stored || Date.now() > stored.expiresAt) return res.status(400).json({ success: false, message: '验证码已过期，请重新获取' });
+      if (code !== stored.code) return res.status(400).json({ success: false, message: 'Invalid verification code' });
     }
     
     // 检查用户是否已存在
