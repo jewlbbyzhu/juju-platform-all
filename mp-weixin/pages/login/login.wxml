@@ -1,0 +1,78 @@
+<view class="login-container">
+  <view class="login-header">
+    <view class="logo-placeholder">
+      <text class="logo-text">聚</text>
+    </view>
+    <text class="app-name">聚聚</text>
+    <text class="slogan">发现身边的派对与活动</text>
+  </view>
+  
+  <view class="login-body">
+    <button class="login-btn wechat" bindtap="onWechatLogin">
+      <text class="iconfont icon-wechat"></text>
+      <text>微信一键登录</text>
+    </button>
+    
+    <view class="divider">
+      <text class="line"></text>
+      <text class="divider-text">其他方式</text>
+      <text class="line"></text>
+    </view>
+    
+    <button class="login-btn phone" bindtap="showPhoneLogin">
+      <text class="iconfont icon-phone"></text>
+      <text>手机号登录</text>
+    </button>
+  </view>
+  
+  <view class="login-footer">
+    <checkbox-group bindchange="onAgreeChange">
+      <label class="agreement">
+        <checkbox value="agree" checked="{{agreed}}"/>
+        <text>我已阅读并同意</text>
+        <text class="link" bindtap="showUserAgreement">《用户协议》</text>
+        <text>和</text>
+        <text class="link" bindtap="showPrivacyPolicy">《隐私政策》</text>
+      </label>
+    </checkbox-group>
+  </view>
+
+  <!-- 手机号登录弹窗 -->
+  <view class="phone-modal" wx:if="{{showPhoneModal}}">
+    <view class="phone-modal-mask" bindtap="hidePhoneModal"></view>
+    <view class="phone-modal-content">
+      <view class="modal-header">
+        <text class="modal-title">手机号登录</text>
+        <text class="modal-close iconfont icon-close" bindtap="hidePhoneModal"></text>
+      </view>
+      <view class="modal-body">
+        <view class="input-item">
+          <input 
+            type="number" 
+            placeholder="请输入手机号"
+            maxlength="11"
+            value="{{phone}}"
+            bindinput="onPhoneInput"
+          />
+        </view>
+        <view class="input-item verify-code">
+          <input 
+            type="number" 
+            placeholder="请输入验证码"
+            maxlength="6"
+            value="{{code}}"
+            bindinput="onCodeInput"
+          />
+          <button 
+            class="send-code-btn" 
+            bindtap="sendVerifyCode"
+            disabled="{{countdown > 0}}"
+          >
+            {{countdown > 0 ? countdown + 's' : '获取验证码'}}
+          </button>
+        </view>
+        <button class="confirm-btn" bindtap="onPhoneLogin">确认登录</button>
+      </view>
+    </view>
+  </view>
+</view>

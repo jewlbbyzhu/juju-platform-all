@@ -1,11 +1,6 @@
 const { User, Wallet, WalletTransaction, Party, Order, Payment, Ticket, Notification, TicketType, VIPMembership, Admin, Role } = require('../models');
 const logger = require('../utils/logger');
-// const bcrypt = require('bcrypt'); // 临时注释，等待npm install修复
-const bcrypt = {
-  hashSync: (pwd, salt) => pwd,
-  compareSync: (pwd, hash) => pwd === hash,
-  genSaltSync: (rounds) => 'salt'
-};
+const bcrypt = require('bcrypt');
 
 class TestDataSeeder {
   async seedTestData() {

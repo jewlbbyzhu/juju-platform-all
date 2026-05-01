@@ -1,13 +1,15 @@
+// ChatListScreen - 私聊列表界面 (霓虹玻璃风格)
+// 2026 精细化霓虹改造 - 渐变背景 + 玻璃卡片 + 霓虹文字
 import React, { useState, useEffect, useCallback } from 'react';
 import {
-
   FlatList,
   RefreshControl,
   ActivityIndicator,
   ViewStyle,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Animated, { FadeInUp } from 'react-native-reanimated';
+import Animated, { FadeInUp, FadeIn } from 'react-native-reanimated';
+import LinearGradient from 'expo-linear-gradient';
 import { chatApi } from '../api';
 import type {
   NavigationProp,
@@ -18,12 +20,10 @@ import type {
 import {
   useTheme,
   spacing,
-
-
-
-
   animation,
-
+  gradients,
+  glassmorphism,
+  BorderRadius,
 } from '../theme';
 import {
   ChatListItem,
@@ -36,6 +36,30 @@ type TabType = 'all' | 'unread' | 'groups';
 interface ChatListScreenProps {
   navigation: NavigationProp;
 }
+
+// 命名样式对象 - 霓虹玻璃风格
+const containerStyle: ViewStyle = {
+  flex: 1,
+  backgroundColor: '#0F172A', // 深色背景配合霓虹
+};
+
+const gradientBackgroundStyle: ViewStyle = {
+  position: 'absolute',
+  left: 0,
+  right: 0,
+  top: 0,
+  bottom: 0,
+  opacity: 0.6,
+};
+
+const animatedContainerStyle: ViewStyle = {
+  flex: 1,
+};
+
+const safeAreaStyle: ViewStyle = {
+  flex: 1,
+  backgroundColor: 'transparent',
+};
 
 export default function ChatListScreen({
   navigation,
@@ -153,12 +177,6 @@ export default function ChatListScreen({
 
   const keyExtractor = useCallback((item: Conversation) => String(item.id), []);
 
-  // 使用设计系统替代内联样式
-  const safeAreaStyle: ViewStyle = {
-    flex: 1,
-    backgroundColor: colors.background.primary,
-  };
-
   const listContentStyle: ViewStyle = {
     padding: spacing.lg,
     flexGrow: 1,
@@ -178,38 +196,51 @@ export default function ChatListScreen({
 
   return (
     <SafeAreaView style={safeAreaStyle} edges={['top']}>
-      <ChatListHeader
-        unreadCount={unreadCount}
-        activeTab={activeTab}
-        searchQuery={searchQuery}
-        onTabChange={setActiveTab}
-        onSearchChange={setSearchQuery}
-        onAddPress={handleAddPress}
+      {/* 霓虹渐变背景 */}
+      <LinearGradient
+        colors={gradients.cool as unknown as string[]}
+        style={gradientBackgroundStyle}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
       />
-
+      
       <Animated.View
-        style={{ flex: 1 }}
-        entering={FadeInUp.duration(animation.duration.normal).delay(100)}
+        style={animatedContainerStyle}
+        entering={FadeIn.duration(animation.duration.normal).delay(100)}
       >
-        <FlatList
-          data={filteredChats}
-          renderItem={renderItem}
-          keyExtractor={keyExtractor}
-          contentContainerStyle={listContentStyle}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={onRefresh}
-              colors={[colors.primary.main]}
-              tintColor={colors.primary.main}
-            />
-          }
-          onEndReached={loadMore}
-          onEndReachedThreshold={0.5}
-          ListEmptyComponent={<ChatListEmpty />}
-          ListFooterComponent={ListFooterComponent}
-          showsVerticalScrollIndicator={false}
+        <ChatListHeader
+          unreadCount={unreadCount}
+          activeTab={activeTab}
+          searchQuery={searchQuery}
+          onTabChange={setActiveTab}
+          onSearchChange={setSearchQuery}
+          onAddPress={handleAddPress}
         />
+
+        <Animated.View
+          style={{ flex: 1 }}
+          entering={FadeInUp.duration(animation.duration.normal).delay(200)}
+        >
+          <FlatList
+            data={filteredChats}
+            renderItem={renderItem}
+            keyExtractor={keyExtractor}
+            contentContainerStyle={listContentStyle}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+                colors={[colors.primary.main]}
+                tintColor={colors.primary.main}
+              />
+            }
+            onEndReached={loadMore}
+            onEndReachedThreshold={0.5}
+            ListEmptyComponent={<ChatListEmpty />}
+            ListFooterComponent={ListFooterComponent}
+            showsVerticalScrollIndicator={false}
+          />
+        </Animated.View>
       </Animated.View>
     </SafeAreaView>
   );

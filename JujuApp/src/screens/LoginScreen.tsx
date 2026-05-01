@@ -516,8 +516,8 @@ export default function LoginScreen(): React.JSX.Element {
           'userInfo',
           JSON.stringify((res as { data: { userInfo: object } }).data.userInfo),
         );
-        Alert.alert('提示', '登录成功');
-        (navigation as { navigate: (screen: string) => void }).navigate('Main');
+        // 直接导航，不弹Alert阻塞流程
+        (navigation as { replace: (screen: string) => void }).replace('Main');
       } else {
         Alert.alert(
           '提示',

@@ -151,10 +151,25 @@ router.post('/login', async (req, res) => {
         } 
       });
     } else {
-      // 原有的微信code登录逻辑
+      // 微信code登录逻辑
       const { code } = req.body || {};
       if (!code) return res.status(400).json({ success: false, message: 'Code required' });
-      let openid = 'smoke_openid_68713bff0761d19bdf351646';
+      
+      // 生产环境应调用微信API获取真实openid
+      // TODO: 替换为真实微信API调用: https://api.weixin.qq.com/sns/jscode2session
+      let openid;
+      if (process.env.NODE_ENV === 'production') {
+        // 生产环境：调用微信API（此处需要配置 WECHAT_APPID 和 WECHAT_SECRET）
+        if (!process.env.WECHAT_APPID || !process.env.WECHAT_SECRET) {
+          return res.status(500).json({ success: false, message: '微信登录未配置' });
+        }
+        // 实际应调用微信接口，此处placeholder
+        openid = `wechat_${code}_${Date.now()}`;
+      } else {
+        // 开发环境：使用模拟openid（仅供测试）
+        openid = `dev_openid_${code}`;
+      }
+      
       let user = await User.findOne({ where: { openid } });
       if (!user) { user = await User.create({ openid, nickname: '微信用户', gender: 0, language: 'zh_CN', status: 1 }); }
       user.last_login_at = new Date(); await user.save();

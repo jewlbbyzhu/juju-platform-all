@@ -82,12 +82,7 @@ class WalletController {
           });
         }
         
-        // const bcrypt = require('bcrypt'); // 临时注释，等待npm install修复
-const bcrypt = {
-  hashSync: (pwd, salt) => pwd,
-  compareSync: (pwd, hash) => pwd === hash,
-  genSaltSync: (rounds) => 'salt'
-};
+        const bcrypt = require('bcrypt');
         const isPasswordValid = bcrypt.compareSync(paymentPassword, wallet.password);
         if (!isPasswordValid) {
           return res.status(400).json({
@@ -186,12 +181,7 @@ const bcrypt = {
         throw new Error('Insufficient balance');
       }
 
-      // const bcrypt = require('bcrypt'); // 临时注释，等待npm install修复
-const bcrypt = {
-  hashSync: (pwd, salt) => pwd,
-  compareSync: (pwd, hash) => pwd === hash,
-  genSaltSync: (rounds) => 'salt'
-};
+      const bcrypt = require('bcrypt');
       const isPasswordValid = bcrypt.compareSync(paymentPassword, wallet.password);
       if (!isPasswordValid) {
         throw new Error('Invalid payment password');
@@ -247,12 +237,7 @@ const bcrypt = {
         throw new Error('Wallet not found');
       }
 
-      // const bcrypt = require('bcrypt'); // 临时注释，等待npm install修复
-const bcrypt = {
-  hashSync: (pwd, salt) => pwd,
-  compareSync: (pwd, hash) => pwd === hash,
-  genSaltSync: (rounds) => 'salt'
-};
+      const bcrypt = require('bcrypt');
       wallet.password = await bcrypt.hash(password, 10);
       await wallet.save();
 
@@ -302,12 +287,7 @@ const bcrypt = {
         throw new Error('Wallet not found');
       }
 
-      // const bcrypt = require('bcrypt'); // 临时注释，等待npm install修复
-const bcrypt = {
-  hashSync: (pwd, salt) => pwd,
-  compareSync: (pwd, hash) => pwd === hash,
-  genSaltSync: (rounds) => 'salt'
-};
+      const bcrypt = require('bcrypt');
       const isPasswordValid = bcrypt.compareSync(old_password, wallet.password);
       
       if (!isPasswordValid) {
@@ -352,12 +332,7 @@ const bcrypt = {
         });
       }
 
-      // const bcrypt = require('bcrypt'); // 临时注释，等待npm install修复
-const bcrypt = {
-  hashSync: (pwd, salt) => pwd,
-  compareSync: (pwd, hash) => pwd === hash,
-  genSaltSync: (rounds) => 'salt'
-};
+      const bcrypt = require('bcrypt');
       const isPasswordValid = bcrypt.compareSync(password, wallet.password);
       
       res.json({
@@ -416,12 +391,7 @@ const bcrypt = {
         throw new Error('Insufficient balance');
       }
 
-      // const bcrypt = require('bcrypt'); // 临时注释，等待npm install修复
-const bcrypt = {
-  hashSync: (pwd, salt) => pwd,
-  compareSync: (pwd, hash) => pwd === hash,
-  genSaltSync: (rounds) => 'salt'
-};
+      const bcrypt = require('bcrypt');
       const isPasswordValid = bcrypt.compareSync(paymentPassword, fromWallet.password);
       if (!isPasswordValid) {
         throw new Error('Invalid payment password');

@@ -1,10 +1,11 @@
 /**
  * 聚聚 (JUJU) App - 社区页面
- * 2026 设计系统重构版
+ * 2026 设计系统重构版 - 霓虹玻璃风格
+ * 精细化霓虹改造 - 渐变背景 + 玻璃卡片 + 霓虹文字
  */
 
 import React, { useState, useCallback } from 'react';
-import { ScrollView, RefreshControl, ViewStyle } from 'react-native';
+import { ScrollView, RefreshControl, ViewStyle, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, {
   FadeIn,
@@ -12,7 +13,7 @@ import Animated, {
   FadeInDown,
   Layout,
 } from 'react-native-reanimated';
-import LinearGradient from 'react-native-linear-gradient';
+import LinearGradient from 'expo-linear-gradient';
 import { Share } from 'react-native';
 import {
   useTheme,
@@ -22,6 +23,10 @@ import {
   animation,
   layout,
   useEntranceAnimation,
+  BorderRadius,
+  glassmorphism,
+  typography,
+  textStyles,
 } from '../theme';
 import type { NavigationProp } from '../types/navigation';
 import type { Post, Tag } from '../types/api';
@@ -45,19 +50,19 @@ interface CommunityScreenProps {
   navigation: NavigationProp;
 }
 
-// 命名样式对象替代 useMemo
+// 命名样式对象 - 霓虹玻璃风格
 const containerStyle: ViewStyle = {
   flex: 1,
-  backgroundColor: colors.background.primary,
+  backgroundColor: '#0F172A', // 深色背景配合霓虹
 };
 
-const backgroundStyle: ViewStyle = {
+const gradientBackgroundStyle: ViewStyle = {
   position: 'absolute',
   left: 0,
   right: 0,
   top: 0,
   bottom: 0,
-  opacity: 0.8,
+  opacity: 0.5,
 };
 
 const contentStyleMemo: ViewStyle = {
@@ -79,6 +84,37 @@ const usersContainerStyle: ViewStyle = {
 
 const listContainerStyle: ViewStyle = {
   flex: 1,
+  paddingHorizontal: spacing.lg,
+};
+
+// 霓虹标题样式
+const neonTitleStyle: TextStyle = {
+  ...textStyles.h2,
+  color: colors.primary.main,
+  textShadowColor: colors.primary.shadow,
+  textShadowOffset: { width: 0, height: 0 },
+  textShadowRadius: 10,
+  letterSpacing: 1,
+};
+
+// 霓虹副标题样式
+const neonSubtitleStyle: TextStyle = {
+  fontSize: typography.size.body2,
+  color: colors.text.secondary,
+  textShadowColor: 'rgba(123, 97, 255, 0.3)',
+  textShadowOffset: { width: 0, height: 0 },
+  textShadowRadius: 8,
+};
+
+const searchBarContainerStyle: ViewStyle = {
+  paddingHorizontal: spacing.lg,
+  paddingTop: spacing.lg,
+  paddingBottom: spacing.sm,
+};
+
+const tabBarContainerStyle: ViewStyle = {
+  paddingHorizontal: spacing.lg,
+  paddingBottom: spacing.md,
 };
 
 export default function CommunityScreen({
@@ -150,25 +186,41 @@ export default function CommunityScreen({
 
   return (
     <SafeAreaView style={containerStyle} edges={['top']}>
+      {/* 霓虹渐变背景 */}
       <LinearGradient
-        colors={gradients.secondary as unknown as string[]}
-        style={backgroundStyle}
+        colors={gradients.warm as unknown as string[]}
+        style={gradientBackgroundStyle}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
       />
+      
       <Animated.View
         style={[contentStyleMemo, contentStyle]}
         entering={FadeIn.duration(animation.duration.normal)}
       >
-        <CommunitySearchBar
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-          onCreatePress={handleCreatePress}
-        />
+        {/* 搜索栏 */}
+        <Animated.View
+          entering={FadeInUp.duration(animation.duration.normal).delay(50)}
+          style={searchBarContainerStyle}
+        >
+          <CommunitySearchBar
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            onCreatePress={handleCreatePress}
+          />
+        </Animated.View>
 
-        <CommunityTabBar activeTab={activeTab} onTabChange={setActiveTab} />
+        {/* 标签栏 */}
+        <Animated.View
+          entering={FadeInUp.duration(animation.duration.normal).delay(100)}
+          style={tabBarContainerStyle}
+        >
+          <CommunityTabBar activeTab={activeTab} onTabChange={setActiveTab} />
+        </Animated.View>
 
         {isRecommend && (
           <Animated.View
-            entering={FadeInUp.duration(animation.duration.normal).delay(100)}
+            entering={FadeInUp.duration(animation.duration.normal).delay(150)}
             layout={Layout.springify()}
           >
             <ScrollView

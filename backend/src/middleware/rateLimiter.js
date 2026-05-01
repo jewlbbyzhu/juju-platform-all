@@ -24,7 +24,7 @@ const createRateLimiter = (windowMs = 15 * 60 * 1000, max = 100, message = 'Too 
 };
 
 const generalLimiter = createRateLimiter(15 * 60 * 1000, 100, 'Too many requests from this IP, please try again later');
-const strictLimiter = createRateLimiter(60 * 1000, 100, 'Too many requests from this IP, please try again later');
+const strictLimiter = createRateLimiter(60 * 1000, 20, 'Too many requests from this IP, please try again later');
 const authLimiter = createRateLimiter(15 * 60 * 1000, 1000, 'Too many login attempts, please try again later');
 
 module.exports = {

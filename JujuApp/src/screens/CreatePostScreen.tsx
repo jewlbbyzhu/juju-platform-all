@@ -1,3 +1,5 @@
+// CreatePostScreen - 发布动态页面 (霓虹玻璃风格)
+// 2026 精细化霓虹改造 - 渐变背景 + 玻璃卡片 + 霓虹文字
 import React, { useState, useCallback } from 'react';
 import {
   View,
@@ -21,8 +23,7 @@ import {
   BorderRadius,
   gradients,
   typography,
-
-
+  textStyles,
 } from '../theme';
 import { GlassCard } from '../components/GlassCard';
 import { GlassButton } from '../components/GlassButton';
@@ -35,7 +36,162 @@ interface SelectedImage {
 
 const MAX_IMAGES = 9;
 
-// 2026高颜值设计 - 发布动态页 (重构版，使用设计系统替代内联样式)
+// 命名样式对象 - 霓虹玻璃风格
+const containerStyle: ViewStyle = {
+  flex: 1,
+  backgroundColor: '#0F172A',
+};
+
+const headerGradientStyle: ViewStyle = {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  paddingHorizontal: spacing.lg,
+  paddingTop: spacing['3xl'],
+  paddingBottom: spacing.lg,
+};
+
+const cancelButtonStyle: ViewStyle = {
+  padding: spacing.sm,
+};
+
+const cancelTextStyle: TextStyle = {
+  fontSize: typography.size.body,
+  color: colors.text.inverse,
+  fontWeight: typography.weight.medium,
+  textShadowColor: 'rgba(255, 77, 109, 0.5)',
+  textShadowOffset: { width: 0, height: 0 },
+  textShadowRadius: 4,
+};
+
+const headerTitleStyle: TextStyle = {
+  fontSize: typography.size.h3,
+  fontWeight: typography.weight.bold,
+  color: colors.text.inverse,
+  textShadowColor: colors.primary.shadow,
+  textShadowOffset: { width: 0, height: 0 },
+  textShadowRadius: 8,
+  letterSpacing: 0.5,
+};
+
+const publishButtonStyle: ViewStyle = {
+  padding: spacing.sm,
+  minWidth: 60,
+  alignItems: 'center',
+};
+
+const publishTextStyle: TextStyle = {
+  fontSize: typography.size.body,
+  color: colors.text.inverse,
+  fontWeight: typography.weight.semibold,
+  textShadowColor: 'rgba(255, 77, 109, 0.5)',
+  textShadowOffset: { width: 0, height: 0 },
+  textShadowRadius: 4,
+};
+
+const scrollViewStyle: ViewStyle = {
+  flex: 1,
+  padding: spacing.lg,
+};
+
+const inputCardStyle: ViewStyle = {
+  marginBottom: spacing.lg,
+};
+
+const textInputStyle: TextStyle = {
+  fontSize: typography.size.body,
+  lineHeight: typography.size.body * typography.lineHeight.normal,
+  minHeight: 150,
+  textAlignVertical: 'top',
+  color: colors.text.primary,
+  padding: spacing.sm,
+  backgroundColor: 'transparent',
+};
+
+const charCountContainerStyle: ViewStyle = {
+  alignItems: 'flex-end',
+  marginTop: spacing.md,
+  paddingTop: spacing.md,
+  borderTopWidth: 1,
+  borderTopColor: 'rgba(255, 255, 255, 0.05)',
+};
+
+const charCountTextStyle: TextStyle = {
+  color: colors.text.tertiary,
+  fontSize: typography.size.caption,
+  textShadowColor: 'rgba(123, 97, 255, 0.3)',
+  textShadowOffset: { width: 0, height: 0 },
+  textShadowRadius: 4,
+};
+
+const imageListContainerStyle: ViewStyle = {
+  marginTop: spacing.xl,
+};
+
+const imageListContentStyle: ViewStyle = {
+  paddingVertical: spacing.md,
+};
+
+const imageItemContainerStyle: ViewStyle = {
+  position: 'relative',
+  marginRight: spacing.md,
+};
+
+const imageStyle: ImageStyle = {
+  width: 100,
+  height: 100,
+  borderRadius: BorderRadius.md,
+  backgroundColor: colors.gray[700],
+  borderWidth: 1,
+  borderColor: 'rgba(255, 255, 255, 0.1)',
+};
+
+const removeButtonStyle: ViewStyle = {
+  position: 'absolute',
+  top: -spacing.sm,
+  right: -spacing.sm,
+  width: 24,
+  height: 24,
+  borderRadius: BorderRadius.full,
+  backgroundColor: colors.status.error,
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderWidth: 2,
+  borderColor: '#0F172A',
+};
+
+const removeButtonTextStyle: TextStyle = {
+  color: colors.text.inverse,
+  fontSize: typography.size.body,
+  fontWeight: typography.weight.bold,
+  marginTop: -2,
+};
+
+const addImageButtonStyle: ViewStyle = {
+  marginTop: spacing.xl,
+  width: 100,
+  height: 100,
+  backgroundColor: 'rgba(255, 255, 255, 0.03)',
+  borderWidth: 2,
+  borderColor: 'rgba(255, 255, 255, 0.1)',
+  borderStyle: 'dashed',
+  borderRadius: BorderRadius.lg,
+  justifyContent: 'center',
+  alignItems: 'center',
+};
+
+const addImagePlusStyle: TextStyle = {
+  fontSize: 32,
+  color: colors.text.tertiary,
+  fontWeight: typography.weight.regular,
+};
+
+const addImageTextStyle: TextStyle = {
+  fontSize: typography.size.caption,
+  color: colors.text.secondary,
+  marginTop: spacing.xs,
+};
+
 export default function CreatePostScreen() {
   const navigation = useNavigation();
   const { colors } = useTheme();
@@ -44,25 +200,15 @@ export default function CreatePostScreen() {
   const [loading, setLoading] = useState(false);
   const [uploadingImages, setUploadingImages] = useState(false);
 
-  // 模拟图片选择功能
   const handleSelectImages = useCallback(() => {
     if (images.length >= MAX_IMAGES) {
       Alert.alert('提示', `最多只能选择${MAX_IMAGES}张图片`);
       return;
     }
 
-    // 模拟选择图片
     const mockImages: SelectedImage[] = [
-      {
-        uri: 'https://via.placeholder.com/200',
-        type: 'image/jpeg',
-        name: 'image1.jpg',
-      },
-      {
-        uri: 'https://via.placeholder.com/200',
-        type: 'image/jpeg',
-        name: 'image2.jpg',
-      },
+      { uri: 'https://via.placeholder.com/200', type: 'image/jpeg', name: 'image1.jpg' },
+      { uri: 'https://via.placeholder.com/200', type: 'image/jpeg', name: 'image2.jpg' },
     ];
 
     const remainingSlots = MAX_IMAGES - images.length;
@@ -81,12 +227,9 @@ export default function CreatePostScreen() {
 
     setUploadingImages(true);
     try {
-      // 模拟图片上传
       const uploadedUrls = images.map(
-        (_, index) =>
-          `https://example.com/uploads/image_${Date.now()}_${index}.jpg`,
+        (_, index) => `https://example.com/uploads/image_${Date.now()}_${index}.jpg`,
       );
-
       await new Promise<void>(resolve => setTimeout(resolve, 1000));
       return uploadedUrls;
     } finally {
@@ -102,10 +245,8 @@ export default function CreatePostScreen() {
 
     setLoading(true);
     try {
-      // 先上传图片
       const imageUrls = await uploadImages();
 
-      // 创建帖子
       const res = await socialApi.createPost({
         content: content.trim(),
         images: imageUrls,
@@ -125,143 +266,7 @@ export default function CreatePostScreen() {
     setLoading(false);
   };
 
-  // 命名样式对象替代内联样式
-  const safeAreaStyle: ViewStyle = {
-    flex: 1,
-    backgroundColor: colors.background.secondary,
-  };
-
-  const headerGradientStyle: ViewStyle = {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: spacing.lg,
-    paddingTop: spacing['3xl'],
-    paddingBottom: spacing.lg,
-  };
-
-  const cancelButtonStyle: ViewStyle = {
-    padding: spacing.sm,
-  };
-
-  const cancelTextStyle: TextStyle = {
-    fontSize: typography.size.body,
-    color: colors.text.inverse,
-    fontWeight: typography.weight.medium,
-  };
-
-  const headerTitleStyle: TextStyle = {
-    fontSize: typography.size.h3,
-    fontWeight: typography.weight.bold,
-    color: colors.text.inverse,
-  };
-
-  const scrollViewStyle: ViewStyle = {
-    flex: 1,
-    padding: spacing.lg,
-  };
-
-  const inputCardStyle: ViewStyle = {
-    marginBottom: spacing.lg,
-  };
-
-  const textInputStyle: TextStyle = {
-    fontSize: typography.size.body,
-    lineHeight: typography.size.body * typography.lineHeight.normal,
-    minHeight: 150,
-    textAlignVertical: 'top',
-    color: colors.text.primary,
-    padding: spacing.sm,
-  };
-
-  const charCountContainerStyle: ViewStyle = {
-    alignItems: 'flex-end',
-    marginTop: spacing.md,
-    paddingTop: spacing.md,
-    borderTopWidth: 1,
-    borderTopColor: colors.divider,
-  };
-
-  const charCountTextStyle: TextStyle = {
-    color: colors.text.tertiary,
-    fontSize: typography.size.caption,
-  };
-
-  const imageListContainerStyle: ViewStyle = {
-    marginTop: spacing.xl,
-  };
-
-  const imageListContentStyle: ViewStyle = {
-    paddingVertical: spacing.md,
-  };
-
-  const imageItemContainerStyle: ViewStyle = {
-    position: 'relative',
-    marginRight: spacing.md,
-  };
-
-  const imageStyle: ImageStyle = {
-    width: 100,
-    height: 100,
-    borderRadius: BorderRadius.md,
-    backgroundColor: colors.gray[700],
-    borderWidth: 1,
-    borderColor: colors.divider,
-  };
-
-  const removeButtonStyle: ViewStyle = {
-    position: 'absolute',
-    top: -spacing.sm,
-    right: -spacing.sm,
-    width: 24,
-    height: 24,
-    borderRadius: BorderRadius.full,
-    backgroundColor: colors.status.error,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: colors.background.secondary,
-  };
-
-  const removeButtonTextStyle: TextStyle = {
-    color: colors.text.inverse,
-    fontSize: typography.size.body,
-    fontWeight: typography.weight.bold,
-    marginTop: -2,
-  };
-
-  const addImageButtonStyle: ViewStyle = {
-    marginTop: spacing.xl,
-    width: 100,
-    height: 100,
-    backgroundColor: colors.gray[700],
-    borderWidth: 2,
-    borderColor: colors.border,
-    borderStyle: 'dashed',
-    borderRadius: BorderRadius.lg,
-    justifyContent: 'center',
-    alignItems: 'center',
-  };
-
-  const addImagePlusStyle: TextStyle = {
-    fontSize: 32,
-    color: colors.text.tertiary,
-    fontWeight: typography.weight.regular,
-  };
-
-  const addImageTextStyle: TextStyle = {
-    fontSize: typography.size.caption,
-    color: colors.text.secondary,
-    marginTop: spacing.xs,
-  };
-
-  const renderImageItem = ({
-    item,
-    index,
-  }: {
-    item: SelectedImage;
-    index: number;
-  }) => (
+  const renderImageItem = ({ item, index }: { item: SelectedImage; index: number }) => (
     <View style={imageItemContainerStyle}>
       <Image source={{ uri: item.uri }} style={imageStyle} />
       <GlassButton
@@ -276,10 +281,10 @@ export default function CreatePostScreen() {
   );
 
   return (
-    <SafeAreaView style={safeAreaStyle} edges={['bottom']}>
-      {/* Header */}
+    <SafeAreaView style={containerStyle} edges={['bottom']}>
+      {/* 霓虹渐变 Header */}
       <LinearGradient
-        colors={gradients.primary}
+        colors={gradients.primary as unknown as string[]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         style={headerGradientStyle}
@@ -298,13 +303,15 @@ export default function CreatePostScreen() {
           onPress={handleSubmit}
           variant="secondary"
           size="small"
+          style={publishButtonStyle}
+          textStyle={publishTextStyle}
           loading={loading || uploadingImages}
           disabled={loading || uploadingImages}
         />
       </LinearGradient>
 
       <ScrollView style={scrollViewStyle}>
-        {/* Glass Input Card */}
+        {/* 玻璃输入卡片 */}
         <GlassCard style={inputCardStyle} intensity="light">
           <TextInput
             style={textInputStyle}
@@ -316,13 +323,11 @@ export default function CreatePostScreen() {
             maxLength={500}
           />
           <View style={charCountContainerStyle}>
-            <Text style={charCountTextStyle}>
-              {content.length}/500
-            </Text>
+            <Text style={charCountTextStyle}>{content.length}/500</Text>
           </View>
         </GlassCard>
 
-        {/* Images Preview */}
+        {/* 图片预览 */}
         {images.length > 0 && (
           <View style={imageListContainerStyle}>
             <FlatList
@@ -336,7 +341,7 @@ export default function CreatePostScreen() {
           </View>
         )}
 
-        {/* Add Image Button */}
+        {/* 添加图片按钮 */}
         {images.length < MAX_IMAGES && (
           <GlassButton
             title="+"

@@ -4,39 +4,39 @@ const router = express.Router();
 const PLATFORMS = {
   android: {
     version: '1.0.0',
-    downloadUrl: 'https://example.com/download/android',
-    qrCodeUrl: 'https://example.com/qr/android.png',
+    downloadUrl: 'https://hfparty.asia/download/juju-app-latest.apk',
+    qrCodeUrl: '/qrcodes/android.png',
     releaseDate: '2026-01-28',
     changelog: [
-      'Bug fixes and improvements',
-      'Performance optimizations',
-      'New features added'
+      '修复已知问题，提升应用稳定性',
+      '优化性能，提升加载速度',
+      '新增功能，改善用户体验'
     ],
     minVersion: '5.0',
     fileSize: '45.2 MB'
   },
   ios: {
     version: '1.0.0',
-    downloadUrl: 'https://example.com/download/ios',
-    qrCodeUrl: 'https://example.com/qr/ios.png',
+    downloadUrl: 'https://apps.apple.com/app/juju/id123456789',
+    qrCodeUrl: '/qrcodes/ios.png',
     releaseDate: '2026-01-28',
     changelog: [
-      'Bug fixes and improvements',
-      'Performance optimizations',
-      'New features added'
+      '修复已知问题，提升应用稳定性',
+      '优化性能，提升加载速度',
+      '新增功能，改善用户体验'
     ],
     minVersion: '12.0',
     fileSize: '52.8 MB'
   },
   wechat: {
     version: '1.0.0',
-    downloadUrl: 'https://example.com/download/wechat',
-    qrCodeUrl: 'https://example.com/qr/wechat.png',
+    downloadUrl: 'weixin://dl/discover',
+    qrCodeUrl: '/qrcodes/wechat.png',
     releaseDate: '2026-01-28',
     changelog: [
-      'Bug fixes and improvements',
-      'Performance optimizations',
-      'New features added'
+      '修复已知问题，提升应用稳定性',
+      '优化性能，提升加载速度',
+      '新增功能，改善用户体验'
     ],
     minVersion: '7.0.0',
     fileSize: 'N/A'
@@ -52,6 +52,24 @@ router.get('/latest', (req, res) => {
       updateDate: new Date().toISOString(),
       changelog: 'Bug fixes and improvements'
     }
+  });
+});
+
+router.get('/:platform', (req, res) => {
+  const { platform } = req.params;
+  const normalizedPlatform = platform.toLowerCase();
+
+  if (!PLATFORMS[normalizedPlatform]) {
+    return res.status(404).json({
+      success: false,
+      message: `Platform '${platform}' not found`,
+      error: { code: 'NOT_FOUND', message: `Platform '${platform}' not found` }
+    });
+  }
+
+  res.json({
+    success: true,
+    data: PLATFORMS[normalizedPlatform]
   });
 });
 

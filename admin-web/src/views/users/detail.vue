@@ -253,22 +253,20 @@ const handleUnbanUser = async () => {
 }
 
 // Formatters
-const getStatusType = (status: string) => {
-  const typeMap: Record<string, any> = {
-    active: 'success',
-    banned: 'danger',
-    deleted: 'info',
+const getStatusType = (status: number) => {
+  const typeMap: Record<number, any> = {
+    [UserStatus.ACTIVE]: 'success',
+    [UserStatus.BANNED]: 'danger',
   }
   return typeMap[status] || 'info'
 }
 
-const getStatusText = (status: string) => {
-  const textMap: Record<string, string> = {
-    active: '正常',
-    banned: '已封禁',
-    deleted: '已删除',
+const getStatusText = (status: number) => {
+  const textMap: Record<number, string> = {
+    [UserStatus.ACTIVE]: '正常',
+    [UserStatus.BANNED]: '已封禁',
   }
-  return textMap[status] || status
+  return textMap[status] || '未知'
 }
 
 const getGenderText = (gender: number) => {

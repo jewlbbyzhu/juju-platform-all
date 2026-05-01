@@ -4,12 +4,7 @@
  */
 
 const crypto = require('crypto');
-// const bcrypt = require('bcrypt'); // 临时注释，等待npm install修复
-const bcrypt = {
-  hashSync: (pwd, salt) => pwd,
-  compareSync: (pwd, hash) => pwd === hash,
-  genSaltSync: (rounds) => 'salt'
-};
+const bcrypt = require('bcrypt');
 
 // 加密配置
 const ENCRYPTION_CONFIG = {

@@ -1,3 +1,5 @@
+// CreatePartyScreen - 创建聚会页面 (霓虹玻璃风格)
+// 2026 精细化霓虹改造 - 渐变背景 + 玻璃卡片 + 霓虹文字
 import React, { useState, useCallback } from 'react';
 import {
   View,
@@ -18,14 +20,16 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 import { partyApi } from '../api/party';
-import {useTheme, spacing} from '../theme';
+import { useTheme, spacing } from '../theme';
 import { GlassButton } from '../components/GlassButton';
+import { LinearGradient } from 'expo-linear-gradient';
 import {
   CreatePartyHeader,
   BasicInfoSection,
   LocationTimeSection,
   TicketEditor,
 } from '../components/createParty';
+import { gradients, glassmorphism, BorderRadius } from '../theme';
 
 interface FormData {
   title: string;
@@ -46,7 +50,45 @@ interface FormData {
   images: string[];
 }
 
-// 2026高颜值设计 - 创建聚会页 (重构版，使用设计系统替代内联样式)
+// 命名样式对象 - 霓虹玻璃风格
+const containerStyle: ViewStyle = {
+  flex: 1,
+  backgroundColor: '#0F172A',
+};
+
+const keyboardAvoidingStyle: ViewStyle = {
+  flex: 1,
+};
+
+const scrollViewStyle: ViewStyle = {
+  flex: 1,
+};
+
+const scrollContentStyle: ViewStyle = {
+  padding: spacing.lg,
+  paddingBottom: spacing['5xl'] + spacing['4xl'],
+};
+
+const bottomSpacerStyle: ViewStyle = {
+  height: spacing['5xl'] + spacing['4xl'],
+};
+
+const bottomBarStyle: ViewStyle = {
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  right: 0,
+  paddingHorizontal: spacing.lg,
+  paddingVertical: spacing.md,
+  paddingBottom: spacing['2xl'],
+  ...glassmorphism.navbar,
+};
+
+const gradientHeaderStyle: ViewStyle = {
+  paddingVertical: spacing.md,
+  paddingHorizontal: spacing.lg,
+};
+
 export default function CreatePartyScreen() {
   const navigation = useNavigation();
   const { colors, glassmorphism } = useTheme();
@@ -112,10 +154,7 @@ export default function CreatePartyScreen() {
       const res = await partyApi.createParty(data);
       if ((res as any).code === 0) {
         Alert.alert('创建成功', '您的聚会已发布！', [
-          {
-            text: '确定',
-            onPress: () => navigation.goBack(),
-          },
+          { text: '确定', onPress: () => navigation.goBack() },
         ]);
       } else {
         Alert.alert('创建失败', (res as any).message || '请重试');
@@ -155,6 +194,7 @@ export default function CreatePartyScreen() {
     [form.ticket_types, updateForm],
   );
 
+  // 脉冲动画
   const pulseOpacity = useSharedValue(1);
   const pulseScale = useSharedValue(1);
 
@@ -182,43 +222,17 @@ export default function CreatePartyScreen() {
     transform: [{ scale: pulseScale.value }],
   }));
 
-  // 使用设计系统替代内联样式
-  const safeAreaStyle: ViewStyle = {
-    flex: 1,
-    backgroundColor: colors.background.secondary,
-  };
-
-  const keyboardAvoidingStyle: ViewStyle = {
-    flex: 1,
-  };
-
-  const scrollViewStyle: ViewStyle = {
-    flex: 1,
-  };
-
-  const scrollContentStyle: ViewStyle = {
-    padding: spacing.lg,
-    paddingBottom: spacing['5xl'] + spacing['4xl'],
-  };
-
-  const bottomSpacerStyle: ViewStyle = {
-    height: spacing['5xl'] + spacing['4xl'],
-  };
-
-  const bottomBarStyle: ViewStyle = {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
-    paddingBottom: spacing['2xl'],
-    ...glassmorphism.navbar,
-  };
-
   return (
-    <SafeAreaView style={safeAreaStyle} edges={['top']}>
-      <CreatePartyHeader index={0} />
+    <SafeAreaView style={containerStyle} edges={['top']}>
+      {/* 霓虹渐变 Header */}
+      <LinearGradient
+        colors={gradients.warm as unknown as string[]}
+        style={gradientHeaderStyle}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      >
+        <CreatePartyHeader index={0} />
+      </LinearGradient>
 
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -264,12 +278,13 @@ export default function CreatePartyScreen() {
         </ScrollView>
       </KeyboardAvoidingView>
 
+      {/* 霓虹脉冲提交按钮 */}
       <View style={bottomBarStyle}>
         <Animated.View style={animatedButtonStyle}>
           <GlassButton
             title="创建聚会"
             onPress={handleSubmit}
-            variant="primary"
+            variant="gradient"
             size="large"
             loading={loading}
             disabled={loading}

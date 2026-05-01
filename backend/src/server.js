@@ -44,17 +44,21 @@ const app = express();
 app.use(helmet({
   contentSecurityPolicy: false
 }));
-const corsOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ['*'];
+const corsOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : (process.env.NODE_ENV === 'production' ? [] : ['*']);
+// 生产环境禁止使用通配符CORS
+if (process.env.NODE_ENV === 'production' && corsOrigins.length === 0) {
+  console.warn('WARNING: CORS_ORIGIN not configured for production! API may be insecure.');
+}
 app.use(cors({
   origin: corsOrigins,
   credentials: process.env.CORS_CREDENTIALS === 'true'
 }));
-const limiter = rateLimit({
-  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000,
-  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100,
-  message: 'Too many requests from this IP, please try again later'
-});
-app.use(limiter);
+// const limiter = rateLimit({
+//   windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000,
+//   max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100,
+//   message: 'Too many requests from this IP, please try again later'
+// });
+// app.use(limiter); // 测试阶段禁用限流
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
