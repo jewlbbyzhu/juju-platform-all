@@ -55,8 +55,9 @@ class OrderController {
         user_id: req.query.user_id ? parseInt(req.query.user_id) : undefined
       };
 
-      // 管理员获取所有订单，不传userId限制
-      const result = await orderService.getOrderList(null, page, limit, filters);
+      // 管理员获取所有订单，普通用户只能查看自己的
+      const userId = req.user && req.user.role === 'admin' ? null : req.user.id;
+      const result = await orderService.getOrderList(userId, page, limit, filters);
       res.json({
         success: true,
         data: result.data,

@@ -10,9 +10,9 @@ const { Op } = require('sequelize');
 const mockVerifyCodes = {};
 const CODE_EXPIRE_MS = 5 * 60 * 1000; // 5分钟过期
 
-// 生成6位随机验证码
+// 生成6位随机验证码（加密安全）
 function generateCode() {
-  return Math.floor(100000 + Math.random() * 900000).toString();
+  return crypto.randomInt(100000, 999999).toString();
 }
 
 // 简单内存限速：{ phone: [timestamps] }
@@ -29,43 +29,57 @@ function checkRateLimit(identifier) {
   return true;
 }
 
+// 统一验证码发送函数
+async function sendVerificationCode(phone, type = 'register') {
+  if (!phone) {
+    throw new Error('Phone required');
+  }
+  if (!checkRateLimit(phone)) {
+    throw new Error('请求过于频繁，请稍后再试');
+  }
+  const code = generateCode();
+  mockVerifyCodes[phone] = { code, expiresAt: Date.now() + CODE_EXPIRE_MS };
+  // 开发环境日志，生产应替换为真实短信
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[DEV] 验证码 ${phone} -> ${code}`);
+  }
+  return { sent: true, type };
+}
+
 // 发送验证码 - 兼容前端 /auth/verification-code
 router.post('/verify-code', async (req, res) => {
   try {
     const { phone } = req.body || {};
-    if (!phone) return res.status(400).json({ success: false, message: 'Phone required' });
-    if (!checkRateLimit(phone)) return res.status(429).json({ success: false, message: '请求过于频繁，请稍后再试' });
-    const code = generateCode();
-    mockVerifyCodes[phone] = { code, expiresAt: Date.now() + CODE_EXPIRE_MS };
-    console.log(`[DEV] 验证码 ${phone} -> ${code}`); // 开发环境日志，生产应替换为真实短信
-    res.json({ success: true, message: 'Code sent', data: { sent: true } });
-  } catch (error) { res.status(500).json({ success: false, message: 'Failed' }); }
+    const result = await sendVerificationCode(phone, 'verify');
+    res.json({ success: true, message: 'Code sent', data: result });
+  } catch (error) {
+    const status = error.message.includes('频繁') ? 429 : 400;
+    res.status(status).json({ success: false, message: error.message });
+  }
 });
 
 // 前端兼容性路由 - /auth/send-code (别名)
 router.post('/send-code', async (req, res) => {
   try {
     const { phone } = req.body || {};
-    if (!phone) return res.status(400).json({ success: false, message: 'Phone required' });
-    if (!checkRateLimit(phone)) return res.status(429).json({ success: false, message: '请求过于频繁，请稍后再试' });
-    const code = generateCode();
-    mockVerifyCodes[phone] = { code, expiresAt: Date.now() + CODE_EXPIRE_MS };
-    console.log(`[DEV] 验证码 ${phone} -> ${code}`); // 开发环境日志，生产应替换为真实短信
-    res.json({ success: true, message: 'Code sent', data: { sent: true } });
-  } catch (error) { res.status(500).json({ success: false, message: 'Failed' }); }
+    const result = await sendVerificationCode(phone, 'login');
+    res.json({ success: true, message: 'Code sent', data: result });
+  } catch (error) {
+    const status = error.message.includes('频繁') ? 429 : 400;
+    res.status(status).json({ success: false, message: error.message });
+  }
 });
 
 // 前端兼容性路由 - /auth/verification-code
 router.post('/verification-code', async (req, res) => {
   try {
     const { phone, type } = req.body || {};
-    if (!phone) return res.status(400).json({ success: false, message: 'Phone required' });
-    if (!checkRateLimit(phone)) return res.status(429).json({ success: false, message: '请求过于频繁，请稍后再试' });
-    const code = generateCode();
-    mockVerifyCodes[phone] = { code, expiresAt: Date.now() + CODE_EXPIRE_MS };
-    console.log(`[DEV] 验证码 ${phone} -> ${code}`); // 开发环境日志，生产应替换为真实短信
-    res.json({ success: true, message: 'Code sent', data: { sent: true, type: type || 'register' } });
-  } catch (error) { res.status(500).json({ success: false, message: 'Failed' }); }
+    const result = await sendVerificationCode(phone, type || 'register');
+    res.json({ success: true, message: 'Code sent', data: result });
+  } catch (error) {
+    const status = error.message.includes('频繁') ? 429 : 400;
+    res.status(status).json({ success: false, message: error.message });
+  }
 });
 
 // 手机号+验证码登录
@@ -198,12 +212,13 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Phone and password required' });
     }
     
-    // 验证验证码（如果提供了）
-    if (code) {
-      const stored = mockVerifyCodes[phone];
-      if (!stored || Date.now() > stored.expiresAt) return res.status(400).json({ success: false, message: '验证码已过期，请重新获取' });
-      if (code !== stored.code) return res.status(400).json({ success: false, message: 'Invalid verification code' });
+    // 验证验证码（必须提供）
+    if (!code) {
+      return res.status(400).json({ success: false, message: 'Verification code required' });
     }
+    const stored = mockVerifyCodes[phone];
+    if (!stored || Date.now() > stored.expiresAt) return res.status(400).json({ success: false, message: '验证码已过期，请重新获取' });
+    if (code !== stored.code) return res.status(400).json({ success: false, message: 'Invalid verification code' });
     
     // 检查用户是否已存在
     let existingUser = await User.findOne({ where: { phone } });
@@ -329,6 +344,21 @@ router.patch('/profile', async (req, res) => {
 // 前端兼容性路由 - POST /auth/logout 退出登录
 router.post('/logout', async (req, res) => {
   try {
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.substring(7);
+      const jwt = require('jsonwebtoken');
+      try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const expiresIn = decoded.exp ? decoded.exp - Math.floor(Date.now() / 1000) : 3600;
+        if (expiresIn > 0) {
+          const TokenBlacklist = require('../../utils/tokenBlacklist');
+          await TokenBlacklist.addToBlacklist(token, expiresIn, 'user_logout');
+        }
+      } catch (e) {
+        // Token无效或已过期，无需加入黑名单
+      }
+    }
     res.json({
       success: true,
       message: 'Logout successful'
@@ -365,17 +395,20 @@ router.post('/reset-password', async (req, res) => {
     }
     // 验证旧密码（支持bcrypt哈希和明文迁移）
     let passwordValid = false;
+    if (!oldPassword) {
+      return res.status(400).json({ success: false, message: '原密码不能为空' });
+    }
     if (user.password) {
       if (user.password.startsWith('$2')) {
-        passwordValid = await bcrypt.compare(oldPassword || '', user.password);
+        passwordValid = await bcrypt.compare(oldPassword, user.password);
       } else if (process.env.NODE_ENV !== 'production') {
         passwordValid = oldPassword === user.password; // 明文迁移通道（仅开发/测试环境）
       } else {
         return res.status(401).json({ success: false, message: '密码格式错误，请联系客服' });
       }
-    }
-    if (!passwordValid) {
-      return res.status(403).json({ success: false, message: '原密码错误' });
+    } else {
+      // 无密码用户：允许通过验证码直接重置
+      passwordValid = true;
     }
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedPassword;

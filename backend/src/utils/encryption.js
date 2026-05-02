@@ -133,11 +133,12 @@ class SensitiveDataEncryption {
     }
 
     try {
-      const key = deriveKeyFromPassword(this.masterKey, generateSalt());
+      const salt = generateSalt();
+      const key = deriveKeyFromPassword(this.masterKey, salt);
       const result = encryptAES(plaintext, key);
       
       return {
-        encrypted: result.encrypted,
+        encrypted: salt.toString('hex') + ':' + result.encrypted,
         algorithm: ENCRYPTION_CONFIG.algorithm,
         timestamp: Date.now()
       };
@@ -155,8 +156,14 @@ class SensitiveDataEncryption {
     }
 
     try {
-      const key = deriveKeyFromPassword(this.masterKey, generateSalt());
-      return decryptAES(encryptedData.encrypted, key);
+      const parts = encryptedData.encrypted.split(':');
+      if (parts.length !== 2) {
+        throw new Error('Invalid encrypted data format: missing salt');
+      }
+      const salt = Buffer.from(parts[0], 'hex');
+      const encrypted = parts[1];
+      const key = deriveKeyFromPassword(this.masterKey, salt);
+      return decryptAES(encrypted, key);
     } catch (error) {
       throw new Error(`String decryption failed: ${error.message}`);
     }

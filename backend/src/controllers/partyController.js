@@ -216,7 +216,7 @@ class PartyController {
           };
             // 调试第一个聚会
           if (index === 0) {
-            // DEBUG: console.log('DEBUG party.start_time:', party.start_time, 'type:', typeof party.start_time);
+            // DEBUG removed: console.log('DEBUG party.start_time:', party.start_time, 'type:', typeof party.start_time);
           }
           return {
             id: party.id,

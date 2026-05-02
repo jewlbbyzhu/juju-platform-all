@@ -12,7 +12,7 @@
 | 3 | 🔴 | backend/src/routes/v1/auth.js | 明文密码迁移通道（`process.env.NODE_ENV !== 'production'`）仍存在，旧用户账户在生产环境前需完成迁移 | 上线前强制所有旧用户重置密码，移除明文兼容逻辑 |
 | 4 | 🔴 | backend/src/server.js | `process.env.CORS_CREDENTIALS=*** 'true'` 这一行疑似被截断/篡改，存在语法风险 | 检查并修复 `cors` 配置行，确保 `credentials` 正确赋值 |
 | 5 | 🔴 | backend/src/utils/encryption.js | `SensitiveDataEncryption` 类中 `encryptString` 和 `decryptString` 使用随机盐派生密钥，导致加密后无法解密（盐值未保存） | 加密时必须将盐值与密文一起存储，解密时提取盐值重新派生密钥 |
-| 6 | 🔴 | JujuApp_new/src/config/index.ts | `isRelease` 判断逻辑 `!isDev \|\| process.env.NODE_ENV === 'production'` 中 `process.env` 在 RN 打包后不存在，可能导致误判 | 仅依赖 `__DEV__` 判断，移除 `process.env` 引用；或改用 `__DEV__ === false` 明确判断 |
+| 6 | 🔴 | JujuApp_new/src/config/index.ts | `isRelease` 判断逻辑 `!isDev || process.env.NODE_ENV === 'production'` 中 `process.env` 在 RN 打包后不存在，可能导致误判 | 仅依赖 `__DEV__` 判断，移除 `process.env` 引用；或改用 `__DEV__ === false` 明确判断 |
 | 7 | 🟡 | backend/src/middleware/auth.js | `isValidTestToken` 在 `NODE_ENV === 'test'` 时允许硬编码测试Token绕过认证 | 确保测试环境不部署到生产，或增加更严格的测试Token校验 |
 | 8 | 🟡 | backend/src/controllers/partyController.js | `console.log('DEBUG party.start_time:', ...)` 调试代码残留 | 移除生产环境调试日志 |
 | 9 | 🟡 | backend/src/routes/v1/auth.js | `register` 路由中验证码 `code` 为可选参数（`if (code)`），允许无验证码注册 | 注册时必须强制验证验证码，防止批量注册攻击 |
@@ -30,6 +30,26 @@
 | 3 | backend/src/controllers/orderController.js | `getOrderList` 中 `user_id` 从 query 参数传入，但无权限校验 | 确保普通用户只能查看自己的订单 |
 | 4 | backend/src/utils/encryption.js | `encrypt()` 使用 XOR 加密，安全性极低 | 废弃此函数，统一使用 AES-256-GCM |
 | 5 | backend/src/services/paymentService.js | 支付回调中先更新状态再验证签名（`handlePaymentCallback`） | 严格先验签，再更新数据库状态 |
+| 6 | backend/src/services/databaseOptimizationService.js | `slowQueryThreshold` 直接拼接到SQL中，存在SQL注入风险 | 使用参数化查询 |
+| 7 | JujuApp_new/src/api/mockApi.ts | Mock数据文件被打包进APK，可能暴露测试数据 | 生产构建时排除mock文件 |
+| 8 | backend/src/routes/v1/auth.js | 错误处理中 `res.status(500).json({ success: false, message: 'Failed' })` 吞掉错误详情 | 开发环境记录详细错误，生产环境返回友好提示 |
+
+## 新增发现（2026-05-03）
+| # | 严重度 | 文件 | 问题 | 建议 |
+|---|--------|------|------|------|
+| 15 | 🟡 | backend/src/controllers/orderController.js | `getOrderList` 调用 `orderService.getOrderList(null, ...)` 传入 `null` 作为userId，但service中 `if (userId)` 不生效，导致filters.user_id可覆盖 | 管理员接口应单独路由，普通用户强制使用 `req.user.id` |
+| 16 | 🟡 | backend/src/routes/v1/tickets.js | `/tickets/:id/qrcode` 使用 `constructor.prototype.getTicketById.call` 绕过正常controller调用 | 简化逻辑，直接调用service层 |
+| 17 | 🟢 | backend/src/services/userService.js | 使用 `sequelize.query` 但使用了 `replacements` 参数化，无SQL注入风险 | ✅ 安全 |
+
+## 安全合规检查
+| 检查项 | 状态 | 说明 |
+|--------|------|------|
+| SQL注入 | ✅ | 主要使用Sequelize ORM，参数化查询正确 |
+| XSS防护 | ⚠️ | helmet CSP已关闭 (`contentSecurityPolicy: false`)，需评估风险 |
+| CSRF防护 | ⚠️ | CORS credentials配置异常，需修复 |
+| 敏感信息泄露 | ⚠️ | `console.log` 输出验证码，mock数据打包 |
+| 认证绕过 | ⚠️ | 测试Token机制需确保不部署到生产 |
+| 加密安全 | 🔴 | `encryption.js` 盐值未保存，XOR加密弱 |
 
 ## 下一步
 1. **立即修复（P0）**：修复 `encryption.js` 的盐值保存问题，否则敏感数据加密后无法解密
@@ -37,5 +57,6 @@
 3. **上线前（P1）**：接入真实短信服务，替换 `mockVerifyCodes` 内存存储
 4. **上线前（P1）**：清理所有 `console.log` 调试代码
 5. **上线前（P1）**：完成明文密码用户强制迁移，移除明文兼容代码
-6. **建议（P2）**：为关键接口（登录、支付）增加IP级频率限制
-7. **建议（P2）**：对 `partyController` 和 `orderController` 增加更严格的输入校验和权限检查
+6. **上线前（P1）**：修复 `register` 路由验证码可选问题
+7. **建议（P2）**：为关键接口（登录、支付）增加IP级频率限制
+8. **建议（P2）**：对 `partyController` 和 `orderController` 增加更严格的输入校验和权限检查

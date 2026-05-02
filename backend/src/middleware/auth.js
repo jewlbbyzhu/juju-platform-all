@@ -13,6 +13,7 @@ const isValidTestToken = (token) => {
   if (process.env.NODE_ENV !== 'test') return false;
   
   const testTokens = process.env.TEST_TOKENS ? process.env.TEST_TOKENS.split(',') : [];
+  if (testTokens.length === 0) return false;
   return testTokens.includes(token);
 };
 
