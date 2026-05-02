@@ -5,65 +5,37 @@
 **状态**: ⚠️ 有问题
 
 ## 重大发现
-
 | # | 严重度 | 文件 | 问题 | 建议 |
 |---|--------|------|------|------|
-| 1 | 🔴 | auth.js:342-377 | reset-password 路由不验证短信验证码，仅验证旧密码即可重置 | 必须同时验证短信验证码，防止已知手机号的攻击者重置任意账户 |
-| 2 | 🔴 | server.js:56-61 | 全局Rate Limiter被注释禁用 | 生产环境必须启用限流，防止DDoS和暴力破解 |
-| 3 | 🟡 | auth.js:115-123 | 明文密码迁移通道仍存在（开发环境） | 生产环境已保护，但开发环境明文对比仍有风险，建议完全移除 |
-| 4 | 🟡 | auth.js:10 | mockVerifyCodes 使用内存存储，重启丢失且无法集群共享 | 使用Redis存储验证码，支持多实例共享 |
-| 5 | 🟡 | auth.js:40,53,66 | 验证码通过 console.log 输出到日志 | 生产环境应接入真实短信服务，日志中不应包含验证码 |
-| 6 | 🟡 | auth.js:342-377 | reset-password 未检查 verificationCode 参数 | 即使传了验证码也不校验，逻辑漏洞 |
-| 7 | 🟡 | auth.js:257-288,291-327 | /me 和 /profile 路由重复实现JWT验证逻辑 | 应统一使用 auth 中间件，避免代码重复和安全不一致 |
-| 8 | 🟡 | wechatService.js:9 | 微信API URL中 secret 被硬编码为 `***` | 检查是否为真实secret泄露，或只是占位符 |
-| 9 | 🟡 | orderController.js:59 | getOrderList 传 null 作为 userId，可能返回所有用户订单 | 确认是否为管理员接口，否则存在越权风险 |
-| 10 | 🟡 | auth.js:19-30 | 内存限速器 rateLimitMap 无持久化，重启清零 | 生产环境使用Redis限流 |
+| 1 | 🔴 | backend/src/routes/v1/auth.js | `mockVerifyCodes` 为内存存储，验证码仅5分钟过期，无持久化，重启后丢失；且 `console.log` 输出验证码到日志 | 生产环境必须接入真实短信服务商（如阿里云/腾讯云短信），移除 `console.log` 日志输出 |
+| 2 | 🔴 | backend/src/routes/v1/auth.js | `reset-password` 路由中 `verificationCode` 验证后，若用户未设置密码（`!user.password`），`passwordValid` 保持 `false`，但逻辑分支允许空密码用户无法重置 | 确保重置密码流程对无密码用户也能正常工作，或明确提示先设置密码 |
+| 3 | 🔴 | backend/src/routes/v1/auth.js | 明文密码迁移通道（`process.env.NODE_ENV !== 'production'`）仍存在，旧用户账户在生产环境前需完成迁移 | 上线前强制所有旧用户重置密码，移除明文兼容逻辑 |
+| 4 | 🔴 | backend/src/server.js | `process.env.CORS_CREDENTIALS=*** 'true'` 这一行疑似被截断/篡改，存在语法风险 | 检查并修复 `cors` 配置行，确保 `credentials` 正确赋值 |
+| 5 | 🔴 | backend/src/utils/encryption.js | `SensitiveDataEncryption` 类中 `encryptString` 和 `decryptString` 使用随机盐派生密钥，导致加密后无法解密（盐值未保存） | 加密时必须将盐值与密文一起存储，解密时提取盐值重新派生密钥 |
+| 6 | 🔴 | JujuApp_new/src/config/index.ts | `isRelease` 判断逻辑 `!isDev \|\| process.env.NODE_ENV === 'production'` 中 `process.env` 在 RN 打包后不存在，可能导致误判 | 仅依赖 `__DEV__` 判断，移除 `process.env` 引用；或改用 `__DEV__ === false` 明确判断 |
+| 7 | 🟡 | backend/src/middleware/auth.js | `isValidTestToken` 在 `NODE_ENV === 'test'` 时允许硬编码测试Token绕过认证 | 确保测试环境不部署到生产，或增加更严格的测试Token校验 |
+| 8 | 🟡 | backend/src/controllers/partyController.js | `console.log('DEBUG party.start_time:', ...)` 调试代码残留 | 移除生产环境调试日志 |
+| 9 | 🟡 | backend/src/routes/v1/auth.js | `register` 路由中验证码 `code` 为可选参数（`if (code)`），允许无验证码注册 | 注册时必须强制验证验证码，防止批量注册攻击 |
+| 10 | 🟡 | backend/src/routes/v1/auth.js | `send-code` / `verify-code` / `verification-code` 三个路由逻辑完全重复，代码冗余 | 提取公共函数，统一验证码发送逻辑 |
+| 11 | 🟡 | backend/src/middleware/rateLimiter.js | `authLimiter` 限制为 15分钟1000次，对登录接口过于宽松 | 登录/验证码接口应使用更严格的限制（如 15分钟10次） |
+| 12 | 🟡 | JujuApp_new/src/api/index.ts | `OFFLINE_MODE = false` 为硬编码，但 `mockApi` 仍被打包进代码 | 生产构建时通过 Tree Shaking 移除 mock 模块，或改用动态导入 |
+| 13 | 🟢 | backend/src/server.js | `.env` 文件通过 `fs.readFileSync` 手动解析，不支持多行值和引号 | 使用 `dotenv` 标准库解析，或确保.env格式简单 |
+| 14 | 🟢 | backend/src/routes/v1/auth.js | `logout` 路由未将Token加入黑名单 | 调用 `TokenBlacklist.addToBlacklist` 使Token失效 |
 
 ## 低风险问题
-
 | # | 文件 | 问题 | 建议 |
 |---|------|------|------|
-| 1 | auth.js:186-189 | 错误处理中返回 `error.message` 可能泄露内部信息 | 生产环境返回通用错误消息，记录详细日志 |
-| 2 | partyController.js | 多处 console.log 调试代码残留 | 清理调试日志，使用 logger |
-| 3 | auth.js:40 | `[DEV] 验证码` 日志标记 | 生产环境应移除所有开发标记 |
-| 4 | server.js:47 | CORS_ORIGIN 未配置时生产环境允许空数组 | 空数组 origin 可能导致CORS拒绝所有请求，需确认行为 |
-| 5 | errorHandler.js:66 | 注释掉的 `isTest` 和 `isProduction` 判断 | 清理无用注释 |
-| 6 | auth.js:98-99 | 重复检查 phone && password | 外层已判断，内层重复检查冗余 |
-| 7 | auth.js:175 | 开发环境使用 `dev_openid_${code}` | 开发环境openid可预测 | 开发环境无风险，但建议加随机前缀 |
-| 8 | orders.js:35-49 | /orders/:id/tickets 直接查询，未验证订单归属 | 添加 user_id 校验，防止查看他人订单票券 |
-| 9 | partyController.js:218-220 | `index === 0` 的调试 console.log | 移除调试代码 |
-| 10 | logger.js:29-36 | 非生产环境添加 Console transport | 开发环境OK，但确保生产环境 `NODE_ENV=production` |
+| 1 | backend/src/routes/v1/auth.js | `generateCode()` 使用 `Math.random()` 生成验证码，非加密安全 | 改用 `crypto.randomInt(100000, 999999)` |
+| 2 | backend/src/routes/v1/parties.js | `getPublishedParties` 等接口无分页上限限制 | 增加 `limit` 最大值校验（如 ≤ 100） |
+| 3 | backend/src/controllers/orderController.js | `getOrderList` 中 `user_id` 从 query 参数传入，但无权限校验 | 确保普通用户只能查看自己的订单 |
+| 4 | backend/src/utils/encryption.js | `encrypt()` 使用 XOR 加密，安全性极低 | 废弃此函数，统一使用 AES-256-GCM |
+| 5 | backend/src/services/paymentService.js | 支付回调中先更新状态再验证签名（`handlePaymentCallback`） | 严格先验签，再更新数据库状态 |
 
-## 安全亮点
-
-| # | 文件 | 亮点 |
-|---|------|------|
-| 1 | auth.js:112-127 | 密码双模式验证（bcrypt + 明文迁移），且生产环境拒绝明文 |
-| 2 | auth.js:165-172 | 生产环境微信登录返回501，强制要求真实API集成 |
-| 3 | auth.js:36-37,49-50,62-63 | 验证码发送有速率限制（60秒5次） |
-| 4 | auth.js:215 | 注册密码使用 bcrypt hash，saltRounds=10 |
-| 5 | auth.js:77-79 | 验证码有过期检查（5分钟） |
-| 6 | middleware/auth.js:47-58 | JWT验证检查 tokenType，防止refresh token滥用 |
-| 7 | middleware/auth.js:60-71 | Token黑名单检查 |
-| 8 | server.js:44-46 | 使用 helmet 安全头 |
-| 9 | server.js:66-78 | 集成日志脱敏、审计、加密中间件 |
-| 10 | errorHandler.js:17-27 | 错误日志中敏感字段脱敏处理 |
-| 11 | orderValidator.js | 使用Joi进行输入验证 |
-| 12 | orders.js | 支付相关路由使用 strictLimiter 限流 |
-
-## 下一步建议
-
-1. **立即修复（P0）**:
-   - auth.js reset-password 添加短信验证码校验
-   - server.js 取消注释全局Rate Limiter
-
-2. **本周修复（P1）**:
-   - 验证码存储迁移至Redis
-   - 移除所有 console.log 调试代码
-   - orders/:id/tickets 添加权限校验
-
-3. **发布前检查**:
-   - 确认生产环境 `NODE_ENV=production`
-   - 确认 CORS_ORIGIN 配置正确（非通配符）
-   - 确认 JWT_SECRET 强度足够（≥32字节随机字符串）
-   - 确认 WECHAT_APPID/SECRET 已配置
+## 下一步
+1. **立即修复（P0）**：修复 `encryption.js` 的盐值保存问题，否则敏感数据加密后无法解密
+2. **立即修复（P0）**：检查 `server.js` 第54行 `CORS_CREDENTIALS` 被截断的问题
+3. **上线前（P1）**：接入真实短信服务，替换 `mockVerifyCodes` 内存存储
+4. **上线前（P1）**：清理所有 `console.log` 调试代码
+5. **上线前（P1）**：完成明文密码用户强制迁移，移除明文兼容代码
+6. **建议（P2）**：为关键接口（登录、支付）增加IP级频率限制
+7. **建议（P2）**：对 `partyController` 和 `orderController` 增加更严格的输入校验和权限检查

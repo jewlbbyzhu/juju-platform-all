@@ -34,7 +34,14 @@ router.get('/stats', auth, orderController.getOrderStatistics);
 // 前端兼容性路由 - GET /orders/:id/tickets 获取订单的票券列表
 router.get('/:id/tickets', auth, async (req, res, next) => {
   try {
-    const { Ticket } = require('../../models');
+    const { Ticket, Order } = require('../../models');
+    // 先验证订单归属，防止查看他人订单票券
+    const order = await Order.findOne({
+      where: { id: req.params.id, user_id: req.user.id }
+    });
+    if (!order) {
+      return res.status(403).json({ success: false, message: '无权访问该订单票券' });
+    }
     const tickets = await Ticket.findAll({
       where: { order_id: req.params.id },
       order: [['created_at', 'DESC']]
