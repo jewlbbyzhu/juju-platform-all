@@ -112,8 +112,8 @@ router.post('/login', async (req, res) => {
       if (user.password.startsWith('$2')) {
         // bcrypt哈希
         isValidPassword = await bcrypt.compare(password, user.password);
-      } else {
-        // 明文密码（旧数据迁移）
+      } else if (process.env.NODE_ENV !== 'production') {
+        // 明文密码（旧数据迁移，仅开发/测试环境允许）
         isValidPassword = (password === user.password);
         if (isValidPassword) {
           // 自动升级：明文密码迁移为bcrypt哈希
@@ -121,6 +121,9 @@ router.post('/login', async (req, res) => {
           await user.save();
           console.log(`[MIGRATION] 用户 ${phone} 密码已从明文升级为bcrypt`);
         }
+      } else {
+        // 生产环境：明文密码已废弃，拒绝登录
+        return res.status(401).json({ success: false, message: '密码格式错误，请重置密码' });
       }
       if (!isValidPassword) {
         return res.status(400).json({ success: false, message: 'Invalid password' });
@@ -160,12 +163,13 @@ router.post('/login', async (req, res) => {
       // TODO: 替换为真实微信API调用: https://api.weixin.qq.com/sns/jscode2session
       let openid;
       if (process.env.NODE_ENV === 'production') {
-        // 生产环境：调用微信API（此处需要配置 WECHAT_APPID 和 WECHAT_SECRET）
+        // 生产环境：必须配置微信API才允许微信登录
         if (!process.env.WECHAT_APPID || !process.env.WECHAT_SECRET) {
-          return res.status(500).json({ success: false, message: '微信登录未配置' });
+          return res.status(500).json({ success: false, message: '微信登录暂未开放' });
         }
-        // 实际应调用微信接口，此处placeholder
-        openid = `wechat_${code}_${Date.now()}`;
+        // TODO: 替换为真实微信API调用: https://api.weixin.qq.com/sns/jscode2session
+        // 临时返回错误，要求真实微信API集成完成前不可用
+        return res.status(501).json({ success: false, message: '微信登录功能正在维护中' });
       } else {
         // 开发环境：使用模拟openid（仅供测试）
         openid = `dev_openid_${code}`;
@@ -350,8 +354,10 @@ router.post('/reset-password', async (req, res) => {
     if (user.password) {
       if (user.password.startsWith('$2')) {
         passwordValid = await bcrypt.compare(oldPassword || '', user.password);
+      } else if (process.env.NODE_ENV !== 'production') {
+        passwordValid = oldPassword === user.password; // 明文迁移通道（仅开发/测试环境）
       } else {
-        passwordValid = oldPassword === user.password; // 明文迁移通道
+        return res.status(401).json({ success: false, message: '密码格式错误，请联系客服' });
       }
     }
     if (!passwordValid) {
