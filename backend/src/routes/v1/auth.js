@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const { generateAccessToken, generateRefreshToken } = require('../../config/jwt');
+const jwt = require('jsonwebtoken');
 const { User } = require('../../models');
 const { Op } = require('sequelize');
 

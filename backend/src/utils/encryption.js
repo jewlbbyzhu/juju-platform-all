@@ -405,7 +405,10 @@ function encrypt(plaintext) {
   
   try {
     // 使用更简单的XOR加密+base64编码，确保输出长度可控
-    const key = process.env.ENCRYPTION_MASTER_KEY || 'default_key_1234567890123456';
+    const key = process.env.ENCRYPTION_MASTER_KEY;
+    if (!key) {
+      throw new Error('ENCRYPTION_MASTER_KEY environment variable is required');
+    }
     let encrypted = '';
     
     for (let i = 0; i < plaintext.length; i++) {
@@ -428,7 +431,10 @@ function decrypt(encryptedData) {
   }
   
   try {
-    const key = deriveKeyFromPassword(process.env.ENCRYPTION_MASTER_KEY || 'default_key', generateSalt());
+    if (!process.env.ENCRYPTION_MASTER_KEY) {
+      throw new Error('ENCRYPTION_MASTER_KEY environment variable is required');
+    }
+    const key = deriveKeyFromPassword(process.env.ENCRYPTION_MASTER_KEY, generateSalt());
     return decryptAES(encryptedData, key);
   } catch (error) {
     throw new Error(`Decryption failed: ${error.message}`);

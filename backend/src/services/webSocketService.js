@@ -21,6 +21,10 @@ class WebSocketService {
           return;
         }
 
+        if (!process.env.JWT_SECRET) {
+          ws.close(4004, 'Server misconfigured: JWT_SECRET not set');
+          return;
+        }
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findByPk(decoded.id);
 
