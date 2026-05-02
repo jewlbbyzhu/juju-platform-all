@@ -104,11 +104,11 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ success: false, message: 'User not found' });
       }
       
-      // 验证密码（双模式：支持bcrypt哈希和明文迁移）
+    // 验证密码（双模式：支持bcrypt哈希和明文迁移）
+      let isValidPassword = false;
       if (!user.password) {
         return res.status(400).json({ success: false, message: '请先设置密码' });
       }
-      let isValidPassword = false;
       if (user.password.startsWith('$2')) {
         // bcrypt哈希
         isValidPassword = await bcrypt.compare(password, user.password);
@@ -122,8 +122,8 @@ router.post('/login', async (req, res) => {
           console.log(`[MIGRATION] 用户 ${phone} 密码已从明文升级为bcrypt`);
         }
       } else {
-        // 生产环境：明文密码已废弃，拒绝登录
-        return res.status(401).json({ success: false, message: '密码格式错误，请重置密码' });
+        // 生产环境：明文密码已废弃，拒绝登录并提示重置
+        return res.status(401).json({ success: false, message: '密码格式已过期，请通过"忘记密码"重置密码' });
       }
       if (!isValidPassword) {
         return res.status(400).json({ success: false, message: 'Invalid password' });
@@ -345,6 +345,20 @@ router.post('/reset-password', async (req, res) => {
     if (!phone || !newPassword) {
       return res.status(400).json({ success: false, message: 'Phone and new password required' });
     }
+    // 验证短信验证码（必须提供且匹配）
+    if (!verificationCode) {
+      return res.status(400).json({ success: false, message: 'Verification code required' });
+    }
+    const stored = mockVerifyCodes[phone];
+    if (!stored || Date.now() > stored.expiresAt) {
+      return res.status(400).json({ success: false, message: '验证码已过期，请重新获取' });
+    }
+    if (verificationCode !== stored.code) {
+      return res.status(400).json({ success: false, message: 'Invalid verification code' });
+    }
+    // 验证通过后删除验证码，防止重放攻击
+    delete mockVerifyCodes[phone];
+
     const user = await User.findOne({ where: { phone } });
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
