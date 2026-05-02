@@ -73,7 +73,7 @@ router.post('/phone-login', async (req, res) => {
   try {
     const { phone, code } = req.body || {};
     if (!phone || !code) return res.status(400).json({ success: false, message: 'Phone and code required' });
-    // 验证验证码（开发环境支持万能码 123456）
+    // 验证验证码
     const stored = mockVerifyCodes[phone];
     if (!stored || Date.now() > stored.expiresAt) return res.status(400).json({ success: false, message: '验证码已过期，请重新获取' });
     if (code !== stored.code) return res.status(400).json({ success: false, message: 'Invalid code' });
@@ -337,13 +337,25 @@ router.post('/logout', async (req, res) => {
 // 前端兼容性路由 - POST /auth/reset-password 重置密码
 router.post('/reset-password', async (req, res) => {
   try {
-    const { phone, verificationCode, newPassword } = req.body || {};
+    const { phone, oldPassword, verificationCode, newPassword } = req.body || {};
     if (!phone || !newPassword) {
       return res.status(400).json({ success: false, message: 'Phone and new password required' });
     }
     const user = await User.findOne({ where: { phone } });
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
+    }
+    // 验证旧密码（支持bcrypt哈希和明文迁移）
+    let passwordValid = false;
+    if (user.password) {
+      if (user.password.startsWith('$2')) {
+        passwordValid = await bcrypt.compare(oldPassword || '', user.password);
+      } else {
+        passwordValid = oldPassword === user.password; // 明文迁移通道
+      }
+    }
+    if (!passwordValid) {
+      return res.status(403).json({ success: false, message: '原密码错误' });
     }
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedPassword;
