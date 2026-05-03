@@ -12,6 +12,21 @@ const { Op } = require('sequelize');
 const mockVerifyCodes = {};
 const CODE_EXPIRE_MS = 5 * 60 * 1000; // 5分钟过期
 
+// 内存验证码清理：每10分钟清理过期验证码，防止内存无限增长
+setInterval(() => {
+  const now = Date.now();
+  let cleaned = 0;
+  for (const phone of Object.keys(mockVerifyCodes)) {
+    if (mockVerifyCodes[phone].expiresAt < now) {
+      delete mockVerifyCodes[phone];
+      cleaned++;
+    }
+  }
+  if (cleaned > 0 && process.env.NODE_ENV === 'development') {
+    console.log(`[CLEANUP] 清理 ${cleaned} 个过期验证码`);
+  }
+}, 10 * 60 * 1000);
+
 // 生成6位随机验证码（加密安全）
 function generateCode() {
   return crypto.randomInt(100000, 999999).toString();

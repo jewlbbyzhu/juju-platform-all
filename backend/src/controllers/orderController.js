@@ -40,6 +40,13 @@ class OrderController {
   async getOrderByOrderNo(req, res, next) {
     try {
       const order = await orderService.getOrderByOrderNo(req.params.orderNo);
+      // 权限校验：非管理员只能查看自己的订单
+      if (order && req.user.role !== 'admin' && order.user_id !== req.user.id) {
+        return res.status(403).json({
+          success: false,
+          message: '无权查看该订单'
+        });
+      }
       res.json({
         success: true,
         data: order
@@ -105,6 +112,13 @@ class OrderController {
 
   async updateOrderStatus(req, res, next) {
     try {
+      // 权限校验：仅管理员可更新订单状态
+      if (req.user.role !== 'admin') {
+        return res.status(403).json({
+          success: false,
+          message: '无权更新订单状态'
+        });
+      }
       const { status } = req.body;
       const order = await orderService.updateOrderStatus(req.params.id, status);
       res.json({
@@ -142,6 +156,13 @@ class OrderController {
 
   async generateTickets(req, res, next) {
     try {
+      // 权限校验：仅管理员可生成票券
+      if (req.user.role !== 'admin') {
+        return res.status(403).json({
+          success: false,
+          message: '无权生成票券'
+        });
+      }
       const order = await orderService.generateTickets(req.params.id);
       res.json({
         success: true,
@@ -256,6 +277,14 @@ class OrderController {
 
   async getOrderTickets(req, res, next) {
     try {
+      const order = await orderService.getOrderById(req.params.id);
+      // 权限校验：非管理员只能查看自己订单的票券
+      if (order && req.user.role !== 'admin' && order.user_id !== req.user.id) {
+        return res.status(403).json({
+          success: false,
+          message: '无权查看该订单的票券'
+        });
+      }
       const tickets = await orderService.getOrderTickets(req.params.id);
       res.json({
         success: true,
@@ -269,6 +298,14 @@ class OrderController {
 
   async getOrderRefund(req, res, next) {
     try {
+      const order = await orderService.getOrderById(req.params.id);
+      // 权限校验：非管理员只能查看自己订单的退款
+      if (order && req.user.role !== 'admin' && order.user_id !== req.user.id) {
+        return res.status(403).json({
+          success: false,
+          message: '无权查看该订单的退款信息'
+        });
+      }
       const refund = await orderService.getOrderRefund(req.params.id);
       res.json({
         success: true,
@@ -282,6 +319,13 @@ class OrderController {
 
   async auditRefund(req, res, next) {
     try {
+      // 权限校验：仅管理员可审核退款
+      if (req.user.role !== 'admin') {
+        return res.status(403).json({
+          success: false,
+          message: '无权审核退款'
+        });
+      }
       const { status, reason } = req.body;
       const result = await orderService.auditRefund(req.params.id, status, reason);
       res.json({
@@ -298,6 +342,13 @@ class OrderController {
   async getUserOrders(req, res, next) {
     try {
       const { userId } = req.params;
+      // 权限校验：非管理员只能查看自己的订单
+      if (req.user.role !== 'admin' && parseInt(userId) !== req.user.id) {
+        return res.status(403).json({
+          success: false,
+          message: '无权查看其他用户的订单'
+        });
+      }
       const { page = 1, pageSize = 20 } = req.query;
       const result = await orderService.getUserOrders(userId, page, pageSize);
       res.json({
