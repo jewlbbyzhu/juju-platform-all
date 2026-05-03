@@ -10,10 +10,10 @@ router.get('/my', auth, ticketController.getUserTickets);
 router.get('/', auth, ticketController.getTicketList);
 router.get('/stats', auth, ticketController.getTicketStats);
 
-// 必须在 /:id 之前的静态路由
+// 公开验票接口 - 用于扫码/输入票号验证票券真伪（无需登录，但需防枚举）
 router.get('/code/:code', ticketController.getTicketByCode);
 
-// 前端兼容性路由 - /tickets/number/:ticketNo 映射到 getTicketByCode (必须在 /:id 之前)
+// 前端兼容性路由 - /tickets/number/:ticketNo 映射到 getTicketByCode
 router.get('/number/:ticketNo', ticketController.getTicketByCode);
 
 // 前端兼容性路由 - POST /tickets/validate 验证票券（必须在 /:id 之前）
@@ -78,7 +78,7 @@ router.post('/:id/share', auth, async (req, res, next) => {
   }
 });
 
-router.post('/:id/verify', validateVerifyTicket, ticketController.verifyTicket);
+router.post('/:id/verify', auth, validateVerifyTicket, ticketController.verifyTicket);
 router.patch('/:id', auth, validateUseTicket, ticketController.useTicket);
 
 // 前端兼容性路由 - POST /tickets/:id/use 映射到 useTicket (前端使用POST而非PATCH)

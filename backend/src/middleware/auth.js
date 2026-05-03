@@ -129,8 +129,10 @@ const adminAuth = (req, res, next) => {
     }
     
     if (isValidTestToken(token)) {
+      // 从环境变量获取测试用户ID和管理员ID，避免所有测试共享同一身份
+      const testAdminId = parseInt(process.env.TEST_ADMIN_ID, 10) || 9998;
       req.user = {
-        id: 1,
+        id: testAdminId,
         username: 'test_admin',
         role: 'admin',
         tokenType: 'access'

@@ -139,12 +139,19 @@ router.get('/parties/filter', async (req, res) => {
     }
 
     if (tag) {
-      // 对tag进行输入校验：只允许字母、数字、中文、空格和常见分隔符
-      const sanitizedTag = String(tag).replace(/[^\w\u4e00-\u9fa5\s\-_,]/g, '').substring(0, 50);
-      if (sanitizedTag) {
-        conditions.push('p.tags LIKE ?');
-        replacements.push(`%"${sanitizedTag}"%`);
+      // 对tag进行严格白名单校验：仅允许字母、数字、中文，长度1-20
+      const tagStr = String(tag).trim();
+      const sanitizedTag = tagStr.replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g, '').substring(0, 20);
+      // 如果原始输入包含非法字符，直接拒绝而非静默过滤
+      if (tagStr !== sanitizedTag || !sanitizedTag || sanitizedTag.length < 1) {
+        return res.status(400).json({
+          success: false,
+          message: 'tag参数包含非法字符，仅允许字母、数字和中文',
+          code: 'INVALID_TAG_FORMAT'
+        });
       }
+      conditions.push('p.tags LIKE ?');
+      replacements.push(`%${sanitizedTag}%`);
     }
 
     let distanceSelect = '';

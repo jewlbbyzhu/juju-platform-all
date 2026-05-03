@@ -1,3 +1,4 @@
+const logger = require('../utils/logger');
 const { Post, Comment, Follow, Like, User, Party } = require('../models');
 
 const socialController = {
@@ -41,7 +42,7 @@ const socialController = {
         }
       });
     } catch (error) {
-      console.error('获取动态列表失败:', error);
+      logger.error('获取动态列表失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '获取动态列表失败'
@@ -84,7 +85,7 @@ const socialController = {
         message: '发布成功'
       });
     } catch (error) {
-      console.error('发布动态失败:', error);
+      logger.error('发布动态失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '发布动态失败'
@@ -138,7 +139,7 @@ const socialController = {
         message: '更新成功'
       });
     } catch (error) {
-      console.error('更新动态失败:', error);
+      logger.error('更新动态失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '更新动态失败'
@@ -169,7 +170,7 @@ const socialController = {
         message: '删除成功'
       });
     } catch (error) {
-      console.error('删除动态失败:', error);
+      logger.error('删除动态失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '删除动态失败'
@@ -202,7 +203,7 @@ const socialController = {
         message: '点赞成功'
       });
     } catch (error) {
-      console.error('点赞失败:', error);
+      logger.error('点赞失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '点赞失败'
@@ -235,7 +236,7 @@ const socialController = {
         message: '取消点赞成功'
       });
     } catch (error) {
-      console.error('取消点赞失败:', error);
+      logger.error('取消点赞失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '取消点赞失败'
@@ -273,7 +274,7 @@ const socialController = {
         }
       });
     } catch (error) {
-      console.error('获取评论列表失败:', error);
+      logger.error('获取评论列表失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '获取评论列表失败'
@@ -312,7 +313,7 @@ const socialController = {
         message: '评论成功'
       });
     } catch (error) {
-      console.error('评论失败:', error);
+      logger.error('评论失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '评论失败'
@@ -332,7 +333,7 @@ const socialController = {
         message: '分享成功'
       });
     } catch (error) {
-      console.error('分享失败:', error);
+      logger.error('分享失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '分享失败'
@@ -386,7 +387,7 @@ const socialController = {
         message: '关注成功'
       });
     } catch (error) {
-      console.error('关注失败:', error);
+      logger.error('关注失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '关注失败'
@@ -432,7 +433,7 @@ const socialController = {
         message: '关注成功'
       });
     } catch (error) {
-      console.error('关注失败:', error);
+      logger.error('关注失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '关注失败'
@@ -466,7 +467,7 @@ const socialController = {
         message: '取消关注成功'
       });
     } catch (error) {
-      console.error('取消关注失败:', error);
+      logger.error('取消关注失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '取消关注失败'
@@ -501,7 +502,7 @@ const socialController = {
         }
       });
     } catch (error) {
-      console.error('获取好友列表失败:', error);
+      logger.error('获取好友列表失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '获取好友列表失败'
@@ -539,7 +540,7 @@ const socialController = {
         }
       });
     } catch (error) {
-      console.error('获取粉丝列表失败:', error);
+      logger.error('获取粉丝列表失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '获取粉丝列表失败'
@@ -577,7 +578,7 @@ const socialController = {
         }
       });
     } catch (error) {
-      console.error('获取关注列表失败:', error);
+      logger.error('获取关注列表失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '获取关注列表失败'
@@ -610,7 +611,7 @@ const socialController = {
         message: '点赞成功'
       });
     } catch (error) {
-      console.error('点赞聚会失败:', error);
+      logger.error('点赞聚会失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '点赞失败'
@@ -643,7 +644,7 @@ const socialController = {
         message: '取消点赞成功'
       });
     } catch (error) {
-      console.error('取消点赞聚会失败:', error);
+      logger.error('取消点赞聚会失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '取消点赞失败'
@@ -663,7 +664,7 @@ const socialController = {
         message: '分享成功'
       });
     } catch (error) {
-      console.error('分享聚会失败:', error);
+      logger.error('分享聚会失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '分享失败'
@@ -698,7 +699,7 @@ const socialController = {
         message: '拉黑成功'
       });
     } catch (error) {
-      console.error('拉黑失败:', error);
+      logger.error('拉黑失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '拉黑失败'
@@ -729,7 +730,7 @@ const socialController = {
         message: '取消拉黑成功'
       });
     } catch (error) {
-      console.error('取消拉黑失败:', error);
+      logger.error('取消拉黑失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '取消拉黑失败'
@@ -778,7 +779,7 @@ const socialController = {
         }
       });
     } catch (error) {
-      console.error('获取拉黑列表失败:', error);
+      logger.error('获取拉黑列表失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '获取拉黑列表失败'
@@ -797,7 +798,7 @@ const socialController = {
         message: '举报成功'
       });
     } catch (error) {
-      console.error('举报失败:', error);
+      logger.error('举报失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '举报失败'
@@ -854,7 +855,7 @@ const socialController = {
         }
       });
     } catch (error) {
-      console.error('获取活动评论失败:', error);
+      logger.error('获取活动评论失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '获取评论失败'
@@ -904,7 +905,7 @@ const socialController = {
         message: '评论成功'
       });
     } catch (error) {
-      console.error('添加活动评论失败:', error);
+      logger.error('添加活动评论失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '评论失败'
@@ -942,7 +943,7 @@ const socialController = {
         message: '删除成功'
       });
     } catch (error) {
-      console.error('删除评论失败:', error);
+      logger.error('删除评论失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '删除失败'
@@ -983,7 +984,7 @@ const socialController = {
         message: '点赞成功'
       });
     } catch (error) {
-      console.error('点赞评论失败:', error);
+      logger.error('点赞评论失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '点赞失败'
@@ -1016,7 +1017,7 @@ const socialController = {
         message: '取消点赞成功'
       });
     } catch (error) {
-      console.error('取消点赞评论失败:', error);
+      logger.error('取消点赞评论失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '取消点赞失败'
@@ -1048,7 +1049,7 @@ const socialController = {
         }
       });
     } catch (error) {
-      console.error('获取分享数失败:', error);
+      logger.error('获取分享数失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '获取分享数失败'
@@ -1075,7 +1076,7 @@ const socialController = {
         message: '举报成功，我们会尽快处理'
       });
     } catch (error) {
-      console.error('举报用户失败:', error);
+      logger.error('举报用户失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '举报失败'
@@ -1102,7 +1103,7 @@ const socialController = {
         message: '举报成功，我们会尽快处理'
       });
     } catch (error) {
-      console.error('举报评论失败:', error);
+      logger.error('举报评论失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '举报失败'

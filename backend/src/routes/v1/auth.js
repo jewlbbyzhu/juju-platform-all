@@ -120,18 +120,6 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ success: false, message: 'User not found' });
       }
       
-// 明文密码迁移通道 - 已废弃，将在下一版本彻底移除
-// 状态: 所有生产用户已完成bcrypt迁移，此代码保留仅用于极端回滚场景
-// 移除日期: 2026-06-01 (v1.2.0)
-// 移除条件: 确认所有环境用户密码均已bcrypt哈希化
-// 当前行为: 生产环境已绝对禁用，代码存在但不执行任何明文逻辑
-/*
-原明文迁移逻辑（已归档）:
-- 仅当 NODE_ENV !== 'production' 且 ALLOW_LEGACY_PLAINTEXT === 'true' 时生效
-- 自动将明文密码升级为bcrypt哈希
-- 所有生产环境请求会走到 else 分支返回 401
-*/
-// TODO(v1.2.0): 彻底删除以下遗留代码块
     let isValidPassword = false;
     if (!user.password) {
       return res.status(400).json({ success: false, message: '请先设置密码' });
@@ -139,17 +127,8 @@ router.post('/login', async (req, res) => {
     if (user.password.startsWith('$2')) {
       // bcrypt哈希
       isValidPassword = await bcrypt.compare(password, user.password);
-    } else if (process.env.NODE_ENV !== 'production' && process.env.ALLOW_LEGACY_PLAINTEXT === 'true') {
-      // 明文密码（旧数据迁移，仅开发/测试环境允许，且需显式开启ALLOW_LEGACY_PLAINTEXT）
-      isValidPassword = (password === user.password);
-      if (isValidPassword) {
-        // 自动升级：明文密码迁移为bcrypt哈希
-        user.password = await bcrypt.hash(password, 10);
-        await user.save();
-        console.log(`[MIGRATION] 用户 ${phone} 密码已从明文升级为bcrypt`);
-      }
     } else {
-      // 生产环境：明文密码已废弃，拒绝登录并提示重置
+      // 非bcrypt哈希密码（可能是旧明文或其他格式），一律拒绝并提示重置
       return res.status(401).json({ success: false, message: '密码格式已过期，请通过"忘记密码"重置密码' });
     }
       if (!isValidPassword) {

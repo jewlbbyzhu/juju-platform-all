@@ -169,35 +169,45 @@ class BankCardService {
 
   encryptCardNumber(cardNumber) {
     const crypto = require('crypto');
-    const algorithm = 'aes-256-cbc';
-    
-    if (!process.env.ENCRYPTION_KEY || !process.env.ENCRYPTION_IV) {
-      throw new Error('Encryption key and IV must be set in environment variables');
-    }
-    
-    const key = Buffer.from(process.env.ENCRYPTION_KEY, 'utf8');
-    const iv = Buffer.from(process.env.ENCRYPTION_IV, 'utf8');
+    const algorithm = 'aes-256-gcm';
 
+    if (!process.env.ENCRYPTION_KEY) {
+      throw new Error('Encryption key must be set in environment variables');
+    }
+
+    const key = Buffer.from(process.env.ENCRYPTION_KEY, 'utf8');
+    // 使用随机IV（每次加密不同），GCM模式更安全
+    const iv = crypto.randomBytes(12);
     const cipher = crypto.createCipheriv(algorithm, key, iv);
     let encrypted = cipher.update(cardNumber, 'utf8', 'hex');
     encrypted += cipher.final('hex');
+    const authTag = cipher.getAuthTag();
 
-    return encrypted;
+    // 格式: iv:authTag:encrypted
+    return iv.toString('hex') + ':' + authTag.toString('hex') + ':' + encrypted;
   }
 
   decryptCardNumber(encryptedCardNumber) {
     const crypto = require('crypto');
-    const algorithm = 'aes-256-cbc';
-    
-    if (!process.env.ENCRYPTION_KEY || !process.env.ENCRYPTION_IV) {
-      throw new Error('Encryption key and IV must be set in environment variables');
+    const algorithm = 'aes-256-gcm';
+
+    if (!process.env.ENCRYPTION_KEY) {
+      throw new Error('Encryption key must be set in environment variables');
     }
-    
+
+    const parts = encryptedCardNumber.split(':');
+    if (parts.length !== 3) {
+      throw new Error('Invalid encrypted card number format');
+    }
+
     const key = Buffer.from(process.env.ENCRYPTION_KEY, 'utf8');
-    const iv = Buffer.from(process.env.ENCRYPTION_IV, 'utf8');
+    const iv = Buffer.from(parts[0], 'hex');
+    const authTag = Buffer.from(parts[1], 'hex');
+    const encrypted = parts[2];
 
     const decipher = crypto.createDecipheriv(algorithm, key, iv);
-    let decrypted = decipher.update(encryptedCardNumber, 'hex', 'utf8');
+    decipher.setAuthTag(authTag);
+    let decrypted = decipher.update(encrypted, 'hex', 'utf8');
     decrypted += decipher.final('utf8');
 
     return decrypted;

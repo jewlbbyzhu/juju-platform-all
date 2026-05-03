@@ -119,7 +119,7 @@ class PartyController {
       res.json({ success: true, ...result });
     } catch (error) {
       logger.error('Get pending parties error:', error);
-      res.status(500).json({ success: false, message: '获取待审核聚会失败', error: error.message });
+      next(error);
     }
   }
 
