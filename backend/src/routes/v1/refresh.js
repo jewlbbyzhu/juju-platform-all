@@ -1,6 +1,7 @@
 const logger = require('../../utils/logger');
 const express = require('express');
 const router = express.Router();
+const { strictLimiter } = require('../../middleware/rateLimiter');
 const {
   generateAccessToken,
   generateRefreshToken,
@@ -9,7 +10,8 @@ const {
   ACCESS_EXPIRES_IN
 } = require('../../config/jwt');
 
-router.post('/', async (req, res) => {
+// Token刷新路由 - 添加strictLimiter防止重放攻击和资源耗尽
+router.post('/', strictLimiter, async (req, res) => {
   try {
     const { refreshToken } = req.body;
 

@@ -164,9 +164,26 @@ class DatabaseOptimizationService {
 
   async optimizeTable(tableName) {
     try {
-      await sequelize.query(`ANALYZE ${tableName}`, { type: QueryTypes.RAW });
-      await sequelize.query(`VACUUM ANALYZE ${tableName}`, { type: QueryTypes.RAW });
-      logger.info(`Table ${tableName} optimized`);
+      // 白名单校验：只允许已知的系统表名，防止SQL注入
+      const ALLOWED_TABLES = [
+        'users', 'parties', 'orders', 'tickets', 'payments', 'refunds',
+        'categories', 'tags', 'reviews', 'messages', 'notifications',
+        'user_follows', 'social_posts', 'comments', 'chat_groups',
+        'chat_messages', 'wallets', 'transactions', 'ui_themes',
+        'announcements', 'banners', 'articles', 'configs'
+      ];
+      
+      // 提取纯表名（去除schema前缀）
+      const pureTableName = tableName.includes('.') ? tableName.split('.').pop() : tableName;
+      
+      if (!ALLOWED_TABLES.includes(pureTableName)) {
+        logger.warn(`optimizeTable rejected: table "${pureTableName}" not in whitelist`);
+        return false;
+      }
+      
+      await sequelize.query(`ANALYZE \`${pureTableName}\``, { type: QueryTypes.RAW });
+      await sequelize.query(`VACUUM ANALYZE \`${pureTableName}\``, { type: QueryTypes.RAW });
+      logger.info(`Table ${pureTableName} optimized`);
       return true;
     } catch (error) {
       logger.error(`Optimize table ${tableName} failed:`, error);

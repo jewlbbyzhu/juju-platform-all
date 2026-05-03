@@ -11,10 +11,12 @@ router.get('/', auth, ticketController.getTicketList);
 router.get('/stats', auth, ticketController.getTicketStats);
 
 // 公开验票接口 - 用于扫码/输入票号验证票券真伪（无需登录，但需防枚举）
-router.get('/code/:code', ticketController.getTicketByCode);
+// 安全设计：票券编码使用不可预测随机字符串（UUID），且添加generalLimiter防止枚举攻击
+const { generalLimiter } = require('../../middleware/rateLimiter');
+router.get('/code/:code', generalLimiter, ticketController.getTicketByCode);
 
 // 前端兼容性路由 - /tickets/number/:ticketNo 映射到 getTicketByCode
-router.get('/number/:ticketNo', ticketController.getTicketByCode);
+router.get('/number/:ticketNo', generalLimiter, ticketController.getTicketByCode);
 
 // 前端兼容性路由 - POST /tickets/validate 验证票券（必须在 /:id 之前）
 router.post('/validate', auth, async (req, res, next) => {

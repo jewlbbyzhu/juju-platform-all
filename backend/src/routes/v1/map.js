@@ -1,13 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const { auth } = require('../../middleware/auth');
+const { generalLimiter } = require('../../middleware/rateLimiter');
 
-// 地图配置
-router.get('/config', (req, res) => {
+// 地图配置 - 必须认证访问，防止配置信息泄露和Key被滥用
+// 生产环境部署前必须替换 'your_amap_key_here' 为真实Key
+router.get('/config', auth, (req, res) => {
+  const amapKey = process.env.AMAP_KEY;
+  if (!amapKey || amapKey === 'your_amap_key_here') {
+    return res.status(503).json({
+      success: false,
+      message: 'Map service not configured',
+      code: 'MAP_KEY_MISSING'
+    });
+  }
   res.json({
     success: true,
     data: {
       provider: 'amap',
-      key: 'your_amap_key_here',
+      key: amapKey,
       style: 'normal',
       center: [114.4905, 36.6099],
       zoom: 12
@@ -15,8 +26,8 @@ router.get('/config', (req, res) => {
   });
 });
 
-// 搜索地点
-router.get('/search', (req, res) => {
+// 搜索地点 - 添加限流防止滥用
+router.get('/search', auth, generalLimiter, (req, res) => {
   const { keyword } = req.query;
   
   // 模拟搜索结果
@@ -35,8 +46,8 @@ router.get('/search', (req, res) => {
   });
 });
 
-// 获取地点详情
-router.get('/places/:id', (req, res) => {
+// 获取地点详情 - 必须认证
+router.get('/places/:id', auth, (req, res) => {
   res.json({
     success: true,
     data: {
