@@ -204,7 +204,7 @@ async function handleHighRiskEvent(auditRecord) {
     // 这里可以添加高风险事件的特殊处理逻辑
     // 例如：发送告警、通知管理员、触发安全响应等
     
-    console.warn('HIGH RISK SECURITY EVENT:', {
+    logger.warn('HIGH RISK SECURITY EVENT:', {
       action: auditRecord.action,
       resource: auditRecord.resource,
       userId: auditRecord.userId,

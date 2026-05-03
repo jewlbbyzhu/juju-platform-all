@@ -12,7 +12,7 @@ try {
     }
   });
 } catch (e) {
-  console.log('Warning: Could not load .env file');
+  logger.warn('Warning: Could not load .env file');
 }
 
 const env = process.env.NODE_ENV || 'development';
@@ -47,7 +47,7 @@ app.use(helmet({
 const corsOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : (process.env.NODE_ENV === 'production' ? [] : ['*']);
 // 生产环境禁止使用通配符CORS
 if (process.env.NODE_ENV === 'production' && corsOrigins.length === 0) {
-  console.warn('WARNING: CORS_ORIGIN not configured for production! API may be insecure.');
+  logger.warn('WARNING: CORS_ORIGIN not configured for production! API may be insecure.');
 }
 app.use(cors({
   origin: corsOrigins,
