@@ -220,7 +220,7 @@ class SensitiveDataEncryption {
           decrypted[field] = this.decryptString(decrypted[field]);
         } catch (error) {
           // 解密失败，保持原值
-          console.warn(`Failed to decrypt field ${field}:`, error.message);
+          logger.warn(`Failed to decrypt field ${field}`, { error: error.message });
         }
       }
     });

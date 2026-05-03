@@ -191,7 +191,7 @@ async function auditLog(auditData) {
     return true;
   } catch (error) {
     // 审计日志记录失败，记录到系统日志
-    console.error('Failed to write audit log:', error);
+    logger.error('Failed to write audit log', { error: error.message });
     return false;
   }
 }
@@ -219,7 +219,7 @@ async function handleHighRiskEvent(auditRecord) {
     // await triggerSecurityResponse(auditRecord);
     
   } catch (error) {
-    console.error('Failed to handle high risk event:', error);
+    logger.error('Failed to handle high risk event', { error: error.message });
   }
 }
 

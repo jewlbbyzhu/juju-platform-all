@@ -6,6 +6,7 @@ const { generateAccessToken, generateRefreshToken } = require('../../config/jwt'
 const jwt = require('jsonwebtoken');
 const { User } = require('../../models');
 const { Op } = require('sequelize');
+const logger = require('../../utils/logger');
 
 // 验证码存储：{ phone: { code, expiresAt } }
 // TODO: 生产环境应迁移至 Redis，当前内存存储仅用于开发/测试
@@ -23,7 +24,7 @@ setInterval(() => {
     }
   }
   if (cleaned > 0 && process.env.NODE_ENV === 'development') {
-    console.log(`[CLEANUP] 清理 ${cleaned} 个过期验证码`);
+    logger.info(`[CLEANUP] 清理 ${cleaned} 个过期验证码`);
   }
 }, 10 * 60 * 1000);
 
@@ -58,7 +59,7 @@ async function sendVerificationCode(phone, type = 'register') {
   mockVerifyCodes[phone] = { code, expiresAt: Date.now() + CODE_EXPIRE_MS };
   // 仅开发环境输出验证码到日志，生产环境禁止
   if (process.env.NODE_ENV === 'development') {
-    console.log(`[DEV] 验证码 ${phone} -> ${code}`);
+    logger.info(`[DEV] 验证码 ${phone} -> ${code}`);
   }
   return { sent: true, type };
 }
@@ -255,8 +256,8 @@ router.post('/register', async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Register error:', error);
-    res.status(500).json({ success: false, message: 'Registration failed: ' + error.message });
+    logger.error('Register error:', error);
+    res.status(500).json({ success: false, message: 'Registration failed' });
   }
 });
 
@@ -285,7 +286,7 @@ router.get('/me', authMiddleware, async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Get current user error:', error);
+    logger.error('Get current user error:', error);
     res.status(401).json({ success: false, message: 'Invalid token' });
   }
 });
@@ -317,8 +318,8 @@ router.patch('/profile', authMiddleware, async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Update profile error:', error);
-    res.status(500).json({ success: false, message: 'Update failed: ' + error.message });
+    logger.error('Update profile error:', error);
+    res.status(500).json({ success: false, message: 'Update failed' });
   }
 });
 
@@ -386,11 +387,8 @@ router.post('/reset-password', async (req, res) => {
         return res.status(401).json({ success: false, message: '密码格式已过期，请通过"忘记密码"重置密码' });
       }
     } else {
-      // 无密码用户：允许通过验证码直接重置（仅开发环境）
-      if (process.env.NODE_ENV === 'production') {
-        return res.status(401).json({ success: false, message: '请先设置密码后再进行重置操作' });
-      }
-      passwordValid = true;
+      // 无密码用户：不允许直接重置，必须先设置密码
+      return res.status(401).json({ success: false, message: '请先设置密码后再进行重置操作' });
     }
     if (!passwordValid) {
       return res.status(401).json({ success: false, message: '原密码错误' });
@@ -403,8 +401,8 @@ router.post('/reset-password', async (req, res) => {
       message: 'Password reset successful'
     });
   } catch (error) {
-    console.error('Reset password error:', error);
-    res.status(500).json({ success: false, message: 'Reset failed: ' + error.message });
+    logger.error('Reset password error:', error);
+    res.status(500).json({ success: false, message: 'Reset failed' });
   }
 });
 

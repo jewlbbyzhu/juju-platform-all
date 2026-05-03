@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const logger = require('../../utils/logger');
 const { sequelize } = require('../../config/database');
 
 // 获取所有UI主题（用户选择用）
@@ -31,12 +32,10 @@ router.get('/', async (req, res) => {
       })
     });
   } catch (error) {
-    console.error('Get UI themes error:', error);
-    const isDev = process.env.NODE_ENV === 'development';
+    logger.error('Get UI themes error:', error);
     res.status(500).json({
       success: false,
-      message: '获取主题失败',
-      error: isDev ? error.message : 'Internal server error'
+      message: '获取主题失败'
     });
   }
 });
@@ -57,12 +56,10 @@ router.get('/tags/hot', async (req, res) => {
       data: tags
     });
   } catch (error) {
-    console.error('Get hot tags error:', error);
-    const isDev = process.env.NODE_ENV === 'development';
+    logger.error('Get hot tags error:', error);
     res.status(500).json({
       success: false,
-      message: '获取热门标签失败',
-      error: isDev ? error.message : 'Internal server error'
+      message: '获取热门标签失败'
     });
   }
 });
@@ -241,14 +238,10 @@ router.get('/parties/filter', async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Filter parties error:', error);
-    // 生产环境不返回原始error.message，防止泄露数据库结构等敏感信息
-    const isDev = process.env.NODE_ENV === 'development';
+    logger.error('Filter parties error:', error);
     res.status(500).json({
       success: false,
-      message: '筛选聚会失败',
-      error: isDev ? error.message : 'Internal server error',
-      ...(isDev ? { stack: error.stack } : {})
+      message: '筛选聚会失败'
     });
   }
 });

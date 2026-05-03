@@ -316,7 +316,7 @@ function createDataMaskingMiddleware(options = {}) {
         
         return originalJson.call(this, data);
       } catch (error) {
-        console.error('Data masking error:', error);
+        logger.error('Data masking error:', { error: error.message });
         // 脱敏失败时返回原数据
         return originalJson.call(this, data);
       }

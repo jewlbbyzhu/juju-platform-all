@@ -1063,7 +1063,7 @@ const socialController = {
       const reporterId = req.user.id;
 
       // 这里应该保存举报记录到数据库
-      console.log('举报用户:', {
+      logger.info('举报用户', {
         reporterId,
         reportedUserId: userId,
         reason,
@@ -1090,7 +1090,7 @@ const socialController = {
       const reporterId = req.user.id;
 
       // 这里应该保存举报记录到数据库
-      console.log('举报评论:', {
+      logger.info('举报评论', {
         reporterId,
         commentId,
         reason,
