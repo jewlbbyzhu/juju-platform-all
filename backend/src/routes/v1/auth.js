@@ -190,8 +190,8 @@ router.post('/login', async (req, res) => {
       res.json({ success: true, message: 'Login successful', data: { token, refreshToken, userInfo: { id: user.id, nickname: user.nickname, avatar: user.avatar, phone: user.phone } } });
     }
   } catch (error) { 
-    console.error('Login error:', error);
-    res.status(500).json({ success: false, message: 'Login failed: ' + error.message }); 
+    logger.error('Login error:', error);
+    res.status(500).json({ success: false, message: 'Login failed' }); 
   }
 });
 
@@ -219,7 +219,7 @@ router.post('/register', async (req, res) => {
     }
     
     // 密码加密
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 12);
     
     // 创建新用户
     const user = await User.create({ 
@@ -386,13 +386,16 @@ router.post('/reset-password', async (req, res) => {
         return res.status(401).json({ success: false, message: '密码格式已过期，请通过"忘记密码"重置密码' });
       }
     } else {
-      // 无密码用户：允许通过验证码直接重置
+      // 无密码用户：允许通过验证码直接重置（仅开发环境）
+      if (process.env.NODE_ENV === 'production') {
+        return res.status(401).json({ success: false, message: '请先设置密码后再进行重置操作' });
+      }
       passwordValid = true;
     }
     if (!passwordValid) {
       return res.status(401).json({ success: false, message: '原密码错误' });
     }
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    const hashedPassword = await bcrypt.hash(newPassword, 12);
     user.password = hashedPassword;
     await user.save();
     res.json({

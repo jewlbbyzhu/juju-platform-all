@@ -112,7 +112,7 @@ const auth = async (req, res, next) => {
 
 const authWithRefresh = auth;
 
-const adminAuth = (req, res, next) => {
+const adminAuth = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.replace('Bearer ', '');
     
@@ -143,6 +143,19 @@ const adminAuth = (req, res, next) => {
     }
     
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
+    const isBlacklisted = await TokenBlacklist.isBlacklisted(token);
+    if (isBlacklisted) {
+      return res.status(401).json({
+        success: false,
+        message: 'Token已失效，请重新登录',
+        code: 'TOKEN_INVALIDATED',
+        error: {
+          code: 'TOKEN_INVALIDATED',
+          message: 'Token已失效，请重新登录'
+        }
+      });
+    }
     
     if (decoded && decoded.tokenType && decoded.tokenType !== 'access') {
       return res.status(401).json({
