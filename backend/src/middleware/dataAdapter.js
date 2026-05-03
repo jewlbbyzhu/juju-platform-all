@@ -108,7 +108,6 @@ function dataAdapter(req, res, next) {
     } catch (error) {
       logger.error('Data adapter error:', {
         error: error.message,
-        stack: error.stack,
         clientType: req.client,
         path: req.path,
         method: req.method

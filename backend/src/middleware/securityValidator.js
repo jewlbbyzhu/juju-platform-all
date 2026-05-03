@@ -165,7 +165,6 @@ function createSecurityValidator(schema, target = 'body', options = {}) {
     } catch (validationError) {
       logger.error('Security validation error:', {
         error: validationError.message,
-        stack: validationError.stack,
         url: req.url,
         method: req.method,
         target
@@ -334,7 +333,6 @@ function validateFileUpload(options = {}) {
     } catch (error) {
       logger.error('File upload validation error:', {
         error: error.message,
-        stack: error.stack,
         url: req.url,
         method: req.method
       });
@@ -424,7 +422,6 @@ function createRateLimitValidator(options = {}) {
     } catch (error) {
       logger.error('Rate limit validation error:', {
         error: error.message,
-        stack: error.stack,
         url: req.url,
         method: req.method
       });
