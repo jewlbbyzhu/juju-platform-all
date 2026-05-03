@@ -126,6 +126,7 @@ class SensitiveDataEncryption {
 
   /**
    * 加密敏感字符串
+   * 盐值与密文一起存储，确保可解密
    */
   encryptString(plaintext) {
     if (!plaintext || typeof plaintext !== 'string') {
@@ -137,8 +138,16 @@ class SensitiveDataEncryption {
       const key = deriveKeyFromPassword(this.masterKey, salt);
       const result = encryptAES(plaintext, key);
       
+      // 将盐值、IV、tag、密文全部编码存储，格式: salt:iv:tag:ciphertext
+      const combined = [
+        salt.toString('hex'),
+        result.iv,
+        result.tag,
+        result.encrypted.slice((ENCRYPTION_CONFIG.ivLength + ENCRYPTION_CONFIG.tagLength) * 2)
+      ].join(':');
+      
       return {
-        encrypted: salt.toString('hex') + ':' + result.encrypted,
+        encrypted: combined,
         algorithm: ENCRYPTION_CONFIG.algorithm,
         timestamp: Date.now()
       };
@@ -149,6 +158,7 @@ class SensitiveDataEncryption {
 
   /**
    * 解密敏感字符串
+   * 从存储格式中提取盐值、IV、tag，重新派生密钥解密
    */
   decryptString(encryptedData) {
     if (!encryptedData || typeof encryptedData !== 'object') {
@@ -157,13 +167,19 @@ class SensitiveDataEncryption {
 
     try {
       const parts = encryptedData.encrypted.split(':');
-      if (parts.length !== 2) {
-        throw new Error('Invalid encrypted data format: missing salt');
+      if (parts.length !== 4) {
+        throw new Error('Invalid encrypted data format: expected salt:iv:tag:ciphertext');
       }
       const salt = Buffer.from(parts[0], 'hex');
-      const encrypted = parts[1];
+      const iv = parts[1]; // hex string
+      const tag = parts[2]; // hex string
+      const encrypted = parts[3]; // hex string
+      
+      // 重新组合 iv + tag + ciphertext 供 decryptAES 使用
+      const combinedEncrypted = iv + tag + encrypted;
+      
       const key = deriveKeyFromPassword(this.masterKey, salt);
-      return decryptAES(encrypted, key);
+      return decryptAES(combinedEncrypted, key);
     } catch (error) {
       throw new Error(`String decryption failed: ${error.message}`);
     }

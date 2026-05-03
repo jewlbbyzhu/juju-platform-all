@@ -7,56 +7,42 @@
 ## 重大发现
 | # | 严重度 | 文件 | 问题 | 建议 |
 |---|--------|------|------|------|
-| 1 | 🔴 | backend/src/routes/v1/auth.js | `mockVerifyCodes` 为内存存储，验证码仅5分钟过期，无持久化，重启后丢失；且 `console.log` 输出验证码到日志 | 生产环境必须接入真实短信服务商（如阿里云/腾讯云短信），移除 `console.log` 日志输出 |
-| 2 | 🔴 | backend/src/routes/v1/auth.js | `reset-password` 路由中 `verificationCode` 验证后，若用户未设置密码（`!user.password`），`passwordValid` 保持 `false`，但逻辑分支允许空密码用户无法重置 | 确保重置密码流程对无密码用户也能正常工作，或明确提示先设置密码 |
-| 3 | 🔴 | backend/src/routes/v1/auth.js | 明文密码迁移通道（`process.env.NODE_ENV !== 'production'`）仍存在，旧用户账户在生产环境前需完成迁移 | 上线前强制所有旧用户重置密码，移除明文兼容逻辑 |
-| 4 | 🔴 | backend/src/server.js | `process.env.CORS_CREDENTIALS=*** 'true'` 这一行疑似被截断/篡改，存在语法风险 | 检查并修复 `cors` 配置行，确保 `credentials` 正确赋值 |
-| 5 | 🔴 | backend/src/utils/encryption.js | `SensitiveDataEncryption` 类中 `encryptString` 和 `decryptString` 使用随机盐派生密钥，导致加密后无法解密（盐值未保存） | 加密时必须将盐值与密文一起存储，解密时提取盐值重新派生密钥 |
-| 6 | 🔴 | JujuApp_new/src/config/index.ts | `isRelease` 判断逻辑 `!isDev || process.env.NODE_ENV === 'production'` 中 `process.env` 在 RN 打包后不存在，可能导致误判 | 仅依赖 `__DEV__` 判断，移除 `process.env` 引用；或改用 `__DEV__ === false` 明确判断 |
-| 7 | 🟡 | backend/src/middleware/auth.js | `isValidTestToken` 在 `NODE_ENV === 'test'` 时允许硬编码测试Token绕过认证 | 确保测试环境不部署到生产，或增加更严格的测试Token校验 |
-| 8 | 🟡 | backend/src/controllers/partyController.js | `console.log('DEBUG party.start_time:', ...)` 调试代码残留 | 移除生产环境调试日志 |
-| 9 | 🟡 | backend/src/routes/v1/auth.js | `register` 路由中验证码 `code` 为可选参数（`if (code)`），允许无验证码注册 | 注册时必须强制验证验证码，防止批量注册攻击 |
-| 10 | 🟡 | backend/src/routes/v1/auth.js | `send-code` / `verify-code` / `verification-code` 三个路由逻辑完全重复，代码冗余 | 提取公共函数，统一验证码发送逻辑 |
-| 11 | 🟡 | backend/src/middleware/rateLimiter.js | `authLimiter` 限制为 15分钟1000次，对登录接口过于宽松 | 登录/验证码接口应使用更严格的限制（如 15分钟10次） |
-| 12 | 🟡 | JujuApp_new/src/api/index.ts | `OFFLINE_MODE = false` 为硬编码，但 `mockApi` 仍被打包进代码 | 生产构建时通过 Tree Shaking 移除 mock 模块，或改用动态导入 |
-| 13 | 🟢 | backend/src/server.js | `.env` 文件通过 `fs.readFileSync` 手动解析，不支持多行值和引号 | 使用 `dotenv` 标准库解析，或确保.env格式简单 |
-| 14 | 🟢 | backend/src/routes/v1/auth.js | `logout` 路由未将Token加入黑名单 | 调用 `TokenBlacklist.addToBlacklist` 使Token失效 |
+| 1 | 🔴 | `backend/src/utils/encryption.js` | `SensitiveDataEncryption` 使用随机盐派生密钥但盐值未保存，加密后无法解密 | 将盐值与密文一起存储，或在构造函数中固定盐值 |
+| 2 | 🔴 | `backend/src/server.js` | `CORS_CREDENTIALS` 配置行被截断：`process.env.CORS_CREDENTIALS=*** 'true'` 是赋值表达式而非布尔值 | 修正为 `credentials: process.env.CORS_CREDENTIALS === 'true'` |
+| 3 | 🔴 | `backend/src/routes/v1/auth.js` | `mockVerifyCodes` 内存存储，重启丢失；`console.log` 输出验证码到日志 | 迁移至 Redis；生产环境禁止日志输出验证码 |
+| 4 | 🔴 | `backend/src/middleware/auth.js` | 测试环境硬编码Token可绕过认证：`isValidTestToken` 在 `NODE_ENV=test` 时生效 | 限制仅在 CI/测试环境使用，生产环境必须禁用 |
+| 5 | 🟡 | `backend/src/routes/v1/auth.js` | 明文密码迁移通道仍存在（`process.env.NODE_ENV !== 'production'`） | 添加版本号/时间戳限制，设定迁移截止日期 |
+| 6 | 🟡 | `backend/src/routes/v1/auth.js` | 三个验证码发送路由逻辑完全重复（`/verify-code`, `/send-code`, `/verification-code`） | 提取为统一中间件，减少维护成本 |
+| 7 | 🟡 | `backend/src/middleware/rateLimiter.js` | `authLimiter` 15分钟20次过于宽松 | 收紧至 15分钟5次，并增加账号级限流 |
+| 8 | 🟡 | `backend/src/routes/v1/auth.js` | `generateCode()` 使用 `crypto.randomInt` 但 `crypto` 未在文件顶部导入 | 确认 `crypto` 是否为全局变量，否则显式导入 |
+| 9 | 🟡 | `backend/src/controllers/orderController.js` | `getOrderList` 中 `user_id` 无权限校验（`filters.user_id` 可被任意传递） | 非管理员请求时强制覆盖 `user_id` 为当前用户ID |
+| 10 | 🟡 | `JujuApp_new/src/config/index.ts` | `process.env.NODE_ENV` 在RN打包后不存在，但后端代码多处依赖 | 统一使用 `__DEV__` 判断，移除对 `process.env.NODE_ENV` 的依赖 |
+| 11 | 🟡 | `backend/src/routes/v1/parties.js` | 多处临时实现路由直接返回成功（`/reviews`, `/tickets/inventory` 等） | 标记 TODO 并补充真实业务逻辑，避免接口空转 |
+| 12 | 🟢 | `backend/src/routes/v1/auth.js` | `logout` 已实现Token黑名单（Redis），但 `auth.js` 中的 `logout` 路由也实现了黑名单 | 确认是否重复，统一使用 `TokenBlacklist` 工具类 |
+| 13 | 🟢 | `backend/src/routes/v1/ui-themes.js` | 原始SQL查询拼接 `whereClause`，存在SQL注入风险 | 使用 Sequelize 参数化查询或 ORM 替代字符串拼接 |
+| 14 | 🟢 | `JujuApp_new/src/api/apiClient.ts` | Token 存储在 `AsyncStorage`（非加密），Root 后可被读取 | 敏感场景使用 `react-native-keychain` 或加密存储 |
+| 15 | 🟢 | `backend/src/server.js` | `.env` 文件包含真实数据库密码、微信支付密钥、JWT_SECRET | 确认 `.env` 不在 Git 跟踪中；生产环境使用密钥管理服务 |
 
 ## 低风险问题
 | # | 文件 | 问题 | 建议 |
 |---|------|------|------|
-| 1 | backend/src/routes/v1/auth.js | `generateCode()` 使用 `Math.random()` 生成验证码，非加密安全 | 改用 `crypto.randomInt(100000, 999999)` |
-| 2 | backend/src/routes/v1/parties.js | `getPublishedParties` 等接口无分页上限限制 | 增加 `limit` 最大值校验（如 ≤ 100） |
-| 3 | backend/src/controllers/orderController.js | `getOrderList` 中 `user_id` 从 query 参数传入，但无权限校验 | 确保普通用户只能查看自己的订单 |
-| 4 | backend/src/utils/encryption.js | `encrypt()` 使用 XOR 加密，安全性极低 | 废弃此函数，统一使用 AES-256-GCM |
-| 5 | backend/src/services/paymentService.js | 支付回调中先更新状态再验证签名（`handlePaymentCallback`） | 严格先验签，再更新数据库状态 |
-| 6 | backend/src/services/databaseOptimizationService.js | `slowQueryThreshold` 直接拼接到SQL中，存在SQL注入风险 | 使用参数化查询 |
-| 7 | JujuApp_new/src/api/mockApi.ts | Mock数据文件被打包进APK，可能暴露测试数据 | 生产构建时排除mock文件 |
-| 8 | backend/src/routes/v1/auth.js | 错误处理中 `res.status(500).json({ success: false, message: 'Failed' })` 吞掉错误详情 | 开发环境记录详细错误，生产环境返回友好提示 |
+| 1 | `backend/src/routes/v1/auth.js` | `Math.random()` 已替换为 `crypto.randomInt`，但 `crypto` 导入不明确 | 显式 `const crypto = require('crypto')` |
+| 2 | `backend/src/middleware/errorHandler.js` | 错误日志包含完整堆栈，可能泄露内部路径 | 生产环境脱敏处理堆栈信息 |
+| 3 | `JujuApp_new/src/api/index.ts` | `OFFLINE_MODE` 硬编码为 `false`，但 `mockApi` 仍被打包 | 使用环境变量控制，生产构建排除 mock 代码 |
+| 4 | `backend/src/controllers/partyController.js` | `getPendingParties` 错误时返回 `success: true` 和空数组 | 应返回 500 错误码，避免前端误判 |
+| 5 | `backend/src/routes/v1/orders.js` | `orders/:id/tickets` 已添加订单归属校验，但 `getOrderById` 未校验 | 在 `orderService.getOrderById` 中添加用户权限校验 |
 
-## 新增发现（2026-05-03）
-| # | 严重度 | 文件 | 问题 | 建议 |
-|---|--------|------|------|------|
-| 15 | 🟡 | backend/src/controllers/orderController.js | `getOrderList` 调用 `orderService.getOrderList(null, ...)` 传入 `null` 作为userId，但service中 `if (userId)` 不生效，导致filters.user_id可覆盖 | 管理员接口应单独路由，普通用户强制使用 `req.user.id` |
-| 16 | 🟡 | backend/src/routes/v1/tickets.js | `/tickets/:id/qrcode` 使用 `constructor.prototype.getTicketById.call` 绕过正常controller调用 | 简化逻辑，直接调用service层 |
-| 17 | 🟢 | backend/src/services/userService.js | 使用 `sequelize.query` 但使用了 `replacements` 参数化，无SQL注入风险 | ✅ 安全 |
-
-## 安全合规检查
-| 检查项 | 状态 | 说明 |
-|--------|------|------|
-| SQL注入 | ✅ | 主要使用Sequelize ORM，参数化查询正确 |
-| XSS防护 | ⚠️ | helmet CSP已关闭 (`contentSecurityPolicy: false`)，需评估风险 |
-| CSRF防护 | ⚠️ | CORS credentials配置异常，需修复 |
-| 敏感信息泄露 | ⚠️ | `console.log` 输出验证码，mock数据打包 |
-| 认证绕过 | ⚠️ | 测试Token机制需确保不部署到生产 |
-| 加密安全 | 🔴 | `encryption.js` 盐值未保存，XOR加密弱 |
+## 已修复问题（本次审查确认）
+| # | 文件 | 问题 | 状态 |
+|---|------|------|------|
+| 1 | `backend/src/routes/v1/auth.js` | `reset-password` 已添加验证码验证 | ✅ 已修复 |
+| 2 | `backend/src/server.js` | 全局 Rate Limiter 已启用 | ✅ 已修复 |
+| 3 | `backend/src/routes/v1/auth.js` | 微信登录生产环境返回 501 | ✅ 已修复 |
+| 4 | `backend/src/routes/v1/orders.js` | `orders/:id/tickets` 越权访问已添加校验 | ✅ 已修复 |
+| 5 | `backend/src/controllers/partyController.js` | 调试日志已清理 | ✅ 已修复 |
 
 ## 下一步
-1. **立即修复（P0）**：修复 `encryption.js` 的盐值保存问题，否则敏感数据加密后无法解密
-2. **立即修复（P0）**：检查 `server.js` 第54行 `CORS_CREDENTIALS` 被截断的问题
-3. **上线前（P1）**：接入真实短信服务，替换 `mockVerifyCodes` 内存存储
-4. **上线前（P1）**：清理所有 `console.log` 调试代码
-5. **上线前（P1）**：完成明文密码用户强制迁移，移除明文兼容代码
-6. **上线前（P1）**：修复 `register` 路由验证码可选问题
-7. **建议（P2）**：为关键接口（登录、支付）增加IP级频率限制
-8. **建议（P2）**：对 `partyController` 和 `orderController` 增加更严格的输入校验和权限检查
+1. **立即修复**: `encryption.js` 盐值保存问题、`server.js` CORS 配置截断问题
+2. **短期修复**: 验证码存储迁移至 Redis、authLimiter 收紧、SQL 注入防护
+3. **中期改进**: Token 加密存储、明文密码迁移通道关闭、测试 Token 机制加固
+4. **长期规划**: 密钥管理服务（KMS）替代 `.env`、完整的渗透测试

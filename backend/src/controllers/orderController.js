@@ -57,6 +57,17 @@ class OrderController {
 
       // 管理员获取所有订单，普通用户只能查看自己的
       const userId = req.user && req.user.role === 'admin' ? null : req.user.id;
+      // 安全校验：如果filters中传入了user_id，普通用户只能查看自己的
+      if (filters.user_id && req.user.role !== 'admin' && filters.user_id !== req.user.id) {
+        return res.status(403).json({
+          success: false,
+          message: '无权查看其他用户的订单'
+        });
+      }
+      // 强制普通用户只能查看自己的订单
+      if (req.user.role !== 'admin') {
+        filters.user_id = req.user.id;
+      }
       const result = await orderService.getOrderList(userId, page, limit, filters);
       res.json({
         success: true,

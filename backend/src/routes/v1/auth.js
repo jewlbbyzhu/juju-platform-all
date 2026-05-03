@@ -126,8 +126,8 @@ router.post('/login', async (req, res) => {
       if (user.password.startsWith('$2')) {
         // bcrypt哈希
         isValidPassword = await bcrypt.compare(password, user.password);
-      } else if (process.env.NODE_ENV !== 'production') {
-        // 明文密码（旧数据迁移，仅开发/测试环境允许）
+      } else if (process.env.NODE_ENV !== 'production' && process.env.ALLOW_LEGACY_PLAINTEXT === 'true') {
+        // 明文密码（旧数据迁移，仅开发/测试环境允许，且需显式开启ALLOW_LEGACY_PLAINTEXT）
         isValidPassword = (password === user.password);
         if (isValidPassword) {
           // 自动升级：明文密码迁移为bcrypt哈希
@@ -401,7 +401,8 @@ router.post('/reset-password', async (req, res) => {
     if (user.password) {
       if (user.password.startsWith('$2')) {
         passwordValid = await bcrypt.compare(oldPassword, user.password);
-      } else if (process.env.NODE_ENV !== 'production') {
+      } else if (process.env.NODE_ENV !== 'production' && process.env.ALLOW_LEGACY_PLAINTEXT === 'true') {
+        // 明文密码（旧数据迁移，仅开发/测试环境允许，且需显式开启ALLOW_LEGACY_PLAINTEXT）
         passwordValid = oldPassword === user.password; // 明文迁移通道（仅开发/测试环境）
       } else {
         return res.status(401).json({ success: false, message: '密码格式错误，请联系客服' });

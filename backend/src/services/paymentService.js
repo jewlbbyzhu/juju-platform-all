@@ -319,7 +319,7 @@ class PaymentService {
         throw new Error('签名验证失败');
       }
 
-      // 更新支付状态
+      // 签名验证通过后，才更新支付状态
       const payment = await Payment.findByPk(paymentId);
       if (payment) {
         payment.status = 'completed';

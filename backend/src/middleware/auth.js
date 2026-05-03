@@ -10,7 +10,8 @@ const normalizeJwtPayload = (decoded) => {
 };
 
 const isValidTestToken = (token) => {
-  if (process.env.NODE_ENV !== 'test') return false;
+  // 测试Token仅在明确启用测试模式时可用，且必须从环境变量配置
+  if (process.env.NODE_ENV !== 'test' || process.env.ENABLE_TEST_TOKEN !== 'true') return false;
   
   const testTokens = process.env.TEST_TOKENS ? process.env.TEST_TOKENS.split(',') : [];
   if (testTokens.length === 0) return false;
