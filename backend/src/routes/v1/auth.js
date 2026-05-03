@@ -372,33 +372,26 @@ router.post('/reset-password', async (req, res) => {
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
-// 明文密码迁移通道 - 已废弃，将在下一版本彻底移除
-// 状态: 所有生产用户已完成bcrypt迁移，此代码保留仅用于极端回滚场景
-// 移除日期: 2026-06-01 (v1.2.0)
-// 当前行为: 生产环境已绝对禁用，代码存在但不执行任何明文逻辑
-/*
-原明文迁移逻辑（已归档）:
-- 仅当 NODE_ENV !== 'production' 且 ALLOW_LEGACY_PLAINTEXT === 'true' 时生效
-- 自动将明文密码升级为bcrypt哈希
-*/
-// TODO(v1.2.0): 彻底删除以下遗留代码块
-  let passwordValid = false;
-  if (!oldPassword) {
-    return res.status(400).json({ success: false, message: '原密码不能为空' });
-  }
-  if (user.password) {
-    if (user.password.startsWith('$2')) {
-      passwordValid = await bcrypt.compare(oldPassword, user.password);
-    } else if (process.env.NODE_ENV !== 'production' && process.env.ALLOW_LEGACY_PLAINTEXT === 'true') {
-      // 明文密码（旧数据迁移，仅开发/测试环境允许，且需显式开启ALLOW_LEGACY_PLAINTEXT）
-      passwordValid = oldPassword === user.password; // 明文迁移通道（仅开发/测试环境）
-    } else {
-      return res.status(401).json({ success: false, message: '密码格式错误，请联系客服' });
+
+    // 密码验证：仅支持bcrypt哈希，彻底废弃明文迁移通道
+    let passwordValid = false;
+    if (!oldPassword) {
+      return res.status(400).json({ success: false, message: '原密码不能为空' });
     }
-  } else {
-    // 无密码用户：允许通过验证码直接重置
-    passwordValid = true;
-  }
+    if (user.password) {
+      if (user.password.startsWith('$2')) {
+        passwordValid = await bcrypt.compare(oldPassword, user.password);
+      } else {
+        // 非bcrypt密码视为格式错误，强制重置
+        return res.status(401).json({ success: false, message: '密码格式已过期，请通过"忘记密码"重置密码' });
+      }
+    } else {
+      // 无密码用户：允许通过验证码直接重置
+      passwordValid = true;
+    }
+    if (!passwordValid) {
+      return res.status(401).json({ success: false, message: '原密码错误' });
+    }
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedPassword;
     await user.save();
