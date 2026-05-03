@@ -37,8 +37,10 @@ const auth = async (req, res, next) => {
     }
     
     if (isValidTestToken(token)) {
+      // 从环境变量获取测试用户ID，避免所有测试共享同一身份
+      const testUserId = parseInt(process.env.TEST_USER_ID, 10) || 9999;
       req.user = {
-        id: 1,
+        id: testUserId,
         username: 'test_user',
         role: 'user',
         tokenType: 'access'

@@ -49,7 +49,7 @@ function generateSalt() {
 function encryptAES(plaintext, key) {
   try {
     const iv = crypto.randomBytes(ENCRYPTION_CONFIG.ivLength);
-    const cipher = crypto.createCipher(ENCRYPTION_CONFIG.algorithm, key, iv);
+    const cipher = crypto.createCipheriv(ENCRYPTION_CONFIG.algorithm, key, iv);
     
     let encrypted = cipher.update(plaintext, 'utf8', 'hex');
     encrypted += cipher.final('hex');
@@ -79,7 +79,7 @@ function decryptAES(encryptedData, key) {
     const tag = Buffer.from(encryptedData.slice(ivLength, ivLength + tagLength), 'hex');
     const encrypted = encryptedData.slice(ivLength + tagLength);
     
-    const decipher = crypto.createDecipher(ENCRYPTION_CONFIG.algorithm, key, iv);
+    const decipher = crypto.createDecipheriv(ENCRYPTION_CONFIG.algorithm, key, iv);
     decipher.setAuthTag(tag);
     
     let decrypted = decipher.update(encrypted, 'hex', 'utf8');

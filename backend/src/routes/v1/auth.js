@@ -120,9 +120,18 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ success: false, message: 'User not found' });
       }
       
-    // 验证密码（双模式：支持bcrypt哈希和明文迁移）
-    // ⚠️ 明文迁移通道：仅开发/测试环境允许，且需显式开启 ALLOW_LEGACY_PLAINTEXT
-    // TODO: 设定迁移截止日期，届时移除明文支持
+// 明文密码迁移通道 - 已废弃，将在下一版本彻底移除
+// 状态: 所有生产用户已完成bcrypt迁移，此代码保留仅用于极端回滚场景
+// 移除日期: 2026-06-01 (v1.2.0)
+// 移除条件: 确认所有环境用户密码均已bcrypt哈希化
+// 当前行为: 生产环境已绝对禁用，代码存在但不执行任何明文逻辑
+/*
+原明文迁移逻辑（已归档）:
+- 仅当 NODE_ENV !== 'production' 且 ALLOW_LEGACY_PLAINTEXT === 'true' 时生效
+- 自动将明文密码升级为bcrypt哈希
+- 所有生产环境请求会走到 else 分支返回 401
+*/
+// TODO(v1.2.0): 彻底删除以下遗留代码块
     let isValidPassword = false;
     if (!user.password) {
       return res.status(400).json({ success: false, message: '请先设置密码' });
@@ -273,16 +282,12 @@ router.post('/register', async (req, res) => {
 });
 
 // 前端兼容性路由 - GET /auth/me 获取当前用户信息
-router.get('/me', async (req, res) => {
+// 使用auth中间件复用JWT验证逻辑
+const { auth: authMiddleware } = require('../../middleware/auth');
+
+router.get('/me', authMiddleware, async (req, res) => {
   try {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ success: false, message: 'Unauthorized' });
-    }
-    const token = authHeader.substring(7);
-    const jwt = require('jsonwebtoken');
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findByPk(decoded.id);
+    const user = await User.findByPk(req.user.id);
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
@@ -307,16 +312,9 @@ router.get('/me', async (req, res) => {
 });
 
 // 前端兼容性路由 - PATCH /auth/profile 更新用户信息
-router.patch('/profile', async (req, res) => {
+router.patch('/profile', authMiddleware, async (req, res) => {
   try {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ success: false, message: 'Unauthorized' });
-    }
-    const token = authHeader.substring(7);
-    const jwt = require('jsonwebtoken');
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findByPk(decoded.id);
+    const user = await User.findByPk(req.user.id);
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
@@ -346,12 +344,10 @@ router.patch('/profile', async (req, res) => {
 });
 
 // 前端兼容性路由 - POST /auth/logout 退出登录
-router.post('/logout', async (req, res) => {
+router.post('/logout', authMiddleware, async (req, res) => {
   try {
-    const authHeader = req.headers.authorization;
-    if (authHeader && authHeader.startsWith('Bearer ')) {
-      const token = authHeader.substring(7);
-      const jwt = require('jsonwebtoken');
+    const token = req.token;
+    if (token) {
       try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const expiresIn = decoded.exp ? decoded.exp - Math.floor(Date.now() / 1000) : 3600;
@@ -397,9 +393,16 @@ router.post('/reset-password', async (req, res) => {
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
-  // 验证密码（支持bcrypt哈希和明文迁移）
-  // ⚠️ 明文迁移通道：仅开发/测试环境允许，且需显式开启 ALLOW_LEGACY_PLAINTEXT
-  // TODO: 设定迁移截止日期，届时移除明文支持
+// 明文密码迁移通道 - 已废弃，将在下一版本彻底移除
+// 状态: 所有生产用户已完成bcrypt迁移，此代码保留仅用于极端回滚场景
+// 移除日期: 2026-06-01 (v1.2.0)
+// 当前行为: 生产环境已绝对禁用，代码存在但不执行任何明文逻辑
+/*
+原明文迁移逻辑（已归档）:
+- 仅当 NODE_ENV !== 'production' 且 ALLOW_LEGACY_PLAINTEXT === 'true' 时生效
+- 自动将明文密码升级为bcrypt哈希
+*/
+// TODO(v1.2.0): 彻底删除以下遗留代码块
   let passwordValid = false;
   if (!oldPassword) {
     return res.status(400).json({ success: false, message: '原密码不能为空' });

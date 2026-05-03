@@ -139,8 +139,12 @@ router.get('/parties/filter', async (req, res) => {
     }
 
     if (tag) {
-      conditions.push('p.tags LIKE ?');
-      replacements.push(`%"${tag}"%`);
+      // 对tag进行输入校验：只允许字母、数字、中文、空格和常见分隔符
+      const sanitizedTag = String(tag).replace(/[^\w\u4e00-\u9fa5\s\-_,]/g, '').substring(0, 50);
+      if (sanitizedTag) {
+        conditions.push('p.tags LIKE ?');
+        replacements.push(`%"${sanitizedTag}"%`);
+      }
     }
 
     let distanceSelect = '';
