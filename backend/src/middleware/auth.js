@@ -11,6 +11,8 @@ const normalizeJwtPayload = (decoded) => {
 
 const isValidTestToken = (token) => {
   // 测试Token仅在明确启用测试模式时可用，且必须从环境变量配置
+  // 生产环境绝对禁止测试Token
+  if (process.env.NODE_ENV === 'production') return false;
   if (process.env.NODE_ENV !== 'test' || process.env.ENABLE_TEST_TOKEN !== 'true') return false;
   
   const testTokens = process.env.TEST_TOKENS ? process.env.TEST_TOKENS.split(',') : [];

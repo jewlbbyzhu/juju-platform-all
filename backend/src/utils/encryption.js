@@ -447,17 +447,24 @@ function encrypt(plaintext) {
 
 /**
  * 简单解密函数
+ * ⚠️ 注意：此函数使用固定的派生参数（非随机盐）以确保加密后可解密
+ * 用于兼容旧版简单加密数据，新版推荐使用 SensitiveDataEncryption 类
  */
 function decrypt(encryptedData) {
   if (!encryptedData || typeof encryptedData !== 'string') {
     return encryptedData;
   }
-  
+
   try {
     if (!process.env.ENCRYPTION_MASTER_KEY) {
       throw new Error('ENCRYPTION_MASTER_KEY environment variable is required');
     }
-    const key = deriveKeyFromPassword(process.env.ENCRYPTION_MASTER_KEY, generateSalt());
+    // 使用固定盐值（从环境密钥派生）确保可重复派生相同密钥
+    const fixedSalt = crypto.createHash('sha256')
+      .update(process.env.ENCRYPTION_MASTER_KEY)
+      .digest()
+      .slice(0, 16);
+    const key = deriveKeyFromPassword(process.env.ENCRYPTION_MASTER_KEY, fixedSalt);
     return decryptAES(encryptedData, key);
   } catch (error) {
     throw new Error(`Decryption failed: ${error.message}`);

@@ -20,6 +20,13 @@ class OrderController {
   async getOrderById(req, res, next) {
     try {
       const order = await orderService.getOrderById(req.params.id);
+      // 权限校验：非管理员只能查看自己的订单
+      if (order && req.user.role !== 'admin' && order.user_id !== req.user.id) {
+        return res.status(403).json({
+          success: false,
+          message: '无权查看该订单'
+        });
+      }
       res.json({
         success: true,
         data: order

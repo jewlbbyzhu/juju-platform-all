@@ -53,13 +53,13 @@ router.get('/themes', async (req, res, next) => {
   }
 });
 
-// 前端兼容性路由 - POST /parties/reviews 提交评价 (必须在 /:id 之前)
+// 前端兼容性路由 - GET /parties/reviews 提交评价 (必须在 /:id 之前)
 router.post('/reviews', auth, async (req, res, next) => {
   try {
-    // 临时实现 - 返回成功，实际应该保存评价到数据库
-    res.json({
-      success: true,
-      message: 'Review submitted successfully',
+    // TODO: 实现真实评价保存逻辑，当前为临时占位
+    res.status(501).json({
+      success: false,
+      message: '评价功能正在开发中',
       data: req.body
     });
   } catch (error) {
@@ -70,9 +70,10 @@ router.post('/reviews', auth, async (req, res, next) => {
 // 前端兼容性路由 - GET /parties/tickets/inventory 获取票券库存 (必须在 /:id 之前)
 router.get('/tickets/inventory', auth, async (req, res, next) => {
   try {
-    // 临时实现 - 返回空库存列表
-    res.json({
-      success: true,
+    // TODO: 实现真实库存查询逻辑，当前为临时占位
+    res.status(501).json({
+      success: false,
+      message: '库存查询功能正在开发中',
       data: {
         inventory: [],
         total: 0
@@ -83,13 +84,13 @@ router.get('/tickets/inventory', auth, async (req, res, next) => {
   }
 });
 
-// 前端兼容性路由 - PUT /parties/tickets/:ticketId/status 更新票券状态 (必须在 /:id 之前)
+  // 前端兼容性路由 - PUT /parties/tickets/:ticketId/status 更新票券状态 (必须在 /:id 之前)
 router.put('/tickets/:ticketId/status', auth, async (req, res, next) => {
   try {
-    // 临时实现 - 返回成功
-    res.json({
-      success: true,
-      message: 'Ticket status updated',
+    // TODO: 实现真实票券状态更新逻辑，当前为临时占位
+    res.status(501).json({
+      success: false,
+      message: '票券状态更新功能正在开发中',
       data: {
         ticketId: req.params.ticketId,
         status: req.body.status
@@ -103,10 +104,10 @@ router.put('/tickets/:ticketId/status', auth, async (req, res, next) => {
 // 前端兼容性路由 - PUT /parties/tickets/:id/status (前端使用id而非ticketId) (必须在 /:id 之前)
 router.put('/tickets/:id/status', auth, async (req, res, next) => {
   try {
-    // 临时实现 - 返回成功
-    res.json({
-      success: true,
-      message: 'Ticket status updated',
+    // TODO: 实现真实票券状态更新逻辑，当前为临时占位
+    res.status(501).json({
+      success: false,
+      message: '票券状态更新功能正在开发中',
       data: {
         ticketId: req.params.id,
         status: req.body.status

@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
@@ -7,6 +8,7 @@ const { User } = require('../../models');
 const { Op } = require('sequelize');
 
 // 验证码存储：{ phone: { code, expiresAt } }
+// TODO: 生产环境应迁移至 Redis，当前内存存储仅用于开发/测试
 const mockVerifyCodes = {};
 const CODE_EXPIRE_MS = 5 * 60 * 1000; // 5分钟过期
 
@@ -39,48 +41,33 @@ async function sendVerificationCode(phone, type = 'register') {
   }
   const code = generateCode();
   mockVerifyCodes[phone] = { code, expiresAt: Date.now() + CODE_EXPIRE_MS };
-  // 开发环境日志，生产应替换为真实短信
+  // 仅开发环境输出验证码到日志，生产环境禁止
   if (process.env.NODE_ENV === 'development') {
     console.log(`[DEV] 验证码 ${phone} -> ${code}`);
   }
   return { sent: true, type };
 }
 
-// 发送验证码 - 兼容前端 /auth/verification-code
-router.post('/verify-code', async (req, res) => {
-  try {
-    const { phone } = req.body || {};
-    const result = await sendVerificationCode(phone, 'verify');
-    res.json({ success: true, message: 'Code sent', data: result });
-  } catch (error) {
-    const status = error.message.includes('频繁') ? 429 : 400;
-    res.status(status).json({ success: false, message: error.message });
-  }
-});
-
-// 前端兼容性路由 - /auth/send-code (别名)
-router.post('/send-code', async (req, res) => {
-  try {
-    const { phone } = req.body || {};
-    const result = await sendVerificationCode(phone, 'login');
-    res.json({ success: true, message: 'Code sent', data: result });
-  } catch (error) {
-    const status = error.message.includes('频繁') ? 429 : 400;
-    res.status(status).json({ success: false, message: error.message });
-  }
-});
-
-// 前端兼容性路由 - /auth/verification-code
-router.post('/verification-code', async (req, res) => {
+// 统一验证码发送路由处理器
+async function handleSendCode(req, res) {
   try {
     const { phone, type } = req.body || {};
-    const result = await sendVerificationCode(phone, type || 'register');
+    const result = await sendVerificationCode(phone, type || 'verify');
     res.json({ success: true, message: 'Code sent', data: result });
   } catch (error) {
     const status = error.message.includes('频繁') ? 429 : 400;
     res.status(status).json({ success: false, message: error.message });
   }
-});
+}
+
+// 发送验证码 - 兼容前端 /auth/verification-code
+router.post('/verify-code', handleSendCode);
+
+// 前端兼容性路由 - /auth/send-code (别名)
+router.post('/send-code', handleSendCode);
+
+// 前端兼容性路由 - /auth/verification-code
+router.post('/verification-code', handleSendCode);
 
 // 手机号+验证码登录
 router.post('/phone-login', async (req, res) => {
@@ -119,26 +106,28 @@ router.post('/login', async (req, res) => {
       }
       
     // 验证密码（双模式：支持bcrypt哈希和明文迁移）
-      let isValidPassword = false;
-      if (!user.password) {
-        return res.status(400).json({ success: false, message: '请先设置密码' });
+    // ⚠️ 明文迁移通道：仅开发/测试环境允许，且需显式开启 ALLOW_LEGACY_PLAINTEXT
+    // TODO: 设定迁移截止日期，届时移除明文支持
+    let isValidPassword = false;
+    if (!user.password) {
+      return res.status(400).json({ success: false, message: '请先设置密码' });
+    }
+    if (user.password.startsWith('$2')) {
+      // bcrypt哈希
+      isValidPassword = await bcrypt.compare(password, user.password);
+    } else if (process.env.NODE_ENV !== 'production' && process.env.ALLOW_LEGACY_PLAINTEXT === 'true') {
+      // 明文密码（旧数据迁移，仅开发/测试环境允许，且需显式开启ALLOW_LEGACY_PLAINTEXT）
+      isValidPassword = (password === user.password);
+      if (isValidPassword) {
+        // 自动升级：明文密码迁移为bcrypt哈希
+        user.password = await bcrypt.hash(password, 10);
+        await user.save();
+        console.log(`[MIGRATION] 用户 ${phone} 密码已从明文升级为bcrypt`);
       }
-      if (user.password.startsWith('$2')) {
-        // bcrypt哈希
-        isValidPassword = await bcrypt.compare(password, user.password);
-      } else if (process.env.NODE_ENV !== 'production' && process.env.ALLOW_LEGACY_PLAINTEXT === 'true') {
-        // 明文密码（旧数据迁移，仅开发/测试环境允许，且需显式开启ALLOW_LEGACY_PLAINTEXT）
-        isValidPassword = (password === user.password);
-        if (isValidPassword) {
-          // 自动升级：明文密码迁移为bcrypt哈希
-          user.password = await bcrypt.hash(password, 10);
-          await user.save();
-          console.log(`[MIGRATION] 用户 ${phone} 密码已从明文升级为bcrypt`);
-        }
-      } else {
-        // 生产环境：明文密码已废弃，拒绝登录并提示重置
-        return res.status(401).json({ success: false, message: '密码格式已过期，请通过"忘记密码"重置密码' });
-      }
+    } else {
+      // 生产环境：明文密码已废弃，拒绝登录并提示重置
+      return res.status(401).json({ success: false, message: '密码格式已过期，请通过"忘记密码"重置密码' });
+    }
       if (!isValidPassword) {
         return res.status(400).json({ success: false, message: 'Invalid password' });
       }
@@ -393,24 +382,26 @@ router.post('/reset-password', async (req, res) => {
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
-    // 验证旧密码（支持bcrypt哈希和明文迁移）
-    let passwordValid = false;
-    if (!oldPassword) {
-      return res.status(400).json({ success: false, message: '原密码不能为空' });
-    }
-    if (user.password) {
-      if (user.password.startsWith('$2')) {
-        passwordValid = await bcrypt.compare(oldPassword, user.password);
-      } else if (process.env.NODE_ENV !== 'production' && process.env.ALLOW_LEGACY_PLAINTEXT === 'true') {
-        // 明文密码（旧数据迁移，仅开发/测试环境允许，且需显式开启ALLOW_LEGACY_PLAINTEXT）
-        passwordValid = oldPassword === user.password; // 明文迁移通道（仅开发/测试环境）
-      } else {
-        return res.status(401).json({ success: false, message: '密码格式错误，请联系客服' });
-      }
+  // 验证密码（支持bcrypt哈希和明文迁移）
+  // ⚠️ 明文迁移通道：仅开发/测试环境允许，且需显式开启 ALLOW_LEGACY_PLAINTEXT
+  // TODO: 设定迁移截止日期，届时移除明文支持
+  let passwordValid = false;
+  if (!oldPassword) {
+    return res.status(400).json({ success: false, message: '原密码不能为空' });
+  }
+  if (user.password) {
+    if (user.password.startsWith('$2')) {
+      passwordValid = await bcrypt.compare(oldPassword, user.password);
+    } else if (process.env.NODE_ENV !== 'production' && process.env.ALLOW_LEGACY_PLAINTEXT === 'true') {
+      // 明文密码（旧数据迁移，仅开发/测试环境允许，且需显式开启ALLOW_LEGACY_PLAINTEXT）
+      passwordValid = oldPassword === user.password; // 明文迁移通道（仅开发/测试环境）
     } else {
-      // 无密码用户：允许通过验证码直接重置
-      passwordValid = true;
+      return res.status(401).json({ success: false, message: '密码格式错误，请联系客服' });
     }
+  } else {
+    // 无密码用户：允许通过验证码直接重置
+    passwordValid = true;
+  }
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedPassword;
     await user.save();
