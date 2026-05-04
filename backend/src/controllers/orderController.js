@@ -146,7 +146,7 @@ class OrderController {
       if (error.message === 'Order not found' || error.message === 'Unauthorized') {
         return res.status(401).json({
           success: false,
-          message: error.message,
+          message: '订单不存在或无权限',
           code: 'UNAUTHORIZED'
         });
       }

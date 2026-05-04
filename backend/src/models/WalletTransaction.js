@@ -42,6 +42,12 @@ const WalletTransaction = sequelize.define('WalletTransaction', {
     allowNull: true,
     comment: '关联订单ID'
   },
+  transaction_no: {
+    type: DataTypes.STRING(64),
+    allowNull: true,
+    unique: true,
+    comment: '交易流水号'
+  },
   status: {
     type: DataTypes.TINYINT,
     allowNull: false,

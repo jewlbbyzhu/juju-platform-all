@@ -190,6 +190,17 @@ const Party = sequelize.define('Party', {
     allowNull: false,
     defaultValue: false,
     comment: '是否热门'
+  },
+  report_count: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+    comment: '被举报次数'
+  },
+  last_report_time: {
+    type: DataTypes.DATE,
+    allowNull: true,
+    comment: '最后一次被举报时间'
   }
 }, {
   tableName: 'parties',

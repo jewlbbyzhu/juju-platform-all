@@ -1,9 +1,0 @@
-JUJU APK Build Report
-=====================
-Build Time: 20260417-030152
-Commit: 99f6ce6
-Commit Message: refactor: 深度重构GroupChatScreen - 2026设计系统、组件拆分至4个独立文件、动画优化、统一colors引用
-APK File: juju-v1.0.5-release-20260417-030152.apk
-APK Size: 67M
-Build Status: SUCCESS
-Gradle Output: android/app/build/outputs/apk/release/juju-v1.0.5-5-release.apk

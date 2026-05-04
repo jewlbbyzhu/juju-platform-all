@@ -34,7 +34,7 @@ const pushController = {
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: error.message
+        message: '获取推送消息列表失败'
       });
     }
   },
@@ -70,7 +70,7 @@ const pushController = {
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: error.message
+        message: '标记已读失败'
       });
     }
   },
@@ -94,7 +94,7 @@ const pushController = {
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: error.message
+        message: '标记全部已读失败'
       });
     }
   },
@@ -130,7 +130,7 @@ const pushController = {
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: error.message
+        message: '删除消息失败'
       });
     }
   },
@@ -148,7 +148,7 @@ const pushController = {
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: error.message
+        message: '清空消息失败'
       });
     }
   },
@@ -169,7 +169,7 @@ const pushController = {
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: error.message
+        message: '获取未读数失败'
       });
     }
   },
@@ -198,7 +198,7 @@ const pushController = {
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: error.message
+        message: '获取推送设置失败'
       });
     }
   },
@@ -243,7 +243,7 @@ const pushController = {
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: error.message
+        message: '更新推送设置失败'
       });
     }
   },
@@ -281,7 +281,7 @@ const pushController = {
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: error.message
+        message: '启用推送失败'
       });
     }
   },
@@ -319,7 +319,7 @@ const pushController = {
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: error.message
+        message: '禁用推送失败'
       });
     }
   }

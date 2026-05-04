@@ -6,16 +6,15 @@
   "setting": {
     "urlCheck": false,
     "es6": true,
-    "postcss": true,
-    "minified": true,
+    "postcss": false,
+    "minified": false,
     "newFeature": true,
-    "bigPackageSizeSupport": true,
-    "enhance": true
+    "bigPackageSizeSupport": true
   },
   "compileType": "miniprogram",
   "libVersion": "",
   "appid": "touristappid",
-  "projectname": "juju-uniapp",
+  "projectname": "聚聚",
   "condition": {
     "search": {
       "current": -1,

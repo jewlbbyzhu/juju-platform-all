@@ -1,0 +1,90 @@
+{
+  "project": "JUJU 后端API",
+  "date": "2026-05-04",
+  "summary": {
+    "v1_routes": 37,
+    "v2_routes": 30,
+    "controllers": 31,
+    "models": 53,
+    "todo_items": 19
+  },
+  "completed_apis": [
+    "用户认证 (auth.js)",
+    "聚会列表/详情/搜索 (partyController.js)",
+    "订单管理 (orderController.js)",
+    "支付系统 (paymentController.js)",
+    "钱包管理 (walletController.js)",
+    "票券系统 (ticketController.js)",
+    "社交功能 (socialController.js) - 动态/评论/点赞/关注",
+    "通知系统 (notificationController.js) - 基础CRUD",
+    "VIP系统 (vipController.js)",
+    "退款管理 (refundController.js)",
+    "聊天系统 (chatController.js)",
+    "银行卡管理 (bankCardController.js)",
+    "用户管理 (userController.js)",
+    "结算服务 (settlementService.js)",
+    "自动取消服务 (autoCancelService.js)"
+  ],
+  "pending_features": [
+    {
+      "feature": "举报功能",
+      "priority": "高",
+      "status": "部分实现",
+      "details": "socialController.js 有 reportPost/reportUser/reportComment 方法，但仅记录日志，未保存到数据库。缺少 Report 数据模型。"
+    },
+    {
+      "feature": "钱包交易号",
+      "priority": "高",
+      "status": "部分实现",
+      "details": "转账功能已有 transaction_no，但提现功能缺少。WalletTransaction 模型缺少 transaction_no 字段定义。"
+    },
+    {
+      "feature": "通知推送",
+      "priority": "高",
+      "status": "部分实现",
+      "details": "autoCancelService 已集成 sendNotification，但 settlementService 中 TODO 未完全实现。"
+    },
+    {
+      "feature": "评价系统",
+      "priority": "中",
+      "status": "占位实现",
+      "details": "parties.js /reviews 返回 501，未实现真实评价保存。"
+    },
+    {
+      "feature": "库存查询",
+      "priority": "中",
+      "status": "占位实现",
+      "details": "parties.js /tickets/inventory 返回 501。"
+    },
+    {
+      "feature": "微信API集成",
+      "priority": "中",
+      "status": "TODO",
+      "details": "auth.js 中有 TODO 注释，需替换为真实微信API调用。"
+    },
+    {
+      "feature": "Redis验证码存储",
+      "priority": "中",
+      "status": "TODO",
+      "details": "当前内存存储，生产环境需迁移至 Redis。"
+    }
+  ],
+  "security_fixes": [
+    "bcrypt salt rounds 提升至 12",
+    "验证码改为 crypto.randomInt()",
+    "createCipher → createCipheriv",
+    "CORS 配置修复",
+    "明文密码迁移通道移除",
+    "Token 黑名单机制",
+    "订单越权访问修复",
+    "错误信息脱敏",
+    "authLimiter 收紧至 3次/15分钟",
+    "bankCardService 随机 IV"
+  ],
+  "deployment": {
+    "local": "✅ 运行中 (端口18789)",
+    "render_yaml": "❌ 缺失",
+    "dockerfile": "✅ 存在",
+    "dockerignore": "❌ 缺失"
+  }
+}

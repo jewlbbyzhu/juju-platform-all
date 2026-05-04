@@ -140,6 +140,17 @@ const User = sequelize.define('User', {
     allowNull: true,
     comment: '最后登录IP'
   },
+  report_count: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+    comment: '被举报次数'
+  },
+  last_report_time: {
+    type: DataTypes.DATE,
+    allowNull: true,
+    comment: '最后一次被举报时间'
+  },
   password: {
     type: DataTypes.STRING(255),
     allowNull: true,

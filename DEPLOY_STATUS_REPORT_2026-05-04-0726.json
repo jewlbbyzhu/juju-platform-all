@@ -1,0 +1,77 @@
+{
+  "deploy_time": "2026-05-04 07:26:00 CST",
+  "agent": "devops-deploy",
+  "task_ip": "47.239.136.22",
+  "config_ip": "122.51.255.13",
+  "checks": {
+    "env": {
+      "project_exists": true,
+      "ssh_key_exists": true
+    },
+    "ip_consistency": {
+      "task_ip": "47.239.136.22",
+      "config_ip": "122.51.255.13",
+      "match": false,
+      "status": "IP_MISMATCH"
+    },
+    "ssh": {
+      "success": true,
+      "status": "OK",
+      "output": "SSH_OK\nMon May  4 07:26:01 AM CST 2026\n 07:26:01 up 78 days,  7:23, 39 users,  load average: 0.00, 0.00, 0.00\n"
+    },
+    "build_artifacts": {
+      "backend": true,
+      "admin_web": true,
+      "website": true,
+      "official_website": false,
+      "latest_commit": "d7f84948",
+      "commit_message": "fix: 统一后端所有console.*为logger.* (2026-05-04)"
+    },
+    "server": {
+      "pm2": "┌────┬───────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐\n│ id │ name      │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │\n├────┼───────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤\n│ 0  │ server    │ default     │ 1.0.0   │ fork    │ 986198   │ 29m    │ 23   │ online    │ 0%       │ 97.1mb   │ ubuntu   │ disabled │\n└────┴───────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘\n",
+      "ports": "LISTEN 0      4096      127.0.0.54:53         0.0.0.0:*    users:((\"systemd-resolve\",pid=473,fd=17))                                                                                                 \nLISTEN 0      151          0.0.0.0:3306       0.0.0.0:*    users:((\"mysqld\",pid=466495,fd=23))                                                                                                       \nLISTEN 0      5            0.0.0.0:8080       0.0.0.0:*    users:((\"python3\",pid=432946,fd=3))                                                                                                       \nLISTEN 0      4096       127.0.0.1:34225      0.0.0.0:*    users:((\"containerd\",pid=1090,fd=9))                                                                                                      \nLISTEN 0      4096   127.0.0.53%lo:53         0.0.0.0:*    users:((\"systemd-resolve\",pid=473,fd=15))                                                                                                 \nLISTEN 0      511          0.0.0.0:6379       0.0.0.0:*    users:((\"redis-server\",pid=995,fd=6))                                                                                                     \nLISTEN 0      511          0.0.0.0:80         0.0.0.0:*    users:((\"nginx\",pid=2322097,fd=5),(\"nginx\",pid=964515,fd=5),(\"nginx\",pid=964514,fd=5),(\"nginx\",pid=964513,fd=5),(\"nginx\",pid=964512,fd=5))\nLISTEN 0      511          0.0.0.0:443        0.0.0.0:*    users:((\"nginx\",pid=2322097,fd=6),(\"nginx\",pid=964515,fd=6),(\"nginx\",pid=964514,fd=6),(\"nginx\",pid=964513,fd=6),(\"nginx\",pid=964512,fd=6))\nLISTEN 0      128        127.0.0.1:5037       0.0.0.0:*    users:((\"adb\",pid=2484742,fd=12))                                                                                                         \nLISTEN 0      70           0.0.0.0:33060      0.0.0.0:*    users:((\"mysqld\",pid=466495,fd=21))                                                                                                       \nLISTEN 0      511          0.0.0.0:3000       0.0.0.0:*    users:((\"node /opt/juju-\",pid=986198,fd=27))                                                                                              \nLISTEN 0      511            [::1]:6379          [::]:*    users:((\"redis-server\",pid=995,fd=7))                                                                                                     \nLISTEN 0      4096               *:22               *:*    users:((\"sshd\",pid=1826089,fd=3),(\"systemd\",pid=1,fd=194))                                                                                \n",
+      "disk": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/vda2        40G   26G   12G  69% /\n/dev/vda2        40G   26G   12G  69% /\n/dev/vda2        40G   26G   12G  69% /\n",
+      "memory": "               total        used        free      shared  buff/cache   available\nMem:           3.6Gi       2.0Gi       259Mi       1.7Mi       1.6Gi       1.6Gi\nSwap:          1.9Gi       852Mi       1.1Gi\n"
+    },
+    "health": {
+      "后端API健康": {
+        "url": "https://api.hfparty.asia/api/v1/health",
+        "code": "200"
+      },
+      "后端API根路径": {
+        "url": "https://api.hfparty.asia/",
+        "code": "200"
+      },
+      "管理后台": {
+        "url": "https://admin.hfparty.asia",
+        "code": "200"
+      },
+      "官网": {
+        "url": "https://hfparty.asia",
+        "code": "200"
+      }
+    },
+    "api_probe": {
+      "健康检查": {
+        "url": "http://localhost:3000/api/v1/health",
+        "response": "{\"success\":true,\"data\":{\"status\":\"healthy\",\"timestamp\":\"2026-05-03T23:26:05.873Z\",\"uptime\":1795.619716524,\"environment\":\"development\"},\"_adapter\":{\"clientType\":\"website\",\"adapterClass\":\"WebsiteAdapter",
+        "status": "✅"
+      },
+      "聚会列表": {
+        "url": "http://localhost:3000/api/v1/parties",
+        "response": "{\"success\":false,\"message\":\"Unknown column 'Party.last_report_time' in 'field list'\",\"code\":\"INTERNAL_SERVER_ERROR\",\"error\":{\"code\":\"INTERNAL_SERVER_ERROR\",\"message\":\"Unknown column 'Party.last_report",
+        "status": "❌ SCHEMA_DRIFT"
+      },
+      "分类列表": {
+        "url": "http://localhost:3000/api/v1/categories",
+        "response": "{\"success\":false,\"message\":\"获取分类失败\",\"_trace\":{\"traceId\":\"d8a350a9-a006-4904-9dfe-f517bed84e19\",\"spanId\":\"43270d95-4cb7-493b-97f2-7d47c065ab5c\",\"duration\":\"3ms\"}}",
+        "status": "✅"
+      },
+      "用户列表(需认证)": {
+        "url": "http://localhost:3000/api/v1/users",
+        "response": "{\"success\":false,\"message\":\"未授权，请重新登录\",\"code\":\"UNAUTHORIZED\",\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"未授权，请重新登录\"},\"_trace\":{\"traceId\":\"c3fe48c9-e221-4a5e-8156-d341918f1217\",\"spanId\":\"aeba244c-3b89-4d",
+        "status": "✅"
+      }
+    }
+  }
+}

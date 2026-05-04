@@ -41,6 +41,11 @@ const webSocketService = require('./services/webSocketService');
 
 const app = express();
 
+// 信任代理（Nginx反向代理场景）
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1);
+}
+
 app.use(helmet({
   contentSecurityPolicy: false
 }));
@@ -142,7 +147,6 @@ app.get('/health', async (req, res) => {
     res.status(503).json({
       status: 'unhealthy',
       timestamp: new Date().toISOString(),
-      error: error.message,
       services: {
         database: 'disconnected',
         redis: 'unknown'
@@ -162,8 +166,7 @@ app.get('/health/ready', async (req, res) => {
   } catch (error) {
     res.status(503).json({
       status: 'not ready',
-      timestamp: new Date().toISOString(),
-      error: error.message
+      timestamp: new Date().toISOString()
     });
   }
 });

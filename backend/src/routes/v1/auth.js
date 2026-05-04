@@ -72,7 +72,7 @@ async function handleSendCode(req, res) {
     res.json({ success: true, message: 'Code sent', data: result });
   } catch (error) {
     const status = error.message.includes('频繁') ? 429 : 400;
-    res.status(status).json({ success: false, message: error.message });
+    res.status(status).json({ success: false, message: '验证码发送失败，请稍后重试' });
   }
 }
 

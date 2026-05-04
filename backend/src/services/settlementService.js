@@ -108,7 +108,8 @@ class SettlementService {
       const totalOrders = party.orders ? party.orders.length : 0;
       const totalAmount = party.orders ? party.orders.reduce((sum, order) => sum + order.final_amount, 0) : 0;
 
-      // const organizer = await User.findByPk(party.user_id); // TODO: 获取组织者信息用于通知
+      // 获取组织者信息用于通知
+      const organizer = party.user || await User.findByPk(party.user_id, { attributes: ['id', 'nickname', 'phone'] });
       let commissionRate = 0.05;
       let settlementRate = 0.95;
 
@@ -142,8 +143,8 @@ class SettlementService {
         party_start_time: party.start_time,
         party_end_time: party.end_time,
         organizer_id: party.user_id,
-        organizer_nickname: party.user ? party.user.nickname : '',
-        organizer_phone: party.user ? party.user.phone : '',
+        organizer_nickname: organizer ? organizer.nickname : '',
+        organizer_phone: organizer ? organizer.phone : '',
         total_orders: totalOrders,
         total_amount: totalAmount,
         settlement_status: this.calculateSettlementStatus(party),

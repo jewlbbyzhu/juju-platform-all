@@ -8,6 +8,7 @@ const Order = require('./Order');
 const OrderItem = require('./OrderItem');
 const Payment = require('./Payment');
 const Refund = require('./Refund');
+const Report = require('./Report');
 const Wallet = require('./Wallet');
 const WalletTransaction = require('./WalletTransaction');
 const BankCard = require('./BankCard');
@@ -290,6 +291,7 @@ const db = {
   AnalyticsReport,
   AnalyticsDashboard,
   PartyCategory,
+  Report,
 };
 
 module.exports = db;

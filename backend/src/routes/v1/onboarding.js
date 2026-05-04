@@ -53,8 +53,7 @@ router.get('/onboarding/status', async (req, res) => {
     logger.error('Get onboarding status error:', error);
     res.status(500).json({
       success: false,
-      message: '获取引导状态失败',
-      error: error.message
+      message: '获取引导状态失败'
     });
   }
 });
@@ -138,8 +137,7 @@ router.post('/onboarding/complete', async (req, res) => {
     logger.error('Complete onboarding error:', error);
     res.status(500).json({
       success: false,
-      message: '完善资料失败',
-      error: error.message
+      message: '完善资料失败'
     });
   }
 });

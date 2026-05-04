@@ -121,6 +121,7 @@ class WalletController {
           amount: amount,
           balance: newBalance,
           description: '钱包充值',
+          transaction_no: paymentNo,
           status: 1
         }, { transaction: t });
 
@@ -193,7 +194,7 @@ class WalletController {
       );
 
       const { WalletTransaction } = require('../models');
-      // const transactionNo = `WTH${Date.now()}${Math.floor(Math.random() * 1000)}`; // TODO: 使用交易号
+      const transactionNo = `WTH${Date.now()}${Math.floor(Math.random() * 1000)}`;
 
       const transaction = await WalletTransaction.create({
         user_id: req.user.id,
@@ -203,6 +204,7 @@ class WalletController {
         balance: wallet.balance - amount,
         description: '钱包提现',
         related_order_id: bankCardId,
+        transaction_no: transactionNo,
         status: 0
       });
 
@@ -238,7 +240,7 @@ class WalletController {
       }
 
       const bcrypt = require('bcrypt');
-      wallet.password = await bcrypt.hash(password, 10);
+      wallet.password = await bcrypt.hash(password, 12);
       await wallet.save();
 
       res.json({
@@ -297,7 +299,7 @@ class WalletController {
         });
       }
 
-      wallet.password = await bcrypt.hash(new_password, 10);
+      wallet.password = await bcrypt.hash(new_password, 12);
       await wallet.save();
 
       res.json({

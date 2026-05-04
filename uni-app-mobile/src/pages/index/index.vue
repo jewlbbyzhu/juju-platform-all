@@ -366,6 +366,22 @@ export default {
       });
     },
 
+    onShareAppMessage() {
+      return {
+        title: '发现身边的精彩聚会 - 聚聚',
+        path: '/pages/index/index',
+        imageUrl: '/static/share-cover.png'
+      };
+    },
+
+    onShareTimeline() {
+      return {
+        title: '发现身边的精彩聚会 - 聚聚',
+        query: '',
+        imageUrl: '/static/share-cover.png'
+      };
+    },
+
     goToUserProfile(userId) {
       uni.navigateTo({
         url: `/pages/user-profile/user-profile?id=${userId}`

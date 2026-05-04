@@ -67,7 +67,7 @@ class PartyController {
       if (error.message === 'Party not found') {
         return res.status(404).json({
           success: false,
-          message: error.message,
+          message: '活动不存在',
           code: 'NOT_FOUND'
         });
       }

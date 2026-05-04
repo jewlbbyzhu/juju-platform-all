@@ -1,9 +1,0 @@
-Build Report
-============
-Date: 2026-04-15 09:02:30
-Status: SUCCESS
-Commit: 58bd15a43ced3c6b86de272a961054c9fbbe6cdc
-Message: fix(ui): 微调MyOrdersScreen加载动画样式 + TS修复
-APK File: juju-v1.0.5-5-release-20260415-090230.apk
-APK Size: 67M
-Latest Link: juju-latest-release.apk

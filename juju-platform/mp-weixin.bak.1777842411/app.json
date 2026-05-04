@@ -1,0 +1,94 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/my-parties/my-parties",
+    "pages/party-detail/party-detail",
+    "pages/ticket-selection/ticket-selection",
+    "pages/payment/payment",
+    "pages/my-orders/my-orders",
+    "pages/my-tickets/my-tickets",
+    "pages/wallet/wallet",
+    "pages/profile/profile",
+    "pages/create-party/create-party",
+    "pages/community/community",
+    "pages/create-post/create-post",
+    "pages/social/social",
+    "pages/scan-ticket/scan-ticket",
+    "pages/scan-history/scan-history",
+    "pages/vip-history/vip-history",
+    "pages/push-settings/push-settings",
+    "pages/following/following",
+    "pages/fans/fans",
+    "pages/vip-privileges/vip-privileges",
+    "pages/share-poster/share-poster",
+    "pages/tag-manage/tag-manage",
+    "pages/invite-code/invite-code",
+    "pages/vip-events/vip-events",
+    "pages/user-profile/user-profile",
+    "pages/chat-list/chat-list",
+    "pages/private-chat/private-chat",
+    "pages/vip-levels/vip-levels",
+    "pages/vip-points/vip-points",
+    "pages/ticket-inventory/ticket-inventory",
+    "pages/ticket-stats/ticket-stats",
+    "pages/ticket-stats-detail/ticket-stats-detail",
+    "pages/group-chat-list/group-chat-list",
+    "pages/group-chat/group-chat",
+    "pages/create-group/create-group",
+    "pages/vip-stats/vip-stats",
+    "pages/order-detail/order-detail",
+    "pages/review/review",
+    "pages/refund-apply/refund-apply",
+    "pages/customer-service/customer-service",
+    "pages/vip/vip",
+    "pages/notifications/notifications"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "聚聚",
+    "navigationBarBackgroundColor": "#0a0a0a",
+    "backgroundColor": "#0a0a0a",
+    "backgroundColorTop": "#0a0a0a",
+    "backgroundColorBottom": "#0a0a0a"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#FF6B35",
+    "backgroundColor": "#0a0a0a",
+    "borderStyle": "black",
+    "blurEffect": "dark",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "发现",
+        "iconPath": "static/tabbar/home.png",
+        "selectedIconPath": "static/tabbar/home-active.png"
+      },
+      {
+        "pagePath": "pages/community/community",
+        "text": "社区",
+        "iconPath": "static/tabbar/community.png",
+        "selectedIconPath": "static/tabbar/community-active.png"
+      },
+      {
+        "pagePath": "pages/create-party/create-party",
+        "text": "发布",
+        "iconPath": "static/tabbar/publish.png",
+        "selectedIconPath": "static/tabbar/publish-active.png"
+      },
+      {
+        "pagePath": "pages/chat-list/chat-list",
+        "text": "消息",
+        "iconPath": "static/tabbar/message.png",
+        "selectedIconPath": "static/tabbar/message-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "static/tabbar/profile.png",
+        "selectedIconPath": "static/tabbar/profile-active.png"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

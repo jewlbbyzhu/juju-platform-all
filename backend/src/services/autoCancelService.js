@@ -29,7 +29,7 @@ class AutoCancelService {
       });
 
       let cancelledCount = 0;
-      // const notifiedCount = 0; // TODO: 实现通知功能
+      let notifiedCount = 0;
 
       for (const party of partiesToCheck) {
         const participantCount = await Order.count({
@@ -47,12 +47,13 @@ class AutoCancelService {
         }
       }
 
-      logger.info(`Auto-cancel check completed. Cancelled: ${cancelledCount}, Checked: ${partiesToCheck.length}`);
+      logger.info(`Auto-cancel check completed. Cancelled: ${cancelledCount}, Notified: ${notifiedCount}, Checked: ${partiesToCheck.length}`);
 
       return {
         cancelled_count: cancelledCount,
+        notified_count: notifiedCount,
         checked_count: partiesToCheck.length,
-        message: `自动取消检查完成，共检查 ${partiesToCheck.length} 个聚会，取消 ${cancelledCount} 个聚会`
+        message: `自动取消检查完成，共检查 ${partiesToCheck.length} 个聚会，取消 ${cancelledCount} 个聚会，通知 ${notifiedCount} 位用户`
       };
     } catch (error) {
       logger.error('Auto-cancel parties failed:', error);
@@ -108,6 +109,7 @@ class AutoCancelService {
           related_id: party.id,
           related_type: 'party'
         });
+        notifiedCount++;
       }
 
       await sendNotification({
@@ -118,6 +120,7 @@ class AutoCancelService {
         related_id: party.id,
         related_type: 'party'
       });
+      notifiedCount++;
 
       return result;
     });

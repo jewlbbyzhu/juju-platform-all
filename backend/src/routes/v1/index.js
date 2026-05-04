@@ -57,6 +57,7 @@ router.use('/social', require('./social'));  // 前端社交路由
 router.use('/content', require('./content'));  // 前端内容路由
 router.use('/posts', require('./posts'));  // 前端帖子路由
 router.use('/auth/refresh', require('./refresh'));  // 前端兼容性路由 - Token刷新
+router.use('/reports', require('./reports'));  // 举报/投诉路由
 
 // 前端兼容性路由 - /group-chats 直接映射到 chatController
 const chatController = require('../../controllers/chatController');

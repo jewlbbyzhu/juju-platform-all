@@ -263,14 +263,20 @@ export default {
     },
 
     showUserAgreement() {
-      uni.navigateTo({
-        url: '/pages/agreement/agreement?type=user'
+      uni.showModal({
+        title: '用户协议',
+        content: '本协议是用户与聚聚平台之间关于使用聚聚服务所订立的协议。用户使用聚聚服务即视为同意本协议全部内容。',
+        showCancel: false,
+        confirmText: '我知道了'
       })
     },
 
     showPrivacyPolicy() {
-      uni.navigateTo({
-        url: '/pages/agreement/agreement?type=privacy'
+      uni.showModal({
+        title: '隐私政策',
+        content: '聚聚重视用户隐私保护。我们收集的信息仅用于提供服务，不会泄露给第三方。',
+        showCancel: false,
+        confirmText: '我知道了'
       })
     }
   }

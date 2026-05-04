@@ -1,9 +1,0 @@
-Build Report
-============
-Status: SUCCESS
-Timestamp: 20260420-000158
-Commit: ca7731b (ca7731b024f8be9c968cef853ed68d0061ab1073)
-Commit Message: refactor: 重构 CreatePartyScreen.tsx & CreatePostScreen.tsx - 移除 useMemo 样式，改用直接内联样式对象，统一设计系统规范
-APK File: juju-v1.0.5-5-release-20260420-000158.apk
-APK Size:  67M
-Source: android/app/build/outputs/apk/release/juju-v1.0.5-5-release.apk

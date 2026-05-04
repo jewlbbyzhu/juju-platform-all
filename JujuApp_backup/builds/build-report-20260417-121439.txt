@@ -1,9 +1,0 @@
-Build Report - 20260417-121439
-========================
-Status: SUCCESS
-Commit: 4a6875f
-Message: refactor: 深度重构ProfileScreen - 437行降至117行，拆分至4个独立组件文件，统一2026设计系统
-APK: juju-v1.0.5-5-release-20260417-121439.apk
-Size:  67M
-Output: builds/juju-v1.0.5-5-release-20260417-121439.apk
-

@@ -105,6 +105,22 @@ const shareParty = () => {
   });
 };
 
+const onShareAppMessage = () => {
+  return {
+    title: party.value?.title ? `来${party.value.title}一起玩！` : '发现精彩聚会 - 聚聚',
+    path: `/pages/party-detail/party-detail?id=${party.value?.id || ''}`,
+    imageUrl: party.value?.coverImage || '/static/share-cover.png'
+  };
+};
+
+const onShareTimeline = () => {
+  return {
+    title: party.value?.title ? `来${party.value.title}一起玩！` : '发现精彩聚会 - 聚聚',
+    query: `id=${party.value?.id || ''}`,
+    imageUrl: party.value?.coverImage || '/static/share-cover.png'
+  };
+};
+
 const getStatusClass = (status) => {
   const map = {
     0: 'status-pending',

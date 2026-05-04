@@ -109,6 +109,30 @@ onMounted(() => {
   user.value = userStore.userInfo
   loadPartyData()
 })
+
+// 分享功能 - 使用 defineExpose 确保 uni-app 编译器识别
+import { defineExpose } from 'vue'
+
+const onShareAppMessage = () => {
+  return {
+    title: party.value?.title ? `分享聚会：${party.value.title}` : '分享聚会海报',
+    path: `/pages/party-detail/party-detail?id=${party.value?.id || ''}`,
+    imageUrl: '/static/share-cover.png'
+  };
+};
+
+const onShareTimeline = () => {
+  return {
+    title: party.value?.title ? `分享聚会：${party.value.title}` : '分享聚会海报',
+    query: `id=${party.value?.id || ''}`,
+    imageUrl: '/static/share-cover.png'
+  };
+};
+
+defineExpose({
+  onShareAppMessage,
+  onShareTimeline
+})
 </script>
 
 <style lang="scss" scoped>

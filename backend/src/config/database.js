@@ -61,7 +61,8 @@ if (isTest) {
         min: parseInt(process.env.DB_POOL_MIN) || 5,
         acquire: parseInt(process.env.DB_POOL_ACQUIRE_TIMEOUT) || 60000,
         idle: parseInt(process.env.DB_POOL_TIMEOUT) || 30000,
-        evict: 10000
+        evict: 10000,
+        handleDisconnects: true
       },
       retry: {
         max: 3,

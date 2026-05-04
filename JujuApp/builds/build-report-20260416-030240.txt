@@ -1,8 +1,0 @@
-Build Report
-============
-Status: SUCCESS
-Commit: 384ec722b1bc9e40cda7852d1b434b83d40e3a4e
-Message: refactor: 深度重构TicketSelectScreen - 2026设计系统、组件拆分、动画优化、统一colors引用
-Build Time: 2026-04-16 03:02:25
-APK: juju-v1.0.5-5-release-20260416-030225.apk
-Size: $(ls -lh builds/juju-v1.0.5-5-release-20260416-030225.apk | awk '{print $5}')

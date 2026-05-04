@@ -41,7 +41,15 @@
     "pages/refund-apply/refund-apply",
     "pages/customer-service/customer-service",
     "pages/vip/vip",
-    "pages/notifications/notifications"
+    "pages/notifications/notifications",
+    "pages/login/login",
+    "pages/edit-profile/edit-profile",
+    "pages/settings/settings",
+    "pages/favorite/favorite",
+    "pages/help/help",
+    "pages/about/about",
+    "pages/push-messages/push-messages",
+    "pages/theme-preview/theme-preview"
   ],
   "window": {
     "navigationBarTextStyle": "white",

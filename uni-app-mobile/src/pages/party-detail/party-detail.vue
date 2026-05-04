@@ -151,6 +151,23 @@ const getGenderText = (restriction) => {
   };
   return map[restriction] || '';
 };
+
+// 分享功能
+const onShareAppMessage = () => {
+  return {
+    title: party.value?.title ? `来${party.value.title}一起玩！` : '发现精彩聚会 - 聚聚',
+    path: `/pages/party-detail/party-detail?id=${party.value?.id || ''}`,
+    imageUrl: '/static/share-cover.png'
+  };
+};
+
+const onShareTimeline = () => {
+  return {
+    title: party.value?.title ? `来${party.value.title}一起玩！` : '发现精彩聚会 - 聚聚',
+    query: `id=${party.value?.id || ''}`,
+    imageUrl: '/static/share-cover.png'
+  };
+};
 </script>
 
 <style lang="scss" scoped>

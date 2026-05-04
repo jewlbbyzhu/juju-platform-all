@@ -445,6 +445,22 @@ export default {
 
     handleImageError() {
       // 图片加载失败处理
+    },
+
+    onShareAppMessage() {
+      return {
+        title: '发现身边的精彩聚会 - 聚聚',
+        path: '/pages/index/index',
+        imageUrl: '/static/share-cover.png'
+      };
+    },
+
+    onShareTimeline() {
+      return {
+        title: '发现身边的精彩聚会 - 聚聚',
+        query: '',
+        imageUrl: '/static/share-cover.png'
+      };
     }
   }
 };

@@ -45,7 +45,6 @@ class MonitoringController {
         success: false,
         data: {
           status: 'unhealthy',
-          error: error.message,
           timestamp: new Date().toISOString()
         }
       });

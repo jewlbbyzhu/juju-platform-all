@@ -105,6 +105,22 @@ const close = () => {
   uni.navigateBack()
 }
 
+const onShareAppMessage = () => {
+  return {
+    title: party.value?.title ? `分享聚会：${party.value.title}` : '分享聚会海报',
+    path: `/pages/party-detail/party-detail?id=${party.value?.id || ''}`,
+    imageUrl: party.value?.coverImage || '/static/share-cover.png'
+  }
+}
+
+const onShareTimeline = () => {
+  return {
+    title: party.value?.title ? `分享聚会：${party.value.title}` : '分享聚会海报',
+    query: `id=${party.value?.id || ''}`,
+    imageUrl: party.value?.coverImage || '/static/share-cover.png'
+  }
+}
+
 onMounted(() => {
   user.value = userStore.userInfo
   loadPartyData()

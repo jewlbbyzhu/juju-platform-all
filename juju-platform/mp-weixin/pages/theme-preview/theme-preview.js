@@ -1,0 +1,1 @@
+"use strict";const t=require("../../common/vendor.js"),e=require("../../utils/theme.js");Math||r();const r=()=>"../../components/theme-switch.js",n={__name:"theme-preview",setup(a){return t.onMounted(()=>{e.themeManager.applyTheme(e.themeManager.getCurrentTheme())}),(o,s)=>({})}},c=t._export_sfc(n,[["__scopeId","data-v-9a148e26"]]);wx.createPage(c);

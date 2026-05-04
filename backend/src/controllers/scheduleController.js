@@ -17,8 +17,7 @@ class ScheduleController {
       logger.error('Auto-cancel trigger failed:', error);
       res.status(500).json({
         code: 500,
-        message: '自动取消检查失败',
-        error: error.message
+        message: '自动取消检查失败'
       });
     }
   }
@@ -36,8 +35,7 @@ class ScheduleController {
       logger.error('Get parties to cancel failed:', error);
       res.status(500).json({
         code: 500,
-        message: '获取待取消聚会列表失败',
-        error: error.message
+        message: '获取待取消聚会列表失败'
       });
     }
   }

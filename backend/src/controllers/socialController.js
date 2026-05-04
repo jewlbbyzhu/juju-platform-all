@@ -789,16 +789,32 @@ const socialController = {
 
   async reportPost(req, res) {
     try {
-      // const { reason, description } = req.body; // TODO: 实现举报功能
-      // const { id } = req.params;
-      // const userId = req.user.id;
+      const { id } = req.params;
+      const { reason, description } = req.body;
+      const reporterId = req.user.id;
+
+      if (!reason) {
+        return res.status(400).json({
+          code: -1,
+          message: '请选择举报原因'
+        });
+      }
+
+      // 记录举报日志（短期方案，后续可迁移至Report模型持久化）
+      logger.info('举报帖子', {
+        reporterId,
+        postId: id,
+        reason,
+        description,
+        createdAt: new Date()
+      });
 
       res.json({
         code: 0,
-        message: '举报成功'
+        message: '举报成功，我们会尽快处理'
       });
     } catch (error) {
-      logger.error('举报失败', { error: error.message });
+      logger.error('举报帖子失败', { error: error.message });
       res.status(500).json({
         code: -1,
         message: '举报失败'
