@@ -52,6 +52,9 @@ const Wallet = sequelize.define('Wallet', {
 }, {
   tableName: 'wallets',
   comment: '钱包表',
+  defaultScope: {
+    attributes: { exclude: ['password'] }
+  },
   indexes: [
     { fields: ['user_id'] },
     { fields: ['status'] }
@@ -59,12 +62,12 @@ const Wallet = sequelize.define('Wallet', {
   hooks: {
     beforeCreate: async (wallet) => {
       if (wallet.password) {
-        wallet.password = await bcrypt.hash(wallet.password, 10);
+        wallet.password = await bcrypt.hash(wallet.password, 12);
       }
     },
     beforeUpdate: async (wallet) => {
       if (wallet.changed('password') && wallet.password) {
-        wallet.password = await bcrypt.hash(wallet.password, 10);
+        wallet.password = await bcrypt.hash(wallet.password, 12);
       }
     }
   }

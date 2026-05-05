@@ -145,7 +145,7 @@ class AdminService {
         throw new Error('Admin already exists');
       }
 
-      const hashedPassword = await bcrypt.hash(adminData.password, 10);
+      const hashedPassword = await bcrypt.hash(adminData.password, 12);
 
       const admin = await Admin.create({
         username: adminData.username,
@@ -189,7 +189,7 @@ class AdminService {
       }
 
       if (updateData.password) {
-        updates.password = await bcrypt.hash(updateData.password, 10);
+        updates.password = await bcrypt.hash(updateData.password, 12);
       }
 
       await admin.update(updates);
@@ -420,7 +420,7 @@ class AdminService {
         throw new Error('Admin not found');
       }
 
-      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      const hashedPassword = await bcrypt.hash(newPassword, 12);
       admin.password = hashedPassword;
       await admin.save();
 

@@ -294,7 +294,7 @@ class WalletService {
       }
 
       const bcrypt = require('bcrypt');
-      wallet.password = await bcrypt.hash(newPassword, 10);
+      wallet.password = await bcrypt.hash(newPassword, 12);
       await wallet.save();
 
       return await this.getWalletByUserId(userId);

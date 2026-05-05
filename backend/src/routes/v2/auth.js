@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 const { Admin, Role, Permission } = require('../../models');
 const { auth, adminAuth } = require('../../middleware/auth');
 const {
@@ -147,7 +148,7 @@ router.post('/change-password', auth, adminAuth, async (req, res, next) => {
     const isValid = await bcrypt.compare(oldPassword, admin.password);
     if (!isValid) return res.status(401).json({ success: false, message: 'Invalid password' });
 
-    const hashed = await bcrypt.hash(newPassword, 10);
+    const hashed = await bcrypt.hash(newPassword, 12);
     admin.password = hashed;
     await admin.save();
 
@@ -158,7 +159,7 @@ router.post('/change-password', auth, adminAuth, async (req, res, next) => {
 });
 
 router.get('/captcha', async (req, res) => {
-  const code = Math.random().toString(10).slice(2, 6);
+  const code = String(crypto.randomInt(100000, 999999));
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40"><rect width="120" height="40" fill="#f2f3f5"/><text x="60" y="26" text-anchor="middle" font-size="20" fill="#303133" font-family="Arial">${code}</text></svg>`;
   const captcha = `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
   res.json({ success: true, data: { captcha, key: code } });
