@@ -6,6 +6,7 @@ const cacheManager = require('../utils/cacheManager');
 const { toJSONSafe } = require('../utils/circularRefCleaner');
 const { ORDER_PREFIX } = require('../constants');
 const webSocketService = require('./webSocketService');
+const crypto = require('crypto');
 
 class PartyService {
   async createParty(userId, partyData) {
@@ -737,7 +738,7 @@ class PartyService {
       const Refund = require('../models').Refund;
       for (const order of orders) {
         // 创建退款记录
-        const refundNo = `${ORDER_PREFIX.REFUND}${Date.now()}${Math.floor(Math.random() * 1000)}`;
+        const refundNo = `${ORDER_PREFIX.REFUND}${Date.now()}${crypto.randomInt(0, 999).toString().padStart(3, '0')}`;
         await Refund.create({
           order_id: order.id,
           payment_id: order.payment_id,

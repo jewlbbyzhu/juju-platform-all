@@ -4,6 +4,7 @@ const { Op } = require('sequelize');
 const logger = require('../utils/logger');
 const { TICKET_CONSTANTS, ORDER_PREFIX } = require('../constants');
 const { toJSONSafe } = require('../utils/circularRefCleaner');
+const crypto = require('crypto');
 
 class OrderService {
   async createOrder(userId, orderData) {
@@ -126,7 +127,7 @@ class OrderService {
           }
         }
 
-        const orderNo = `${ORDER_PREFIX.ORDER}${Date.now()}${Math.floor(Math.random() * 1000)}`;
+        const orderNo = `${ORDER_PREFIX.ORDER}${Date.now()}${crypto.randomInt(0, 999).toString().padStart(3, '0')}`;
         const order = await Order.create({
           user_id: userId,
           order_no: orderNo,
@@ -481,7 +482,7 @@ class OrderService {
         throw new Error('Refund deadline has passed');
       }
 
-      const refundNo = `REF${Date.now()}${Math.floor(Math.random() * 1000)}`;
+      const refundNo = `REF${Date.now()}${crypto.randomInt(0, 999).toString().padStart(3, '0')}`;
       const refund = await Refund.create({
         order_id: orderId,
         payment_id: order.payment_id,
@@ -529,7 +530,7 @@ class OrderService {
 
         for (const item of order.order_items) {
           for (let i = 0; i < item.quantity; i++) {
-            const ticketCode = `${ORDER_PREFIX.TICKET}${Date.now()}${Math.floor(Math.random() * TICKET_CONSTANTS.TICKET_CODE_RANDOM_MAX)}`;
+            const ticketCode = `${ORDER_PREFIX.TICKET}${Date.now()}${crypto.randomInt(0, 9999).toString().padStart(4, '0')}`;
             await Ticket.create({
               user_id: order.user_id,
               order_id: order.id,
@@ -785,7 +786,7 @@ class OrderService {
         await this.updatePaymentStatus(orderId, 1, t);
       } else {
         const { Payment } = require('../models');
-        const paymentNo = `${ORDER_PREFIX.PAYMENT}${Date.now()}${Math.floor(Math.random() * 1000)}`;
+        const paymentNo = `${ORDER_PREFIX.PAYMENT}${Date.now()}${crypto.randomInt(0, 999).toString().padStart(3, '0')}`;
         await Payment.create({
           order_id: order.id,
           payment_no: paymentNo,
@@ -1092,7 +1093,7 @@ class OrderService {
       }
 
       const { Payment } = require('../models');
-      const paymentNo = `${ORDER_PREFIX.PAYMENT}${Date.now()}${Math.floor(Math.random() * 1000)}`;
+      const paymentNo = `${ORDER_PREFIX.PAYMENT}${Date.now()}${crypto.randomInt(0, 999).toString().padStart(3, '0')}`;
       const payment = await Payment.create({
         order_id: order.id,
         payment_no: paymentNo,

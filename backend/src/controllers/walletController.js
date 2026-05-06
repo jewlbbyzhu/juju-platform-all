@@ -1,5 +1,6 @@
 const { Wallet, WalletTransaction } = require('../models');
 const logger = require('../utils/logger');
+const crypto = require('crypto');
 const { validatePassword, validateAmount } = require('../utils/validator');
 
 class WalletController {
@@ -96,7 +97,7 @@ class WalletController {
       const TransactionManager = require('../utils/transactionManager');
       
       const result = await TransactionManager.execute(async (t) => {
-        const paymentNo = `PAY${Date.now()}${Math.floor(Math.random() * 1000)}`;
+        const paymentNo = `PAY${Date.now()}${crypto.randomInt(0, 999).toString().padStart(3, '0')}`;
         
         const payment = await Payment.create({
           order_id: 0,
@@ -194,7 +195,7 @@ class WalletController {
       );
 
       const { WalletTransaction } = require('../models');
-      const transactionNo = `WTH${Date.now()}${Math.floor(Math.random() * 1000)}`;
+      const transactionNo = `WTH${Date.now()}${crypto.randomInt(0, 999).toString().padStart(3, '0')}`;
 
       const transaction = await WalletTransaction.create({
         user_id: req.user.id,
@@ -420,7 +421,7 @@ class WalletController {
       );
 
       // Create transaction records
-      const transactionNo = `TRF${Date.now()}${Math.floor(Math.random() * 1000)}`;
+      const transactionNo = `TRF${Date.now()}${crypto.randomInt(0, 999).toString().padStart(3, '0')}`;
 
       await WalletTransaction.create({
         user_id: req.user.id,
