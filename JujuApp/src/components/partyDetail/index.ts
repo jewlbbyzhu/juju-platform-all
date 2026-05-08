@@ -1,9 +1,0 @@
-export { InfoItem } from './InfoItem';
-export { OrganizerSection } from './OrganizerSection';
-export { ParticipantsRow } from './ParticipantsRow';
-export { CoverImage } from './CoverImage';
-export { ActionBar } from './ActionBar';
-export { MainCard } from './MainCard';
-export { PriceCard } from './PriceCard';
-export { DescriptionCard } from './DescriptionCard';
-export { ParticipantsCard } from './ParticipantsCard';

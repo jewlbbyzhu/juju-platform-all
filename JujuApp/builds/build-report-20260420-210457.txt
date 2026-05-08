@@ -1,9 +1,0 @@
-Build Report
-============
-Status: SUCCESS
-Timestamp: 20260420-210457
-Commit: ff3ca78b2379e557ef7af876bd9b063bf31f2956
-Short: ff3ca78
-Message: refactor: 重构 VIPEventsScreen.tsx & VIPLevelsScreen.tsx - 移除 useMemo 样式，统一使用设计系统变量
-APK: builds/juju-release-20260420-210457.apk
-Size: 67M
