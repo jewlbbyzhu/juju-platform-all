@@ -107,10 +107,39 @@ router.post('/phone-login', async (req, res) => {
 // 手机号+密码登录
 router.post('/login', async (req, res) => {
   try {
-    const { phone, password } = req.body || {};
+    const { phone, password, code } = req.body || {};
     
-    // 支持两种模式：手机号+密码 或 微信code登录
-    if (phone && password) {
+    // 支持三种模式：手机号+验证码、手机号+密码 或 微信code登录
+    if (phone && code) {
+      // 手机号+验证码登录
+      const stored = mockVerifyCodes[phone];
+      if (!stored || Date.now() > stored.expiresAt) return res.status(400).json({ success: false, message: '验证码已过期，请重新获取' });
+      if (code !== stored.code) return res.status(400).json({ success: false, message: 'Invalid code' });
+      let user = await User.findOne({ where: { phone } });
+      if (!user) { user = await User.create({ phone, nickname: '用户' + phone.slice(-4), gender: 0, language: 'zh_CN', status: 1 }); }
+      user.last_login_at = new Date(); await user.save();
+      const accessPayload = { id: user.id, role: 'user', phone };
+      const token = generateAccessToken(accessPayload);
+      const refreshToken = generateRefreshToken(accessPayload);
+      res.json({ 
+        success: true, 
+        message: 'Login successful', 
+        data: { 
+          token, 
+          refreshToken, 
+          user: { 
+            id: user.id, 
+            nickname: user.nickname, 
+            name: user.nickname,
+            avatar: user.avatar, 
+            phone: user.phone,
+            gender: user.gender,
+            is_vip: user.is_vip,
+            vip_level: user.vip_level
+          } 
+        } 
+      });
+    } else if (phone && password) {
       // 手机号+密码登录
       if (!phone || !password) {
         return res.status(400).json({ success: false, message: 'Phone and password required' });

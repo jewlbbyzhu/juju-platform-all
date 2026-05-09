@@ -3,6 +3,9 @@ const router = express.Router();
 const socialController = require('../../controllers/socialController');
 const { auth: authenticate } = require('../../middleware/auth');
 
+// 获取当前用户的关注列表（GET /follows）
+router.get('/', authenticate, socialController.getFollowing);
+
 // 关注/取消关注
 router.post('/', authenticate, socialController.follow);
 router.post('/:id', authenticate, socialController.followUser);

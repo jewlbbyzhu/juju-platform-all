@@ -33,7 +33,7 @@ router.put('/:id/read', authenticate, (req, res) => {
 });
 
 // 标记所有消息已读（需要登录）
-router.put('/read-all', authenticate, (req, res) => {
+router.post('/read-all', authenticate, (req, res) => {
   res.json({
     success: true,
     message: '全部标记已读成功'
