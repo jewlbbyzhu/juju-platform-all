@@ -3,6 +3,9 @@ const router = express.Router();
 const ticketTypeController = require('../../controllers/ticketTypeController');
 const { auth } = require('../../middleware/auth');
 
+// 获取所有票种（公开接口，供前端票种选择器使用）
+router.get('/', ticketTypeController.getAllTicketTypes);
+
 // 获取聚会下的所有票种
 router.get('/party/:partyId', ticketTypeController.getTicketTypesByParty);
 

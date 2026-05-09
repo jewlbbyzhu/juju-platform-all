@@ -4,7 +4,7 @@ const { User } = require('../../models');
 const logger = require('../../utils/logger');
 
 // 检查用户是否需要完善资料（新用户引导）
-router.get('/onboarding/status', async (req, res) => {
+router.get('/status', async (req, res) => {
   try {
     // 实际应用中需要从JWT token获取用户ID
     // 这里简化处理，需要配合认证中间件使用
@@ -59,7 +59,7 @@ router.get('/onboarding/status', async (req, res) => {
 });
 
 // 完善用户资料（新用户引导提交）
-router.post('/onboarding/complete', async (req, res) => {
+router.post('/complete', async (req, res) => {
   try {
     const userId = req.user?.id || req.body.userId;
     const { nickname, avatar, gender, birthday } = req.body;

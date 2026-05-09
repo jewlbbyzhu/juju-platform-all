@@ -7,6 +7,37 @@ const { Op } = require('sequelize');
 // 前端兼容性路由 - 票券统计
 // 这些路由对应前端 ticket-stats.ts 的调用
 
+// 获取票券统计概览（不需要认证，返回简单的统计数据）
+router.get('/', async (req, res, next) => {
+  try {
+    const { Ticket, TicketType, Party } = require('../../models');
+    
+    // 获取所有统计数据（不限制用户）
+    const totalTickets = await Ticket.count();
+    const usedTickets = await Ticket.count({ where: { status: 1 } });
+    const unusedTickets = await Ticket.count({ where: { status: 0 } });
+    const expiredTickets = await Ticket.count({
+      where: {
+        status: { [Op.ne]: 1 },
+        expires_at: { [Op.lt]: new Date() }
+      }
+    });
+    
+    res.json({
+      success: true,
+      data: {
+        totalTickets,
+        usedTickets,
+        unusedTickets,
+        expiredTickets,
+        totalAmount: 0
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/overview', auth, async (req, res, next) => {
   try {
     const { Ticket, TicketType, Order } = require('../../models');

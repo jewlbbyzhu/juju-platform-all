@@ -4,6 +4,53 @@ const logger = require('../utils/logger');
 
 class TicketTypeController {
   /**
+   * 获取所有票种（公开接口，供前端票种选择器使用）
+   */
+  async getAllTicketTypes(req, res, next) {
+    try {
+      const { page = 1, pageSize = 50, status = 1 } = req.query;
+      const { TicketType, Party } = require('../models');
+      
+      const where = {};
+      if (status !== 'all') {
+        where.status = parseInt(status);
+      }
+      
+      const { count, rows } = await TicketType.findAndCountAll({
+        where,
+        include: [{
+          model: Party,
+          as: 'party',
+          attributes: ['id', 'title', 'start_time', 'end_time', 'status']
+        }],
+        order: [['created_at', 'DESC']],
+        offset: (parseInt(page) - 1) * parseInt(pageSize),
+        limit: parseInt(pageSize)
+      });
+
+      res.json({
+        success: true,
+        data: rows.map(tt => {
+          const plain = tt.get({ plain: true });
+          const remaining = plain.available_count - plain.sold_count;
+          return {
+            ...plain,
+            remaining_count: remaining > 0 ? remaining : 0,
+            is_sold_out: remaining <= 0,
+            is_available: remaining > 0 && plain.status === 1
+          };
+        }),
+        total: count,
+        page: parseInt(page),
+        pageSize: parseInt(pageSize)
+      });
+    } catch (error) {
+      logger.error('Get all ticket types error:', error);
+      next(error);
+    }
+  }
+
+  /**
    * 获取聚会下的所有票种
    */
   async getTicketTypesByParty(req, res, next) {

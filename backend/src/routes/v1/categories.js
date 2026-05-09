@@ -6,7 +6,7 @@ const { Category } = require('../../models');
 // 获取所有主题分类
 router.get('/', async (req, res) => {
   try {
-    const categories = await PartyCategory.findAll({
+    const categories = await Category.findAll({
       where: { status: 1 },
       order: [['sort_order', 'ASC']],
       attributes: ['id', 'slug', 'name', 'name_en', 'icon', 'color', 'description'],
