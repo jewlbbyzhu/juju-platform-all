@@ -52,7 +52,7 @@ pm2 restart server
 
 # 健康检查
 sleep 3
-curl -s http://localhost:18789/api/v1/health | head -c 200
+curl -s http://localhost:3001/api/v1/health | head -c 200
 "
 
 echo "[6/6] 部署完成"

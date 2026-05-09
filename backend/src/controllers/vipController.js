@@ -275,7 +275,7 @@ class VipController {
     try {
       const benefits = await VipBenefit.findAll({
         where: { is_active: 1 },
-        order: [['sortOrder', 'ASC']]
+        order: [['sort_order', 'ASC']]
       });
 
       return success(res, {
@@ -295,12 +295,13 @@ class VipController {
     try {
       const { page = 1, pageSize = 20 } = req.query;
 
+      // 注意: isVipOnly 字段在数据库中不存在，暂时注释掉该过滤条件
+      // isVipOnly 字段需要数据库添加后才可启用
       const { count, rows: events } = await Party.findAndCountAll({
         where: {
-          isVipOnly: true,
           status: 'active'
         },
-        order: [['startTime', 'ASC']],
+        order: [['start_time', 'ASC']],
         offset: (page - 1) * pageSize,
         limit: parseInt(pageSize)
       });
