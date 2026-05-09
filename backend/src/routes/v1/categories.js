@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const logger = require('../../utils/logger');
-const { Category } = require('../../models');
+const { PartyCategory } = require('../../models');
 
 // 获取所有主题分类
 router.get('/', async (req, res) => {
   try {
-    const categories = await Category.findAll({
+    const categories = await PartyCategory.findAll({
       where: { status: 1 },
       order: [['sort_order', 'ASC']],
       attributes: ['id', 'slug', 'name', 'name_en', 'icon', 'color', 'description'],
